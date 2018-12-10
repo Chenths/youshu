@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HTSearchTextHeadView">
+            <rect key="frame" x="0.0" y="0.0" width="353" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hrf-Kc-95o">
+                    <rect key="frame" x="0.0" y="0.0" width="353" height="44"/>
+                    <connections>
+                        <action selector="beginSearchBtClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="UXA-jL-524"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="各店铺库存情况" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7LU-gx-gm4">
+                    <rect key="frame" x="15" y="13" width="107.5" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="查找" translatesAutoresizingMaskIntoConstraints="NO" id="5mJ-SQ-cxv">
+                    <rect key="frame" x="318" y="11.5" width="20" height="20"/>
+                </imageView>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CDO-Yh-9ks">
+                    <rect key="frame" x="15" y="0.0" width="283" height="44"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                </textField>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Hrf-Kc-95o" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="1gZ-7e-3Om"/>
+                <constraint firstItem="CDO-Yh-9ks" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="93N-QQ-96H"/>
+                <constraint firstAttribute="bottom" secondItem="CDO-Yh-9ks" secondAttribute="bottom" id="FUi-TR-NbG"/>
+                <constraint firstAttribute="bottom" secondItem="Hrf-Kc-95o" secondAttribute="bottom" id="IKT-TQ-Jw2"/>
+                <constraint firstAttribute="trailing" secondItem="5mJ-SQ-cxv" secondAttribute="trailing" constant="15" id="RrE-Rd-iD8"/>
+                <constraint firstItem="5mJ-SQ-cxv" firstAttribute="leading" secondItem="CDO-Yh-9ks" secondAttribute="trailing" constant="20" id="fkg-ya-eFa"/>
+                <constraint firstItem="7LU-gx-gm4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="jFT-Gn-gfq"/>
+                <constraint firstItem="7LU-gx-gm4" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="m2x-Hc-ooL"/>
+                <constraint firstItem="5mJ-SQ-cxv" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="mOU-LO-xkE"/>
+                <constraint firstItem="CDO-Yh-9ks" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="o57-O1-DDT"/>
+                <constraint firstAttribute="trailing" secondItem="Hrf-Kc-95o" secondAttribute="trailing" id="xp0-RC-kMZ"/>
+                <constraint firstItem="Hrf-Kc-95o" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ysD-tV-qdS"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="searchTextFeild" destination="CDO-Yh-9ks" id="ara-2V-Cdy"/>
+                <outlet property="titleLabel" destination="7LU-gx-gm4" id="DlT-Wb-ZSu"/>
+            </connections>
+            <point key="canvasLocation" x="23.5" y="230"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="查找" width="20" height="20"/>
+    </resources>
+</document>

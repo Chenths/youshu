@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="HTBossSaleCompareDataInfoCell">
+            <rect key="frame" x="0.0" y="0.0" width="178" height="192"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="178" height="192"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8hQ-BH-eJh">
+                        <rect key="frame" x="0.0" y="63" width="178" height="129"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pax-D4-FQ4">
+                                <rect key="frame" x="71.5" y="25" width="35.5" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ega-KB-J5y">
+                                <rect key="frame" x="72.5" y="50" width="33" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f3t-je-dvj">
+                                <rect key="frame" x="177.5" y="49" width="0.5" height="32"/>
+                                <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="2zo-SP-oeo"/>
+                                    <constraint firstAttribute="width" constant="0.5" id="pdc-17-AVC"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ega-KB-J5y" firstAttribute="centerX" secondItem="8hQ-BH-eJh" secondAttribute="centerX" id="ddg-XE-L8x"/>
+                            <constraint firstItem="f3t-je-dvj" firstAttribute="centerY" secondItem="8hQ-BH-eJh" secondAttribute="centerY" id="k6F-Uv-7Rr"/>
+                            <constraint firstItem="pax-D4-FQ4" firstAttribute="centerX" secondItem="8hQ-BH-eJh" secondAttribute="centerX" id="pAa-tg-39V"/>
+                            <constraint firstItem="pax-D4-FQ4" firstAttribute="top" secondItem="8hQ-BH-eJh" secondAttribute="top" constant="25" id="rse-Mn-yvq"/>
+                            <constraint firstAttribute="trailing" secondItem="f3t-je-dvj" secondAttribute="trailing" id="vBH-8w-nq0"/>
+                            <constraint firstItem="Ega-KB-J5y" firstAttribute="top" secondItem="pax-D4-FQ4" secondAttribute="bottom" constant="8" id="yOR-an-zSH"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="8hQ-BH-eJh" secondAttribute="bottom" id="C3W-wh-laY"/>
+                <constraint firstItem="8hQ-BH-eJh" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="LS2-7o-zj0"/>
+                <constraint firstAttribute="trailing" secondItem="8hQ-BH-eJh" secondAttribute="trailing" id="XiV-Kw-tjU"/>
+                <constraint firstItem="8hQ-BH-eJh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="63" id="Z75-Xc-ebi"/>
+            </constraints>
+            <size key="customSize" width="178" height="192"/>
+            <connections>
+                <outlet property="countLabel" destination="Ega-KB-J5y" id="RMV-sK-uCl"/>
+                <outlet property="moneyLabel" destination="pax-D4-FQ4" id="NTg-ye-8Cj"/>
+            </connections>
+            <point key="canvasLocation" x="89" y="33"/>
+        </collectionViewCell>
+    </objects>
+</document>

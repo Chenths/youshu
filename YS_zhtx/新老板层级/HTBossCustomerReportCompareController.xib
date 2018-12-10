@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HTBossCustomerReportCompareController">
+            <connections>
+                <outlet property="dataTableView" destination="eXI-ab-44T" id="obU-fu-TGZ"/>
+                <outlet property="leadConstains" destination="RG3-RW-XJ7" id="8uc-9N-aKO"/>
+                <outlet property="toTopBt" destination="ROs-LB-5iL" id="b5a-Mp-XXI"/>
+                <outlet property="topConstion" destination="ZCb-xw-Cwj" id="2o8-LE-J1r"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="eXI-ab-44T">
+                    <rect key="frame" x="75" y="88" width="300" height="579"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                </tableView>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROs-LB-5iL">
+                    <rect key="frame" x="295" y="587" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="kyr-ar-Hic"/>
+                        <constraint firstAttribute="height" constant="60" id="lXM-oB-wLj"/>
+                    </constraints>
+                    <state key="normal" image="置顶"/>
+                    <connections>
+                        <action selector="toBtclicked:" destination="-1" eventType="touchUpInside" id="dxp-Al-Ol3"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="eXI-ab-44T" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="RG3-RW-XJ7"/>
+                <constraint firstItem="eXI-ab-44T" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="88" id="ZCb-xw-Cwj"/>
+                <constraint firstAttribute="trailing" secondItem="eXI-ab-44T" secondAttribute="trailing" id="cie-Iw-42M"/>
+                <constraint firstAttribute="trailing" secondItem="ROs-LB-5iL" secondAttribute="trailing" constant="20" id="jhn-HQ-N7n"/>
+                <constraint firstAttribute="bottom" secondItem="eXI-ab-44T" secondAttribute="bottom" id="r0b-ME-fhy"/>
+                <constraint firstAttribute="bottom" secondItem="ROs-LB-5iL" secondAttribute="bottom" constant="20" id="vLM-EJ-x6L"/>
+            </constraints>
+            <point key="canvasLocation" x="-151.5" y="23.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="置顶" width="67" height="67"/>
+    </resources>
+</document>

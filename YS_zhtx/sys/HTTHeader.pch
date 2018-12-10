@@ -1,0 +1,417 @@
+//
+//  HTTHeader.pch
+//  YOUSHU_zhtx
+//
+//  Created by mac on 2018/5/30.
+//  Copyright © 2018年 有术-新零售. All rights reserved.
+//
+
+#ifndef HTTHeader_pch
+#define HTTHeader_pch
+
+
+#pragma mark -引入文件
+#import "HTCustomDefualAlertView.h"
+#import "LPActionSheet.h"
+#import "UIView+Extension.h"
+#import "UIColor+extend.h"
+#import "HTShareClass.h"
+#import "MBProgressHUD+MJ.h"
+#import "NSDictionary+getValue.h"
+#import "NSObject+Null.h"
+#import "HTHoldNullObj.h"
+#import "HTHttpTools.h"
+#import "KeyboardToolBar.h"
+#import "UIView+layerMaker.h"
+#import "HTGetPhoneType.h"
+#import "UIImageView+WebCache.h"
+#import "UIBarButtonItem+Extension.h"
+#import <Masonry.h>
+#import <KLCPopup.h>
+#import "NSString+Json.h"
+#import <MJRefresh.h>
+#import <YYModel.h>
+#import <NSObject+YYModel.h>
+#import "NSArray+TOJSONSTR.h"
+#import "UIButton+WebCache.h"
+#import "HTCustomDefualAlertView.h"
+#import <JMessage/JMessage.h>
+#import "JCHATStringUtils.h"
+#import "ViewUtil.h"
+#import "JCHATAlertToSendImage.h"
+#import "JCHATStringUtils.h"
+#pragma mark -网络请求地址
+
+#ifndef __OPTIMIZE__
+//这里执行的是debug模式下
+//余静
+//#define baseUrl @"http://10.1.1.109:8090/"
+//颜家栋
+//#define baseUrl @"http://10.1.1.162:8080/"
+//#define baseUrl @"http://192.168.199.7:8080/"
+//#define baseUrl @"http://192.168.199.46:8080/"
+//#define baseUrl @"http://192.168.199.71:8080/"
+#define baseUrl @"http://192.168.199.46:8080/"
+//#define baseUrl @"http://47.93.173.31:8080/"
+//#define baseUrl @"http://192.168.199.111:8080/"
+//#define baseUrl @"http://192.168.199.162:8080/"
+//#define baseUrl @"http://59.110.5.160:8090/"
+#else
+#define baseUrl @"http://59.110.5.160:8090/"
+//#define baseUrl @"http://47.93.173.31:8080/"
+#define NSLog(...)
+#define debugMethod()
+#endif
+#pragma mark -中间url
+//预警
+#define middleWarn @"api/warning/"
+//问题反馈
+#define middleFeedback @"admin/api/feedbacks/"
+//请求员工报表数据
+#define middleApiPersonReport @"admin/api/person_report/"
+//消费报表
+#define middleApiSaleReport @"admin/api/sale_report/"
+//客户相关报表数据
+#define middleCustomerReport @"admin/api/customer_report/"
+//销售报表数据
+#define middleSaleReport  @"admin/api/sale_report/"
+//登录相关
+#define middlePerson @"admin/api/person/"
+//库存相关
+#define middleProductStock @"admin/api/product_stock/"
+//产品相关
+#define middleProduct @"admin/api/product/"
+//模块相关
+#define middleModel @"admin/api/model/"
+//文件中心
+#define middleFilerSource @"/admin/api/fileresource/"
+//参数配置
+#define middleConfig @"admin/api/config/"
+
+#define middleRole @"admin/api/role/"
+
+#define middleLogistics @"admin/api/logistics/"
+
+#define bindWechat @"bind_wechat.html"
+
+//标签相关
+#define middleTag  @"admin/api/tag/"
+//加载门口设备
+#define middleDevice  @"admin/api/device/"
+
+#define middleCust @"admin/api/cust/"
+//流水
+#define middleAccflow @"admin/api/accflow/"
+//
+#define middleHierarchy  @"admin/api/hierarchy/"
+
+#define apiStoreOrder @"api/store/order/"
+
+//通知中心
+#define middleNotice @"admin/api/notice/"
+//获取菜单信息
+#define loadMenu          @"load_module_menu_4_app.html"
+//查询菜单
+#define middleMenu  @"admin/"
+#define middleMonthReport @"admin/month_report/"
+#define middleCompany @"admin/company/"
+
+#define middleOrder @"admin/api/order/"
+#define middleOrderReport @"admin/order_report/"
+
+#define middleAgent @"admin/agent_report/"
+// 会员相关报表
+#define middleCusRepott @"admin/api/customer_report/"
+//库存相关
+//人脸识别
+#define middleFace @"admin/api/face/"
+
+#pragma mark -changeUrl
+
+#define uploadOrderFile @"upload_order_4_app.html"
+
+#define loadSaleDataTodayReport @"load_sale_data_today_report_4_app.html"
+//退换货借口
+#define replaceProduct4App @"load_replace_product_data_4_app.html"
+//
+#define loadCustomerCriteriaReport  @"load_customer_criteria_report_4_app.html"
+//问题反馈
+#define saveFeedback @"save_feedbacks_4_app.html"
+//加载代理店首页
+#define loadAgentSaleDataReport @"load_agent_sale_data_report_4_app.html"
+//请求未读消息
+#define loadUserNoticeCount4App @"load_user_notice_count_4_app.html"
+//请求个人信息
+#define LoadPersonOwnReport  @"load_person_own_report_4_app.html"
+//请求消息列表
+#define loadUserNoticeList4App @"load_user_notice_list_4_app.html"
+//销售报表相关数据
+#define loadAddCustomerReport @"load_add_customer_report_4_app.html"
+//销售报表
+#define loadcustomerConsumeReport @"load_customer_consume_report_4_app.html"
+//消费排行榜
+#define loadcustomerConsumeRankReport @"load_customer_consume_rank_report_4_app.html"
+//客户列表
+#define loadCustomerList @"load_customer_list_4_app.html"
+//上传图片和描述
+#define updateFileResource4APP @"updateFileResource4APP.html"
+
+#define loginUrl @"do_login_app.html"
+// 定时提醒列表
+#define NoticeListLoad @"notice_list_load_4_app.html"
+
+#define  NoticeHandle   @"notice_handle_4_app.html"
+
+#define topUpMoney4App @"admin/api/accflow/top_up_4_app.html"
+
+#define deductMoney4App @"admin/api/accflow/deduct_4_app.html"
+//老板层级 店铺排名
+#define loadSalesRankingReport @"load_sales_ranking_report_4_app.html"
+//请求店铺首页数据
+#define loadOrderBossReport @"load_order_report_boss_4_app.html"
+//请求员工首页数据
+#define loadOrderEmployeeReport @"load_order_report_employee_4_app.html"
+//请求订单列表
+#define loadOrderList @"load_order_list_4_app.html"
+//订单详情
+#define loadOrderDetail @"load_order_detail_list_4_app.html"
+//导购列表
+#define loadAllPersonReport @"load_all_person_personal_report_4_app.html"
+//请求导购报表
+#define loadPersonPersonalReport @"load_person_personal_report_4_app.html"
+//请求客户分析报表
+#define loadCustomerReport @"load_customer_report_4_app.html"
+//读取数据
+#define userReadNotice4App @"user_read_notice_4_app.html"
+//店铺销售数据
+#define loadSaleDataReport @"load_sale_data_report_4_app.html"
+//库存报表
+#define loadCompanyStockReport @"load_company_stock_report_4_app.html"
+//销售报表产品销量排行
+#define loadSaleProductRankReport @"load_sale_product_rank_report_4_app.html"
+//产品搜索
+#define searchByBarcode @"search_by_barcode_4_app.html"
+//请求模块权限
+#define loadModuleAuth @"load_module_auth_4_app.html"
+//请求会员等级列表
+#define loadCompanyCustLevel @"load_company_cust_level.html"
+// 电话号码刷新商品列表
+#define refreshBuyProductList @"refresh_buy_product_list_4_app.html"
+//创建订单
+#define createOrder4App @"create_order_4_app.html"
+//订单改价
+#define modifyOrderPrice4App @"modify_order_price_4_app.html"
+//改价的修改
+#define repalceProductModifyPrice @"replace_product_modify_price_4_app.html"
+//储值支付
+#define payByStoredValue4App @"pay_by_stored_value_4_app.html"
+//现金和刷卡支付
+#define modifyOrderState4App @"modify_order_state_4_app.html"
+//店铺支付宝和微信支付
+#define modifyCompayOnlinePayOrder @"modify_company_online_pay_order_state_4_app.html"
+//刷新支付宝和微信支付
+#define queryPayState @"query_pay_state_4_app.html"
+#define modifyCompanyPrinterCount @"modify_printer_count_4_app.html"
+//查询二次打印订单
+#define queryOrderPrintInfo4App @"query_order_print_info_4_app.html"
+//上传打印数据
+#define createOrderPrintInfo4App @"create_order_print_info_4_app.html"
+//添加打印机
+#define savePrinter4App @"save_printer_4_app.html"
+//查询订单状态
+#define queryOrderState @"query_order_state_4_app.html"
+//请求客户报表
+#define loadCustomerPersonalReport4App @"load_customer_personal_report_4_app.html"
+//上传图片
+#define uploadFile @"upload4APP.html"
+//设置定时提醒
+#define AddUserNotice @"add_user_notice_4_app.html"
+//保存标签
+#define saveCustomerTag @"save_customer_tag_4_app.html"
+//模糊查询标签
+#define loadTagBuyNameInfo @"load_tag_by_name_info_4_app.html"
+//请求商品图片列表
+#define loadImgStyleLibList @"load_img_style_lib_list_4_app.html"
+//按类型请求库存
+#define loadCompanyStockList4App  @"load_company_stock_list_4_app.html"
+//设置置顶图片
+#define settingProductTopImg @"setting_product_top_img.html"
+//检查用户是否存在
+#define cheakCustByPhone @"check_cust_by_phone.html"
+//客户基本信息查询
+#define loadCustomerInfo @"load_customer_info.html"
+//请求配置数据
+#define loadConfig4App @"load_field.html"
+//新增会员
+#define addCust4App @"add_cust_4_app.html"
+//新增跟进记录
+#define addFollowRecord @"add_follow_record.html"
+//请求模块列表
+#define loadList4App @"load_list_4_app.html"
+//编辑会员接口
+#define editModel4App @"edit_model_4_app.html"
+//置顶标签
+#define moveTagToTop @"save_tag_stick_4_app.html"
+//请求客户标签
+#define loadTagByCustomer4App @"load_tag_by_customer_4_app.html"
+//取消置顶标签
+#define removeTagStick4App @"remove_tag_stick_4_app.html"
+//删除客户标签
+#define removeTagRelationInfo4App @"remove_tag_relation_info_4_app.html"
+//删除客户跟进记录
+#define remove4app @"remove_4_app.html"
+//请求会员信息
+#define laodCust4App @"load_cust_4_app.html"
+//请求充值规则
+#define loadRechargeRule4app  @"load_recharge_rule_4_app.html"
+//账单列表
+#define loadBillList @"load_bill_list.html"
+//商品列表
+#define loadOrderListByCustomer @"load_order_list_by_customer.html"
+//查询订单或客户
+#define queryOrderOrCus @"query_order_or_customer_id_4_app.html"
+//退换货下单
+#define loadRepalceProductData4App @"load_replace_product_data_4_app.html"
+//退换
+#define returnProduct4App  @"return_product_4_app.html"
+//取消退换货
+#define cancelReplaceProduct @"cancel_replace_product_4_app.html"
+//加载配置数据
+#define loadCompanyConfig4App @"load_config_4_app.html"
+//修改参数
+#define updateConfig4App @"update_config_4_app.html"
+//换货结算
+#define exchangeReplaceProduct4App @"replace_product_4_app.html"
+//加载角色接口
+#define loadRole4App @"load_role_4_app.html"
+//
+#define loadSaleProductReport4App @"load_sale_product_report_4_app.html"
+//产品筛选接口
+#define loadProductByStyleAndColor @"load_product_by_style_and_color_4_app.html"
+
+#define loadColorBystylecode @"load_color_by_stylecode_4_app.html"
+//
+#define loadAllChildCompany @"load_all_child_company_4_app.html"
+//调入
+#define saveSwapProductStockIn @"save_swap_product_stock_in_4_app.html"
+
+#define saveSwapProductStockOut @"save_swap_product_stock_out_4_app.html"
+
+//修改密码接口
+#define changePassWordUrl @"app_update_pwd.html"
+
+//获取菜单权限
+#define loadMenuAuth4App @"load_menu_auth_4_app.html"
+
+//加载调货单
+#define loadSwapWayBillList @"load_swap_way_bill_list_4_app.html"
+
+#define noticeLoad4App @"notice_load_4_app.html"
+//畅销款
+#define loadProductSaleCycelList @"load_product_sale_cycle_list_4_app.html"
+//滞销款
+#define loadNeedReturnProdcutList  @"load_need_return_product_list_4_app.html"
+
+//人脸识别客户列表
+#define  faceUserList  @"user_list.html"
+//人脸识别头像列表
+#define faceImageList @"img_list.html"
+//员工个人报表 日期报表
+#define loadPersonPersonalTodayReport @"load_person_personal_today_report_4_app.html"
+
+#define loadPersonPersonalMonthReport @"load_person_personal_month_report_4_app.html"
+
+#define loadPersonPersonalYearReport @"load_person_personal_year_report_4_app.html"
+//请求在线订单
+#define loadOnlineOrdersByTypeDelivery @"load_online_orders_by_type_delivery.html"
+
+#define orderRefundWechate4App @"order_refund_wechat4app.html"
+
+#define  onlineOrderDelivery @"online_order_delivery.html"
+//创建无产品订单
+
+#define createNoProductOder     @"create_no_product_order_4_app.html"
+
+#define dateMenuWarningQuestion  @"data_menu_warning_question_4_app.html"
+
+#pragma mark -宏
+
+
+typedef NS_ENUM(NSInteger, ControllerType) {
+    ControllerPost = 0,
+    ControllerDetail   = 1,
+    ControllerEdit  = 2,
+    ControllerCoverEdit  = 3,
+};
+
+#define SeverERRORSTRING @"网络繁忙"
+#define NETERRORSTRING   @"请检查你的网络"
+#define PRODUCTHOLDIMG @"g-goodsHoldImg"
+#define CUSTOMERHOLDIMG @"g-customerholdImg"
+
+#define baseldl  @"ldl"     //连带率
+#define basezkl  @"zkl"     //折扣率
+#define basexsje @"xsje"    //销售金额
+#define basekdj  @"kdj"     //客单价
+#define basehygxl @"hygxl"  //会员贡献率
+#define basejdl   @"jdl"    //进店率
+#define basehhl @"hhl"      // 换货率
+#define basethl @"thl"      // 退货率
+#define basexzhy @"xzhy"    // 新增会员
+#define basehyhy @"hyhy"    // 会员活跃
+#define basehyhtl @"hyhtl"  //会员回头率
+#define basezxcp  @"zxcp"   //滞销产品
+#define basekcbz  @"kcbz"   //库存不足
+
+
+//警告数据
+#define DISCOUNTWARNING(a,b) [NSString stringWithFormat:@"折扣率标准 %@ 折\n当前为:%@折",a,b]
+#define SERUILWARNING(a,b) [NSString stringWithFormat:@"连带率标准 %@ \n当前为:%@",a,b]
+#define VIPWARNING(a,b) [NSString stringWithFormat:@"VIP贡献率标准%@%@\n当前为:%@%@",a,@"%",b,@"%"]
+#define ACTIVEVIPWARNING(a,b) [NSString stringWithFormat:@"活跃会员标准%@%@\n当前为:%@%@",a,@"%",b,@"%"]
+#define THLWARNING(a,b) [NSString stringWithFormat:@"退货率标准%@%@\n当前为:%@%@",a,@"%",b,@"%"]
+#define HHLWARNING(a,b) [NSString stringWithFormat:@"换货率标准%@%@\n当前为:%@%@",a,@"%",b,@"%"]
+
+
+
+
+//shareSdk appkey
+#define shareAppKey  @"1538d02204b74"
+//QQ appkey
+#define qqAppkey @"EtCAahVolrw2s6pd"
+#define qqAppId @"1105561286"
+
+#define JMESSAGE_APPKEY @"5094545990eb415462160e31"
+
+#define STROREUNFINSHORDER @"STROREUNFINSHORDER"
+
+#define STROREUNFINSHORDERTIME @"STROREUNFINSHORDERTIME"
+
+#define STROREUNFINSHCHANGEORDER @"STROREUNFINSHCHANGEORDER"
+
+#define tiantianKuaidiKey @"TznsIGsy8987"
+
+//#define tianitanKuaiDiCustomer @"0CCE57A6429177D29CA307BC925A968A"
+
+//打印数据
+#define PRINGDICKEY [NSString stringWithFormat:@"%@PRINTDIC",[HTShareClass shareClass].loginModel.companyId]
+
+
+#define RGBACOLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]
+#define NavTabbarColor RGBACOLOR(247.0f, 139.0f, 49.0f, 1.0f)
+#define TabBarBackgroundColor [UIColor whiteColor]
+
+#define RGB(a,b,c,d) [UIColor colorWithRed:a green:b blue:c alpha:d]
+
+#define  HMSCREENWIDTH [UIScreen mainScreen].bounds.size.width
+#define HEIGHT [UIScreen mainScreen].bounds.size.height
+#define nav_height ([[HTGetPhoneType iphoneType] isEqualToString:@"iPhone X"] /*|| [[HTGetPhoneType iphoneType] isEqualToString:@"iPhone Simulator"]*/ ? 88.0f : 64.0f)
+#define tar_height 49.0f
+#define SafeAreaBottomHeight  ([[HTGetPhoneType iphoneType] isEqualToString:@"iPhone X"] /* || [[HTGetPhoneType iphoneType] isEqualToString:@"iPhone Simulator"]*/ ? 34.0f : 0.0f)
+#define MyAppDelegate ((AppDelegate *)([UIApplication sharedApplication].delegate))//AppDelegate
+#define HTSEARCHHISTORY @"HTSEARCHHISTORYKEY"
+
+#define  isIPHONEX ([[HTGetPhoneType iphoneType] isEqualToString:@"iPhone X"] /*|| [[HTGetPhoneType iphoneType] isEqualToString:@"iPhone Simulator"] */? YES : NO)
+
+
+#endif /* HTTHeader_pch */

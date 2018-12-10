@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HTChargeViewController">
+            <connections>
+                <outlet property="tab" destination="erF-IY-NdX" id="zh2-Rj-Rdi"/>
+                <outlet property="tabBottomHeight" destination="Mvt-aI-ndh" id="ijg-G7-rB6"/>
+                <outlet property="tabTopHeight" destination="Hk2-hC-km9" id="e6y-u5-y8I"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无商品" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="at8-cc-H8f">
+                    <rect key="frame" x="156.5" y="473" width="61.5" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="g-cashierHoleImg" translatesAutoresizingMaskIntoConstraints="NO" id="gFe-ey-jeW">
+                    <rect key="frame" x="106" y="353" width="163" height="104"/>
+                </imageView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="erF-IY-NdX">
+                    <rect key="frame" x="0.0" y="100" width="375" height="519"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="at8-cc-H8f" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="4dp-Wb-e9O"/>
+                <constraint firstItem="erF-IY-NdX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="Hk2-hC-km9"/>
+                <constraint firstAttribute="bottom" secondItem="erF-IY-NdX" secondAttribute="bottom" constant="48" id="Mvt-aI-ndh"/>
+                <constraint firstAttribute="trailing" secondItem="erF-IY-NdX" secondAttribute="trailing" id="P5Y-D4-Z5C"/>
+                <constraint firstAttribute="bottom" secondItem="at8-cc-H8f" secondAttribute="bottom" constant="176" id="WD2-OI-VF3"/>
+                <constraint firstItem="erF-IY-NdX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="XVr-ea-bki"/>
+                <constraint firstItem="at8-cc-H8f" firstAttribute="top" secondItem="gFe-ey-jeW" secondAttribute="bottom" constant="16" id="bUi-Qw-cVp"/>
+                <constraint firstItem="gFe-ey-jeW" firstAttribute="centerX" secondItem="at8-cc-H8f" secondAttribute="centerX" id="jK2-9C-ebg"/>
+            </constraints>
+            <point key="canvasLocation" x="141" y="49"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="g-cashierHoleImg" width="163" height="104"/>
+    </resources>
+</document>

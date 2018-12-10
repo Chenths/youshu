@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="HTEditPruductImgCollectionCell">
+            <rect key="frame" x="0.0" y="0.0" width="73" height="113"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="73" height="113"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EaC-5J-DIM">
+                        <rect key="frame" x="0.0" y="0.0" width="73" height="80"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="80" id="zH0-TL-518"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iPt-P6-BbK">
+                        <rect key="frame" x="28.5" y="88" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="b6Z-Zv-yYz"/>
+                            <constraint firstAttribute="width" constant="16" id="ugi-qI-dtu"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="单选-未选中"/>
+                    </button>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="iPt-P6-BbK" firstAttribute="top" secondItem="EaC-5J-DIM" secondAttribute="bottom" constant="8" id="MYn-XA-C5S"/>
+                <constraint firstItem="iPt-P6-BbK" firstAttribute="centerX" secondItem="EaC-5J-DIM" secondAttribute="centerX" id="Nb4-Th-jp5"/>
+                <constraint firstItem="EaC-5J-DIM" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="TeZ-0T-ngI"/>
+                <constraint firstAttribute="trailing" secondItem="EaC-5J-DIM" secondAttribute="trailing" id="izg-DR-PvL"/>
+                <constraint firstItem="EaC-5J-DIM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="us1-g1-guW"/>
+            </constraints>
+            <size key="customSize" width="73" height="113"/>
+            <connections>
+                <outlet property="productImg" destination="EaC-5J-DIM" id="axh-kB-Y2w"/>
+                <outlet property="selectedBt" destination="iPt-P6-BbK" id="hoU-RP-a3M"/>
+            </connections>
+            <point key="canvasLocation" x="-27.5" y="34.5"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="单选-未选中" width="23" height="23"/>
+    </resources>
+</document>

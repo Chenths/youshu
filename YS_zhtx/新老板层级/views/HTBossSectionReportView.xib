@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HTBossSectionReportView">
+            <rect key="frame" x="0.0" y="0.0" width="358" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pR7-dv-amo">
+                    <rect key="frame" x="0.0" y="0.0" width="358" height="44"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4yh-1t-rlf">
+                    <rect key="frame" x="15" y="12" width="29" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="展开-黑" translatesAutoresizingMaskIntoConstraints="NO" id="qjt-eC-AdZ">
+                    <rect key="frame" x="339" y="12" width="11" height="16"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="0.94499540328979492" green="0.94515722990036011" blue="0.94498521089553833" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="pR7-dv-amo" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BYR-lI-aAP"/>
+                <constraint firstItem="4yh-1t-rlf" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="GVa-5r-soz"/>
+                <constraint firstAttribute="trailing" secondItem="qjt-eC-AdZ" secondAttribute="trailing" constant="8" id="Hdl-eI-1Vp"/>
+                <constraint firstItem="pR7-dv-amo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PHl-ef-dbx"/>
+                <constraint firstAttribute="trailing" secondItem="pR7-dv-amo" secondAttribute="trailing" id="Uil-76-lTV"/>
+                <constraint firstAttribute="bottom" secondItem="pR7-dv-amo" secondAttribute="bottom" id="VGi-gg-9Th"/>
+                <constraint firstItem="qjt-eC-AdZ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Yvx-gk-4ng"/>
+                <constraint firstItem="4yh-1t-rlf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="xmw-Fc-Vfg"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="openIMg" destination="qjt-eC-AdZ" id="0t0-de-O37"/>
+                <outlet property="openImg" destination="qjt-eC-AdZ" id="dmr-vP-dYa"/>
+                <outlet property="sectionOpenBt" destination="pR7-dv-amo" id="DAV-PZ-lon"/>
+                <outlet property="titleLabel" destination="4yh-1t-rlf" id="aMr-dd-Lx5"/>
+            </connections>
+            <point key="canvasLocation" x="105" y="-172"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="展开-黑" width="11" height="11"/>
+    </resources>
+</document>

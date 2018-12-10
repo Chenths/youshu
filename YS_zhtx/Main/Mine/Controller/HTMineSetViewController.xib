@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HTMineSetViewController">
+            <connections>
+                <outlet property="tab" destination="68i-9z-hNO" id="EeL-HS-81P"/>
+                <outlet property="tabBottomHeight" destination="A0A-Rs-U7S" id="TEh-Cw-Sam"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="68i-9z-hNO">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="619"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZh-4y-r2c">
+                    <rect key="frame" x="0.0" y="619" width="375" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="MRv-ac-CWv"/>
+                    </constraints>
+                    <state key="normal" title="退出登录">
+                        <color key="titleColor" red="0.96078431372549022" green="0.20392156862745098" blue="0.20392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="exitLoginClicked:" destination="-1" eventType="touchUpInside" id="pVr-dE-T4J"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="68i-9z-hNO" secondAttribute="bottom" constant="48" id="A0A-Rs-U7S"/>
+                <constraint firstItem="xZh-4y-r2c" firstAttribute="top" secondItem="68i-9z-hNO" secondAttribute="bottom" id="O6e-Xt-Mrh"/>
+                <constraint firstItem="xZh-4y-r2c" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Wpa-Jk-7iv"/>
+                <constraint firstAttribute="trailing" secondItem="68i-9z-hNO" secondAttribute="trailing" id="fbz-14-xMN"/>
+                <constraint firstAttribute="trailing" secondItem="xZh-4y-r2c" secondAttribute="trailing" id="j6I-ze-h5x"/>
+                <constraint firstItem="68i-9z-hNO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mwk-R7-zza"/>
+                <constraint firstItem="68i-9z-hNO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="uOY-VL-6Gw"/>
+            </constraints>
+            <point key="canvasLocation" x="32.5" y="104.5"/>
+        </view>
+    </objects>
+</document>

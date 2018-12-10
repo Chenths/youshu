@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HTCustomTextAlertView">
+            <rect key="frame" x="0.0" y="0.0" width="380" height="244"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0zH-dT-1Pf">
+                    <rect key="frame" x="16" y="24" width="42.5" height="19.5"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                    <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="NIT-kp-5pv">
+                    <rect key="frame" x="16" y="67.5" width="348" height="100"/>
+                    <color key="backgroundColor" red="0.90196078431372551" green="0.90980392156862744" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="bCe-Db-IJl"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入订单备注内容" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ogi-AQ-guK">
+                    <rect key="frame" x="24" y="75.5" width="138" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.76862745098039209" green="0.77647058823529413" blue="0.79607843137254897" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTR-Cz-AZd">
+                    <rect key="frame" x="32" y="183.5" width="146" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="seZ-BY-1Ea"/>
+                    </constraints>
+                    <state key="normal" title="取消">
+                        <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="cancelClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="UWh-Wi-yJX"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A3m-7P-zNg">
+                    <rect key="frame" x="202" y="183.5" width="146" height="40"/>
+                    <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="W5S-nq-qvW"/>
+                    </constraints>
+                    <state key="normal" title="确认">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="okClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="pfN-sN-sFu"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="NIT-kp-5pv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="4A7-FF-aZP"/>
+                <constraint firstItem="UTR-Cz-AZd" firstAttribute="top" secondItem="NIT-kp-5pv" secondAttribute="bottom" constant="16" id="Avd-YH-nAj"/>
+                <constraint firstItem="A3m-7P-zNg" firstAttribute="width" secondItem="UTR-Cz-AZd" secondAttribute="width" id="Azu-9I-dcI"/>
+                <constraint firstItem="A3m-7P-zNg" firstAttribute="leading" secondItem="UTR-Cz-AZd" secondAttribute="trailing" constant="24" id="C1z-uO-lRy"/>
+                <constraint firstItem="A3m-7P-zNg" firstAttribute="top" secondItem="UTR-Cz-AZd" secondAttribute="top" id="EaM-Mi-BEY"/>
+                <constraint firstItem="Ogi-AQ-guK" firstAttribute="top" secondItem="NIT-kp-5pv" secondAttribute="top" constant="8" id="Fki-uP-MYu"/>
+                <constraint firstItem="0zH-dT-1Pf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="24" id="Jhi-dy-dFX"/>
+                <constraint firstItem="0zH-dT-1Pf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="Rcb-jO-eoZ"/>
+                <constraint firstAttribute="trailing" secondItem="NIT-kp-5pv" secondAttribute="trailing" constant="16" id="aAN-WY-z7O"/>
+                <constraint firstItem="Ogi-AQ-guK" firstAttribute="leading" secondItem="NIT-kp-5pv" secondAttribute="leading" constant="8" id="oce-sY-UHb"/>
+                <constraint firstItem="NIT-kp-5pv" firstAttribute="top" secondItem="0zH-dT-1Pf" secondAttribute="bottom" constant="24" id="s4N-Xv-sNK"/>
+                <constraint firstAttribute="trailing" secondItem="A3m-7P-zNg" secondAttribute="trailing" constant="32" id="sQW-XZ-UO2"/>
+                <constraint firstItem="UTR-Cz-AZd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="32" id="snQ-Rw-T43"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="cancelBt" destination="UTR-Cz-AZd" id="zsI-kR-TzP"/>
+                <outlet property="holdLabel" destination="Ogi-AQ-guK" id="l0h-eh-8Tb"/>
+                <outlet property="okBt" destination="A3m-7P-zNg" id="dmU-dX-TeL"/>
+                <outlet property="textView" destination="NIT-kp-5pv" id="pUV-tX-5kl"/>
+                <outlet property="titleLabel" destination="0zH-dT-1Pf" id="Ib0-5f-zRA"/>
+            </connections>
+            <point key="canvasLocation" x="27" y="191"/>
+        </view>
+    </objects>
+</document>

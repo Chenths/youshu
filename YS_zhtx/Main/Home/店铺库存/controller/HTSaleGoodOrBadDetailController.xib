@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HTSaleGoodOrBadDetailController">
+            <connections>
+                <outlet property="tab" destination="nqv-j8-g50" id="9fP-KU-WCq"/>
+                <outlet property="turnIn" destination="pi8-w2-1lC" id="tVs-bA-Iz8"/>
+                <outlet property="turnOut" destination="ek0-F7-eBB" id="0uD-MA-ljf"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nqv-j8-g50">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="619"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pi8-w2-1lC">
+                    <rect key="frame" x="0.0" y="619" width="187.5" height="48"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="qGe-dA-SG9"/>
+                    </constraints>
+                    <state key="normal" title="调入">
+                        <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="turnInClicked:" destination="-1" eventType="touchUpInside" id="ONM-vM-V6q"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ek0-F7-eBB">
+                    <rect key="frame" x="187.5" y="619" width="187.5" height="48"/>
+                    <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="ecP-er-yib"/>
+                    </constraints>
+                    <state key="normal" title="调出">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="turnOutClicked:" destination="-1" eventType="touchUpInside" id="9Rj-Fq-H4i"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="pi8-w2-1lC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4dB-Pj-M1Q"/>
+                <constraint firstItem="pi8-w2-1lC" firstAttribute="top" secondItem="nqv-j8-g50" secondAttribute="bottom" id="Cgz-mW-zZ1"/>
+                <constraint firstItem="ek0-F7-eBB" firstAttribute="leading" secondItem="pi8-w2-1lC" secondAttribute="trailing" id="Uar-oN-nNK"/>
+                <constraint firstAttribute="trailing" secondItem="ek0-F7-eBB" secondAttribute="trailing" id="VLF-km-4uZ"/>
+                <constraint firstItem="nqv-j8-g50" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="WMy-te-Ckp"/>
+                <constraint firstAttribute="trailing" secondItem="nqv-j8-g50" secondAttribute="trailing" id="XAi-pC-dvn"/>
+                <constraint firstItem="ek0-F7-eBB" firstAttribute="width" secondItem="pi8-w2-1lC" secondAttribute="width" id="gDa-WD-P5T"/>
+                <constraint firstAttribute="bottom" secondItem="nqv-j8-g50" secondAttribute="bottom" constant="48" id="hIW-k7-kFX"/>
+                <constraint firstItem="nqv-j8-g50" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="pNv-id-EQh"/>
+                <constraint firstItem="ek0-F7-eBB" firstAttribute="top" secondItem="nqv-j8-g50" secondAttribute="bottom" id="sdc-fX-fSG"/>
+            </constraints>
+            <point key="canvasLocation" x="193" y="-42"/>
+        </view>
+    </objects>
+</document>

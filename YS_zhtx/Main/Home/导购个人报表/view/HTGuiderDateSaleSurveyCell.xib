@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="109" id="KGk-i7-Jjw" customClass="HTGuiderDateSaleSurveyCell">
+            <rect key="frame" x="0.0" y="0.0" width="322" height="86"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="322" height="85.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8X-zL-cKA">
+                        <rect key="frame" x="223" y="30.5" width="83" height="29"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="32" id="K46-VU-U54"/>
+                            <constraint firstAttribute="width" constant="83" id="Oax-0K-8VA"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <state key="normal" title="查看详情">
+                            <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="今日营业额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UsT-b2-gSX">
+                        <rect key="frame" x="16" y="14.5" width="66.5" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rsk-xR-vvN">
+                        <rect key="frame" x="16" y="39" width="52.5" height="26.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YFu-Uq-enm">
+                        <rect key="frame" x="78.5" y="50.5" width="31" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Y8X-zL-cKA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="3xQ-vM-3P1"/>
+                    <constraint firstAttribute="bottom" secondItem="Y8X-zL-cKA" secondAttribute="bottom" constant="30" id="4e5-rO-Dgf"/>
+                    <constraint firstItem="YFu-Uq-enm" firstAttribute="bottom" secondItem="Rsk-xR-vvN" secondAttribute="bottom" id="65W-MW-O3C"/>
+                    <constraint firstAttribute="bottom" secondItem="Rsk-xR-vvN" secondAttribute="bottom" constant="24" id="B08-Wh-h6F"/>
+                    <constraint firstItem="UsT-b2-gSX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="D6E-9R-t9k"/>
+                    <constraint firstItem="Rsk-xR-vvN" firstAttribute="leading" secondItem="UsT-b2-gSX" secondAttribute="leading" id="FV0-kK-ZJS"/>
+                    <constraint firstAttribute="trailing" secondItem="Y8X-zL-cKA" secondAttribute="trailing" constant="16" id="J0y-hJ-NFE"/>
+                    <constraint firstItem="YFu-Uq-enm" firstAttribute="leading" secondItem="Rsk-xR-vvN" secondAttribute="trailing" constant="10" id="QHo-IE-Mb1"/>
+                    <constraint firstItem="UsT-b2-gSX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="UWe-OY-LKj"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="descBt" destination="Y8X-zL-cKA" id="Tt2-EX-wnY"/>
+                <outlet property="orderAndProductCount" destination="YFu-Uq-enm" id="evd-mE-gkU"/>
+                <outlet property="saleMoney" destination="Rsk-xR-vvN" id="edh-TW-SKw"/>
+                <outlet property="titleLabel" destination="UsT-b2-gSX" id="1np-zc-li0"/>
+            </connections>
+            <point key="canvasLocation" x="26" y="73"/>
+        </tableViewCell>
+    </objects>
+</document>

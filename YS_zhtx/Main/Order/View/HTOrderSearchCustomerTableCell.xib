@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="KGk-i7-Jjw" customClass="HTOrderSearchCustomerTableCell">
+            <rect key="frame" x="0.0" y="0.0" width="359" height="90"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="359" height="89.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="客户" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwH-XN-p4j">
+                        <rect key="frame" x="15" y="15" width="29" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lim-1O-AQx">
+                        <rect key="frame" x="15" y="47" width="329" height="32"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="选择客户" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nTs-wf-jr9">
+                                <rect key="frame" x="0.0" y="0.0" width="329" height="32"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="g-leftIcon" translatesAutoresizingMaskIntoConstraints="NO" id="mzE-y9-Yzh">
+                                <rect key="frame" x="299" y="6" width="20" height="20"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.90196078430000004" green="0.90980392160000001" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="nTs-wf-jr9" secondAttribute="bottom" id="59s-6y-kVb"/>
+                            <constraint firstItem="nTs-wf-jr9" firstAttribute="top" secondItem="Lim-1O-AQx" secondAttribute="top" id="Bpr-5R-aiL"/>
+                            <constraint firstAttribute="height" constant="32" id="V5M-Be-Eq3"/>
+                            <constraint firstItem="mzE-y9-Yzh" firstAttribute="centerY" secondItem="nTs-wf-jr9" secondAttribute="centerY" id="Yis-Ja-NL4"/>
+                            <constraint firstAttribute="trailing" secondItem="nTs-wf-jr9" secondAttribute="trailing" id="ibC-Tr-v8x"/>
+                            <constraint firstAttribute="trailing" secondItem="mzE-y9-Yzh" secondAttribute="trailing" constant="10" id="ixf-xK-UIh"/>
+                            <constraint firstItem="nTs-wf-jr9" firstAttribute="leading" secondItem="Lim-1O-AQx" secondAttribute="leading" id="z7p-Sb-z8d"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="fwH-XN-p4j" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="9Sg-0D-m3H"/>
+                    <constraint firstItem="Lim-1O-AQx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="DpG-NE-IZY"/>
+                    <constraint firstAttribute="trailing" secondItem="Lim-1O-AQx" secondAttribute="trailing" constant="15" id="E4H-ac-O6x"/>
+                    <constraint firstItem="Lim-1O-AQx" firstAttribute="top" secondItem="fwH-XN-p4j" secondAttribute="bottom" constant="15" id="FIr-Al-slm"/>
+                    <constraint firstItem="fwH-XN-p4j" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="MnR-aC-MRc"/>
+                    <constraint firstAttribute="bottom" secondItem="Lim-1O-AQx" secondAttribute="bottom" constant="10.5" id="T8z-M0-Rxs"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="textFiled" destination="nTs-wf-jr9" id="zu6-hU-UQ0"/>
+            </connections>
+            <point key="canvasLocation" x="44.5" y="75"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="g-leftIcon" width="20" height="20"/>
+    </resources>
+</document>

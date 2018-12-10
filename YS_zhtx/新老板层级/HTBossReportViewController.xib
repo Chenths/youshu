@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HTBossReportViewController">
+            <connections>
+                <outlet property="BtbottomConstains" destination="pad-HY-jou" id="rSX-Po-2Kd"/>
+                <outlet property="dataTableView" destination="6s2-89-dvb" id="R3R-C0-wve"/>
+                <outlet property="shopNameLabel" destination="KpS-xw-5VC" id="g0X-lo-QlU"/>
+                <outlet property="tableBottomHeight" destination="KgS-X7-P6k" id="MJw-zt-Qqa"/>
+                <outlet property="timeNameLabel" destination="ax9-oB-bdW" id="yib-0h-IlP"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="phg-H8-gwH">
+                    <rect key="frame" x="0.0" y="0.0" width="187.5" height="44"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="a1L-Nz-OAD"/>
+                    </constraints>
+                    <connections>
+                        <action selector="shopClicked:" destination="-1" eventType="touchUpInside" id="EEK-2G-GyT"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I3U-EK-afQ">
+                    <rect key="frame" x="187.5" y="0.0" width="187.5" height="44"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="psU-Bq-acw"/>
+                    </constraints>
+                    <connections>
+                        <action selector="timeClicked:" destination="-1" eventType="touchUpInside" id="7CX-fI-vLv"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ax9-oB-bdW">
+                    <rect key="frame" x="266" y="13" width="31" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="店铺" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KpS-xw-5VC">
+                    <rect key="frame" x="78.5" y="13" width="31" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="剪头下" translatesAutoresizingMaskIntoConstraints="NO" id="5gN-bq-cMw">
+                    <rect key="frame" x="112.5" y="16.5" width="11" height="11"/>
+                </imageView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6s2-89-dvb">
+                    <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="剪头下" translatesAutoresizingMaskIntoConstraints="NO" id="rJg-RX-XW7">
+                    <rect key="frame" x="300" y="16.5" width="11" height="11"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2aT-Qo-kef">
+                    <rect key="frame" x="295" y="587" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="8u4-t1-Jxv"/>
+                        <constraint firstAttribute="width" constant="60" id="Ph9-cv-Ocy"/>
+                    </constraints>
+                    <state key="normal" image="对比"/>
+                    <connections>
+                        <action selector="compareClicked:" destination="-1" eventType="touchUpInside" id="ChG-M8-fO3"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="5gN-bq-cMw" firstAttribute="centerY" secondItem="KpS-xw-5VC" secondAttribute="centerY" id="0c7-UO-ekx"/>
+                <constraint firstItem="rJg-RX-XW7" firstAttribute="leading" secondItem="ax9-oB-bdW" secondAttribute="trailing" constant="3" id="19n-Uu-ZOO"/>
+                <constraint firstItem="5gN-bq-cMw" firstAttribute="leading" secondItem="KpS-xw-5VC" secondAttribute="trailing" constant="3" id="3S6-ya-SEZ"/>
+                <constraint firstAttribute="trailing" secondItem="6s2-89-dvb" secondAttribute="trailing" id="40R-pA-bBf"/>
+                <constraint firstItem="I3U-EK-afQ" firstAttribute="width" secondItem="phg-H8-gwH" secondAttribute="width" id="4aI-7x-WPd"/>
+                <constraint firstItem="phg-H8-gwH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="52X-id-lEX"/>
+                <constraint firstAttribute="trailing" secondItem="2aT-Qo-kef" secondAttribute="trailing" constant="20" id="9hg-xB-j9C"/>
+                <constraint firstItem="KpS-xw-5VC" firstAttribute="centerY" secondItem="phg-H8-gwH" secondAttribute="centerY" id="HVm-lL-tVI"/>
+                <constraint firstItem="ax9-oB-bdW" firstAttribute="centerY" secondItem="I3U-EK-afQ" secondAttribute="centerY" id="KWy-qs-SaA"/>
+                <constraint firstAttribute="bottom" secondItem="6s2-89-dvb" secondAttribute="bottom" id="KgS-X7-P6k"/>
+                <constraint firstItem="I3U-EK-afQ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="LK2-qD-yGA"/>
+                <constraint firstAttribute="trailing" secondItem="I3U-EK-afQ" secondAttribute="trailing" id="Vp0-54-hsO"/>
+                <constraint firstItem="ax9-oB-bdW" firstAttribute="centerX" secondItem="I3U-EK-afQ" secondAttribute="centerX" id="cjW-L3-11x"/>
+                <constraint firstItem="I3U-EK-afQ" firstAttribute="leading" secondItem="phg-H8-gwH" secondAttribute="trailing" id="lDP-lc-mPX"/>
+                <constraint firstItem="rJg-RX-XW7" firstAttribute="centerY" secondItem="ax9-oB-bdW" secondAttribute="centerY" id="o1X-VC-EOz"/>
+                <constraint firstAttribute="bottom" secondItem="2aT-Qo-kef" secondAttribute="bottom" constant="20" id="pad-HY-jou"/>
+                <constraint firstItem="KpS-xw-5VC" firstAttribute="centerX" secondItem="phg-H8-gwH" secondAttribute="centerX" id="soE-2D-9NI"/>
+                <constraint firstItem="6s2-89-dvb" firstAttribute="top" secondItem="phg-H8-gwH" secondAttribute="bottom" id="uya-5D-CIQ"/>
+                <constraint firstItem="6s2-89-dvb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="v1g-Fu-cmy"/>
+                <constraint firstItem="phg-H8-gwH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="wY1-Re-rxC"/>
+                <constraint firstItem="I3U-EK-afQ" firstAttribute="leading" secondItem="phg-H8-gwH" secondAttribute="trailing" id="yPP-tG-sKM"/>
+            </constraints>
+            <point key="canvasLocation" x="25.5" y="52.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="剪头下" width="11" height="11"/>
+        <image name="对比" width="67" height="67"/>
+    </resources>
+</document>

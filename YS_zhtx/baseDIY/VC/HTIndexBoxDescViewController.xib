@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HTIndexBoxDescViewController">
+            <connections>
+                <outlet property="tab" destination="xup-Bc-KuH" id="yVy-ac-E3d"/>
+                <outlet property="tabBottomHeight" destination="NXj-2R-Has" id="LOK-SU-OIh"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="菜单导航" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NX8-1V-9Ny">
+                    <rect key="frame" x="16" y="32" width="69.5" height="20.5"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7L-5x-hER">
+                    <rect key="frame" x="339" y="31.5" width="20" height="22"/>
+                    <state key="normal" image="inv-deleteSimple"/>
+                    <connections>
+                        <action selector="dismissClicked:" destination="-1" eventType="touchUpInside" id="JXQ-CY-FDe"/>
+                    </connections>
+                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xup-Bc-KuH">
+                    <rect key="frame" x="0.0" y="61.5" width="375" height="605.5"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="k7L-5x-hER" secondAttribute="trailing" constant="16" id="CAD-2h-qKy"/>
+                <constraint firstItem="NX8-1V-9Ny" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="32" id="N9a-5R-Fwj"/>
+                <constraint firstAttribute="bottom" secondItem="xup-Bc-KuH" secondAttribute="bottom" id="NXj-2R-Has"/>
+                <constraint firstAttribute="trailing" secondItem="xup-Bc-KuH" secondAttribute="trailing" id="Sj9-H1-eth"/>
+                <constraint firstItem="k7L-5x-hER" firstAttribute="centerY" secondItem="NX8-1V-9Ny" secondAttribute="centerY" id="bHE-tC-uoh"/>
+                <constraint firstItem="xup-Bc-KuH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="d6i-xj-Fqg"/>
+                <constraint firstItem="xup-Bc-KuH" firstAttribute="top" secondItem="k7L-5x-hER" secondAttribute="bottom" constant="8" id="fnT-DR-rHo"/>
+                <constraint firstItem="NX8-1V-9Ny" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="oIF-jV-7O8"/>
+            </constraints>
+            <point key="canvasLocation" x="177" y="51"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="inv-deleteSimple" width="20" height="20"/>
+    </resources>
+</document>

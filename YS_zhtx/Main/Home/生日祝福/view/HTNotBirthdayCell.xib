@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="562" id="KGk-i7-Jjw" customClass="HTNotBirthdayCell">
+            <rect key="frame" x="0.0" y="0.0" width="373" height="562"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="373" height="561.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="g-noBirth" translatesAutoresizingMaskIntoConstraints="NO" id="OU4-fK-EQV">
+                        <rect key="frame" x="132.5" y="130" width="107" height="89"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无生日客户" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NMf-hH-3Fz">
+                        <rect key="frame" x="142.5" y="239" width="87" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.1333177387714386" green="0.13334330916404724" blue="0.1333121657371521" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FIN-c8-DgK">
+                        <rect key="frame" x="124.5" y="293" width="124" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="8pI-vZ-77C"/>
+                            <constraint firstAttribute="width" constant="124" id="cSm-M1-xXZ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="查看即将生日">
+                            <color key="titleColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="FIN-c8-DgK" firstAttribute="top" secondItem="NMf-hH-3Fz" secondAttribute="bottom" constant="33" id="9IV-1e-zB2"/>
+                    <constraint firstItem="NMf-hH-3Fz" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Eef-fb-Bym"/>
+                    <constraint firstItem="OU4-fK-EQV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="130" id="VH9-wE-owC"/>
+                    <constraint firstItem="OU4-fK-EQV" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="YdO-ir-EBE"/>
+                    <constraint firstItem="FIN-c8-DgK" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="oDD-H7-xJ5"/>
+                    <constraint firstItem="NMf-hH-3Fz" firstAttribute="top" secondItem="OU4-fK-EQV" secondAttribute="bottom" constant="20" id="yd6-xG-fQa"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="seeBt" destination="FIN-c8-DgK" id="i62-bq-6hf"/>
+            </connections>
+            <point key="canvasLocation" x="-17.5" y="-21"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="g-noBirth" width="107" height="89"/>
+    </resources>
+</document>

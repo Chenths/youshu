@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="HTOffOrColseTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="g-mineDown" translatesAutoresizingMaskIntoConstraints="NO" id="xAP-bH-Koy">
+                        <rect key="frame" x="140" y="12" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="BY6-HS-pqq"/>
+                            <constraint firstAttribute="height" constant="20" id="WXJ-QU-QPD"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收起" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ylt-pw-7Ij">
+                        <rect key="frame" x="162" y="13" width="31" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="DR1-3X-4FQ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.1999788582" green="0.20001345870000001" blue="0.1999712884" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ylt-pw-7Ij" firstAttribute="centerY" secondItem="xAP-bH-Koy" secondAttribute="centerY" id="5XY-ik-m2p"/>
+                    <constraint firstItem="xAP-bH-Koy" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="CFc-fb-HMd"/>
+                    <constraint firstItem="ylt-pw-7Ij" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="DNA-6g-bHP"/>
+                    <constraint firstItem="xAP-bH-Koy" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" constant="-10" id="M7P-ix-yx3"/>
+                    <constraint firstAttribute="bottom" secondItem="ylt-pw-7Ij" secondAttribute="bottom" constant="12.5" id="mRD-Pn-O2C"/>
+                    <constraint firstItem="ylt-pw-7Ij" firstAttribute="leading" secondItem="xAP-bH-Koy" secondAttribute="trailing" constant="2" id="xwM-OI-PUb"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="titleLabel" destination="ylt-pw-7Ij" id="kNf-ot-dY0"/>
+                <outlet property="topImg" destination="xAP-bH-Koy" id="pXw-uP-P9P"/>
+            </connections>
+            <point key="canvasLocation" x="-19" y="53"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="g-mineDown" width="20" height="20"/>
+    </resources>
+</document>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HTBossSelectedShopView">
+            <rect key="frame" x="0.0" y="0.0" width="329" height="461"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rx7-F6-FD8">
+                    <rect key="frame" x="164.5" y="417" width="164.5" height="44"/>
+                    <color key="backgroundColor" red="0.78276157379150391" green="0.53908318281173706" blue="0.94280380010604858" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="aqd-g7-00X"/>
+                    </constraints>
+                    <state key="normal" title="确认">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="okSelected:" destination="-1" eventType="touchUpInside" id="LbR-PE-Ddp"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aGF-gS-LkC">
+                    <rect key="frame" x="0.0" y="417" width="164.5" height="44"/>
+                    <color key="backgroundColor" red="0.10979025810956955" green="0.10981263965368271" blue="0.10978538542985916" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="cvb-zS-f98"/>
+                    </constraints>
+                    <state key="normal" title="全选">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="selectedAllClicked:" destination="-1" eventType="touchUpInside" id="PVH-CE-mw5"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="单选-未选中" translatesAutoresizingMaskIntoConstraints="NO" id="Gtf-Bb-JWs">
+                    <rect key="frame" x="20" y="427.5" width="23" height="23"/>
+                </imageView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="txG-91-qmv">
+                    <rect key="frame" x="0.0" y="0.0" width="329" height="417"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="aGF-gS-LkC" secondAttribute="bottom" id="0n9-5H-7T2"/>
+                <constraint firstItem="rx7-F6-FD8" firstAttribute="leading" secondItem="aGF-gS-LkC" secondAttribute="trailing" id="49O-vY-AIe"/>
+                <constraint firstItem="txG-91-qmv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Dcd-9b-xt0"/>
+                <constraint firstAttribute="trailing" secondItem="txG-91-qmv" secondAttribute="trailing" id="FIX-ZT-R6Q"/>
+                <constraint firstItem="Gtf-Bb-JWs" firstAttribute="centerY" secondItem="aGF-gS-LkC" secondAttribute="centerY" id="Sif-U4-Ep6"/>
+                <constraint firstItem="rx7-F6-FD8" firstAttribute="width" secondItem="aGF-gS-LkC" secondAttribute="width" id="cq9-Ul-UI9"/>
+                <constraint firstItem="Gtf-Bb-JWs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="dQx-Mm-PYD"/>
+                <constraint firstItem="txG-91-qmv" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="fiO-e5-Lq8"/>
+                <constraint firstAttribute="bottom" secondItem="rx7-F6-FD8" secondAttribute="bottom" id="pB0-LZ-rib"/>
+                <constraint firstItem="rx7-F6-FD8" firstAttribute="leading" secondItem="aGF-gS-LkC" secondAttribute="trailing" id="pfg-He-5c3"/>
+                <constraint firstItem="rx7-F6-FD8" firstAttribute="top" secondItem="txG-91-qmv" secondAttribute="bottom" id="vzu-KU-1TG"/>
+                <constraint firstAttribute="trailing" secondItem="rx7-F6-FD8" secondAttribute="trailing" id="xHt-6j-lUO"/>
+                <constraint firstItem="aGF-gS-LkC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="y3H-Ku-cHn"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="allSelecetedImg" destination="Gtf-Bb-JWs" id="zwq-r4-01i"/>
+                <outlet property="dataTableView" destination="txG-91-qmv" id="U9R-Rc-xyf"/>
+            </connections>
+            <point key="canvasLocation" x="14.5" y="-149.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="单选-未选中" width="23" height="23"/>
+    </resources>
+</document>

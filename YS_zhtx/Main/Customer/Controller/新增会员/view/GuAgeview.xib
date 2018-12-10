@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1" userLabel="LocateView" customClass="GuAgeview">
+            <rect key="frame" x="0.0" y="0.0" width="333" height="276"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6" userLabel="LocateButton">
+                    <rect key="frame" x="272" y="44" width="42" height="42"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="42" id="14"/>
+                        <constraint firstAttribute="height" constant="42" id="15"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="确定">
+                        <color key="titleColor" red="1" green="0.12539988299999999" blue="0.19521616180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="locate:" destination="1" eventType="touchUpInside" id="11"/>
+                    </connections>
+                </button>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="JXh-Mi-jiv">
+                    <rect key="frame" x="0.0" y="0.0" width="333" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="ypK-fE-f34"/>
+                    </constraints>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3" userLabel="LocatePicker">
+                    <rect key="frame" x="0.0" y="91" width="320" height="180"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="180" id="20"/>
+                    </constraints>
+                </pickerView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="6" secondAttribute="trailing" constant="19" id="16"/>
+                <constraint firstItem="3" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="18"/>
+                <constraint firstItem="3" firstAttribute="top" secondItem="6" secondAttribute="bottom" constant="5" id="0Mo-dh-uby"/>
+                <constraint firstItem="JXh-Mi-jiv" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="46h-NF-Xa8"/>
+                <constraint firstItem="6" firstAttribute="top" secondItem="JXh-Mi-jiv" secondAttribute="bottom" id="HrI-Qn-MxH"/>
+                <constraint firstAttribute="trailing" secondItem="JXh-Mi-jiv" secondAttribute="trailing" id="hmV-U8-uWP"/>
+                <constraint firstItem="JXh-Mi-jiv" firstAttribute="top" secondItem="1" secondAttribute="top" id="uLV-p3-M4O"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="locatePicker" destination="3" id="7"/>
+                <outlet property="searchBar" destination="JXh-Mi-jiv" id="Ci7-EY-nf0"/>
+            </connections>
+            <point key="canvasLocation" x="-61" y="211"/>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
+</document>

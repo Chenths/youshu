@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HTBossSelecteTimeController">
+            <connections>
+                <outlet property="dataTableView" destination="HdG-Yh-5ab" id="Yjv-yj-32I"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HdG-Yh-5ab">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="619"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9fv-NI-3tJ">
+                    <rect key="frame" x="0.0" y="619" width="375" height="48"/>
+                    <color key="backgroundColor" red="0.76460272070000002" green="0.53480845690000001" blue="0.94301205870000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="48" id="L21-d4-tVP"/>
+                        <constraint firstAttribute="height" constant="48" id="a5N-jd-EIe"/>
+                    </constraints>
+                    <state key="normal" title="确认选择">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="compareCliked:" destination="-1" eventType="touchUpInside" id="pu7-ZT-ogk"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="9fv-NI-3tJ" secondAttribute="trailing" id="25T-8B-cKh"/>
+                <constraint firstAttribute="trailing" secondItem="HdG-Yh-5ab" secondAttribute="trailing" id="JJY-l2-UfG"/>
+                <constraint firstItem="9fv-NI-3tJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Jf5-2S-4uS"/>
+                <constraint firstItem="HdG-Yh-5ab" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="QzH-J7-RCj"/>
+                <constraint firstAttribute="bottom" secondItem="9fv-NI-3tJ" secondAttribute="bottom" id="ZZ5-VH-B5F"/>
+                <constraint firstItem="9fv-NI-3tJ" firstAttribute="top" secondItem="HdG-Yh-5ab" secondAttribute="bottom" id="nnf-IL-PIt"/>
+                <constraint firstItem="HdG-Yh-5ab" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="xce-62-JzQ"/>
+            </constraints>
+            <point key="canvasLocation" x="102.5" y="32.5"/>
+        </view>
+    </objects>
+</document>

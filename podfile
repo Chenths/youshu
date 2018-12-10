@@ -1,0 +1,13 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+
+target 'YS_zhtx' do
+pod 'AFNetworking', '~> 3.0'
+pod 'SDWebImage', '~> 4.0'
+pod 'YYModel'
+pod 'MJRefresh'
+pod 'MBProgressHUD', '~> 1.1.0'
+pod 'Masonry', '~> 1.1.0'
+pod 'KLCPopup', '~> 1.0'
+pod 'GDataXML-HTML', '~> 1.4.1'
+end

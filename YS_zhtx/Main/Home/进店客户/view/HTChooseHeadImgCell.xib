@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="HTChooseHeadImgCell">
+            <rect key="frame" x="0.0" y="0.0" width="202" height="250"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="202" height="250"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="散客照片背景" translatesAutoresizingMaskIntoConstraints="NO" id="2Eg-Is-xrM">
+                        <rect key="frame" x="4" y="0.0" width="194" height="208"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="2Eg-Is-xrM" secondAttribute="height" multiplier="189:203" id="FDH-Lb-Vuf"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="g-customerholdImg" translatesAutoresizingMaskIntoConstraints="NO" id="yK0-oY-0vl">
+                        <rect key="frame" x="4" y="14" width="194" height="194"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="yK0-oY-0vl" secondAttribute="height" id="Z4F-67-1Uo"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RIX-eu-Eom">
+                        <rect key="frame" x="83.5" y="216" width="35.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.19997885823249817" green="0.20001345872879028" blue="0.19997128844261169" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="edU-0P-hG7">
+                        <rect key="frame" x="157" y="27" width="25" height="25"/>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="edU-0P-hG7" firstAttribute="top" secondItem="yK0-oY-0vl" secondAttribute="top" constant="5" id="3c4-uk-NHp"/>
+                <constraint firstAttribute="trailing" secondItem="edU-0P-hG7" secondAttribute="trailing" constant="5" id="6mV-oD-eT1"/>
+                <constraint firstItem="RIX-eu-Eom" firstAttribute="top" secondItem="yK0-oY-0vl" secondAttribute="bottom" constant="8" id="AVB-nc-2gD"/>
+                <constraint firstItem="yK0-oY-0vl" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="De0-GJ-nyz"/>
+                <constraint firstAttribute="trailing" secondItem="2Eg-Is-xrM" secondAttribute="trailing" constant="4" id="YVA-3o-Pxq"/>
+                <constraint firstItem="yK0-oY-0vl" firstAttribute="bottom" secondItem="2Eg-Is-xrM" secondAttribute="bottom" id="gbV-hG-vdL"/>
+                <constraint firstAttribute="trailing" secondItem="yK0-oY-0vl" secondAttribute="trailing" constant="4" id="nX0-v6-Krk"/>
+                <constraint firstItem="2Eg-Is-xrM" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="pet-pl-ESY"/>
+                <constraint firstItem="2Eg-Is-xrM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="qwU-Zi-fr8"/>
+                <constraint firstItem="RIX-eu-Eom" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="zF9-xl-V7e"/>
+            </constraints>
+            <size key="customSize" width="202" height="250"/>
+            <connections>
+                <outlet property="backImg" destination="2Eg-Is-xrM" id="P5f-Mr-Kd2"/>
+                <outlet property="decsLabel" destination="RIX-eu-Eom" id="Vb7-hb-AUG"/>
+                <outlet property="headImg" destination="yK0-oY-0vl" id="SYN-di-Huy"/>
+                <outlet property="seletedImg" destination="edU-0P-hG7" id="oWY-Mp-PdU"/>
+            </connections>
+            <point key="canvasLocation" x="-336" y="-108"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="g-customerholdImg" width="75" height="75"/>
+        <image name="散客照片背景" width="94" height="101"/>
+    </resources>
+</document>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HTCustomDefualAlertView">
+            <rect key="frame" x="0.0" y="0.0" width="376" height="167"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vav-cX-FL2">
+                    <rect key="frame" x="32" y="103" width="144" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="zYw-LQ-fza"/>
+                    </constraints>
+                    <state key="normal" title="取消">
+                        <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="cancelBtClicek:" destination="iN0-l3-epB" eventType="touchUpInside" id="mw5-By-gMe"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ht9-VE-jqW">
+                    <rect key="frame" x="200.5" y="103" width="143.5" height="40"/>
+                    <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="MGG-Sw-gnS"/>
+                    </constraints>
+                    <state key="normal" title="确认">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="okBtClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="F8W-WV-3SG"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="是否再争取 一下" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iyP-gS-E6m">
+                    <rect key="frame" x="16" y="50" width="344" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DWH-W9-svn">
+                    <rect key="frame" x="128" y="103" width="120" height="40"/>
+                    <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="P9c-jk-mUA"/>
+                        <constraint firstAttribute="height" constant="40" id="zxm-HB-eJg"/>
+                    </constraints>
+                    <state key="normal" title="确认">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="singleOkBt:" destination="iN0-l3-epB" eventType="touchUpInside" id="jRp-T9-aJk"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="DWH-W9-svn" firstAttribute="centerX" secondItem="iyP-gS-E6m" secondAttribute="centerX" id="0LY-4k-gUc"/>
+                <constraint firstItem="ht9-VE-jqW" firstAttribute="width" secondItem="vav-cX-FL2" secondAttribute="width" id="Je3-xj-evT"/>
+                <constraint firstItem="iyP-gS-E6m" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="MV4-C9-xIn"/>
+                <constraint firstItem="vav-cX-FL2" firstAttribute="top" secondItem="iyP-gS-E6m" secondAttribute="bottom" constant="35" id="Mk6-o4-LFu"/>
+                <constraint firstItem="DWH-W9-svn" firstAttribute="top" secondItem="iyP-gS-E6m" secondAttribute="bottom" constant="35" id="SMC-2W-Y2u"/>
+                <constraint firstItem="iyP-gS-E6m" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ac8-hz-6px"/>
+                <constraint firstAttribute="bottom" secondItem="vav-cX-FL2" secondAttribute="bottom" constant="24" id="mEo-RC-Knc"/>
+                <constraint firstItem="ht9-VE-jqW" firstAttribute="leading" secondItem="vav-cX-FL2" secondAttribute="trailing" constant="24" id="oFr-cP-Ujl"/>
+                <constraint firstAttribute="trailing" secondItem="ht9-VE-jqW" secondAttribute="trailing" constant="32" id="ujA-sh-9TP"/>
+                <constraint firstAttribute="trailing" secondItem="iyP-gS-E6m" secondAttribute="trailing" constant="16" id="v16-Mt-o69"/>
+                <constraint firstItem="vav-cX-FL2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="32" id="vEi-48-FVs"/>
+                <constraint firstItem="ht9-VE-jqW" firstAttribute="top" secondItem="vav-cX-FL2" secondAttribute="top" id="wWb-6e-v84"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="cancelBt" destination="vav-cX-FL2" id="bAD-7K-ZrK"/>
+                <outlet property="okBt" destination="ht9-VE-jqW" id="5YU-vI-3RI"/>
+                <outlet property="singleOkBt" destination="DWH-W9-svn" id="TN6-2S-t0s"/>
+                <outlet property="titleLabel" destination="iyP-gS-E6m" id="BFK-gy-mwS"/>
+            </connections>
+            <point key="canvasLocation" x="31" y="272"/>
+        </view>
+    </objects>
+</document>

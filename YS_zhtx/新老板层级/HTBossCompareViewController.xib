@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HTBossCompareViewController">
+            <connections>
+                <outlet property="companyTitle" destination="IV0-fh-LV9" id="AD7-df-3b6"/>
+                <outlet property="dataTableView" destination="IlO-Dx-XUE" id="Nec-Fp-vZp"/>
+                <outlet property="shopCompareImg" destination="907-vm-Au5" id="iHX-en-RZc"/>
+                <outlet property="timeCompareimg" destination="XOe-CY-V0r" id="3FG-Ip-PAS"/>
+                <outlet property="timeTitle" destination="JzR-Lq-pNj" id="SIK-BM-hkY"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vrb-xt-yUs">
+                    <rect key="frame" x="0.0" y="0.0" width="187.5" height="44"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="bbM-CG-q6Y"/>
+                    </constraints>
+                    <connections>
+                        <action selector="companyCompareClicked:" destination="-1" eventType="touchUpInside" id="mfC-vN-fJM"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8TG-EU-GfM">
+                    <rect key="frame" x="187.5" y="0.0" width="187.5" height="44"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <action selector="timeCompareClieck:" destination="-1" eventType="touchUpInside" id="q31-w0-HpX"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="时间对比" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JzR-Lq-pNj">
+                    <rect key="frame" x="255.5" y="13" width="61.5" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="店铺对比" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IV0-fh-LV9">
+                    <rect key="frame" x="68" y="13" width="61.5" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="店铺对比-未选中" translatesAutoresizingMaskIntoConstraints="NO" id="907-vm-Au5">
+                    <rect key="frame" x="45" y="12" width="20" height="20"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="时间对比未选中" translatesAutoresizingMaskIntoConstraints="NO" id="XOe-CY-V0r">
+                    <rect key="frame" x="232.5" y="12" width="20" height="20"/>
+                </imageView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IlO-Dx-XUE">
+                    <rect key="frame" x="0.0" y="44" width="375" height="575"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1aV-aG-jBN">
+                    <rect key="frame" x="187.5" y="619" width="187.5" height="48"/>
+                    <color key="backgroundColor" red="0.48880654573440552" green="0.51441448926925659" blue="0.97708743810653687" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="eNp-g7-5gp"/>
+                    </constraints>
+                    <state key="normal" title="开始对比">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="beginCompareClicked:" destination="-1" eventType="touchUpInside" id="pMV-Ds-Y2F"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aeo-hh-wOB">
+                    <rect key="frame" x="0.0" y="619" width="187.5" height="48"/>
+                    <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" title="退出对比">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="tuichu:" destination="-1" eventType="touchUpInside" id="sZZ-Cf-TL9"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Aeo-hh-wOB" secondAttribute="bottom" id="1tN-aU-4k5"/>
+                <constraint firstItem="Aeo-hh-wOB" firstAttribute="top" secondItem="IlO-Dx-XUE" secondAttribute="bottom" id="2ty-e8-z7h"/>
+                <constraint firstItem="IV0-fh-LV9" firstAttribute="leading" secondItem="907-vm-Au5" secondAttribute="trailing" constant="3" id="3qD-xE-NSZ"/>
+                <constraint firstItem="Vrb-xt-yUs" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="4a6-l5-zg0"/>
+                <constraint firstAttribute="bottom" secondItem="1aV-aG-jBN" secondAttribute="bottom" id="8Wz-1r-Q7M"/>
+                <constraint firstItem="8TG-EU-GfM" firstAttribute="leading" secondItem="Vrb-xt-yUs" secondAttribute="trailing" id="B0Q-l7-4dn"/>
+                <constraint firstItem="1aV-aG-jBN" firstAttribute="leading" secondItem="Aeo-hh-wOB" secondAttribute="trailing" id="Bod-oX-nBZ"/>
+                <constraint firstItem="XOe-CY-V0r" firstAttribute="centerY" secondItem="JzR-Lq-pNj" secondAttribute="centerY" id="DOm-pD-EkV"/>
+                <constraint firstItem="IlO-Dx-XUE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="FlF-Kc-aCs"/>
+                <constraint firstItem="JzR-Lq-pNj" firstAttribute="centerY" secondItem="8TG-EU-GfM" secondAttribute="centerY" id="GmI-XY-QaM"/>
+                <constraint firstAttribute="trailing" secondItem="8TG-EU-GfM" secondAttribute="trailing" id="NbQ-gH-yyq"/>
+                <constraint firstAttribute="trailing" secondItem="1aV-aG-jBN" secondAttribute="trailing" id="Nq7-PL-oas"/>
+                <constraint firstItem="8TG-EU-GfM" firstAttribute="height" secondItem="Vrb-xt-yUs" secondAttribute="height" id="OhB-pM-wcE"/>
+                <constraint firstItem="Vrb-xt-yUs" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Pu4-Te-Y7l"/>
+                <constraint firstItem="8TG-EU-GfM" firstAttribute="leading" secondItem="Vrb-xt-yUs" secondAttribute="trailing" id="Sgb-cW-M9c"/>
+                <constraint firstItem="1aV-aG-jBN" firstAttribute="width" secondItem="Aeo-hh-wOB" secondAttribute="width" id="VBG-rZ-U1f"/>
+                <constraint firstItem="907-vm-Au5" firstAttribute="centerY" secondItem="IV0-fh-LV9" secondAttribute="centerY" id="XTG-CR-yGJ"/>
+                <constraint firstItem="8TG-EU-GfM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="bMz-93-WOR"/>
+                <constraint firstItem="1aV-aG-jBN" firstAttribute="top" secondItem="IlO-Dx-XUE" secondAttribute="bottom" id="cUF-TL-bX9"/>
+                <constraint firstItem="IV0-fh-LV9" firstAttribute="centerY" secondItem="Vrb-xt-yUs" secondAttribute="centerY" id="hJU-hI-jRG"/>
+                <constraint firstItem="8TG-EU-GfM" firstAttribute="width" secondItem="Vrb-xt-yUs" secondAttribute="width" id="mN4-AX-Dmg"/>
+                <constraint firstAttribute="trailing" secondItem="IlO-Dx-XUE" secondAttribute="trailing" id="nBf-LU-NkJ"/>
+                <constraint firstItem="JzR-Lq-pNj" firstAttribute="centerX" secondItem="8TG-EU-GfM" secondAttribute="centerX" constant="5" id="nNx-wG-bkx"/>
+                <constraint firstItem="IlO-Dx-XUE" firstAttribute="top" secondItem="Vrb-xt-yUs" secondAttribute="bottom" id="txW-YT-yt5"/>
+                <constraint firstItem="IV0-fh-LV9" firstAttribute="centerX" secondItem="Vrb-xt-yUs" secondAttribute="centerX" constant="5" id="vuW-SB-cxx"/>
+                <constraint firstItem="JzR-Lq-pNj" firstAttribute="leading" secondItem="XOe-CY-V0r" secondAttribute="trailing" constant="3" id="ybF-Wa-I1z"/>
+                <constraint firstItem="Aeo-hh-wOB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zWU-Hh-4T8"/>
+            </constraints>
+            <point key="canvasLocation" x="33.5" y="85.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="店铺对比-未选中" width="20" height="20"/>
+        <image name="时间对比未选中" width="20" height="20"/>
+    </resources>
+</document>

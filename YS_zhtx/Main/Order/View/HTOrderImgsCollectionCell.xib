@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="87" id="KGk-i7-Jjw" customClass="HTOrderImgsCollectionCell">
+            <rect key="frame" x="0.0" y="0.0" width="343" height="87"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="343" height="86.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="dXp-xa-428">
+                        <rect key="frame" x="15" y="0.0" width="296" height="86.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="87" id="tS8-JC-B7L"/>
+                        </constraints>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2Me-zl-kfd">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="g-leftIcon" translatesAutoresizingMaskIntoConstraints="NO" id="QPo-oS-2nj">
+                        <rect key="frame" x="311" y="33.5" width="20" height="20"/>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="QPo-oS-2nj" firstAttribute="leading" secondItem="dXp-xa-428" secondAttribute="trailing" id="3OQ-dr-aJu"/>
+                    <constraint firstAttribute="bottom" secondItem="dXp-xa-428" secondAttribute="bottom" id="5pG-JD-X6K"/>
+                    <constraint firstAttribute="trailing" secondItem="QPo-oS-2nj" secondAttribute="trailing" constant="12" id="Gmk-RM-UgX"/>
+                    <constraint firstItem="dXp-xa-428" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="a3f-Nm-N9v"/>
+                    <constraint firstItem="dXp-xa-428" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ghQ-i3-c3U"/>
+                    <constraint firstItem="QPo-oS-2nj" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="zhq-Hj-kyC"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="dataCollectionView" destination="dXp-xa-428" id="6gW-Em-eKw"/>
+            </connections>
+            <point key="canvasLocation" x="143.5" y="134.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="g-leftIcon" width="20" height="20"/>
+    </resources>
+</document>

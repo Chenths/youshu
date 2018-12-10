@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="HTAddStoredMoneyCollectionCell">
+            <rect key="frame" x="0.0" y="0.0" width="151" height="72"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="151" height="72"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stored_添加图标" translatesAutoresizingMaskIntoConstraints="NO" id="CBh-wc-LQL">
+                        <rect key="frame" x="20" y="25" width="27" height="27"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="CBh-wc-LQL" secondAttribute="height" id="QY9-c8-2ox"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="自定义充值" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C9F-Z8-DUB">
+                        <rect key="frame" x="62" y="30" width="76.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.13331398367881775" green="0.13334444165229797" blue="0.13331207633018494" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="CBh-wc-LQL" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="25" id="G7i-c8-Yam"/>
+                <constraint firstItem="C9F-Z8-DUB" firstAttribute="leading" secondItem="CBh-wc-LQL" secondAttribute="trailing" constant="15" id="JWg-Dv-0a4"/>
+                <constraint firstItem="C9F-Z8-DUB" firstAttribute="centerY" secondItem="CBh-wc-LQL" secondAttribute="centerY" id="P8L-Eo-fWE"/>
+                <constraint firstItem="CBh-wc-LQL" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="dwQ-r3-XWf"/>
+                <constraint firstAttribute="bottom" secondItem="CBh-wc-LQL" secondAttribute="bottom" constant="20" id="qgN-6I-cG8"/>
+            </constraints>
+            <size key="customSize" width="151" height="72"/>
+            <point key="canvasLocation" x="151.5" y="70"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="stored_添加图标" width="20" height="20"/>
+    </resources>
+</document>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HTPostProductImgViewController">
+            <connections>
+                <outlet property="tab" destination="oOv-cr-Lka" id="DfO-1u-TEr"/>
+                <outlet property="tabBottomHeight" destination="uue-SC-io4" id="vmU-qQ-nZu"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oOv-cr-Lka">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="619"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="oOv-cr-Lka" secondAttribute="trailing" id="84W-wp-WW0"/>
+                <constraint firstItem="oOv-cr-Lka" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="MTe-bd-j8V"/>
+                <constraint firstItem="oOv-cr-Lka" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="bsq-DP-wCO"/>
+                <constraint firstAttribute="bottom" secondItem="oOv-cr-Lka" secondAttribute="bottom" constant="48" id="uue-SC-io4"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

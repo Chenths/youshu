@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="329" id="KGk-i7-Jjw" customClass="HTShopInventorySeasonInfoCell">
+            <rect key="frame" x="0.0" y="0.0" width="325" height="329"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="325" height="328.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="季节占比" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAd-B5-qew">
+                        <rect key="frame" x="130" y="24" width="65.5" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="NeN-Bl-ZW6"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Fyv-Tj-I2u">
+                        <rect key="frame" x="0.0" y="86" width="325" height="226.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="332" id="tjv-2O-HNz"/>
+                        </constraints>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wzh-U1-o6U">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Fyv-Tj-I2u" firstAttribute="top" secondItem="xAd-B5-qew" secondAttribute="bottom" constant="41" id="7U1-r1-oSd"/>
+                    <constraint firstItem="xAd-B5-qew" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="RLw-OO-SO3"/>
+                    <constraint firstAttribute="bottom" secondItem="Fyv-Tj-I2u" secondAttribute="bottom" constant="16" id="cXi-GK-6t1"/>
+                    <constraint firstItem="xAd-B5-qew" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="j3w-iZ-XKS"/>
+                    <constraint firstAttribute="trailing" secondItem="Fyv-Tj-I2u" secondAttribute="trailing" id="qUz-Nc-Rn5"/>
+                    <constraint firstItem="Fyv-Tj-I2u" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="qWe-vV-mj7"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="collectionViewHeight" destination="tjv-2O-HNz" id="MZa-Pb-GLY"/>
+                <outlet property="dataCollectionView" destination="Fyv-Tj-I2u" id="lSS-DV-Z42"/>
+            </connections>
+            <point key="canvasLocation" x="-125" y="31"/>
+        </tableViewCell>
+    </objects>
+</document>

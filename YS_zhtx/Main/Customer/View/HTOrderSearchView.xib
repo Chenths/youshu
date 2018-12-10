@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HTOrderSearchView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="p5N-qh-1zV">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="619"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Esy-xv-Cbg">
+                    <rect key="frame" x="0.0" y="619" width="187.5" height="48"/>
+                    <state key="normal" title="重置">
+                        <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="resetClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="Mx1-yV-3Oe"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n3C-Iz-uWY">
+                    <rect key="frame" x="187.5" y="619" width="187.5" height="48"/>
+                    <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="Jkj-ua-sxm"/>
+                    </constraints>
+                    <state key="normal" title="确定">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="okBtClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="tJa-mD-3Zr"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="n3C-Iz-uWY" firstAttribute="width" secondItem="Esy-xv-Cbg" secondAttribute="width" id="87R-93-TLV"/>
+                <constraint firstAttribute="bottom" secondItem="n3C-Iz-uWY" secondAttribute="bottom" id="8ry-ca-5ZA"/>
+                <constraint firstItem="p5N-qh-1zV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="DxH-aQ-HnR"/>
+                <constraint firstItem="Esy-xv-Cbg" firstAttribute="top" secondItem="p5N-qh-1zV" secondAttribute="bottom" id="KnB-Uj-Znr"/>
+                <constraint firstAttribute="trailing" secondItem="p5N-qh-1zV" secondAttribute="trailing" id="LvH-tR-Mxn"/>
+                <constraint firstItem="Esy-xv-Cbg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="QTo-CR-Ak5"/>
+                <constraint firstItem="n3C-Iz-uWY" firstAttribute="top" secondItem="p5N-qh-1zV" secondAttribute="bottom" id="TSy-Pb-GZo"/>
+                <constraint firstAttribute="trailing" secondItem="n3C-Iz-uWY" secondAttribute="trailing" id="aLv-Pk-fZf"/>
+                <constraint firstAttribute="bottom" secondItem="Esy-xv-Cbg" secondAttribute="bottom" id="flD-60-D6y"/>
+                <constraint firstItem="p5N-qh-1zV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="khN-NU-mq9"/>
+                <constraint firstItem="n3C-Iz-uWY" firstAttribute="leading" secondItem="Esy-xv-Cbg" secondAttribute="trailing" id="xhE-2F-R8c"/>
+            </constraints>
+            <connections>
+                <outlet property="dataTableView" destination="p5N-qh-1zV" id="OZi-qp-vOW"/>
+            </connections>
+            <point key="canvasLocation" x="32.5" y="94.5"/>
+        </view>
+    </objects>
+</document>

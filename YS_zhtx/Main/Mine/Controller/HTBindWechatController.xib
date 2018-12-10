@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HTBindWechatController">
+            <connections>
+                <outlet property="bingBt" destination="gKU-Eq-hSb" id="p2P-fC-VRR"/>
+                <outlet property="descLabel" destination="LFZ-LG-bnM" id="LgY-AE-Vow"/>
+                <outlet property="stateImg" destination="gTP-KG-ag3" id="iQl-WC-cco"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gKU-Eq-hSb">
+                    <rect key="frame" x="16" y="593" width="343" height="44"/>
+                    <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="FCg-WC-FzE"/>
+                    </constraints>
+                    <state key="normal" title="立即绑定">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="bingWechatClicked:" destination="-1" eventType="touchUpInside" id="0J5-Gz-lyj"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wx_unbind_img" translatesAutoresizingMaskIntoConstraints="NO" id="gTP-KG-ag3">
+                    <rect key="frame" x="123" y="80" width="128" height="128"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="128" id="m3f-Xc-xht"/>
+                        <constraint firstAttribute="height" constant="128" id="xAB-8H-fON"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="你未绑定微信" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFZ-LG-bnM">
+                    <rect key="frame" x="132.5" y="228" width="110.5" height="21.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="LFZ-LG-bnM" firstAttribute="centerX" secondItem="gTP-KG-ag3" secondAttribute="centerX" id="1I0-y5-KkL"/>
+                <constraint firstAttribute="trailing" secondItem="gKU-Eq-hSb" secondAttribute="trailing" constant="16" id="HF4-Gz-vMm"/>
+                <constraint firstItem="gTP-KG-ag3" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="NIa-3a-ydg"/>
+                <constraint firstItem="gKU-Eq-hSb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="TsG-Bg-kXS"/>
+                <constraint firstItem="gTP-KG-ag3" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="d15-1c-Aoy"/>
+                <constraint firstItem="LFZ-LG-bnM" firstAttribute="top" secondItem="gTP-KG-ag3" secondAttribute="bottom" constant="20" id="iON-ZW-oec"/>
+                <constraint firstAttribute="bottom" secondItem="gKU-Eq-hSb" secondAttribute="bottom" constant="30" id="tkg-oC-8YW"/>
+            </constraints>
+            <point key="canvasLocation" x="-993" y="171"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="wx_unbind_img" width="128" height="128"/>
+    </resources>
+</document>

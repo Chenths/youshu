@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HTGSaleReportViewController">
+            <connections>
+                <outlet property="btHeight" destination="8pO-4C-wwf" id="fBw-30-vwy"/>
+                <outlet property="tab" destination="VUb-b9-vHQ" id="u7t-Ha-nDT"/>
+                <outlet property="tabBottomHeight" destination="Kza-bB-Rpr" id="dGN-wx-YRw"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="warningDescBt" destination="RMq-fx-6Ki" id="zHj-2W-jjh"/>
+                <outlet property="warningLabel" destination="bUt-QE-8ay" id="dvc-jK-8Es"/>
+                <outlet property="warningView" destination="1sb-bS-aQv" id="37R-sF-5w8"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="VUb-b9-vHQ">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                </tableView>
+                <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1sb-bS-aQv">
+                    <rect key="frame" x="0.0" y="619" width="375" height="48"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="本页存在 1 处报警" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bUt-QE-8ay">
+                            <rect key="frame" x="16" y="15.5" width="114" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RMq-fx-6Ki">
+                            <rect key="frame" x="209" y="8" width="75" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="32" id="9ZN-vm-mut"/>
+                                <constraint firstAttribute="width" constant="75" id="znD-m6-gN0"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="查看详情">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="seeWaningDescClicked:" destination="-1" eventType="touchUpInside" id="55A-vM-RSz"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YIX-nI-TNn">
+                            <rect key="frame" x="332" y="9" width="31" height="31"/>
+                            <state key="normal" image="colseWhite"/>
+                            <connections>
+                                <action selector="colseWarningView:" destination="-1" eventType="touchUpInside" id="zWI-ha-tGw"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.90196078431372551" green="0.2196078431372549" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="RMq-fx-6Ki" firstAttribute="centerY" secondItem="bUt-QE-8ay" secondAttribute="centerY" id="LvZ-HB-eQF"/>
+                        <constraint firstItem="bUt-QE-8ay" firstAttribute="centerY" secondItem="1sb-bS-aQv" secondAttribute="centerY" id="WPt-nM-fpy"/>
+                        <constraint firstAttribute="height" constant="48" id="ZMu-V7-gOo"/>
+                        <constraint firstItem="YIX-nI-TNn" firstAttribute="leading" secondItem="RMq-fx-6Ki" secondAttribute="trailing" constant="48" id="bP8-qN-Wvw"/>
+                        <constraint firstAttribute="trailing" secondItem="YIX-nI-TNn" secondAttribute="trailing" constant="12" id="g1x-9W-wP3"/>
+                        <constraint firstItem="bUt-QE-8ay" firstAttribute="leading" secondItem="1sb-bS-aQv" secondAttribute="leading" constant="16" id="oEW-DZ-Od3"/>
+                        <constraint firstItem="YIX-nI-TNn" firstAttribute="centerY" secondItem="1sb-bS-aQv" secondAttribute="centerY" id="yEv-hC-jkX"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="1sb-bS-aQv" secondAttribute="trailing" id="5tw-5U-kX4"/>
+                <constraint firstAttribute="bottom" secondItem="1sb-bS-aQv" secondAttribute="bottom" id="8pO-4C-wwf"/>
+                <constraint firstAttribute="trailing" secondItem="VUb-b9-vHQ" secondAttribute="trailing" id="I8p-l3-UrB"/>
+                <constraint firstAttribute="bottom" secondItem="VUb-b9-vHQ" secondAttribute="bottom" id="Kza-bB-Rpr"/>
+                <constraint firstItem="VUb-b9-vHQ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="d2s-KH-Axn"/>
+                <constraint firstItem="1sb-bS-aQv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="reA-2y-Q8f"/>
+                <constraint firstItem="VUb-b9-vHQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="tZV-VT-KVN"/>
+            </constraints>
+            <point key="canvasLocation" x="25.5" y="52.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="colseWhite" width="31" height="31"/>
+    </resources>
+</document>

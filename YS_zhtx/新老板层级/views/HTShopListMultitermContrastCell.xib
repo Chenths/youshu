@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="HTShopListMultitermContrastCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="单选-未选中" translatesAutoresizingMaskIntoConstraints="NO" id="Oqh-6w-wl1">
+                        <rect key="frame" x="25" y="10.5" width="23" height="23"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CsD-vz-PGi">
+                        <rect key="frame" x="63" y="11" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="CsD-vz-PGi" firstAttribute="centerY" secondItem="Oqh-6w-wl1" secondAttribute="centerY" id="45L-9w-j8Z"/>
+                    <constraint firstItem="CsD-vz-PGi" firstAttribute="leading" secondItem="Oqh-6w-wl1" secondAttribute="trailing" constant="15" id="Cfi-Rw-9Yd"/>
+                    <constraint firstItem="Oqh-6w-wl1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="KHZ-We-2fJ"/>
+                    <constraint firstItem="Oqh-6w-wl1" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="jsu-Ja-6nv"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="companyName" destination="CsD-vz-PGi" id="9hm-KF-b24"/>
+                <outlet property="imgView" destination="Oqh-6w-wl1" id="qka-jR-SdH"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="单选-未选中" width="23" height="23"/>
+    </resources>
+</document>

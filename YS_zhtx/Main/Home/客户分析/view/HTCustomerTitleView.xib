@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HTCustomerTitleView">
+            <rect key="frame" x="0.0" y="0.0" width="275" height="126"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ppC-IW-IDM">
+                    <rect key="frame" x="55" y="51" width="165" height="25"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nv" translatesAutoresizingMaskIntoConstraints="NO" id="h28-0A-FjU">
+                            <rect key="frame" x="94.5" y="5" width="0.0" height="15"/>
+                            <constraints>
+                                <constraint firstAttribute="width" id="81g-Ga-nSE"/>
+                            </constraints>
+                        </imageView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2mg-8J-hss">
+                            <rect key="frame" x="99.5" y="2" width="63.5" height="21.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="黄金会员" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="het-z6-Ai2">
+                                    <rect key="frame" x="5" y="3" width="53.5" height="16"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="het-z6-Ai2" firstAttribute="centerY" secondItem="2mg-8J-hss" secondAttribute="centerY" id="7vl-1n-ggh"/>
+                                <constraint firstAttribute="trailing" secondItem="het-z6-Ai2" secondAttribute="trailing" constant="5" id="Mqy-8A-WTh"/>
+                                <constraint firstItem="het-z6-Ai2" firstAttribute="leading" secondItem="2mg-8J-hss" secondAttribute="leading" constant="5" id="ePS-ju-aZV"/>
+                                <constraint firstItem="het-z6-Ai2" firstAttribute="centerX" secondItem="2mg-8J-hss" secondAttribute="centerX" id="lOo-J4-Dsv"/>
+                            </constraints>
+                        </view>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="g-gHead" translatesAutoresizingMaskIntoConstraints="NO" id="iaD-3u-aIx">
+                            <rect key="frame" x="0.0" y="-3" width="32" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="32" id="cGS-SQ-zDO"/>
+                                <constraint firstAttribute="width" constant="32" id="dXc-dC-NLN"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="张雪梅" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NpP-Fe-o0e">
+                            <rect key="frame" x="34" y="2" width="55.5" height="21.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="2mg-8J-hss" firstAttribute="leading" secondItem="h28-0A-FjU" secondAttribute="trailing" constant="5" id="0jZ-p1-MjF"/>
+                        <constraint firstItem="NpP-Fe-o0e" firstAttribute="centerY" secondItem="ppC-IW-IDM" secondAttribute="centerY" id="2cu-9e-jY0"/>
+                        <constraint firstItem="h28-0A-FjU" firstAttribute="centerY" secondItem="NpP-Fe-o0e" secondAttribute="centerY" id="4a5-qL-20A"/>
+                        <constraint firstItem="iaD-3u-aIx" firstAttribute="centerY" secondItem="ppC-IW-IDM" secondAttribute="centerY" id="BNx-F2-zDP"/>
+                        <constraint firstItem="iaD-3u-aIx" firstAttribute="leading" secondItem="ppC-IW-IDM" secondAttribute="leading" id="MCo-mW-M03"/>
+                        <constraint firstAttribute="trailing" secondItem="2mg-8J-hss" secondAttribute="trailing" constant="2" id="Us1-PO-fsu"/>
+                        <constraint firstItem="2mg-8J-hss" firstAttribute="centerY" secondItem="NpP-Fe-o0e" secondAttribute="centerY" id="f3u-ON-j1g"/>
+                        <constraint firstItem="NpP-Fe-o0e" firstAttribute="leading" secondItem="iaD-3u-aIx" secondAttribute="trailing" constant="2" id="gEr-70-GhY"/>
+                        <constraint firstAttribute="height" constant="25" id="pUA-7J-caD"/>
+                        <constraint firstItem="h28-0A-FjU" firstAttribute="leading" secondItem="NpP-Fe-o0e" secondAttribute="trailing" constant="5" id="qJU-7p-icW"/>
+                        <constraint firstItem="2mg-8J-hss" firstAttribute="height" secondItem="NpP-Fe-o0e" secondAttribute="height" id="w7N-Xq-Dhh"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="ppC-IW-IDM" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="2So-uD-APC"/>
+                <constraint firstItem="ppC-IW-IDM" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Sqn-te-Jtb"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="headImg" destination="iaD-3u-aIx" id="LkN-J9-JL6"/>
+                <outlet property="levelView" destination="2mg-8J-hss" id="gdg-Ha-hyp"/>
+                <outlet property="nameLable" destination="NpP-Fe-o0e" id="fxY-r9-Cr6"/>
+                <outlet property="sexImg" destination="h28-0A-FjU" id="3Av-L0-zQ4"/>
+                <outlet property="vipLevel" destination="het-z6-Ai2" id="f02-GA-Q4N"/>
+            </connections>
+            <point key="canvasLocation" x="-372" y="-594"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="g-gHead" width="45" height="45"/>
+        <image name="nv" width="15" height="15"/>
+    </resources>
+</document>

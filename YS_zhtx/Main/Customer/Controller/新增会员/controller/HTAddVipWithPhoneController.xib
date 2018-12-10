@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HTAddVipWithPhoneController">
+            <connections>
+                <outlet property="nextBt" destination="o60-Z6-0jY" id="Aph-p8-RXu"/>
+                <outlet property="phoneText" destination="nLo-lp-zNG" id="xpc-KR-eQx"/>
+                <outlet property="phoneTextBack" destination="hy8-FW-oj0" id="juP-BU-YZu"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="会员手机" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRA-cT-4c0">
+                    <rect key="frame" x="16" y="24" width="65.5" height="19.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hy8-FW-oj0">
+                    <rect key="frame" x="16" y="59.5" width="343" height="32"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输手机号码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nLo-lp-zNG">
+                            <rect key="frame" x="8" y="0.0" width="327" height="32"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" red="0.90196078431372551" green="0.90980392156862744" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="nLo-lp-zNG" secondAttribute="bottom" id="1jL-Y5-Ygg"/>
+                        <constraint firstAttribute="height" constant="32" id="726-YD-Sav"/>
+                        <constraint firstAttribute="trailing" secondItem="nLo-lp-zNG" secondAttribute="trailing" constant="8" id="9Uk-Ia-McS"/>
+                        <constraint firstItem="nLo-lp-zNG" firstAttribute="top" secondItem="hy8-FW-oj0" secondAttribute="top" id="OjJ-qk-upd"/>
+                        <constraint firstItem="nLo-lp-zNG" firstAttribute="leading" secondItem="hy8-FW-oj0" secondAttribute="leading" constant="8" id="bvg-DA-7ym"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o60-Z6-0jY">
+                    <rect key="frame" x="16" y="115.5" width="343" height="44"/>
+                    <color key="backgroundColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="pK7-ft-ZTZ"/>
+                    </constraints>
+                    <state key="normal" title="下一步">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="nextBtClicked:" destination="-1" eventType="touchUpInside" id="4lR-3J-xL2"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="o60-Z6-0jY" firstAttribute="top" secondItem="hy8-FW-oj0" secondAttribute="bottom" constant="24" id="3JU-po-1Hg"/>
+                <constraint firstItem="o60-Z6-0jY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="FCU-zK-n1f"/>
+                <constraint firstItem="hy8-FW-oj0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="SEk-oV-3DY"/>
+                <constraint firstAttribute="trailing" secondItem="hy8-FW-oj0" secondAttribute="trailing" constant="16" id="i2o-do-GT4"/>
+                <constraint firstItem="hy8-FW-oj0" firstAttribute="top" secondItem="RRA-cT-4c0" secondAttribute="bottom" constant="16" id="iBX-Zu-c5m"/>
+                <constraint firstAttribute="trailing" secondItem="o60-Z6-0jY" secondAttribute="trailing" constant="16" id="mKf-Si-Zpg"/>
+                <constraint firstItem="RRA-cT-4c0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="rNa-hm-tfQ"/>
+                <constraint firstItem="RRA-cT-4c0" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="24" id="zGu-Nh-Svz"/>
+            </constraints>
+            <point key="canvasLocation" x="-110" y="-63"/>
+        </view>
+    </objects>
+</document>

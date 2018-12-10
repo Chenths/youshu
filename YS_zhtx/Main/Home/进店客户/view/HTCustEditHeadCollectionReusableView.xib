@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="U6b-Vx-4bR" customClass="HTCustEditHeadCollectionReusableView">
+            <rect key="frame" x="0.0" y="0.0" width="383" height="174"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ojL-nb-Vm3">
+                    <rect key="frame" x="151.5" y="22" width="80" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="V24-g2-34B"/>
+                        <constraint firstAttribute="height" constant="80" id="dYc-YH-JOx"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OgC-98-lx0">
+                    <rect key="frame" x="155.5" y="124" width="72" height="30"/>
+                    <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="72" id="GOj-ka-TWd"/>
+                        <constraint firstAttribute="height" constant="30" id="kQ2-Bf-eiC"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="本地上传">
+                        <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="photos:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="4hg-9Q-ISc"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ihu-K1-frN">
+                    <rect key="frame" x="77.5" y="124" width="72" height="30"/>
+                    <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="72" id="Dg0-NT-ptN"/>
+                        <constraint firstAttribute="height" constant="30" id="Fba-FL-xbs"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="拍照">
+                        <color key="titleColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="takePhoto:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="r34-2E-xrn"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X69-Wl-Qfk">
+                    <rect key="frame" x="233.5" y="124" width="72" height="30"/>
+                    <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="72" id="fhg-DB-DzF"/>
+                        <constraint firstAttribute="height" constant="30" id="nKA-eE-Q0I"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="系统照片">
+                        <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="sysclicked:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="o4v-mW-zcR"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="OgC-98-lx0" firstAttribute="top" secondItem="ojL-nb-Vm3" secondAttribute="bottom" constant="22" id="3xU-eX-LSS"/>
+                <constraint firstItem="OgC-98-lx0" firstAttribute="leading" secondItem="ihu-K1-frN" secondAttribute="trailing" constant="6" id="9dA-zV-dyr"/>
+                <constraint firstItem="ojL-nb-Vm3" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" constant="22" id="L8V-zA-pAy"/>
+                <constraint firstItem="OgC-98-lx0" firstAttribute="centerX" secondItem="U6b-Vx-4bR" secondAttribute="centerX" id="cva-QZ-kOW"/>
+                <constraint firstItem="X69-Wl-Qfk" firstAttribute="leading" secondItem="OgC-98-lx0" secondAttribute="trailing" constant="6" id="fbo-aZ-r1y"/>
+                <constraint firstItem="ojL-nb-Vm3" firstAttribute="centerX" secondItem="U6b-Vx-4bR" secondAttribute="centerX" id="neB-VV-od3"/>
+                <constraint firstItem="ihu-K1-frN" firstAttribute="centerY" secondItem="OgC-98-lx0" secondAttribute="centerY" id="pH1-vS-XDG"/>
+                <constraint firstItem="X69-Wl-Qfk" firstAttribute="centerY" secondItem="OgC-98-lx0" secondAttribute="centerY" id="zCg-XT-aNN"/>
+            </constraints>
+            <connections>
+                <outlet property="headImg" destination="ojL-nb-Vm3" id="sMT-XM-XeR"/>
+                <outlet property="photosBt" destination="OgC-98-lx0" id="OcX-GP-h0I"/>
+                <outlet property="sysBt" destination="X69-Wl-Qfk" id="jg4-9c-EiA"/>
+                <outlet property="takePoto" destination="ihu-K1-frN" id="Scu-Ds-SeE"/>
+            </connections>
+            <point key="canvasLocation" x="3" y="-91"/>
+        </collectionReusableView>
+    </objects>
+</document>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HTAgentStoreSectionHead">
+            <rect key="frame" x="0.0" y="0.0" width="444" height="47"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="各店铺本月销售概况" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1TT-eI-AMs">
+                    <rect key="frame" x="20" y="13" width="156" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.64208491160000003" green="0.58136665789999997" blue="0.56431192969999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ug-gH-cSd">
+                    <rect key="frame" x="355" y="7" width="79" height="33"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="8ug-gH-cSd" secondAttribute="height" multiplier="12:5" id="869-gX-SOw"/>
+                    </constraints>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="查找" translatesAutoresizingMaskIntoConstraints="NO" id="5fb-By-chK">
+                    <rect key="frame" x="414" y="13.5" width="20" height="20"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ucg-0X-anS">
+                    <rect key="frame" x="0.0" y="46" width="444" height="1"/>
+                    <color key="backgroundColor" red="0.89411764705882346" green="0.89411764705882346" blue="0.89411764705882346" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="uF3-hW-TdM"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Ucg-0X-anS" secondAttribute="bottom" id="31Y-W9-KeL"/>
+                <constraint firstAttribute="trailing" secondItem="5fb-By-chK" secondAttribute="trailing" constant="10" id="Aer-6x-Jzu"/>
+                <constraint firstItem="8ug-gH-cSd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="7" id="FDg-Io-7WV"/>
+                <constraint firstAttribute="bottom" secondItem="8ug-gH-cSd" secondAttribute="bottom" constant="7" id="O2d-tF-h0p"/>
+                <constraint firstItem="5fb-By-chK" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="REf-t0-LAs"/>
+                <constraint firstAttribute="trailing" secondItem="8ug-gH-cSd" secondAttribute="trailing" constant="10" id="XNP-G5-Uxr"/>
+                <constraint firstItem="1TT-eI-AMs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="bYA-8L-nMi"/>
+                <constraint firstItem="Ucg-0X-anS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dNV-RY-f4A"/>
+                <constraint firstAttribute="trailing" secondItem="Ucg-0X-anS" secondAttribute="trailing" id="dRH-Kt-Lo0"/>
+                <constraint firstItem="1TT-eI-AMs" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="seB-48-1rD"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="lineHeight" destination="uF3-hW-TdM" id="MLA-5f-weG"/>
+                <outlet property="searchBt" destination="8ug-gH-cSd" id="sQK-Pf-uKJ"/>
+                <outlet property="searchIcon" destination="5fb-By-chK" id="0MD-Zm-uOi"/>
+                <outlet property="titleLabel" destination="1TT-eI-AMs" id="WHl-d7-NWT"/>
+            </connections>
+            <point key="canvasLocation" x="96" y="-484.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="查找" width="20" height="20"/>
+    </resources>
+</document>

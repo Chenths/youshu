@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="113" id="KGk-i7-Jjw" customClass="HTPostImgEditInfoTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="344" height="113"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="344" height="112.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="g-goodsHoldImg" translatesAutoresizingMaskIntoConstraints="NO" id="LV3-ri-nVh">
+                        <rect key="frame" x="16" y="16" width="60" height="80"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="80" id="gY8-v8-Ay0"/>
+                            <constraint firstAttribute="width" constant="60" id="jyr-zo-x9A"/>
+                        </constraints>
+                    </imageView>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ZMX-0r-cUL">
+                        <rect key="frame" x="81" y="16" width="203" height="80"/>
+                        <color key="backgroundColor" red="0.90196078430000004" green="0.90980392160000001" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dhd-35-4Pb">
+                        <rect key="frame" x="284" y="16" width="60" height="80"/>
+                        <state key="normal" image="g-goodsDel"/>
+                        <connections>
+                            <action selector="delBtClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="FKK-HV-50n"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入描述内容" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzf-ha-Oeh">
+                        <rect key="frame" x="88" y="24" width="93" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.76862745098039209" green="0.77647058823529413" blue="0.79607843137254897" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="joH-LB-IAJ">
+                        <rect key="frame" x="54" y="78" width="22" height="18"/>
+                        <state key="normal" backgroundImage="g-goodsCamer"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ZMX-0r-cUL" firstAttribute="top" secondItem="LV3-ri-nVh" secondAttribute="top" id="32l-EV-FHh"/>
+                    <constraint firstItem="Dhd-35-4Pb" firstAttribute="top" secondItem="ZMX-0r-cUL" secondAttribute="top" id="7NS-HI-NBW"/>
+                    <constraint firstAttribute="trailing" secondItem="ZMX-0r-cUL" secondAttribute="trailing" constant="60" id="HKK-Es-VXn"/>
+                    <constraint firstItem="Dhd-35-4Pb" firstAttribute="leading" secondItem="ZMX-0r-cUL" secondAttribute="trailing" id="HlM-sp-bjp"/>
+                    <constraint firstAttribute="bottom" secondItem="LV3-ri-nVh" secondAttribute="bottom" constant="16.5" id="IHs-BZ-uO0"/>
+                    <constraint firstItem="joH-LB-IAJ" firstAttribute="trailing" secondItem="LV3-ri-nVh" secondAttribute="trailing" id="LwA-Z6-HDU"/>
+                    <constraint firstAttribute="trailing" secondItem="Dhd-35-4Pb" secondAttribute="trailing" id="NI3-kh-h6Y"/>
+                    <constraint firstItem="kzf-ha-Oeh" firstAttribute="leading" secondItem="LV3-ri-nVh" secondAttribute="trailing" constant="12" id="NWt-Ek-0Ky"/>
+                    <constraint firstItem="ZMX-0r-cUL" firstAttribute="height" secondItem="LV3-ri-nVh" secondAttribute="height" id="Usc-99-whg"/>
+                    <constraint firstItem="ZMX-0r-cUL" firstAttribute="leading" secondItem="LV3-ri-nVh" secondAttribute="trailing" constant="5" id="XY0-48-c1B"/>
+                    <constraint firstItem="kzf-ha-Oeh" firstAttribute="top" secondItem="LV3-ri-nVh" secondAttribute="top" constant="8" id="di7-fF-wQy"/>
+                    <constraint firstItem="joH-LB-IAJ" firstAttribute="bottom" secondItem="LV3-ri-nVh" secondAttribute="bottom" id="k2q-6I-yP8"/>
+                    <constraint firstItem="LV3-ri-nVh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="oVZ-NN-hXZ"/>
+                    <constraint firstItem="LV3-ri-nVh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="uZs-ep-bKF"/>
+                    <constraint firstItem="Dhd-35-4Pb" firstAttribute="bottom" secondItem="ZMX-0r-cUL" secondAttribute="bottom" id="z8r-A6-cNb"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="deleteBt" destination="Dhd-35-4Pb" id="Czi-Hs-jNH"/>
+                <outlet property="descText" destination="ZMX-0r-cUL" id="KAH-3s-RBr"/>
+                <outlet property="editCamerImg" destination="joH-LB-IAJ" id="mQ1-ip-SZS"/>
+                <outlet property="holdText" destination="kzf-ha-Oeh" id="dMl-QB-z0K"/>
+                <outlet property="productImg" destination="LV3-ri-nVh" id="L8n-FE-glA"/>
+            </connections>
+            <point key="canvasLocation" x="41" y="64.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="g-goodsCamer" width="22" height="15"/>
+        <image name="g-goodsDel" width="31" height="31"/>
+        <image name="g-goodsHoldImg" width="57" height="76"/>
+    </resources>
+</document>

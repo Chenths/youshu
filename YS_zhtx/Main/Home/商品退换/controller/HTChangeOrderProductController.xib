@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HTChangeOrderProductController">
+            <connections>
+                <outlet property="tab" destination="rq2-L7-KBy" id="ZXx-iE-U5O"/>
+                <outlet property="tabBottomHeight" destination="pcZ-Jw-BlK" id="uIX-QS-e0d"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mmj-mm-7kl">
+                    <rect key="frame" x="0.0" y="619" width="187.5" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="ZSx-ce-OAa"/>
+                    </constraints>
+                    <state key="normal" title="退货">
+                        <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="returnClicked:" destination="-1" eventType="touchUpInside" id="oOK-V3-9bb"/>
+                    </connections>
+                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rq2-L7-KBy">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="619"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dLJ-SA-ZHS">
+                    <rect key="frame" x="187.5" y="619" width="187.5" height="48"/>
+                    <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="换货">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="exchangeClicked:" destination="-1" eventType="touchUpInside" id="uJy-dI-v37"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="dLJ-SA-ZHS" firstAttribute="top" secondItem="rq2-L7-KBy" secondAttribute="bottom" id="52r-Sn-Tnd"/>
+                <constraint firstItem="Mmj-mm-7kl" firstAttribute="top" secondItem="rq2-L7-KBy" secondAttribute="bottom" id="7gx-x4-YsN"/>
+                <constraint firstItem="rq2-L7-KBy" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="9g4-I8-oUU"/>
+                <constraint firstItem="dLJ-SA-ZHS" firstAttribute="leading" secondItem="Mmj-mm-7kl" secondAttribute="trailing" id="J1Z-2N-13Y"/>
+                <constraint firstAttribute="trailing" secondItem="rq2-L7-KBy" secondAttribute="trailing" id="Kli-Ku-Df7"/>
+                <constraint firstItem="dLJ-SA-ZHS" firstAttribute="height" secondItem="Mmj-mm-7kl" secondAttribute="height" id="PlK-J3-HF8"/>
+                <constraint firstAttribute="trailing" secondItem="dLJ-SA-ZHS" secondAttribute="trailing" id="byS-Qg-842"/>
+                <constraint firstItem="Mmj-mm-7kl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dFu-9Y-5Yw"/>
+                <constraint firstItem="rq2-L7-KBy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jcp-J6-mqM"/>
+                <constraint firstAttribute="bottom" secondItem="rq2-L7-KBy" secondAttribute="bottom" constant="48" id="pcZ-Jw-BlK"/>
+                <constraint firstItem="dLJ-SA-ZHS" firstAttribute="width" secondItem="Mmj-mm-7kl" secondAttribute="width" id="vfc-iT-wNt"/>
+            </constraints>
+            <point key="canvasLocation" x="24.5" y="52.5"/>
+        </view>
+    </objects>
+</document>

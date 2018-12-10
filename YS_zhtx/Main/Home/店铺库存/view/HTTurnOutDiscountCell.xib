@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="51" id="KGk-i7-Jjw" customClass="HTTurnOutDiscountCell">
+            <rect key="frame" x="0.0" y="0.0" width="319" height="51"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="319" height="50.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入调入折扣" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WPx-1U-Sub">
+                        <rect key="frame" x="15" y="5" width="210" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="Ce8-A6-ZDl"/>
+                        </constraints>
+                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                    </textField>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bG8-F1-Hz1">
+                        <rect key="frame" x="225" y="2" width="1" height="25"/>
+                        <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="1" id="ed7-Kt-t7t"/>
+                        </constraints>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wod-fJ-nDc">
+                        <rect key="frame" x="226" y="0.0" width="88" height="29"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="88" id="5kA-eD-RT1"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <state key="normal" title="输入金额">
+                            <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="holdBtClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="cPw-pm-K7I"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="Wod-fJ-nDc" secondAttribute="bottom" id="8yB-0I-6Ed"/>
+                    <constraint firstItem="WPx-1U-Sub" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="C3L-9K-E6G"/>
+                    <constraint firstItem="bG8-F1-Hz1" firstAttribute="leading" secondItem="WPx-1U-Sub" secondAttribute="trailing" id="CyJ-mG-Fwu"/>
+                    <constraint firstItem="Wod-fJ-nDc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Emg-pA-8PJ"/>
+                    <constraint firstItem="Wod-fJ-nDc" firstAttribute="leading" secondItem="bG8-F1-Hz1" secondAttribute="trailing" id="VY2-Kr-dbh"/>
+                    <constraint firstAttribute="bottom" secondItem="WPx-1U-Sub" secondAttribute="bottom" constant="5" id="ZHe-3L-OrP"/>
+                    <constraint firstAttribute="bottom" secondItem="bG8-F1-Hz1" secondAttribute="bottom" constant="2" id="ZaH-Sz-BMD"/>
+                    <constraint firstAttribute="trailing" secondItem="Wod-fJ-nDc" secondAttribute="trailing" constant="5" id="osC-kE-jAH"/>
+                    <constraint firstItem="bG8-F1-Hz1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="pkK-jW-Cjk"/>
+                    <constraint firstItem="WPx-1U-Sub" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="t4b-cg-MY9"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
+            <connections>
+                <outlet property="holdBt" destination="Wod-fJ-nDc" id="Omv-97-lur"/>
+                <outlet property="textFiled" destination="WPx-1U-Sub" id="mgZ-JO-gzA"/>
+            </connections>
+            <point key="canvasLocation" x="-25.5" y="-125.5"/>
+        </tableViewCell>
+    </objects>
+</document>
