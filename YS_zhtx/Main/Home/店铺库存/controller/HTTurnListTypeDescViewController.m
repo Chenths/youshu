@@ -185,8 +185,8 @@
 #pragma private methods
 -(void)initNav{
     if (!headView) {
-        UIView *vvv  = [[UIView alloc] initWithFrame:CGRectMake(0, 0, HMSCREENWIDTH, 44)];
-        headView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, HMSCREENWIDTH, 44)];
+        UIView *vvv  = [[UIView alloc] initWithFrame:CGRectMake(0, 0, HMSCREENWIDTH - 50, 44)];
+        headView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, HMSCREENWIDTH - 50 - 44 * (24 /21), 44)];
         headView.showsVerticalScrollIndicator = NO;
         headView.showsHorizontalScrollIndicator = NO;
         NSArray *titles = @[@"调出单（出）",@"调出单（入）",@"调入单（入）",@"进货单（入）",@"补货单（入）",@"库存盘点（入）",@"调出单（退货厂家）",@"调出单（报损厂家）",@"调出单（其他）"];
@@ -217,7 +217,7 @@
             [self.btsArray addObject:bt];
         }
         headView.contentSize = CGSizeMake(btx + HMSCREENWIDTH * 0.5, 44);
-        UIButton *bt = [[UIButton alloc] initWithFrame:CGRectMake(HMSCREENWIDTH - 44 - 5 - 44 * (24 /21), 0, 44 * (24 /21), 44)];
+        UIButton *bt = [[UIButton alloc] initWithFrame:CGRectMake(HMSCREENWIDTH - 60 - 44 * (24 /21), 0, 44 * (24 /21), 44)];
         [bt setBackgroundImage:[UIImage imageNamed:@"g-indexblackBack"] forState:UIControlStateNormal];
         [bt addTarget:self action:@selector(rightBtClicked:) forControlEvents:UIControlEventTouchUpInside];
         [vvv addSubview:headView];
