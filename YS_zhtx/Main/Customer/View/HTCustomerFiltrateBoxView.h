@@ -21,6 +21,8 @@
 
 - (instancetype)initWithBoxFrame:(CGRect)frame;
 
+- (void)tapCoverView;
+
 @property (nonatomic,strong) NSArray *dataArray;
 
 @property (nonatomic,weak) id <HTCustomerFiltrateBoxViewDelegate> delegate;
