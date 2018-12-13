@@ -218,9 +218,10 @@
     [self.myTableView registerNib:[UINib nibWithNibName:@"HTBossInfoHeaderCell" bundle:nil] forCellReuseIdentifier:@"HTBossInfoHeaderCell"];
      [self.myTableView registerNib:[UINib nibWithNibName:@"HTShopInfoCell" bundle:nil] forCellReuseIdentifier:@"HTShopInfoCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"HTBossSaleDescinfoCell" bundle:nil] forCellReuseIdentifier:@"HTBossSaleDescinfoCell"];
-    self.myTableView.mj_header = [MJRefreshHeader headerWithRefreshingBlock:^{
+    self.myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self loadData];
     }];
+    
     self.myTableView.tableFooterView = footView;
     self.myTableView.contentInset = self.myTableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, SafeAreaBottomHeight + tar_height, 0);
     
