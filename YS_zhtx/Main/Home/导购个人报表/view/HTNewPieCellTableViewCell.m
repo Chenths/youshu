@@ -222,7 +222,7 @@
         item.suffix = @"人";
         [self.dataArray addObject:item];
     }
-    self.legendHeight.constant = self.model.data.count <= 5 ? self.dataArray.count * 48 : self.model.isSeemore ? self.dataArray.count * 48  : 5 * 48 ;
+    self.legendHeight.constant = self.model.data.count <= 5 ? self.dataArray.count * 48 : self.model.isSeemore ? ((self.dataArray.count + 1) * 48)  : 6 * 48 ;
     [self createChart];
     [self.LegendTableView reloadData];
 }

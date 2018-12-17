@@ -649,7 +649,7 @@
     if ([[json[@"data"] getStringWithKey:@"state"] isEqualToString:@"-1"]){
         HTAccoutInfoModel *accoun = self.custModel.account.integral;
         HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:[NSString stringWithFormat:@"积分余不足,退货失败，应扣除%@积分,余额为%@",[json[@"data"] getStringWithKey:@"deductpoints"],accoun.balance ?  accoun.balance :@"0"] btTitle:@"确定" okBtclicked:nil];
-        [alert show];
+        [alert notTochShow];
         return;
     }
     [MBProgressHUD hideHUD];
@@ -670,7 +670,7 @@
             [strongSelf settleSuccessWithMsg:json[@"data"][@"sms"]];
             [strongSelf print];
         }];
-        [alert show];
+        [alert notTochShow];
     }else{
        [self settleSuccessWithMsg:json[@"data"][@"sms"]];
        [self print];
@@ -688,10 +688,10 @@
        if ([json[@"data"] getStringWithKey:@"deductpoints"].length > 0) {
         HTAccoutInfoModel *accoun = self.custModel.account.integral;
         HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:[NSString stringWithFormat:@"积分余不足,退货失败，应扣除%@积分,余额为%@",[json[@"data"] getStringWithKey:@"deductpoints"],accoun.balance ?  accoun.balance :@"0"] btTitle:@"确定" okBtclicked:nil];
-        [alert show];
+        [alert notTochShow];
        }else{
            HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:[NSString stringWithFormat:@"储值余额不足,退货失败，应扣除%@,余额为%@",[json[@"data"] getStringWithKey:@"balance"],self.orderModel.encodeFinal] btTitle:@"确定" okBtclicked:nil];
-           [alert show];
+           [alert notTochShow];
        }
         return;
     }
@@ -710,7 +710,7 @@
             [strongSelf settleSuccessWithMsg:json[@"data"][@"sms"]];
             [strongSelf print];
         }];
-        [alert show];
+        [alert notTochShow];
 }
 /**
  下单成功后的统一操作

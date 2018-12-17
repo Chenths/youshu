@@ -18,9 +18,9 @@
     
     NSString*platform = [NSString stringWithCString: systemInfo.machine encoding:NSASCIIStringEncoding];
     
-    if([platform isEqualToString:@"iPhone1,1"])  return@"iPhone 2G";
+    if([platform isEqualToString:@"iPhone1,1"])  return @"iPhone 2G";
     
-    if([platform isEqualToString:@"iPhone1,2"])  return@"iPhone 3G";
+    if([platform isEqualToString:@"iPhone1,2"])  return @"iPhone 3G";
     
     if([platform isEqualToString:@"iPhone2,1"])  return@"iPhone 3GS";
     
@@ -69,15 +69,6 @@
     if([platform isEqualToString:@"iPhone10,3"]) return@"iPhone X";
     
     if([platform isEqualToString:@"iPhone10,6"]) return@"iPhone X";
-    
-    if([platform isEqualToString:@"iPhone11,2"]) return@"iPhone XS";
-    
-    if([platform isEqualToString:@"iPhone11,4"]) return@"iPhone XS Max";
-    
-    if([platform isEqualToString:@"iPhone11,6"]) return@"iPhone XS Max";
-    
-    if([platform isEqualToString:@"iPhone11,8"]) return@"iPhone XR";
-    
     
     if([platform isEqualToString:@"iPod1,1"])  return@"iPod Touch 1G";
     
@@ -151,42 +142,9 @@
     
     if([platform isEqualToString:@"iPad6,8"])  return@"iPad Pro 12.9";
     
-    if([platform isEqualToString:@"iPad6,11"])    return@"iPad 5 (WiFi)";
+    if([platform isEqualToString:@"i386"])  return@"iPhone Simulator";
     
-    if([platform isEqualToString:@"iPad6,12"])    return@"iPad 5 (Cellular)";
-    
-    if([platform isEqualToString:@"iPad7,1"])     return@"iPad Pro 12.9 inch 2nd gen (WiFi)";
-    
-    if([platform isEqualToString:@"iPad7,2"])     return@"iPad Pro 12.9 inch 2nd gen (Cellular)";
-    
-    if([platform isEqualToString:@"iPad7,3"])     return@"iPad Pro 10.5 inch (WiFi)";
-    
-    if([platform isEqualToString:@"iPad7,4"])     return@"iPad Pro 10.5 inch (Cellular)";
-    
-    if([platform isEqualToString:@"iPad7,5"])     return@"iPad 6th generation";
-    
-    if([platform isEqualToString:@"iPad7,6"])     return@"iPad 6th generation";
-    
-    if([platform isEqualToString:@"iPad8,1"])     return@"iPad Pro (11-inch)";
-    
-    if([platform isEqualToString:@"iPad8,2"])     return@"iPad Pro (11-inch)";
-    
-    if([platform isEqualToString:@"iPad8,3"])     return@"iPad Pro (11-inch)";
-    
-    if([platform isEqualToString:@"iPad8,4"])     return@"iPad Pro (11-inch)";
-    
-    if([platform isEqualToString:@"iPad8,5"])     return@"iPad Pro (12.9-inch) (3rd generation)";
-    
-    if([platform isEqualToString:@"iPad8,6"])     return@"iPad Pro (12.9-inch) (3rd generation)";
-    
-    
-    if([platform isEqualToString:@"iPad8,7"])     return@"iPad Pro (12.9-inch) (3rd generation)";
-    
-    if([platform isEqualToString:@"iPad8,8"])     return@"iPad Pro (12.9-inch) (3rd generation)";
-    
-    if([platform isEqualToString:@"i386"])        return@"iPhone Simulator";
-    
-    if([platform isEqualToString:@"x86_64"])      return@"iPhone Simulator";
+    if([platform isEqualToString:@"x86_64"])  return@"iPhone Simulator";
     
     return platform;
     

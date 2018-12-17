@@ -62,7 +62,7 @@
                 <outlet property="typeLabel" destination="H0U-pQ-EU4" id="WFw-zI-cWG"/>
                 <outlet property="valueLAbel" destination="0fb-y2-da3" id="Csg-9C-JOh"/>
             </connections>
-            <point key="canvasLocation" x="38" y="61.5"/>
+            <point key="canvasLocation" x="-70" y="-69"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -173,7 +173,9 @@
             __weak typeof(self) weakSelf = self;
             vc.selectWhich = ^(NSString *num){
                 __strong typeof(weakSelf) strongSelf = weakSelf;
-                [strongSelf doPrintWithNum:num];
+                if (num.length > 0) {
+                 [strongSelf doPrintWithNum:num];
+                }
                 if (strongSelf.pushNext) {
                     strongSelf.pushNext();
                 }

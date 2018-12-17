@@ -11,9 +11,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HTTurnListTypeDescViewController">
             <connections>
-                <outlet property="checkBt" destination="bdW-ls-BRH" id="epc-u5-sp2"/>
-                <outlet property="notClickBt" destination="ThF-Ke-70b" id="bv1-bD-ZsM"/>
-                <outlet property="refuseBt" destination="OId-j8-wit" id="tyj-Lk-Lib"/>
                 <outlet property="tab" destination="TSH-OX-Ifa" id="DZH-Jv-gZN"/>
                 <outlet property="tabBottomHeight" destination="KEJ-ep-Hnb" id="Lgg-kb-YrQ"/>
                 <outlet property="topView" destination="e2m-Wc-zjT" id="1Ii-Mv-Mwo"/>
@@ -28,69 +25,9 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e2m-Wc-zjT">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ThF-Ke-70b">
-                            <rect key="frame" x="0.0" y="0.0" width="125" height="48"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <state key="normal" title="未签收">
-                                <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <state key="selected" title="未签收">
-                                <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="holdBtClicked:" destination="-1" eventType="touchUpInside" id="wzB-5S-V9f"/>
-                                <action selector="notCheakClicked:" destination="-1" eventType="touchUpInside" id="vLA-wz-GhY"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OId-j8-wit">
-                            <rect key="frame" x="250" y="0.0" width="125" height="48"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <state key="normal" title="已拒绝">
-                                <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <state key="selected" title="已拒绝">
-                                <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="holdBtClicked:" destination="-1" eventType="touchUpInside" id="IDV-DO-5un"/>
-                                <action selector="refuseClicked:" destination="-1" eventType="touchUpInside" id="1To-tX-59Z"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bdW-ls-BRH">
-                            <rect key="frame" x="125" y="0.0" width="125" height="48"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <state key="normal" title="已签收">
-                                <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <state key="selected" title="已签收">
-                                <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="cheakClicked:" destination="-1" eventType="touchUpInside" id="tc4-gK-o1S"/>
-                                <action selector="holdBtClicked:" destination="-1" eventType="touchUpInside" id="sJs-hT-Pi1"/>
-                            </connections>
-                        </button>
-                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="ThF-Ke-70b" firstAttribute="top" secondItem="e2m-Wc-zjT" secondAttribute="top" id="1uw-pG-Wgv"/>
-                        <constraint firstItem="ThF-Ke-70b" firstAttribute="leading" secondItem="e2m-Wc-zjT" secondAttribute="leading" id="4bc-Bd-dzI"/>
-                        <constraint firstAttribute="bottom" secondItem="OId-j8-wit" secondAttribute="bottom" id="87F-Qn-7Bg"/>
-                        <constraint firstAttribute="bottom" secondItem="ThF-Ke-70b" secondAttribute="bottom" id="9cq-Th-nFF"/>
-                        <constraint firstItem="bdW-ls-BRH" firstAttribute="top" secondItem="e2m-Wc-zjT" secondAttribute="top" id="DMR-Xi-Ast"/>
-                        <constraint firstItem="OId-j8-wit" firstAttribute="top" secondItem="e2m-Wc-zjT" secondAttribute="top" id="HWG-Qd-atO"/>
-                        <constraint firstAttribute="bottom" secondItem="bdW-ls-BRH" secondAttribute="bottom" id="Kxg-1k-e1I"/>
-                        <constraint firstItem="OId-j8-wit" firstAttribute="width" secondItem="ThF-Ke-70b" secondAttribute="width" id="MiG-Jr-kGL"/>
-                        <constraint firstItem="bdW-ls-BRH" firstAttribute="width" secondItem="ThF-Ke-70b" secondAttribute="width" id="WZa-v0-zuV"/>
                         <constraint firstAttribute="height" constant="48" id="Yms-Zj-hsG"/>
-                        <constraint firstItem="OId-j8-wit" firstAttribute="leading" secondItem="bdW-ls-BRH" secondAttribute="trailing" id="b3w-L9-A5O"/>
-                        <constraint firstItem="bdW-ls-BRH" firstAttribute="leading" secondItem="ThF-Ke-70b" secondAttribute="trailing" id="y3e-rh-PLM"/>
-                        <constraint firstAttribute="trailing" secondItem="OId-j8-wit" secondAttribute="trailing" id="ztA-iZ-mT6"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TSH-OX-Ifa">

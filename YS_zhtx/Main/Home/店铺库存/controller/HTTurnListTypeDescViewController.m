@@ -31,6 +31,8 @@
 
 @property (nonatomic,strong) NSMutableArray *btsArray;
 
+@property (nonatomic,strong) NSMutableArray *headsArray;
+
 @property (nonatomic,assign) int page;
 
 @property (nonatomic,strong) NSString *type;
@@ -55,6 +57,7 @@
     [super viewDidLoad];
     self.page = 1;
     [self createTb];
+    [self initHeadView];
     self.state = @"1";
     self.type = @"1";
     [self.tab.mj_header beginRefreshing];
@@ -100,34 +103,15 @@
 #pragma mark -CustomDelegate
 
 #pragma EventResponse
-
-- (IBAction)refuseClicked:(id)sender {
-    self.checkBt.titleLabel.font = [UIFont systemFontOfSize:15];
-    self.notClickBt.titleLabel.font = [UIFont systemFontOfSize:15];
-    self.refuseBt.titleLabel.font = [UIFont systemFontOfSize:17];
-    self.state = @"3";
+-(void)stateBtClicked:(UIButton *)sender{
+    for (UIButton *bt in self.headsArray) {
+        bt.selected = NO;
+        bt.titleLabel.font = [UIFont systemFontOfSize:15];
+    }
+    sender.selected = YES;
+    sender.titleLabel.font = [UIFont systemFontOfSize:17];
+    self.state = [NSString stringWithFormat:@"%ld",(sender.tag - 600) + 1];
     [self.tab.mj_header beginRefreshing];
-}
-- (IBAction)cheakClicked:(id)sender {
-    self.checkBt.titleLabel.font = [UIFont systemFontOfSize:17];
-    self.notClickBt.titleLabel.font = [UIFont systemFontOfSize:15];
-    self.refuseBt.titleLabel.font = [UIFont systemFontOfSize:15];
-    self.state = @"2";
-    [self.tab.mj_header beginRefreshing];
-}
-- (IBAction)notCheakClicked:(id)sender {
-    self.checkBt.titleLabel.font = [UIFont systemFontOfSize:15];
-    self.notClickBt.titleLabel.font = [UIFont systemFontOfSize:17];
-    self.refuseBt.titleLabel.font = [UIFont systemFontOfSize:15];
-    self.state = @"1";
-    [self.tab.mj_header beginRefreshing];
-}
-- (IBAction)holdBtClicked:(id)sender {
-    UIButton *bt = (id) sender;
-    self.notClickBt.selected = NO;
-    self.checkBt.selected = NO;
-    self.refuseBt.selected = NO;
-    bt.selected = YES;
 }
 -(void)createNav{
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#ffffff"]}];
@@ -185,8 +169,8 @@
 #pragma private methods
 -(void)initNav{
     if (!headView) {
-        UIView *vvv  = [[UIView alloc] initWithFrame:CGRectMake(0, 0, HMSCREENWIDTH - 50, 44)];
-        headView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, HMSCREENWIDTH - 50 - 44 * (24 /21), 44)];
+        UIView *vvv  = [[UIView alloc] initWithFrame:CGRectMake(0, 0, HMSCREENWIDTH, 44)];
+        headView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, HMSCREENWIDTH, 44)];
         headView.showsVerticalScrollIndicator = NO;
         headView.showsHorizontalScrollIndicator = NO;
         NSArray *titles = @[@"调出单（出）",@"调出单（入）",@"调入单（入）",@"进货单（入）",@"补货单（入）",@"库存盘点（入）",@"调出单（退货厂家）",@"调出单（报损厂家）",@"调出单（其他）"];
@@ -217,7 +201,7 @@
             [self.btsArray addObject:bt];
         }
         headView.contentSize = CGSizeMake(btx + HMSCREENWIDTH * 0.5, 44);
-        UIButton *bt = [[UIButton alloc] initWithFrame:CGRectMake(HMSCREENWIDTH - 60 - 44 * (24 /21), 0, 44 * (24 /21), 44)];
+        UIButton *bt = [[UIButton alloc] initWithFrame:CGRectMake(HMSCREENWIDTH - 44 - 5 - 44 * (24 /21), 0, 44 * (24 /21), 44)];
         [bt setBackgroundImage:[UIImage imageNamed:@"g-indexblackBack"] forState:UIControlStateNormal];
         [bt addTarget:self action:@selector(rightBtClicked:) forControlEvents:UIControlEventTouchUpInside];
         [vvv addSubview:headView];
@@ -228,6 +212,41 @@
         self.notClickBt.titleLabel.font = [UIFont systemFontOfSize:17];
     }
 }
+-(void)initHeadView{
+    UIScrollView  *topView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, HMSCREENWIDTH, 48)];
+    topView.showsVerticalScrollIndicator = NO;
+    topView.showsHorizontalScrollIndicator = NO;
+    NSArray *titles = @[@"未签收 ",@"已签收",@"拒绝签收",@"未确认",@"已确认",@"拒绝出货"];
+    NSMutableArray *arr = [NSMutableArray array];
+    for (NSString *title in titles) {
+        HTIndexsModel *model = [[HTIndexsModel alloc] init];
+        model.titles = title;
+        [arr addObject:model];
+    }
+    CGFloat btx = 0;
+    for (int i = 0; i < arr.count; i++) {
+        HTIndexsModel *model = arr[i];
+        UIButton *bt = [UIButton buttonWithType:UIButtonTypeCustom];
+        [bt setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:UIControlStateNormal];
+        [bt setTitleColor:[UIColor colorWithHexString:@"#222222"] forState:UIControlStateSelected];
+        [bt setTitle:[HTHoldNullObj getValueWithUnCheakValue:model.titles] forState:UIControlStateNormal];
+        bt.titleLabel.font = [UIFont systemFontOfSize:15];
+        [bt addTarget:self action:@selector(stateBtClicked:) forControlEvents:UIControlEventTouchUpInside];
+        CGFloat titleWidth = [bt.titleLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 16) options:0 attributes:@{NSFontAttributeName :[UIFont systemFontOfSize:14]} context:nil].size.width + 20;
+        bt.frame = CGRectMake(btx, 0, titleWidth , 48);
+        btx += titleWidth;
+        bt.tag = 600 + i;
+        if (i == 0) {
+            bt.selected = YES;
+            bt.titleLabel.font = [UIFont systemFontOfSize:17];
+        }
+        [topView addSubview:bt];
+        [self.headsArray addObject:bt];
+    }
+    topView.contentSize = CGSizeMake(btx + 48, 48);
+    [self.topView addSubview:topView];
+}
+
 -(void)createTb{
     self.tab.delegate = self;
     self.tab.dataSource = self;
@@ -252,14 +271,28 @@
     }];
 }
 -(void)loadDataWithType:(NSString *) turnType state:(NSString *) turnState andPage:(int ) page{
-    NSDictionary *dic = @{
-                          @"signStatus":turnState,
-                          @"type": turnType,
-                          @"companyId":[HTShareClass shareClass].loginModel.companyId,
-                          @"page":@(page),
-                          @"rows":@"10"
-                          };
-    [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleProductStock,loadSwapWayBillList] params:dic success:^(id json) {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    if (turnState.integerValue >= 4) {
+        NSDictionary *dic = @{
+                              @"swapStatus":@(turnState.integerValue - 3),
+                              @"type": turnType,
+                              @"companyId":[HTShareClass shareClass].loginModel.companyId,
+                              @"page":@(page),
+                              @"rows":@"10"
+                              };
+        [dict setValuesForKeysWithDictionary:dic];
+    }else{
+        NSDictionary *dic = @{
+                              @"signStatus":turnState,
+                              @"type": turnType,
+                              @"companyId":[HTShareClass shareClass].loginModel.companyId,
+                              @"page":@(page),
+                              @"rows":@"10"
+                              };
+        [dict setValuesForKeysWithDictionary:dic];
+    }
+   
+    [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleProductStock,loadSwapWayBillList] params:dict success:^(id json) {
         [MBProgressHUD hideHUD];
         if (page == 1) {
             [self.dataArray removeAllObjects];
@@ -296,6 +329,12 @@
         _dataArray = [NSMutableArray array];
     }
     return _dataArray;
+}
+-(NSMutableArray *)headsArray{
+    if (!_headsArray) {
+        _headsArray = [NSMutableArray array];
+    }
+    return _headsArray;
 }
 -(NSArray *)types{
     if (!_types) {

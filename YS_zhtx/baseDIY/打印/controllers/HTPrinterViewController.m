@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *setpagesBt;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *btBottomHeight;
 
+@property (nonatomic,assign) BOOL isSelected;
+
 @end
 
 @implementation HTPrinterViewController
@@ -29,6 +31,12 @@
     [super viewDidLoad];
     [self createTB];
     
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (self.selectWhich && !self.isSelected) {
+        self.selectWhich(@"");
+    }
 }
 - (void)createTB{
     self.tableView.delegate = self;
@@ -141,6 +149,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (self.selectWhich) {
+        self.isSelected = YES;
         [self.navigationController popViewControllerAnimated:YES];
         self.selectWhich([[HTShareClass shareClass].loginModel.printers[indexPath.row] valueForKey:@"name"]);
     }

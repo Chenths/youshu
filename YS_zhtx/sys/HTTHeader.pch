@@ -50,8 +50,8 @@
 //#define baseUrl @"http://10.1.1.162:8080/"
 //#define baseUrl @"http://192.168.199.7:8080/"
 //#define baseUrl @"http://192.168.199.46:8080/"
-//#define baseUrl @"http://192.168.199.71:8080/"
-#define baseUrl @"http://192.168.199.46:8080/"
+#define baseUrl @"http://192.168.199.71:8080/"
+//#define baseUrl @"http://192.168.199.46:8080/"
 //#define baseUrl @"http://47.93.173.31:8080/"
 //#define baseUrl @"http://192.168.199.111:8080/"
 //#define baseUrl @"http://192.168.199.162:8080/"
@@ -405,13 +405,13 @@ typedef NS_ENUM(NSInteger, ControllerType) {
 
 #define  HMSCREENWIDTH [UIScreen mainScreen].bounds.size.width
 #define HEIGHT [UIScreen mainScreen].bounds.size.height
-#define nav_height ([[HTGetPhoneType iphoneType] isEqualToString:@"iPhone X"] ||  [[HTGetPhoneType iphoneType] isEqualToString:@"iPhone XS"] || [[HTGetPhoneType iphoneType] isEqualToString:@"iPhone XS Max"] || [[HTGetPhoneType iphoneType] isEqualToString:@"iPhone XR"]/*|| [[HTGetPhoneType iphoneType] isEqualToString:@"iPhone Simulator"]*/ ? 88.0f : 64.0f)
+#define nav_height ([[HTGetPhoneType iphoneType] isEqualToString:@"iPhone X"] /*|| [[HTGetPhoneType iphoneType] isEqualToString:@"iPhone Simulator"]*/ ? 88.0f : 64.0f)
 #define tar_height 49.0f
-#define SafeAreaBottomHeight  ([[HTGetPhoneType iphoneType] isEqualToString:@"iPhone X"] ||  [[HTGetPhoneType iphoneType] isEqualToString:@"iPhone XS"] || [[HTGetPhoneType iphoneType] isEqualToString:@"iPhone XS Max"] || [[HTGetPhoneType iphoneType] isEqualToString:@"iPhone XR"] /* || [[HTGetPhoneType iphoneType] isEqualToString:@"iPhone Simulator"]*/ ? 34.0f : 0.0f)
+#define SafeAreaBottomHeight  ([[HTGetPhoneType iphoneType] isEqualToString:@"iPhone X"] /* || [[HTGetPhoneType iphoneType] isEqualToString:@"iPhone Simulator"]*/ ? 34.0f : 0.0f)
 #define MyAppDelegate ((AppDelegate *)([UIApplication sharedApplication].delegate))//AppDelegate
 #define HTSEARCHHISTORY @"HTSEARCHHISTORYKEY"
 
-#define  isIPHONEX ([[HTGetPhoneType iphoneType] isEqualToString:@"iPhone X"] || [[HTGetPhoneType iphoneType] isEqualToString:@"iPhone XS"] || [[HTGetPhoneType iphoneType] isEqualToString:@"iPhone XS Max"] || [[HTGetPhoneType iphoneType] isEqualToString:@"iPhone XR"] /*|| [[HTGetPhoneType iphoneType] isEqualToString:@"iPhone Simulator"] */? YES : NO)
+#define  isIPHONEX ([[HTGetPhoneType iphoneType] isEqualToString:@"iPhone X"] /*|| [[HTGetPhoneType iphoneType] isEqualToString:@"iPhone Simulator"] */? YES : NO)
 
 
 #endif /* HTTHeader_pch */

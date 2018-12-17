@@ -863,6 +863,7 @@
 		04B39EAA216F34CA00FC7D07 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B39EA1216F34CA00FC7D07 /* FMDatabase.m */; };
 		04B39EAB216F34CA00FC7D07 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B39EA5216F34CA00FC7D07 /* FMDatabasePool.m */; };
 		04B39EAC216F34CA00FC7D07 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B39EA6216F34CA00FC7D07 /* FMResultSet.m */; };
+		04B39EAD216F34CA00FC7D07 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04B39EA7216F34CA00FC7D07 /* Info.plist */; };
 		04B39EB0216F34E300FC7D07 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B39EAF216F34E300FC7D07 /* DBManager.m */; };
 		04B39EB2216F364D00FC7D07 /* express_code_data.txt in Resources */ = {isa = PBXBuildFile; fileRef = 04B39EB1216F364D00FC7D07 /* express_code_data.txt */; };
 		04B39EB6216F381600FC7D07 /* HTLogisticsCompanyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B39EB3216F381500FC7D07 /* HTLogisticsCompanyCell.xib */; };
@@ -5917,6 +5918,7 @@
 			files = (
 				0439A19420D0F0C500BB5E9B /* HTTotleVipNumsTableViewCell.xib in Resources */,
 				0476344A216AF569002DC90E /* HTMsgCenterViewController.xib in Resources */,
+				04B39EAD216F34CA00FC7D07 /* Info.plist in Resources */,
 				04C73C2320DA4F6000C62F17 /* HTAddStoredMoneyCollectionCell.xib in Resources */,
 				044F64FC2174387800181D66 /* HTOrderHeadTableCell.xib in Resources */,
 				0471898C216079DD0063A736 /* JCHATPhotoPickerViewController.xib in Resources */,
@@ -6298,6 +6300,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

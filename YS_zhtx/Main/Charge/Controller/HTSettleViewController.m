@@ -730,7 +730,7 @@
             [strongSelf settleSuccessWithMsg:json[@"data"][@"sms"]];
             [strongSelf print];
         }];
-        [alert show];
+        [alert notTochShow];
     }else{
         [MBProgressHUD hideHUD];
         HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:json[@"data"][@"msg"] btTitle:@"确定" okBtclicked:^{
@@ -814,7 +814,7 @@
                 [strongSelf settleSuccessWithMsg:json[@"data"][@"sms"]];
                 [strongSelf print];
             }];
-            [alert show];
+            [alert notTochShow];
             return ;
         }
         [self clearCache];

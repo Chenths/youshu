@@ -87,7 +87,6 @@
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [_FiltrateBoxView tapCoverView];
     if (!self.isselected) {
         if (self.searchCustItme) {
             self.searchCustItme([[HTCustomerListModel alloc] init]);

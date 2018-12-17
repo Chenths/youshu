@@ -28,7 +28,6 @@
         [_centerBtn setBackgroundImage:[UIImage imageNamed:caishImg] forState:UIControlStateNormal];
         [_centerBtn setBackgroundImage:[UIImage imageNamed:caishImg] forState:UIControlStateHighlighted];
         [_centerBtn addTarget:self action:@selector(centBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_centerBtn sizeToFit];
         [self addSubview:_centerBtn];
     }
     return self;
@@ -47,11 +46,8 @@
         }
     }
     _centerBtn.size = CGSizeMake(_centerBtn.currentBackgroundImage.size.width, _centerBtn.currentBackgroundImage.size.height);
-    if (isIPHONEX) {
-        _centerBtn.center = CGPointMake(HMSCREENWIDTH * 0.5, self.frame.size.height - _centerBtn.currentBackgroundImage.size.height * 0.5 - 34);
-    }else{
-        _centerBtn.center = CGPointMake(HMSCREENWIDTH * 0.5, self.frame.size.height - _centerBtn.currentBackgroundImage.size.height * 0.5);
-    }
+    
+    _centerBtn.center = CGPointMake(HMSCREENWIDTH * 0.5, self.height - _centerBtn.currentBackgroundImage.size.height * 0.5);
     _labTag = [[UILabel alloc] init];
     _labTag.text = @"";
     _labTag.font = [UIFont systemFontOfSize:10];
