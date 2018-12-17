@@ -169,8 +169,8 @@
 #pragma private methods
 -(void)initNav{
     if (!headView) {
-        UIView *vvv  = [[UIView alloc] initWithFrame:CGRectMake(0, 0, HMSCREENWIDTH, 44)];
-        headView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, HMSCREENWIDTH, 44)];
+        UIView *vvv  = [[UIView alloc] initWithFrame:CGRectMake(0, 0, HMSCREENWIDTH - 50, 44)];
+        headView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, HMSCREENWIDTH - 50 - 44 * (24 /21), 44)];
         headView.showsVerticalScrollIndicator = NO;
         headView.showsHorizontalScrollIndicator = NO;
         NSArray *titles = @[@"调出单（出）",@"调出单（入）",@"调入单（入）",@"进货单（入）",@"补货单（入）",@"库存盘点（入）",@"调出单（退货厂家）",@"调出单（报损厂家）",@"调出单（其他）"];
