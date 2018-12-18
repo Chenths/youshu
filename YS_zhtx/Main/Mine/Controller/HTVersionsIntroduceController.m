@@ -64,7 +64,7 @@
     self.tab.tableFooterView = v ;
     self.tab.backgroundColor = [UIColor clearColor];
     self.tab.estimatedRowHeight = 300;
-    self.tab.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.tab.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tabBottomHeight.constant = SafeAreaBottomHeight;
 }
 #pragma mark - getters and setters
