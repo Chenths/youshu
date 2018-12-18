@@ -28,8 +28,8 @@
 - (void)setModel:(HTBossReportBasciModel *)model{
     _model = model;
     self.title1.text = model.title1;
-    self.title2.text = [NSString stringWithFormat:@"%@：", model.title2];
-    self.title3.text = [NSString stringWithFormat:@"%@：", model.title3];
+    self.title2.text = [NSString stringWithFormat:@"%@:", model.title2];
+    self.title3.text = [NSString stringWithFormat:@"%@:", model.title3];
     self.value1.text =[NSString stringWithFormat:@"%@%@%@",model.prefix1,model.value1,model.suffix1
                        ];
     self.value2.text =[NSString stringWithFormat:@"%@%@%@",model.prefix2,model.value2,model.suffix2
