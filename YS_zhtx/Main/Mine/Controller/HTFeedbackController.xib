@@ -24,10 +24,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M2G-80-pYU">
-                    <rect key="frame" x="15" y="20" width="115" height="40"/>
+                    <rect key="frame" x="15" y="20" width="114" height="40"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="反馈概述" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uP7-RD-Lf8">
-                            <rect key="frame" x="45.5" y="11" width="61.5" height="18"/>
+                            <rect key="frame" x="26.5" y="11" width="61.5" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -35,8 +35,8 @@
                     </subviews>
                     <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="uP7-RD-Lf8" secondAttribute="trailing" constant="8" id="BeV-nl-oLz"/>
                         <constraint firstAttribute="height" constant="40" id="bbI-Zz-TwN"/>
+                        <constraint firstItem="uP7-RD-Lf8" firstAttribute="centerX" secondItem="M2G-80-pYU" secondAttribute="centerX" id="bio-g4-sas"/>
                         <constraint firstItem="uP7-RD-Lf8" firstAttribute="centerY" secondItem="M2G-80-pYU" secondAttribute="centerY" id="cxS-Jl-4pR"/>
                     </constraints>
                 </view>
@@ -44,7 +44,7 @@
                     <rect key="frame" x="15" y="68" width="114" height="140"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="问题描述" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLy-JC-CAj">
-                            <rect key="frame" x="44.5" y="61" width="61.5" height="18"/>
+                            <rect key="frame" x="26.5" y="61" width="61.5" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -52,13 +52,13 @@
                     </subviews>
                     <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstItem="dLy-JC-CAj" firstAttribute="centerX" secondItem="lNP-fg-R7x" secondAttribute="centerX" id="0lz-pU-oVh"/>
                         <constraint firstItem="dLy-JC-CAj" firstAttribute="centerY" secondItem="lNP-fg-R7x" secondAttribute="centerY" id="OaA-kq-hx6"/>
-                        <constraint firstAttribute="trailing" secondItem="dLy-JC-CAj" secondAttribute="trailing" constant="8" id="RCN-1g-bkb"/>
                         <constraint firstAttribute="height" constant="140" id="n3X-4D-JrZ"/>
                     </constraints>
                 </view>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入反馈概述" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dEW-Ah-VfL">
-                    <rect key="frame" x="130" y="20" width="230" height="40"/>
+                    <rect key="frame" x="132" y="20" width="228" height="40"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -101,10 +101,9 @@
                 <constraint firstAttribute="trailing" secondItem="Ni7-Mk-FoH" secondAttribute="trailing" constant="30" id="Fnv-Vg-WF0"/>
                 <constraint firstItem="tzP-o0-ASp" firstAttribute="top" secondItem="dEW-Ah-VfL" secondAttribute="bottom" constant="15" id="H0J-hf-LLu"/>
                 <constraint firstItem="dEW-Ah-VfL" firstAttribute="width" secondItem="M2G-80-pYU" secondAttribute="width" multiplier="2:1" id="HKX-BK-qOG"/>
-                <constraint firstItem="dEW-Ah-VfL" firstAttribute="leading" secondItem="M2G-80-pYU" secondAttribute="trailing" id="NzK-oQ-hQ3"/>
+                <constraint firstItem="dEW-Ah-VfL" firstAttribute="leading" secondItem="M2G-80-pYU" secondAttribute="trailing" constant="3" id="NzK-oQ-hQ3"/>
                 <constraint firstAttribute="trailing" secondItem="dEW-Ah-VfL" secondAttribute="trailing" constant="15" id="Oae-6H-qw6"/>
                 <constraint firstItem="Ni7-Mk-FoH" firstAttribute="top" secondItem="rZx-wk-ffh" secondAttribute="bottom" constant="30" id="Pwt-TR-8EU"/>
-                <constraint firstItem="rZx-wk-ffh" firstAttribute="leading" secondItem="lNP-fg-R7x" secondAttribute="trailing" id="QhZ-OQ-Awq"/>
                 <constraint firstItem="rZx-wk-ffh" firstAttribute="width" secondItem="lNP-fg-R7x" secondAttribute="width" multiplier="2:1" id="aV4-mQ-FYB"/>
                 <constraint firstItem="rZx-wk-ffh" firstAttribute="top" secondItem="dEW-Ah-VfL" secondAttribute="bottom" constant="8" id="e7R-Kl-pGH"/>
                 <constraint firstItem="rZx-wk-ffh" firstAttribute="leading" secondItem="lNP-fg-R7x" secondAttribute="trailing" constant="3" id="hK5-dg-Txi"/>
