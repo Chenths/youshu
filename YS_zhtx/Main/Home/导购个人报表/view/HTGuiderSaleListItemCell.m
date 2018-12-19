@@ -42,7 +42,7 @@
         self.rankLabel.text = [NSString stringWithFormat:@"%d",model.index + 1];
     }
     self.nameLabel.text  = [HTHoldNullObj getValueWithUnCheakValue:model.name];
-    self.totalLabel.text = [NSString stringWithFormat:@"¥%@",[HTHoldNullObj getValueWithBigDecmalObj:model.price]];
+    self.totalLabel.text = [NSString stringWithFormat:@"¥%.2f",[[HTHoldNullObj getValueWithBigDecmalObj:model.price] floatValue]];
     self.orderAndProductCount.text = [NSString stringWithFormat:@"完成%@单 销售%@件",model.ordercount,model.salevolume];
 }
 @end
