@@ -860,7 +860,7 @@
         NSDate *dateB = [dateFormatter dateFromString:self.beginTime];
         NSDate *dateA = [dateFormatter dateFromString:self.endTime];
         NSComparisonResult result = [dateA compare:dateB];
-        if (result == NSOrderedDescending) {
+        if (result == NSOrderedDescending || result == NSOrderedSame) {
             [self dismissBlock:^(BOOL Complete) {
                 weak.betweenClickedOkBtn(self.beginTime, self.endTime);
             }];
