@@ -34,10 +34,11 @@
         if (strongSelf.alerttttShow) {
             strongSelf.alerttttShow();
         }
-        [strongSelf.searchDic setObject:model.custId forKey:@"model.customerid"];
-        [strongSelf.searchDic setObject:model.name forKey:@"custName"];
-        strongSelf.textFiled.text = [HTHoldNullObj getValueWithUnCheakValue:model.name];
-       
+        if (model.custId) {
+            [strongSelf.searchDic setObject:model.custId forKey:@"model.customerid"];
+            [strongSelf.searchDic setObject:model.name forKey:@"custName"];
+            strongSelf.textFiled.text = [HTHoldNullObj getValueWithUnCheakValue:model.name];
+        }
     };
     if (self.alertttttHidd) {
         self.alertttttHidd();
