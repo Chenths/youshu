@@ -594,7 +594,7 @@
             }else{
                 [self.cellsName addObject:@[@"HTAddProductImgTableCell"]];
             }
-            self.navigationItem.rightBarButtonItem = [UIBarButtonItem creatBarButtonItemWithTitle:@"分享" target:self action:@selector(shareClicked:) ];
+//            self.navigationItem.rightBarButtonItem = [UIBarButtonItem creatBarButtonItemWithTitle:@"分享" target:self action:@selector(shareClicked:) ];
         }
             break;
         case ControllerCoverEdit:
