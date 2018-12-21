@@ -18,6 +18,8 @@
 #import "HTAccountTool.h"
 //#import "HTBindWechatController.h"
 #import "UIBarButtonItem+Extension.h"
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKUI/ShareSDK+SSUI.h>
 #define KCompressibilityFactor 1280.00
 
 @interface HTNewEditProductStyleController ()<UITableViewDelegate,UITableViewDataSource,HTPostProductDescInfoCellDelegate,HTProductColImgsTableCellDelegate,DNImagePickerControllerDelegate,HTPostProductDescInfoCellDelegate,HTPostImgEditInfoTableViewCellDelegate>{
@@ -374,63 +376,102 @@
 }
 
 - (void)shareClicked:(UIBarButtonItem *)sender{
-    if (![HTShareClass shareClass].isShowAliCode) {
-        if (![HTAccountTool cheackUnionId]) {
-//            HTBindWechatController *vc = [[HTBindWechatController alloc] init];
-//            [self.navigationController pushViewController:vc animated:YES];
-            return;
-        }
-    }
-    [MBProgressHUD showMessage:@"正在处理"];
-    NSMutableArray *activityItems = [NSMutableArray array];
-    NSMutableArray *imgs = [NSMutableArray array];
-    [imgs addObjectsFromArray:self.brandImgs];
-    [imgs addObjectsFromArray:self.shopImgs];
-    for (int  i = 0; i < imgs.count; i++) {
-        if (i > 8) {
-            break;
-        }
-        HTPostImageModel *model = imgs[i];
-        
-        if (model.image != nil) {
-            [activityItems addObject:[self getJPEGImagerImg: model.image]];
-        }else{
-            SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    NSArray* imageArray = @[[UIImage imageNamed:@"share_图标"]];
+    if (imageArray) {
+        NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
+        NSString *pasteStr = [NSString stringWithFormat:@"http://24v5.com/store/qr/product_info.html?b=%@&personId=%@",self.model.stylecode,[HTShareClass shareClass].loginId];
+        [shareParams SSDKSetupShareParamsByText:@"知识与你共享"
+                                         images:imageArray
+                                            url:[NSURL URLWithString:pasteStr]
+                                          title:self.title
+                                           type:SSDKContentTypeAuto];
+        [ShareSDK showShareActionSheet:nil items:nil shareParams:shareParams onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
             
-            NSURL *imgUrl = [NSURL URLWithString:model.imageSeverUrl];
-            
-            [manager diskImageExistsForURL:imgUrl completion:nil];
-            [manager diskImageExistsForURL:imgUrl completion:^(BOOL isInCache) {
-                if (isInCache) {
-                  [activityItems addObject: [self getJPEGImagerImg: [[manager imageCache] imageFromDiskCacheForKey:imgUrl.absoluteString]]];
-                }else{
-                    NSData *data = [NSData dataWithContentsOfURL:imgUrl];
-                    if (data) {
-                        [activityItems addObject: [self getJPEGImagerImg: [UIImage imageWithData:data]]];
-                    }
+            switch (state) {
+                case SSDKResponseStateSuccess:
+                {
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
+                                                                        message:nil
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"确定"
+                                                              otherButtonTitles:nil];
+                    [alertView show];
+                    break;
                 }
-            }];
-        }
+                case SSDKResponseStateFail:
+                {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败"
+                                                                    message:[NSString stringWithFormat:@"%@",error]
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil, nil];
+                    [alert show];
+                    break;
+                }
+                default:
+                    break;
+            }
+        }];
     }
-    UIPasteboard *appPasteBoard =  [UIPasteboard generalPasteboard];
-    appPasteBoard.persistent = YES;
-    NSString *pasteStr = [NSString stringWithFormat:@"点击链接购买\nhttp://24v5.com/store/qr/product_info.html?b=%@&personId=%@",self.model.stylecode,[HTShareClass shareClass].loginId];
-    [appPasteBoard setString:pasteStr];
-    if (activityItems.count == 0) {
-        [MBProgressHUD hideHUD];
-        [MBProgressHUD showError:@"未发现图片资源不能分享"];
-        return;
-    }
-    UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
-    [MBProgressHUD hideHUD];
-    HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:@"已将该商品购买网址复制到粘贴板，分享时粘贴即可" btTitle:@"确定" okBtclicked:^{
-    }];
-    [alert show];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self presentViewController:activityVC animated:YES completion:nil];
-    });
-    
 }
+//{
+//    if (![HTShareClass shareClass].isShowAliCode) {
+//        if (![HTAccountTool cheackUnionId]) {
+////            HTBindWechatController *vc = [[HTBindWechatController alloc] init];
+////            [self.navigationController pushViewController:vc animated:YES];
+//            return;
+//        }
+//    }
+//    [MBProgressHUD showMessage:@"正在处理"];
+//    NSMutableArray *activityItems = [NSMutableArray array];
+//    NSMutableArray *imgs = [NSMutableArray array];
+//    [imgs addObjectsFromArray:self.brandImgs];
+//    [imgs addObjectsFromArray:self.shopImgs];
+//    for (int  i = 0; i < imgs.count; i++) {
+//        if (i > 8) {
+//            break;
+//        }
+//        HTPostImageModel *model = imgs[i];
+//
+//        if (model.image != nil) {
+//            [activityItems addObject:[self getJPEGImagerImg: model.image]];
+//        }else{
+//            SDWebImageManager *manager = [SDWebImageManager sharedManager];
+//
+//            NSURL *imgUrl = [NSURL URLWithString:model.imageSeverUrl];
+//
+//            [manager diskImageExistsForURL:imgUrl completion:nil];
+//            [manager diskImageExistsForURL:imgUrl completion:^(BOOL isInCache) {
+//                if (isInCache) {
+//                  [activityItems addObject: [self getJPEGImagerImg: [[manager imageCache] imageFromDiskCacheForKey:imgUrl.absoluteString]]];
+//                }else{
+//                    NSData *data = [NSData dataWithContentsOfURL:imgUrl];
+//                    if (data) {
+//                        [activityItems addObject: [self getJPEGImagerImg: [UIImage imageWithData:data]]];
+//                    }
+//                }
+//            }];
+//        }
+//    }
+//    UIPasteboard *appPasteBoard =  [UIPasteboard generalPasteboard];
+//    appPasteBoard.persistent = YES;
+//    NSString *pasteStr = [NSString stringWithFormat:@"点击链接购买\nhttp://24v5.com/store/qr/product_info.html?b=%@&personId=%@",self.model.stylecode,[HTShareClass shareClass].loginId];
+//    [appPasteBoard setString:pasteStr];
+//    if (activityItems.count == 0) {
+//        [MBProgressHUD hideHUD];
+//        [MBProgressHUD showError:@"未发现图片资源不能分享"];
+//        return;
+//    }
+//    UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
+//    [MBProgressHUD hideHUD];
+//    HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:@"已将该商品购买网址复制到粘贴板，分享时粘贴即可" btTitle:@"确定" okBtclicked:^{
+//    }];
+//    [alert show];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [self presentViewController:activityVC animated:YES completion:nil];
+//    });
+//
+//}
 
 #pragma mark -private methods
 -(void)setTopImgLoadWithImgModel:(HTPostImageModel *)model{
