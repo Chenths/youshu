@@ -173,6 +173,10 @@
             break;
         case 1:
         {
+            if ([_orderModel.paytype isEqualToString:@"组合支付"]) {
+                [MBProgressHUD showError:@"APP端暂不支付组合支付的退换货，\n请到PC进行组合支付的退换"];
+                return;
+            }
             [HTHoldOrderEventManager exchangeOrReturnOrderWithOrderId:self.orderId];
         }
             break;

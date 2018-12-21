@@ -150,6 +150,10 @@
                 [HTHoldOrderEventManager seeOrderDetailWithOrderId:model.orderId];
             }
             if ([title isEqualToString:@"退换货"]) {
+                if ([model.paytype isEqualToString:@"组合支付"]) {
+                    [MBProgressHUD showError:@"APP端暂不支付组合支付的退换货，\n请到PC进行组合支付的退换"];
+                    return;
+                }
                 [HTHoldOrderEventManager exchangeOrReturnOrderWithOrderId:model.orderId];
             }
             if ([title isEqualToString:@"定时提醒"]) {
@@ -174,6 +178,10 @@
 -(void)exchangeClickedWithCell:(HTOrderInfoViewCell *)cell{
     NSIndexPath *indexPath = [self.dataTableView indexPathForCell:cell];
     HTOrderListModel *model = self.dataArray[indexPath.row];
+    if ([model.paytype isEqualToString:@"组合支付"]) {
+        [MBProgressHUD showError:@"APP端暂不支付组合支付的退换货，\n请到PC进行组合支付的退换"];
+        return;
+    }
     [HTHoldOrderEventManager exchangeOrReturnOrderWithOrderId:model.orderId];
 }
 -(void)printClickedWithCell:(HTOrderInfoViewCell *)cell{
