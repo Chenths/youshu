@@ -82,6 +82,8 @@
     } success:^(id json) {
         [MBProgressHUD hideHUD];
         [MBProgressHUD showSuccess:@"上传成功"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderDetailNotifi" object:nil];
+        
     } error:^{
         [MBProgressHUD hideHUD];
         [MBProgressHUD showError:@"网络繁忙,图片上传失败"];

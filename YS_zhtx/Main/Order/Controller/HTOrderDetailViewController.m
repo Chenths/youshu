@@ -46,7 +46,9 @@
     self.title = @"订单详情";
     [self createTb];
     [self loadData];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadData) name:@"OrderDetailNotifi" object:nil];
 }
+
 #pragma mark -UITabelViewDelegate
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
