@@ -684,6 +684,9 @@
 		047D568120C14262000348DC /* HTSearchBoxStylePlainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047D567F20C14262000348DC /* HTSearchBoxStylePlainTableViewCell.xib */; };
 		047D568520C1434B000348DC /* HTSearchBoxStyleBetweenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D568320C1434B000348DC /* HTSearchBoxStyleBetweenTableViewCell.m */; };
 		047D568620C1434B000348DC /* HTSearchBoxStyleBetweenTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047D568420C1434B000348DC /* HTSearchBoxStyleBetweenTableViewCell.xib */; };
+		047D760F21D0855500E7CB72 /* daily_report.caf in Resources */ = {isa = PBXBuildFile; fileRef = 047D760C21D0855500E7CB72 /* daily_report.caf */; };
+		047D761021D0855500E7CB72 /* cnwav.caf in Resources */ = {isa = PBXBuildFile; fileRef = 047D760D21D0855500E7CB72 /* cnwav.caf */; };
+		047D761121D0855500E7CB72 /* finish_order.caf in Resources */ = {isa = PBXBuildFile; fileRef = 047D760E21D0855500E7CB72 /* finish_order.caf */; };
 		0482240F21182AD60030C21D /* HTCustomerListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0482240E21182AD60030C21D /* HTCustomerListModel.m */; };
 		048224122118380D0030C21D /* HTCustomerAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 048224112118380D0030C21D /* HTCustomerAuth.m */; };
 		04846E43216D9396004C9868 /* HTOnlineOrderInfoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04846E40216D9395004C9868 /* HTOnlineOrderInfoViewCell.m */; };
@@ -2136,6 +2139,9 @@
 		047D568220C1434B000348DC /* HTSearchBoxStyleBetweenTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTSearchBoxStyleBetweenTableViewCell.h; sourceTree = "<group>"; };
 		047D568320C1434B000348DC /* HTSearchBoxStyleBetweenTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTSearchBoxStyleBetweenTableViewCell.m; sourceTree = "<group>"; };
 		047D568420C1434B000348DC /* HTSearchBoxStyleBetweenTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTSearchBoxStyleBetweenTableViewCell.xib; sourceTree = "<group>"; };
+		047D760C21D0855500E7CB72 /* daily_report.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = daily_report.caf; sourceTree = "<group>"; };
+		047D760D21D0855500E7CB72 /* cnwav.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = cnwav.caf; sourceTree = "<group>"; };
+		047D760E21D0855500E7CB72 /* finish_order.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = finish_order.caf; sourceTree = "<group>"; };
 		0482240D21182AD60030C21D /* HTCustomerListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTCustomerListModel.h; sourceTree = "<group>"; };
 		0482240E21182AD60030C21D /* HTCustomerListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTCustomerListModel.m; sourceTree = "<group>"; };
 		048224102118380D0030C21D /* HTCustomerAuth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTCustomerAuth.h; sourceTree = "<group>"; };
@@ -3271,6 +3277,9 @@
 		043DBD8720BE9E4B00020936 /* YS_zhtx */ = {
 			isa = PBXGroup;
 			children = (
+				047D760D21D0855500E7CB72 /* cnwav.caf */,
+				047D760C21D0855500E7CB72 /* daily_report.caf */,
+				047D760E21D0855500E7CB72 /* finish_order.caf */,
 				0471890C216074F60063A736 /* YS_zhtx.entitlements */,
 				04204C8721798CF000BBFEAF /* 非产品收银 */,
 				0420F8BA20F5F65300E785D5 /* 新老板层级 */,
@@ -5928,6 +5937,7 @@
 				04326AA120C6940A00CF481D /* HTShopingGuideReportController.xib in Resources */,
 				04204CC921798CF100BBFEAF /* HTFastEditProductViewController.xib in Resources */,
 				0489FFFF20DB84A9009B5964 /* HTSetWarningAlertView.xib in Resources */,
+				047D761021D0855500E7CB72 /* cnwav.caf in Resources */,
 				0471898E216079DD0063A736 /* JCHATPhotoBrowserViewController.xib in Resources */,
 				04852A1220DC978300589EBA /* HTOrderRemarkTableViewCell.xib in Resources */,
 				047D566C20C0F480000348DC /* HTFiltrateCollectionStyleCell.xib in Resources */,
@@ -5970,6 +5980,7 @@
 				0466C3FB215C7786004F9C58 /* HTCustEditHeadTableViewCell.xib in Resources */,
 				044F81D7212BE1EE007674EC /* HTPrinterViewController.xib in Resources */,
 				04852A1C20DCF28300589EBA /* HTGuideSaleDescItemCell.xib in Resources */,
+				047D760F21D0855500E7CB72 /* daily_report.caf in Resources */,
 				0420F9B120F5F65400E785D5 /* HTBossSectionReportView.xib in Resources */,
 				0453EB7B212EA3CD0064BF3D /* HTAddProductImgTableCell.xib in Resources */,
 				044F81ED212BEBD6007674EC /* HTPrinterBrandCell.xib in Resources */,
@@ -6043,6 +6054,7 @@
 				046096CF2175CD5F00FC57C0 /* ShareSDK.bundle in Resources */,
 				04991B6920CE5BA7007AC4AF /* HTProductInventoryDescController.xib in Resources */,
 				0489FFFA20DB81B6009B5964 /* HTWarningDefaulTableCell.xib in Resources */,
+				047D761121D0855500E7CB72 /* finish_order.caf in Resources */,
 				0420F9D120F5F65400E785D5 /* HTBossMeHeadTableViewCell.xib in Resources */,
 				043DBE1420BE9EF300020936 /* HTCustomerViewController.xib in Resources */,
 				0439A18A20D0C9BC00BB5E9B /* HTSeemoreFooterView.xib in Resources */,

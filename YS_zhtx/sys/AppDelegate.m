@@ -25,6 +25,7 @@
 #import <AdSupport/AdSupport.h>
 #import "IQKeyboardManager.h"
 #import "HTBaceNavigationController.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 static NSString *appKey = @"5094545990eb415462160e31";
 static NSString *channel = @"App Store";
@@ -178,7 +179,7 @@ static BOOL isProduction = YES;
                 [HTJumpTools jumpWithStr:[HTShareClass shareClass].jumpType withDic:[HTShareClass shareClass].jumpDic];
             }];
         }else{
-//            跳转相关推送页面
+            //            跳转相关推送页面
             [HTShareClass shareClass].jumpType = userInfo[@"type"];
             [HTShareClass shareClass].jumpDic  = userInfo;
             if ( [UIApplication sharedApplication].applicationIconBadgeNumber > 0 ) {
@@ -189,11 +190,10 @@ static BOOL isProduction = YES;
             }else{
                 [HTJumpTools jumpWithStr:[HTShareClass shareClass].jumpType withDic:[HTShareClass shareClass].jumpDic];
             }
-//
+            //
         }
         [JPUSHService handleRemoteNotification:userInfo];
     }
-    completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
 }
 
 //
@@ -223,6 +223,24 @@ static BOOL isProduction = YES;
     
     
     completionHandler(UIBackgroundFetchResultNewData);
+    
+    
+    
+    
+    
+    //组装并播放音效
+    
+    SystemSoundID soundID;
+    NSString *filePathStr = [[NSBundle mainBundle] pathForResource:[userInfo objectForKey:@"sound"] ofType:@"caf"];
+
+    NSURL *filePath = [NSURL URLWithString:filePathStr];
+    
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)filePath, &soundID);
+    
+    AudioServicesPlaySystemSound(soundID);
+    
+
+    
     //    NSString *jsonStr = [userInfo getStringWithKey:@"noticeParams"];
     
     //    NSDictionary *paramsDic = [jsonStr dictionaryWithJsonString];
