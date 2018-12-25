@@ -208,9 +208,13 @@
 }
 #pragma mark -CustomDelegate
 -(void)topBtClick{
-    self.controllertype = ControllerCoverEdit;
-    [self configUI];
-    [self.tab reloadData];
+    if (self.assetsArray.count == 0) {
+        self.controllertype = ControllerCoverEdit;
+        [self configUI];
+        [self.tab reloadData];
+    }else{
+        [MBProgressHUD showError:@"请先点击完成，上传已选的照片。"];
+    }
 }
 -(void)selectedTopImgWithModel:(HTPostImageModel *)model1{
     for (HTPostImageModel *model in self.brandImgs) {
