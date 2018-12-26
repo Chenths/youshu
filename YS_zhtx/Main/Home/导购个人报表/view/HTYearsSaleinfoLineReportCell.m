@@ -95,7 +95,9 @@
 
 - (CGFloat)lineChartView:(JBLineChartView *)lineChartView verticalValueForHorizontalIndex:(NSUInteger)horizontalIndex atLineIndex:(NSUInteger)lineIndex
 {
-    return [[[self.chartData objectAtIndex:lineIndex] objectAtIndex:horizontalIndex] floatValue];
+    NSString *tempStr = [HTHoldNullObj getValueWithBigDecmalObj:[NSString stringWithFormat:@"%@", [[self.chartData objectAtIndex:lineIndex] objectAtIndex:horizontalIndex]]];
+    double tempDouble = [tempStr doubleValue];
+    return tempDouble;
 }
 -(NSString *)lineChartView:(JBLineChartView *)lineChartView verticalXValueForHorizontalIndex:(NSUInteger)horizontalIndex atLineIndex:(NSUInteger)lineIndex{
 
