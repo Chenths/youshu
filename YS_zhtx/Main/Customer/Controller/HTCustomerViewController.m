@@ -165,19 +165,21 @@
     HTCustomerListModel *model = self.dataArray[indexPath.row];
     
     [tapArr addObject:@"电话"];
+    [tapArr addObject:@"账单"];
+    
     if ([HTHoldNullObj getValueWithUnCheakValue:model.openid].length > 0) {
        [tapArr addObject:@"聊天"];
     }
     if ([[HTHoldNullObj getValueWithUnCheakValue:model.isedit] isEqualToString:@"1"] && self.authModel.edit) {
         [tapArr addObject:@"编辑"];
     }
+    
     if (self.authModel.topUp) {
        [tapArr  addObject:@"充值"];
     }
     if (self.authModel.deduct) {
       [tapArr  addObject:@"扣除"];
     }
-    [tapArr addObject:@"账单"];
     if (self.authModel.timer) {
       [tapArr addObject:@"定时提醒"];
     }
@@ -242,8 +244,8 @@
         [MBProgressHUD hideHUD];
         [MBProgressHUD showError:NETERRORSTRING];
     }];
-    
 }
+
 -(void)getModlueId{
     if ([HTShareClass shareClass].menuArray.count > 0) {
         for (HTMenuModle *model in [HTShareClass shareClass].menuArray) {
