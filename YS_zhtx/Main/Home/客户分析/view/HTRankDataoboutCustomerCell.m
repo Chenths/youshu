@@ -44,7 +44,12 @@
         self.rankLabel.hidden = NO;
         self.rankLabel.text = [NSString stringWithFormat:@"%ld",model.position.integerValue + 1];
     }
-    self.levelLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.custlevel];
+    NSString *levelStr = [HTHoldNullObj getValueWithUnCheakValue:model.custlevel];
+    if ([levelStr isEqualToString:@""]) {
+        self.levelLabel.hidden = YES;
+    }else{
+        self.levelLabel.text = levelStr;
+    }
     [self.headImg sd_setImageWithURL:[NSURL URLWithString:model.headimg] placeholderImage:[UIImage imageNamed:@"g-customerholdImg"]];
     self.nameLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.name].length == 0 ? @"未录入称呼" : [HTHoldNullObj getValueWithUnCheakValue:model.name];
     self.sexImg.image = [model.sex isEqualToString:@"0"] ? [UIImage imageNamed:@"g-woman"] :[UIImage imageNamed:@"g-man"];
