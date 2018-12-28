@@ -250,7 +250,7 @@
             NSString *valuestr = [dataArr getStringWithKey:@"value"];
             self.editTime = [[dataArr getStringWithKey:@"editDateStr"] length] > 11 ? [[dataArr getStringWithKey:@"editDateStr"] substringWithRange:NSMakeRange(0, 11)] : [dataArr getStringWithKey:@"editDateStr"];
             self.editName = [[dataArr getStringWithKey:@"editorName"] isNull] ? @"老板层级" : [dataArr getStringWithKey:@"editorName"];
-            self.descLabel.text = [NSString stringWithFormat:@"最近修改 %@ %@",self.editTime,self.editTime];
+            self.descLabel.text = [NSString stringWithFormat:@"最近修改 %@ %@",self.editTime,self.editName];
             NSDictionary *valueDic = [valuestr dictionaryWithJsonString];
             NSArray *section1 = self.dataArray[0];
             NSArray *section2 = self.dataArray[1];
