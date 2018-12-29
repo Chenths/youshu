@@ -25,6 +25,7 @@
 #import "HTNoticeCenterViewController.h"
 #import "HTHoldCustomerEventManger.h"
 #import "MainTabBarViewController.h"
+#import "HTChargeViewController.h"
 
 @interface HTCustomerViewController()<HTCustomerFiltrateBoxViewDelegate,UITableViewDelegate,UITableViewDataSource,HTCustomSearchViewDelegate,HTNewCustomCustomerCellDelegate,HTCustomerTapMoreControllerDelegate,UITabBarControllerDelegate>{
     Poper  *poper;
@@ -184,6 +185,8 @@
       [tapArr addObject:@"定时提醒"];
     }
     
+    [tapArr addObject:@"快速下单"];
+    
     NSInteger i = tapArr.count % 3 > 0 ? tapArr.count / 3 + 1 : tapArr.count / 3;
     CGFloat height = 90 + (HMSCREENWIDTH / 3) * i;
     poper                     = [[Poper alloc] init];
@@ -218,6 +221,10 @@
         [HTHoldCustomerEventManger lookCustomerBillListWithCustomerId:[HTHoldNullObj getValueWithUnCheakValue:model.custId] andCustModel:model1];
     }else if ([tapKey isEqualToString:@"聊天"]){
         [HTHoldCustomerEventManger chatWithCustomerWithCustomerId:[HTHoldNullObj getValueWithUnCheakValue:model.custId] customerName:model.name  andOpenId:[HTHoldNullObj getValueWithUnCheakValue:model.openid]];
+    }else if ([tapKey isEqualToString:@"快速下单"]){
+        HTChargeViewController *vc = [[HTChargeViewController alloc] init];
+        vc.phone = model.phone_cust;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 #pragma mark -EventResponse
