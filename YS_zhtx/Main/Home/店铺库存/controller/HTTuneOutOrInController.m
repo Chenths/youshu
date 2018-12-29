@@ -151,9 +151,23 @@
         [MBProgressHUD showError:@"请选择调货类型" toView:self.view];
         return;
     }
-    if ([self.dicountDic getStringWithKey:@"discount"].length == 0 &&[self.dicountDic getStringWithKey:@"money"].length == 0) {
-        [MBProgressHUD showError:@"请输入成本折扣或成本金额" toView:self.view];
-        return ;
+    
+    
+    if ([self.dicountDic getStringWithKey:@"discount"].length == 0  ||[self.dicountDic getStringWithKey:@"money"].length == 0) {
+        
+        HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:@"调货折扣或成本价格未设置，是否继续？" btsArray:@[@"取消",@"确认"] okBtclicked:^{
+             [self turnInNetWorkWithDic:updateBtchJsonDic WithArr:sizeGroup];
+        }
+                                                                               cancelClicked:^{
+                                                                                   
+                                                                                                                             }];
+        [alert show];
+        
+        return;
+//        [MBProgressHUD showError:@"请输入成本折扣或成本金额" toView:self.view];
+//
+//
+//        return ;
     }
     if ([self.dicountDic getStringWithKey:@"discount"].length > 0) {
         if (  [self.dicountDic getFloatWithKey:@"discount"] >= 1 && [self.dicountDic getFloatWithKey:@"discount"]  <= 10) {
@@ -162,7 +176,11 @@
             return;
         }
     }
+    [self turnInNetWorkWithDic:updateBtchJsonDic WithArr:sizeGroup];
     
+}
+
+- (void)turnInNetWorkWithDic:(NSMutableDictionary *)updateBtchJsonDic WithArr:(NSMutableArray *)sizeGroup{
     [updateBtchJsonDic setObject:[HTHoldNullObj getValueWithUnCheakValue:self.inventoryModel.styleCode] forKey:@"styleCode"];
     [updateBtchJsonDic setObject:[HTHoldNullObj getValueWithUnCheakValue:self.inventoryModel.colorCode] forKey:@"colorCode"];
     
@@ -198,6 +216,7 @@
         [MBProgressHUD showError:NETERRORSTRING];
     }];
 }
+
 - (IBAction)turnOutClicked:(id)sender {
     
     if (self.selcetedDic.allKeys.count == 0) {

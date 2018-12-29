@@ -100,8 +100,15 @@
         [updateBtchjson addObject:dic];
     }
     if (([self.discount getStringWithKey:@"discount"].length == 0) && ([self.discount getStringWithKey:@"money"].length == 0)) {
-        [MBProgressHUD showError:@"请输入成本折扣或成本金额" toView:self.view];
-        return ;
+        HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:@"调货折扣或成本价格未设置，是否继续？" btsArray:@[@"取消",@"确认"] okBtclicked:^{
+            [self turnInNetWorkWithArr:updateBtchjson];
+        }
+                                                                               cancelClicked:^{
+                                                                                   
+                                                                               }];
+        [alert show];
+        
+        return;
     }
     if ([self.discount getStringWithKey:@"discount"].length > 0) {
         if (  [self.discount getFloatWithKey:@"discount"] >= 1 && [self.discount getFloatWithKey:@"discount"]  <= 10) {
@@ -110,7 +117,11 @@
             return;
         }
     }
+    [self turnInNetWorkWithArr:updateBtchjson];
     
+}
+
+- (void)turnInNetWorkWithArr:(NSMutableArray *)updateBtchjson{
     NSDictionary *dic = @{
                           @"companyId":[HTShareClass shareClass].loginModel.companyId,
                           @"styleCode":@"",
@@ -145,7 +156,9 @@
         [MBProgressHUD hideHUDForView:self.view];
         [MBProgressHUD showError:@"检查你的网络"];
     }];
+    
 }
+
 -(NSMutableDictionary *)discount{
     if (!_discount) {
         _discount = [NSMutableDictionary dictionary];

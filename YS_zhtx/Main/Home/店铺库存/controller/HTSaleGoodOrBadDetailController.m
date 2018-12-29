@@ -35,13 +35,17 @@
     [super viewDidLoad];
     self.page = 1;
     [self createTb];
-    [self.tab.mj_header beginRefreshing];
     if (self.model) {
         self.title = [NSString stringWithFormat:@"%@ %@",self.model.styleCode,[HTHoldNullObj getValueWithUnCheakValue:self.model.color]];
     }
     if (self.barcode) {
         self.title = self.barcode;
     }
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tab.mj_header beginRefreshing];
 }
 #pragma mark -UITabelViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
