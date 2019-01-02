@@ -327,6 +327,10 @@
     [postDic setValuesForKeysWithDictionary:self.requstDic];
    
     [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleModel,loadCustomerList] params:postDic success:^(id json) {
+        if (json[@"data"][@"isShare"]) {
+            [[NSUserDefaults standardUserDefaults] setObject:json[@"data"][@"isShare"] forKey:@"isShare"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
         if (page == 1) {
             [self.dataArray removeAllObjects];
         }

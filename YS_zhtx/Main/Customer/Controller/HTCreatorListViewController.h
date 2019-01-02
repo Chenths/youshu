@@ -12,5 +12,6 @@ typedef void(^DIDSELECTEDITME)(NSDictionary *dic);
 @interface HTCreatorListViewController : HTCommonViewController
 
 @property (nonatomic,copy) DIDSELECTEDITME selecedItme;
-
+//1 创建者  2 共享店铺
+@property (nonatomic, assign) NSInteger type;
 @end

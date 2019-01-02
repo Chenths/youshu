@@ -81,6 +81,7 @@
         HTSearchCustomerCreaterCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTSearchCustomerCreaterCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.searchDic = self.searchDic;
+        cell.type = 1;
         cell.alertHidd = ^{
             self.hidden = YES;
             self.coverView.hidden = YES;

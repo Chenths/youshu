@@ -74,21 +74,39 @@
     
 }
 -(void)loadList{
-    NSDictionary *dic = @{
-                          @"companyId":[HTShareClass shareClass].loginModel.companyId
-                          };
-    [MBProgressHUD showMessage:@""];
-    [HTHttpTools POST:[NSString stringWithFormat:@"%@%@",baseUrl,@"admin/api/person/load_list_4_app.html"] params:dic success:^(id json) {
-        [MBProgressHUD hideHUD];
-        [self.dataArray addObjectsFromArray:[json[@"data"] getArrayWithKey:@"rows"]];
-        [self.tab reloadData];
-    } error:^{
-        [MBProgressHUD hideHUD];
-        [MBProgressHUD showError:SeverERRORSTRING];
-    } failure:^(NSError *error) {
-        [MBProgressHUD hideHUD];
-        [MBProgressHUD showError:NETERRORSTRING];
-    }];
+    if (_type == 1) {
+        NSDictionary *dic = @{
+                              @"companyId":[HTShareClass shareClass].loginModel.companyId
+                              };
+        [MBProgressHUD showMessage:@""];
+        [HTHttpTools POST:[NSString stringWithFormat:@"%@%@",baseUrl,@"admin/api/person/load_list_4_app.html"] params:dic success:^(id json) {
+            [MBProgressHUD hideHUD];
+            [self.dataArray addObjectsFromArray:[json[@"data"] getArrayWithKey:@"rows"]];
+            [self.tab reloadData];
+        } error:^{
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:SeverERRORSTRING];
+        } failure:^(NSError *error) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:NETERRORSTRING];
+        }];
+    }else{
+        NSDictionary *dic = @{
+                              @"companyId":[HTShareClass shareClass].loginModel.companyId
+                              };
+        [MBProgressHUD showMessage:@""];
+        [HTHttpTools POST:[NSString stringWithFormat:@"%@%@",baseUrl,@"admin/api/cust/load_companyId_isShare_4_app.html"] params:dic success:^(id json) {
+            [MBProgressHUD hideHUD];
+            [self.dataArray addObjectsFromArray:[json[@"data"] getArrayWithKey:@"rows"]];
+            [self.tab reloadData];
+        } error:^{
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:SeverERRORSTRING];
+        } failure:^(NSError *error) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:NETERRORSTRING];
+        }];
+    }
 }
 #pragma mark - getters and setters
 -(NSMutableArray *)dataArray{

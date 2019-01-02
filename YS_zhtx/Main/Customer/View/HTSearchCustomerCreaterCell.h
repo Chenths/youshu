@@ -17,4 +17,6 @@ typedef void(^AlertShow)(void);
 
 @property (nonatomic,copy) AlertShow alertShow;
 
+//1 创建者  2 共享店铺
+@property (nonatomic,assign) NSInteger type;
 @end

@@ -84,6 +84,11 @@
             self.hidden = NO;
             self.coverView.hidden = NO;
         };
+        if (indexPath.row == 3) {
+            cell.type = 1;
+        }else{
+            cell.type = 2;
+        }
         cell.searchDic = self.searchDic;
         return cell;
     }else{
@@ -124,6 +129,8 @@
     [self.searchDic setObject:@"" forKey:@"model.birthday_cust_from"];
     [self.searchDic setObject:@"" forKey:@"model.nickname_cust"];
     [self.searchDic setObject:@"" forKey:@"model.phone_cust"];
+    [self.searchDic setObject:@"" forKey:@"model.companyId_cust"];
+    [self.searchDic setObject:@"" forKey:@"model.companyName_cust"];
     [self.dataTableView reloadData];
 }
 - (IBAction)okBtClicked:(id)sender {
@@ -172,6 +179,12 @@
         [_cellsName addObject:@"HTCustomerSearchPhoneTableCell"];
         [_cellsName addObject:@"HTSearchBoxStyleBetweenTableViewCell"];
         [_cellsName addObject:@"HTSearchCustomerCreaterCell"];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        BOOL isShare = [defaults objectForKey:@"isShare"];
+        if (isShare) {
+            [_cellsName addObject:@"HTSearchCustomerCreaterCell"];
+        }
+
     }
     return _cellsName;
 }
