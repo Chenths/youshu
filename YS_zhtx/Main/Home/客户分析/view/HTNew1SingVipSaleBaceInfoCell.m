@@ -48,8 +48,6 @@
 
 
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *birthLabel;
-//顾问
-@property (unsafe_unretained, nonatomic) IBOutlet UILabel *heightLabel;
 
 /**
  加入时间
@@ -62,6 +60,8 @@
 
 //爱好
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *hobbyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *heightLabel;
+@property (weak, nonatomic) IBOutlet UITextView *tipTextView;
 
 
 
@@ -90,6 +90,10 @@
     self.createTimeLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.createdate].length == 0 ? @"暂无数据" : [HTHoldNullObj getValueWithUnCheakValue:model.createdate];
     self.buyPurchaseLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.buyralt].length == 0 ?  @"暂无数据" : [HTHoldNullObj getValueWithUnCheakValue:model.buyralt];
     self.notComeTimeLabe.text = [HTHoldNullObj getValueWithUnCheakValue:model.day].length == 0 ? @"暂无数据" : [HTHoldNullObj getValueWithUnCheakValue:model.day];
+    self.hobbyLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.hobby].length == 0 ? @"暂无数据" : [HTHoldNullObj getValueWithUnCheakValue:model.hobby];
+    self.heightLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.height].length == 0 ? @"暂无数据" : [HTHoldNullObj getValueWithUnCheakValue:model.height];
+    self.heightLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.height].length == 0 ? @"暂无数据" : [HTHoldNullObj getValueWithUnCheakValue:model.height];
+    self.tipTextView.text = [HTHoldNullObj getValueWithUnCheakValue:model.remark].length == 0 ? @"暂无数据" : [HTHoldNullObj getValueWithUnCheakValue:model.remark];
 }
 
 //- (void)setModel:(HTSingleVipDataModel *)model{

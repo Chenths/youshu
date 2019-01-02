@@ -55,7 +55,8 @@
 @property (nonatomic,strong) NSString *openid;
 @property (nonatomic,strong) NSString *isedit;
 @property (nonatomic,strong) NSString *isdel;
-
-
+@property (nonatomic,strong) NSString *hobby;
+@property (nonatomic,strong) NSString *height;
+@property (nonatomic,strong) NSString *remark;
 
 @end
