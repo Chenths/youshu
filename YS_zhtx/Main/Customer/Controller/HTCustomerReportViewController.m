@@ -62,10 +62,11 @@
     [super viewDidLoad];
     [self loadAuth];
     [self createTb];
-    [self loadData];
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self loadData];
     if (self.customerType == HTCustomerReportTypeFacePush) {
         self.topConstain.constant = 0;
     }else{

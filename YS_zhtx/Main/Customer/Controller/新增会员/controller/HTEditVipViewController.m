@@ -25,7 +25,8 @@
 #import "HTChooseHeadImgViewController.h"
 #import "HTFaceImgListModel.h"
 #import "HTChangeHeadImgViewController.h"
-@interface HTEditVipViewController ()<UITableViewDelegate,UITableViewDataSource,HTTagsTableViewCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HTEditVipContinueBackListCellDelegate>
+#import "HTEditVipTipCell.h"
+@interface HTEditVipViewController ()<UITableViewDelegate,UITableViewDataSource,HTTagsTableViewCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HTEditVipContinueBackListCellDelegate, EditVipTipsDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tab;
 @property (weak, nonatomic) IBOutlet UIButton *saveBt;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *saveBottomHeight;
@@ -51,6 +52,8 @@
 @property (nonatomic,assign) BOOL hasHeaders;
 
 @property (nonatomic,strong) NSArray *selectedImgArray;
+
+@property (nonatomic, copy) NSString *textViewStr;
 
 @end
 
@@ -110,14 +113,56 @@
         cell.model = self.backLists[indexPath.row];
         cell.delegate = self;
         return cell;
-    }else{
+    }else if([cellname isEqualToString:@"HTEditVipSexTypeCell"]){
         HTEditVipSexTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTEditVipSexTypeCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.model = indexPath.section == 0 ? self.configs[indexPath.row - 1] : self.configs[(firstCells.count - 1) * indexPath.section + indexPath.row];
         cell.requestDic = self.requestDic;
         return cell;
+    }else{
+        HTEditVipTipCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTEditVipTipCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.delegate = self;
+        cell.tipTextView.delegate = self;
+//        cell.model = indexPath.section == 0 ? self.configs[indexPath.row - 1] : self.configs[(firstCells.count - 1) * indexPath.section + indexPath.row];
+        cell.requestDic = self.requestDic;
+        return cell;
+
     }
 }
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView
+{
+    NSLog(@"fuck");
+    _textViewStr = textView.text;
+    return YES;
+}
+
+- (void)editVipTipsEndDelegate:(NSString *)tips{
+    _textViewStr = tips;
+}
+
+- (void)editTipAction{
+        NSDictionary *dic = @{
+                              @"companyId":[HTShareClass shareClass].loginModel.companyId,
+                              @"customerId":[HTHoldNullObj getValueWithUnCheakValue:self.modelId],
+                              @"remark" :[HTHoldNullObj getValueWithUnCheakValue:_textViewStr]
+                              };
+        [MBProgressHUD showMessage:@""];
+        [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,@"admin/api/cust/",@"update_customer_remark_4_app.html"] params:dic success:^(id json) {
+            [MBProgressHUD hideHUD];
+            [self saveInfo];
+        } error:^{
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:SeverERRORSTRING];
+            
+        } failure:^(NSError *error) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:@"请检查你的网络"];
+        }];
+    
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if ([[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[HTEditVipHeadImgCell class]]) {
         if (![HTShareClass shareClass].face) {
@@ -431,13 +476,13 @@
                 };
                 [self.navigationController pushViewController:vc animated:YES];
             } cancelClicked:^{
-                [self saveInfo];
+                [self editTipAction];
             }];
             [alert show];
             return;
         }
     }
-    [self saveInfo];
+    [self editTipAction];
     
 }
 
@@ -476,7 +521,7 @@
         model.custId = [HTHoldNullObj getValueWithUnCheakValue:self.modelId ];
         vc.model = model;
         [self.navigationController popViewControllerAnimated:NO];
-        [[HTShareClass shareClass].getCurrentNavController pushViewController:vc animated:YES];
+//        [[HTShareClass shareClass].getCurrentNavController pushViewController:vc animated:YES];
         
     } error:^{
         [MBProgressHUD hideHUD];
@@ -501,6 +546,7 @@
     [self.tab registerNib:[UINib nibWithNibName:@"HTEditVipHeadImgCell" bundle:nil] forCellReuseIdentifier:@"HTEditVipHeadImgCell"];
     [self.tab registerNib:[UINib nibWithNibName:@"HTTagsTableViewCell" bundle:nil] forCellReuseIdentifier:@"HTTagsTableViewCell"];
     [self.tab registerNib:[UINib nibWithNibName:@"HTEditVipContinueBackListCell" bundle:nil] forCellReuseIdentifier:@"HTEditVipContinueBackListCell"];
+    [self.tab registerNib:[UINib nibWithNibName:@"HTEditVipTipCell" bundle:nil] forCellReuseIdentifier:@"HTEditVipTipCell"];
     [self.saveBt changeCornerRadiusWithRadius:3];
     self.tab.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         self.page ++;
@@ -560,6 +606,7 @@
             [self.requestDic setObject:[baseInfo  getStringWithKey:@"hobby"] forKey:@"model.hobby"];
             [self.requestDic setObject:[baseInfo  getStringWithKey:@"name"] forKey:@"model.name"];
             [self.requestDic setObject:[baseInfo  getStringWithKey:@"headimg"] forKey:@"headimg"];
+            [self.requestDic setObject:[baseInfo  getStringWithKey:@"remark"] forKey:@"remark"];
         }
         self.hasHeaders = [json[@"data"][@"hasHeaders"] boolValue];
         self.tagDic = [json[@"data"] getDictionArrayWithKey:@"tags"];
@@ -690,7 +737,7 @@
         _cellsName = [NSMutableArray array];
         [_cellsName addObject:@[@"HTEditVipHeadImgCell",@"HTEditVipDefaulTypeCell",@"HTEditVipDefaulTypeCell",@"HTEditVipSexTypeCell",@"HTEditVipBirthTypeCell"]];
         [self.headsTitle addObject:@"基本信息"];
-        [_cellsName addObject:@[@"HTEditVipCustLevelCell",@"HTEditVipDefaulTypeCell",@"HTEditVipDefaulTypeCell",@"HTEditVipDefaulTypeCell"]];
+        [_cellsName addObject:@[@"HTEditVipCustLevelCell",@"HTEditVipDefaulTypeCell",@"HTEditVipDefaulTypeCell",@"HTEditVipDefaulTypeCell", @"HTEditVipTipCell"]];
         [self.headsTitle addObject:@"客户资料"];
         [_cellsName addObject:@[@"HTTagsTableViewCell"]];
         [self.headsTitle addObject:@"个性标签"];
