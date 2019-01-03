@@ -26,7 +26,7 @@
 #import "HTFaceImgListModel.h"
 #import "HTChangeHeadImgViewController.h"
 #import "HTEditVipTipCell.h"
-@interface HTEditVipViewController ()<UITableViewDelegate,UITableViewDataSource,HTTagsTableViewCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HTEditVipContinueBackListCellDelegate, EditVipTipsDelegate, UITextViewDelegate>
+@interface HTEditVipViewController ()<UITableViewDelegate,UITableViewDataSource,HTTagsTableViewCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HTEditVipContinueBackListCellDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tab;
 @property (weak, nonatomic) IBOutlet UIButton *saveBt;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *saveBottomHeight;
@@ -122,9 +122,7 @@
     }else{
         HTEditVipTipCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTEditVipTipCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.delegate = self;
         cell.tipTextView.delegate = self;
-//        cell.model = indexPath.section == 0 ? self.configs[indexPath.row - 1] : self.configs[(firstCells.count - 1) * indexPath.section + indexPath.row];
         cell.requestDic = self.requestDic;
         return cell;
 
