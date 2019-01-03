@@ -226,7 +226,7 @@
                 [HTShareClass shareClass].printerModel.returnPayType = cashType;
                 HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:[NSString stringWithFormat: @"需退该VIP%.2f元",totle] btTitle:@"确定"  okBtclicked:^{
                     //            回上个页面刷新数据
-//                    [strongSelf.navigationController  popViewControllerAnimated:YES];
+                    [strongSelf.navigationController  popViewControllerAnimated:YES];
                 }];
                 [alert notTochShow];
             }
