@@ -20,6 +20,7 @@
 #import "HTCustomerReportViewController.h"
 #import "MJPhoto.h"
 #import "MJPhotoBrowser.h"
+#import "HTOrderDetailSimpleTableViewCell.h"
 @interface HTOrderDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tab;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabBottomHeight;
@@ -32,8 +33,10 @@
 @property (nonatomic,strong) NSMutableArray *dataArray;
 
 @property (nonatomic,strong) HTOrderDetailModel *orderModel;
-
-
+//导购列表
+@property (nonatomic, strong) NSMutableArray *groupGuide;
+//支付列表
+@property (nonatomic, strong) NSMutableArray *groupPay;
 @end
 
 @implementation HTOrderDetailViewController
@@ -96,10 +99,22 @@
         HTOrderDetailProductModel *model = self.dataArray[indexPath.section][indexPath.row];
         cell.orderProductModel = model;
         return cell;
-    }else{
+    }else if ([cellname isEqualToString:@"HTOrderRemarkTableViewCell"]){
         HTOrderRemarkTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTOrderRemarkTableViewCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.model = self.orderModel;
+        return cell;
+    }else{
+        HTOrderDetailSimpleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTOrderDetailSimpleTableViewCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if ([cellname isEqualToString:@"HTOrderDetailSimpleTableViewCell"]) {
+            cell.nameLabel.text = [[_groupGuide objectAtIndex:indexPath.row] objectForKey:@"name"];
+            cell.detailLabel.text = [NSString stringWithFormat:@"¥%@", [[_groupGuide objectAtIndex:indexPath.row] objectForKey:@"money"]];
+        }else{
+            cell.nameLabel.text = [[_groupPay objectAtIndex:indexPath.row] objectForKey:@"paytype"];
+            cell.detailLabel.text = [NSString stringWithFormat:@"¥%@", [[_groupPay objectAtIndex:indexPath.row] objectForKey:@"money"]];
+        }
+        
         return cell;
     }
 }
@@ -243,12 +258,41 @@
             [self.sectionTitle addObject:@""];
             [self.dataArray addObject:@[]];
         }
+        
+        
         [self.cellsName addObject:@[@"HTFastOrderDetailInfoViewCell"]];
         [self.sectionTitle addObject:@""];
         [self.dataArray addObject:@[]];
+        
+        self.groupGuide = [NSMutableArray arrayWithArray:[[json objectForKey:@"data"] objectForKey:@"groupguide"]];
+        self.groupPay = [NSMutableArray arrayWithArray:[[json objectForKey:@"data"] objectForKey:@"grouppay"]];
+        
+        //这里换成 导购员列表
+        NSMutableArray *guideTempArr = [NSMutableArray array];
+        if (self.groupGuide.count > 0) {
+            for (int i = 0; i < self.groupGuide.count; i++) {
+                [guideTempArr addObject:@"HTOrderDetailSimpleTableViewCell"];
+            }
+            [self.cellsName addObject:guideTempArr];
+            [self.sectionTitle addObject:@""];
+            [self.dataArray addObject:@[]];
+        }
+        
         [self.cellsName addObject:@[@"HTOrderInfoDetailTableCell"]];
         [self.sectionTitle addObject:@""];
         [self.dataArray addObject:@[]];
+        
+        //这里换成 支付方式列表
+        NSMutableArray *payTempArr = [NSMutableArray array];
+        if (self.groupPay.count > 0) {
+            for (int i = 0; i < self.groupPay.count; i++) {
+              [payTempArr addObject:@"HTOrderDetailSimpleTableViewCell2"];
+            }
+            [self.cellsName addObject:payTempArr];
+            [self.sectionTitle addObject:@""];
+            [self.dataArray addObject:@[]];
+        }
+        
         [self.tab reloadData];
         [self configBottom];
         [MBProgressHUD hideHUD];
@@ -272,6 +316,8 @@
     [self.tab registerNib:[UINib nibWithNibName:@"HTOrderImgsCollectionCell" bundle:nil] forCellReuseIdentifier:@"HTOrderImgsCollectionCell"];
     [self.tab registerNib:[UINib nibWithNibName:@"HTFastOrderDetailInfoViewCell" bundle:nil] forCellReuseIdentifier:@"HTFastOrderDetailInfoViewCell"];
     [self.tab registerNib:[UINib nibWithNibName:@"HTOrderInfoDetailTableCell" bundle:nil] forCellReuseIdentifier:@"HTOrderInfoDetailTableCell"];
+    [self.tab registerNib:[UINib nibWithNibName:@"HTOrderDetailSimpleTableViewCell" bundle:nil] forCellReuseIdentifier:@"HTOrderDetailSimpleTableViewCell"];
+    
     UIView *v = [[UIView alloc] init];
     v.backgroundColor = [UIColor colorWithHexString:@"#F9F9FA"];
     self.tab.tableFooterView = v ;
