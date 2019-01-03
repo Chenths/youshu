@@ -26,10 +26,10 @@
     [self.productImg sd_setImageWithURL:[NSURL URLWithString:model.image] placeholderImage:[UIImage imageNamed:PRODUCTHOLDIMG]];
     if (model.productState == HTProductStateChange) {
         self.holdLabel.hidden = NO;
-        self.holdLabel.image = [UIImage imageNamed:@"EXCHANGED"];
+        self.holdLabel.image = [UIImage imageNamed:@"EXCHANGE"];
     }else if (model.productState == HTProductStateReturn) {
         self.holdLabel.hidden = NO;
-        self.holdLabel.image = [UIImage imageNamed:@"RETURENED"];
+        self.holdLabel.image = [UIImage imageNamed:@"RETURN"];
     }else{
         self.holdLabel.hidden = YES;
     }

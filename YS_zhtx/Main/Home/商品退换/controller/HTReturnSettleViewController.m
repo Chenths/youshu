@@ -84,15 +84,15 @@
     }];
     [alert show];
 }
--(void)cancelOrderClicked:(UIButton *)sender{
-    __weak typeof(self) weakSelf = self;
-    HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:@"是否再争取一下" btsArray:@[@"争取一次",@"残忍拒绝"] okBtclicked:^{
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf.navigationController popViewControllerAnimated:YES];
-    } cancelClicked:^{
-    }];
-    [alert show];
-}
+//-(void)cancelOrderClicked:(UIButton *)sender{
+//    __weak typeof(self) weakSelf = self;
+//    HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:@"是否再争取一下" btsArray:@[@"争取一次",@"残忍拒绝"] okBtclicked:^{
+//        __strong typeof(weakSelf) strongSelf = weakSelf;
+//        [strongSelf.navigationController popViewControllerAnimated:YES];
+//    } cancelClicked:^{
+//    }];
+//    [alert show];
+//}
 - (IBAction)okBtClicked:(id)sender {
     [MBProgressHUD showMessage:@"正在退货..."];
     if (![HTShareClass shareClass].printerModel.lastOrderPrintDic || [HTShareClass shareClass].printerModel.lastOrderPrintDic.allKeys.count > 0) {
@@ -226,7 +226,7 @@
                 [HTShareClass shareClass].printerModel.returnPayType = cashType;
                 HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:[NSString stringWithFormat: @"需退该VIP%.2f元",totle] btTitle:@"确定"  okBtclicked:^{
                     //            回上个页面刷新数据
-                    [strongSelf.navigationController  popViewControllerAnimated:YES];
+//                    [strongSelf.navigationController  popViewControllerAnimated:YES];
                 }];
                 [alert notTochShow];
             }
@@ -316,13 +316,14 @@
     }
 }
 -(void)createSub{
+    self.backView.frame = CGRectMake(0, 0, [UIScreen mainScreen].applicationFrame.size.width, [UIScreen mainScreen].applicationFrame.size.height + 60);
     [self.backView setGradientColorWithBeginColor:[UIColor colorWithHexString:@"#FC5C7D"] beginPoint:CGPointMake(0, 0) andEndColor:[UIColor colorWithHexString:@"#6A82FB"] endPoint:CGPointMake(1, 1)];
     [self.refreshBt changeCornerRadiusWithRadius:3];
 }
 -(void)initNav{
     self.navigationItem.backBarButtonItem = nil;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem creatBarButtonItemWithTitle:@"取消退货" target:self withColor:[UIColor whiteColor] action:@selector(closeOrderClicked:)];
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem creatBarButtonItemWithTitle:@"退货" target:self withColor:[UIColor whiteColor] action:@selector(cancelOrderClicked:)];
+//    self.navigationItem.leftBarButtonItem = [UIBarButtonItem creatBarButtonItemWithTitle:@"退货" target:self withColor:[UIColor whiteColor] action:@selector(cancelOrderClicked:)];
     
     self.detailView = [[HTSetterExchangePruductDetailView alloc] initWithDetailFrame:CGRectMake(16,self.storedMoneyLabel.y + 36, HMSCREENWIDTH - 32, 240)] ;
     dispatch_async(dispatch_get_main_queue(), ^{

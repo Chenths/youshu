@@ -58,10 +58,10 @@
     [self createTopSeg];
     [self createTb];
     [self getModlueId];
- 
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.dataTableView.mj_header beginRefreshing];
     [self laodNoRedNum];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#222222"]}];
     [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
