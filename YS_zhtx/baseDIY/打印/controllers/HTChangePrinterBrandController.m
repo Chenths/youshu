@@ -39,6 +39,17 @@
         }
     }
 }
+
+- (void)back{
+    int index = (int)[[self.navigationController viewControllers]indexOfObject:self];
+    if (index > 2) {
+        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:(index-2)] animated:YES];
+    }else{
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        
+    }
+}
+
 #pragma mark -UITabelViewDelegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return   [self.dataArray count];
@@ -87,7 +98,13 @@
 }
 - (void)neverTiXing{
     self.isTap = YES;
-     [self.navigationController popViewControllerAnimated:YES];
+    int index = (int)[[self.navigationController viewControllers]indexOfObject:self];
+    if (index > 2) {
+        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:(index-2)] animated:YES];
+    }else{
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        
+    }
      if (self.delegate && [self.delegate respondsToSelector:@selector(neverNoticeSelectedBrand)]) {
         [self.delegate neverNoticeSelectedBrand];
      }

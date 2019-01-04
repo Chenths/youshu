@@ -213,20 +213,23 @@
             if ([strongSelf.orderModel.paytype isEqualToString:@"储值支付"]) {
                 [HTShareClass shareClass].printerModel.returnPayType = storedType;
                 HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:[NSString stringWithFormat: @"已将%.2f元,退至该VIP储值账户 ",totle] btTitle:@"确定"  okBtclicked:^{
-                    [strongSelf.navigationController  popViewControllerAnimated:YES];
+//                    [strongSelf.navigationController  popViewControllerAnimated:YES];
+                    [MBProgressHUD showError:@"退货成功"];
                 }];
                 [alert notTochShow];
             }else if([strongSelf.orderModel.paytype isEqualToString:@"储值赠送支付"]){
                 [HTShareClass shareClass].printerModel.returnPayType = storedSendType;
                 HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:[NSString stringWithFormat: @"已将%.2f元,退至该VIP储值赠送账户 ",totle] btTitle:@"确定"  okBtclicked:^{
-                    [strongSelf.navigationController  popViewControllerAnimated:YES];
+//                    [strongSelf.navigationController  popViewControllerAnimated:YES];
+                    [MBProgressHUD showError:@"退货成功"];
                 }];
                 [alert notTochShow];
             }else{
                 [HTShareClass shareClass].printerModel.returnPayType = cashType;
                 HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:[NSString stringWithFormat: @"需退该VIP%.2f元",totle] btTitle:@"确定"  okBtclicked:^{
                     //            回上个页面刷新数据
-                    [strongSelf.navigationController  popViewControllerAnimated:YES];
+//                    [strongSelf.navigationController  popViewControllerAnimated:YES];
+                    [MBProgressHUD showError:@"退货成功"];
                 }];
                 [alert notTochShow];
             }
