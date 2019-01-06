@@ -30,6 +30,7 @@
 #import "HTEditVipContinueBackListCell.h"
 #import "HTMenuModle.h"
 #import "HTHoldCustomerEventManger.h"
+#import "HTChargeViewController.h"
 @interface HTCustomerReportViewController ()<UITableViewDelegate,UITableViewDataSource,HTNewSingVipSaleBaceInfoCellDelegate,HTTagsCloseTableViewCellDelegate,HTTagsTableViewCellDelegate,HTCustomerTapMoreControllerDelegate,HTEditVipContinueBackListCellDelegate>{
     Poper *poper;
 }
@@ -273,6 +274,10 @@
         [HTHoldCustomerEventManger lookCustomerBillListWithCustomerId:[HTHoldNullObj getValueWithUnCheakValue:self.model.custId] andCustModel:model1];
     }else if ([tapKey isEqualToString:@"聊天"]){
         [HTHoldCustomerEventManger chatWithCustomerWithCustomerId:[HTHoldNullObj getValueWithUnCheakValue:self.model.custId] customerName:self.model.name andOpenId:[HTHoldNullObj getValueWithUnCheakValue:self.reportModel.baseMessage.openid]];
+    }else if ([tapKey isEqualToString:@"快速下单"]){
+        HTChargeViewController *vc = [[HTChargeViewController alloc] init];
+        vc.phone = self.model.phone_cust;
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
 }
@@ -331,6 +336,7 @@
     if (self.authModel.timer) {
         [tapArr addObject:@"定时提醒"];
     }
+    [tapArr addObject:@"快速下单"];
     NSInteger i = tapArr.count % 3 > 0 ? tapArr.count / 3 + 1 : tapArr.count / 3;
     CGFloat height = 90 + (HMSCREENWIDTH / 3) * i;
     poper                     = [[Poper alloc] init];
