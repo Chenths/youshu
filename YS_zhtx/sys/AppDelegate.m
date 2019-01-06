@@ -11,7 +11,8 @@
 #import "HTMenuModle.h"
 #import "AppDelegate.h"
 #import <JMessage/JMessage.h>
-#import "HTFaceVipModel.h"
+//#import "HTFaceVipModel.h"
+#import "HTNewFaceVipModel.h"
 #import "HTLoginVienController.h"
 #import "JCHATConversationViewController.h"
 #import "HTJumpTools.h"
@@ -257,7 +258,7 @@ static BOOL isProduction = YES;
     
     if (application.applicationState == UIApplicationStateActive) {
 #warning 加载未读消息
-        if ([[userInfo getStringWithKey:@"type"] isEqualToString:@"VIP_REPORT"]) {
+        if ([[userInfo getStringWithKey:@"type"] isEqualToString:@"VIP_CUSTOMER"]) {
 //          人脸识别
             [self loadFaceDataWithModelId:userInfo];
         }
@@ -373,39 +374,60 @@ static BOOL isProduction = YES;
     }
 }
 
+- (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString
+{
+    if (jsonString == nil) {
+        return nil;
+    }
+    
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err)
+    {
+        NSLog(@"json解析失败：%@",err);
+        return nil;
+    }
+    return dic;
+}
+
 -(void)loadFaceDataWithModelId:(NSDictionary *)userInfo{
     
     NSString *noticeParams = [userInfo getStringWithKey:@"noticeParams"];
-    NSArray *keys = [noticeParams componentsSeparatedByString:@"^"];
-    NSMutableArray *arr = [HTShareClass shareClass].faceArray;
-    HTFaceVipModel *model = [[HTFaceVipModel alloc] init];
-    if (keys.count == 6) {
-        model.path = [HTHoldNullObj getValueWithUnCheakValue:keys[0]];
-        model.nickname_cust = keys[1];
-        model.hasbuy = [keys[2] boolValue];
-        model.cust_level = @{
-                             @"name":keys[3]
-                             };
-        model.sex_cust = [keys[4] boolValue];
-        model.birth = [NSString stringWithFormat:@"%@-01-01",keys[5]];
-    }
-    model.uid = [userInfo getStringWithKey:@"modelId"];
-    NSDateFormatter *formate = [[NSDateFormatter alloc] init];
-    [formate setDateFormat:@"HH:mm:ss"];
-    model.create_time =  [formate stringFromDate:[NSDate date]];
-    model.isPush = YES;
-    if (arr.count < 2) {
-        [arr addObject:model];
-    }else{
-        [arr removeObjectAtIndex:0];
-        [arr addObject:model];
-    }
+//    NSArray *keys = [noticeParams componentsSeparatedByString:@"^"];
+//    NSMutableArray *arr = [HTShareClass shareClass].faceArray;
+    NSDictionary *tempDic = [self dictionaryWithJsonString:noticeParams];
+    HTNewFaceVipModel *model = [[HTNewFaceVipModel alloc] init];
+//    if (keys.count == 6) {
+//        model.path = [HTHoldNullObj getValueWithUnCheakValue:keys[0]];
+//        model.nickname_cust = keys[1];
+//        model.hasbuy = [keys[2] boolValue];
+//        model.cust_level = @{
+//                             @"name":keys[3]
+//                             };
+//        model.sex_cust = [keys[4] boolValue];
+//        model.birth = [NSString stringWithFormat:@"%@-01-01",keys[5]];
+//    }
+//    model.uid = [userInfo getStringWithKey:@"modelId"];
+//    NSDateFormatter *formate = [[NSDateFormatter alloc] init];
+//    [formate setDateFormat:@"HH:mm:ss"];
+//    model.create_time =  [formate stringFromDate:[NSDate date]];
+//    model.isPush = YES;
+//    if (arr.count < 2) {
+//        [arr addObject:model];
+//    }else{
+//        [arr removeObjectAtIndex:0];
+//        [arr addObject:model];
+//    }
+    [model setValuesForKeysWithDictionary:tempDic];
     for (UIView *vvv in self.window.subviews) {
         if ([vvv isKindOfClass:[HTFaceComingAlertView class]]) {
             [vvv removeFromSuperview];
         }
     }
-    [HTFaceComingAlertView showWithDatas:arr];
+    [HTFaceComingAlertView showWithDatas:@[model]];
 }
 
 

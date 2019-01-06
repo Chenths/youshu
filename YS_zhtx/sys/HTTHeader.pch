@@ -49,11 +49,12 @@
 //颜家栋
 //#define baseUrl @"http://10.1.1.162:8080/"
 //#define baseUrl @"http://192.168.199.7:8080/"
-#define baseUrl @"http://192.168.199.46:8080/"
+//#define baseUrl @"http://192.168.199.46:8080/"
 //#define baseUrl @"http://192.168.199.71:8080/"
 //#define baseUrl @"http://192.168.199.188:8080/"
 //#define baseUrl @"http://47.93.173.31:8080/"
 //#define baseUrl @"http://192.168.199.111:8080/"
+#define baseUrl @"http://192.168.199.34:8080/"
 //#define baseUrl @"http://192.168.199.162:8080/"
 //#define baseUrl @"http://59.110.5.160:8090/"
 #else

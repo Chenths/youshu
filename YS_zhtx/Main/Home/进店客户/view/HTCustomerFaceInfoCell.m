@@ -47,44 +47,44 @@
     
 }
 
-- (void)setVipModel:(HTFaceVipModel *)vipModel{
-    _vipModel = vipModel;
-    [self.vipImg sd_setImageWithURL:[NSURL URLWithString:vipModel.path] placeholderImage:[UIImage imageNamed:@"g-customerholdImg"]];
-    self.comeDateLabel.text = [HTHoldNullObj getValueWithUnCheakValue:vipModel.create_time];
-    self.nameLabel.text = [HTHoldNullObj getValueWithUnCheakValue:vipModel.nickname_cust];
-    self.sexImg.hidden = NO;
-    self.sexImg.image = [UIImage imageNamed: vipModel.sex_cust ? @"g-man" : @"g-woman"];
-    NSDictionary *cust_level = vipModel.cust_level;
-    self.levelLabel.hidden = NO;;
-    self.levelLabel.text = [cust_level getStringWithKey:@"name"];
-    if (vipModel.hasbuy) {
-    self.descLabel.hidden = NO;
-//        [self.receptionBt setBackgroundImage:[UIImage imageNamed:@"再购背景"] forState:UIControlStateNormal];
-        [self.receptionBt setTitleColor:[UIColor colorWithHexString:@"#060000"]forState:UIControlStateNormal];
-        [self.receptionBt setBackgroundColor:[UIColor colorWithHexString:@"#F9F9FA"]];
-        [self.receptionBt changeBorderStyleColor:[UIColor colorWithHexString:@"#060000"] withWidth:1];
-        self.receptionBt.titleLabel.font = [UIFont systemFontOfSize:16];
-        [self.receptionBt setTitle:@"再购" forState:UIControlStateNormal];
-    }else{
-//        [self.receptionBt setBackgroundImage:[UIImage imageNamed:@"接待背景"] forState:UIControlStateNormal];
-        [self.receptionBt setTitleColor:[UIColor colorWithHexString:@"#FFFFFF"]forState:UIControlStateNormal];
-        [self.receptionBt setBackgroundColor:[UIColor colorWithHexString:@"#333333"]];
-        [self.receptionBt changeBorderStyleColor:[UIColor colorWithHexString:@"#333333"] withWidth:1];
-        self.receptionBt.titleLabel.font = [UIFont systemFontOfSize:16];
-        [self.receptionBt setTitle:@"接待" forState:UIControlStateNormal];
-        self.descLabel.hidden = YES;
-    }
-    if (vipModel.isPush) {
-    self.deleteLabel.hidden = NO;
-    }else{
-        self.deleteLabel.hidden = YES;
-    }
-}
+//- (void)setVipModel:(HTNewFaceNoVipModel *)vipModel{
+//    _vipModel = vipModel;
+//    [self.vipImg sd_setImageWithURL:[NSURL URLWithString:vipModel.path] placeholderImage:[UIImage imageNamed:@"g-customerholdImg"]];
+//    self.comeDateLabel.text = [HTHoldNullObj getValueWithUnCheakValue:vipModel.create_time];
+//    self.nameLabel.text = [HTHoldNullObj getValueWithUnCheakValue:vipModel.nickname_cust];
+//    self.sexImg.hidden = NO;
+//    self.sexImg.image = [UIImage imageNamed: vipModel.sex_cust ? @"g-man" : @"g-woman"];
+//    NSDictionary *cust_level = vipModel.cust_level;
+//    self.levelLabel.hidden = NO;;
+//    self.levelLabel.text = [cust_level getStringWithKey:@"name"];
+//    if (vipModel.hasbuy) {
+//    self.descLabel.hidden = NO;
+////        [self.receptionBt setBackgroundImage:[UIImage imageNamed:@"再购背景"] forState:UIControlStateNormal];
+//        [self.receptionBt setTitleColor:[UIColor colorWithHexString:@"#060000"]forState:UIControlStateNormal];
+//        [self.receptionBt setBackgroundColor:[UIColor colorWithHexString:@"#F9F9FA"]];
+//        [self.receptionBt changeBorderStyleColor:[UIColor colorWithHexString:@"#060000"] withWidth:1];
+//        self.receptionBt.titleLabel.font = [UIFont systemFontOfSize:16];
+//        [self.receptionBt setTitle:@"再购" forState:UIControlStateNormal];
+//    }else{
+////        [self.receptionBt setBackgroundImage:[UIImage imageNamed:@"接待背景"] forState:UIControlStateNormal];
+//        [self.receptionBt setTitleColor:[UIColor colorWithHexString:@"#FFFFFF"]forState:UIControlStateNormal];
+//        [self.receptionBt setBackgroundColor:[UIColor colorWithHexString:@"#333333"]];
+//        [self.receptionBt changeBorderStyleColor:[UIColor colorWithHexString:@"#333333"] withWidth:1];
+//        self.receptionBt.titleLabel.font = [UIFont systemFontOfSize:16];
+//        [self.receptionBt setTitle:@"接待" forState:UIControlStateNormal];
+//        self.descLabel.hidden = YES;
+//    }
+//    if (vipModel.isPush) {
+//    self.deleteLabel.hidden = NO;
+//    }else{
+//        self.deleteLabel.hidden = YES;
+//    }
+//}
 
--(void)setNotVipModel:(HTFaceNotVipModel *)notVipModel{
+-(void)setNotVipModel:(HTNewFaceNoVipModel *)notVipModel{
     _notVipModel = notVipModel;
     [self.vipImg sd_setImageWithURL:[NSURL URLWithString:notVipModel.path] placeholderImage:[UIImage imageNamed:@"g-customerholdImg"]];
-    self.comeDateLabel.text = [HTHoldNullObj getValueWithUnCheakValue:notVipModel.create_time];
+    self.comeDateLabel.text = [HTHoldNullObj getValueWithUnCheakValue:notVipModel.enterTime];
     self.nameLabel.text = [HTHoldNullObj getValueWithUnCheakValue:notVipModel.userVipName];
     self.sexImg.hidden = YES;
     self.levelLabel.hidden = YES;
@@ -122,10 +122,11 @@
 }
 - (IBAction)deleteBtClicked:(id)sender {
     if (self.delegate ) {
-        [self.delegate deleleItemeWithCell:self];
+//        [self.delegate deleleItemeWithCell:self];
     }
 }
 -(void)tapClicked:(UITapGestureRecognizer *)sender{
+    /*
     NSMutableArray *photos = [NSMutableArray array];
     if (self.vipModel.imgs.count > 0) {
         for (NSString *url in self.vipModel.imgs) {
@@ -149,6 +150,7 @@
     browser.currentPhotoIndex = 0; // 弹出相册时显示的第一张图片是？
     browser.photos = photos; // 设置所有的图片
     [browser show];
+     */
 }
 
 

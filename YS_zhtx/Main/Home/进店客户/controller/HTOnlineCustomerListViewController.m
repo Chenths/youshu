@@ -10,11 +10,14 @@
 #import "HTChargeViewController.h"
 #import "HTOnlineCustomerListViewController.h"
 #import "HTCustomerFaceInfoCell.h"
-#import "HTFaceVipModel.h"
-#import "HTFaceNotVipModel.h"
+//#import "HTFaceVipModel.h"
+#import "HTNewFaceVipModel.h"
+//#import "HTFaceNotVipModel.h"
+#import "HTNewFaceNoVipModel.h"
 #import "MJRefresh.h"
 #import "HTMenuModle.h"
-@interface HTOnlineCustomerListViewController ()<UITableViewDelegate,UITableViewDataSource,HTCustomerFaceInfoCellDelegate>
+#import "HTCustomerFaceVipTableViewCell.h"
+@interface HTOnlineCustomerListViewController ()<UITableViewDelegate,UITableViewDataSource,HTCustomerFaceInfoCellDelegate, HTCustomerFaceVIPCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *dataTableView;
 
@@ -39,32 +42,44 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    
+    if (self.usrType == HTUSRERVIP) {
+        //VIP
+        HTCustomerFaceVipTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTCustomerFaceVipTableViewCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.delegate = self;
+        if (self.dataArray.count > 0) {
+            cell.vipModel = self.dataArray[indexPath.row];
+            
+        }
+        return cell;
+    }else{
+        //非VIP
         HTCustomerFaceInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTCustomerFaceInfoCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.delegate = self;
-    if (self.usrType == HTUSRERVIP) {
-        cell.vipModel = self.dataArray[indexPath.row];
-    }else{
-        HTFaceNotVipModel *model = self.dataArray[indexPath.row];
+        HTNewFaceNoVipModel *model = self.dataArray[indexPath.row];
         model.userVipName = [NSString stringWithFormat:@"%@%ld",@"散客",indexPath.row + 1];
-        cell.notVipModel = self.dataArray[indexPath.row];
-    }
+        if (_dataArray.count > 0) {
+            cell.notVipModel = self.dataArray[indexPath.row];            
+        }
         return cell;
-  
+    }
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (self.usrType == HTUSRERVIP) {
-        HTFaceVipModel *model = self.dataArray[indexPath.row];
+        HTNewFaceVipModel *model = self.dataArray[indexPath.row];
         HTCustomerReportViewController *vc = [[HTCustomerReportViewController alloc] init];
         HTCustomerListModel *mmm = [[HTCustomerListModel alloc] init];
-        mmm.custId = model.uid;
-        vc.customerType = HTCustomerReportTypeFacePush;
+        mmm.custId = model.customerId;
+        vc.customerType = HTCustomerReportTypeNomal;
         vc.model = mmm;
         [self.navigationController pushViewController:vc animated:YES];
     }else{
         HTAddVipWithPhoneController *vc = [[HTAddVipWithPhoneController alloc] init];
-        HTFaceNotVipModel *model = self.dataArray[indexPath.row];
+        HTNewFaceNoVipModel *model = self.dataArray[indexPath.row];
         for (HTMenuModle *mmm in [HTShareClass shareClass].menuArray) {
             if ([mmm.moduleName isEqualToString:@"customer"]) {
                 vc.moduleId = [mmm.moduleId stringValue];
@@ -78,10 +93,10 @@
 #pragma mark -CustomDelegate
 -(void)receptionCustmerWithCell:(HTCustomerFaceInfoCell *)cell{
     NSIndexPath *index = [self.dataTableView indexPathForCell:cell];
-    HTFaceVipModel *model = self.dataArray[index.row];
+    HTNewFaceVipModel *model = self.dataArray[index.row];
     HTCustomerReportViewController *vc = [[HTCustomerReportViewController alloc] init];
     HTCustomerListModel *mmm = [[HTCustomerListModel alloc] init];
-    mmm.custId = model.uid;
+    mmm.custId = model.customerId;
     vc.customerType = HTCustomerReportTypeFacePush;
     vc.model = mmm;
     [self.navigationController pushViewController:vc animated:YES];
@@ -90,15 +105,50 @@
 - (void)repitBuyWithCell:(HTCustomerFaceInfoCell *)cell{
     HTChargeViewController *vc = [[HTChargeViewController alloc] init];
     NSIndexPath *index = [self.dataTableView indexPathForCell:cell];
-    HTFaceVipModel *model = self.dataArray[index.row];
-    vc.phone = model.phone_cust;
+    HTNewFaceVipModel *model = self.dataArray[index.row];
+    vc.phone = model.phone;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)writeCutomerInfoWithCell:(HTCustomerFaceInfoCell *)cell{
     HTAddVipWithPhoneController *vc = [[HTAddVipWithPhoneController alloc] init];
     NSIndexPath *index = [self.dataTableView indexPathForCell:cell];
-    HTFaceNotVipModel *model = self.dataArray[index.row];
+    HTNewFaceNoVipModel *model = self.dataArray[index.row];
+    for (HTMenuModle *mmm in [HTShareClass shareClass].menuArray) {
+        if ([mmm.moduleName isEqualToString:@"customer"]) {
+            vc.moduleId = [mmm.moduleId stringValue];
+            break;
+        }
+    }
+    vc.faceModel = model;
+    vc.path = model.path;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark -CustomDelegate
+-(void)receptionCustmerVipWithCell:(HTCustomerFaceInfoCell *)cell{
+    NSIndexPath *index = [self.dataTableView indexPathForCell:cell];
+    HTNewFaceVipModel *model = self.dataArray[index.row];
+    HTCustomerReportViewController *vc = [[HTCustomerReportViewController alloc] init];
+    HTCustomerListModel *mmm = [[HTCustomerListModel alloc] init];
+    mmm.custId = model.customerId;
+    vc.customerType = HTCustomerReportTypeNomal;
+    vc.model = mmm;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)repitBuyVipWithCell:(HTCustomerFaceInfoCell *)cell{
+    HTChargeViewController *vc = [[HTChargeViewController alloc] init];
+    NSIndexPath *index = [self.dataTableView indexPathForCell:cell];
+    HTNewFaceVipModel *model = self.dataArray[index.row];
+    vc.phone = model.phone;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)writeCutomerInfoVipWithCell:(HTCustomerFaceInfoCell *)cell{
+    HTAddVipWithPhoneController *vc = [[HTAddVipWithPhoneController alloc] init];
+    NSIndexPath *index = [self.dataTableView indexPathForCell:cell];
+    HTNewFaceNoVipModel *model = self.dataArray[index.row];
     for (HTMenuModle *mmm in [HTShareClass shareClass].menuArray) {
         if ([mmm.moduleName isEqualToString:@"customer"]) {
             vc.moduleId = [mmm.moduleId stringValue];
@@ -119,29 +169,23 @@
         [self.dataArray removeAllObjects];
         if (self.usrType == HTUSRERVIP) {
             NSArray *vip = [json[@"data"] getArrayWithKey:@"vip"];
-            for (NSArray *arr in vip) {
-                if (arr.count > 0) {
-                    NSDictionary *dic1 = [arr firstObject];
-                    HTFaceVipModel *model = [[HTFaceVipModel alloc] init];
-                    [model setValuesForKeysWithDictionary:dic1];
-                    for (NSDictionary  *dic in arr) {
-                        [model.imgs addObject:[dic getStringWithKey:@"path"]];
-                    }
-                    [self.dataArray addObject:model];
-                }
+            for (NSDictionary *dic1 in vip) {
+                HTNewFaceVipModel *model = [[HTNewFaceVipModel alloc] init];
+                [model setValuesForKeysWithDictionary:dic1];
+                [self.dataArray addObject:model];
             }
         }else{
-            NSArray *notVip = [json[@"data"] getArrayWithKey:@"user"];
-            for (NSArray *arr in notVip) {
-                if (arr.count > 0) {
-                    NSDictionary *dic1 = [arr firstObject];
-                    HTFaceNotVipModel *model = [[HTFaceNotVipModel alloc] init];
+            NSArray *notVip = [json[@"data"] getArrayWithKey:@"individaul"];
+            for (NSDictionary *dic1 in notVip) {
+//                if (arr.count > 0) {
+//                    NSDictionary *dic1 = [arr firstObject];
+                    HTNewFaceNoVipModel *model = [[HTNewFaceNoVipModel alloc] init];
                     [model setValuesForKeysWithDictionary:dic1];
-                    for (NSDictionary  *dic in arr) {
-                        [model.imgs addObject:[dic getStringWithKey:@"path"]];
-                    }
+//                    for (NSDictionary  *dic in arr) {
+//                        [model.imgs addObject:[dic getStringWithKey:@"path"]];
+//                    }
                     [self.dataArray addObject:model];
-                }
+//                }
             }
         }
         [self.dataTableView.mj_header endRefreshing];
@@ -157,7 +201,9 @@
 -(void)createTb{
     self.dataTableView.delegate = self;
     self.dataTableView.dataSource = self;
+    
     [self.dataTableView registerNib:[UINib nibWithNibName:@"HTCustomerFaceInfoCell" bundle:nil] forCellReuseIdentifier:@"HTCustomerFaceInfoCell"];
+    [self.dataTableView registerNib:[UINib nibWithNibName:@"HTCustomerFaceVipTableViewCell" bundle:nil] forCellReuseIdentifier:@"HTCustomerFaceVipTableViewCell"];
     UIView *v = [[UIView alloc] init];
     v.backgroundColor = [UIColor clearColor];
     self.tabBottomHeight.constant = SafeAreaBottomHeight;
@@ -166,7 +212,12 @@
     self.dataTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self loadData];
     }];
-    self.dataTableView.estimatedRowHeight = 300;
+    //设置预估行高
+    _dataTableView.estimatedRowHeight = 80;
+    _dataTableView.rowHeight = UITableViewAutomaticDimension;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 80;
 }
 #pragma mark - getters and setters
 -(NSMutableArray *)dataArray{

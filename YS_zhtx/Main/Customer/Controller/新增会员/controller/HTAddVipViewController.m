@@ -354,6 +354,9 @@
     if (self.selectedImg) {
         [self.requestDic setObject:[self.selectedImg getBase64Img] forKey:@"headImg"];
     }
+    if (self.path) {
+        [self.requestDic setObject:self.path forKey:@"faceurl"];
+    }
     if (self.selectedImgArray.count > 0) {
         NSMutableArray *arr = [NSMutableArray array];
         for (HTFaceImgListModel *model in self.selectedImgArray) {

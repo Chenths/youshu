@@ -65,6 +65,7 @@
                 }
             }
             vc.phone = [HTHoldNullObj getValueWithUnCheakValue:self.phoneText.text];
+            vc.path = self.path;
             [self.navigationController pushViewController:vc animated: YES];
         }else{
             HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:@"该账户已存在，是否查看详情" btsArray:@[@"取消",@"确定"] okBtclicked:^{
