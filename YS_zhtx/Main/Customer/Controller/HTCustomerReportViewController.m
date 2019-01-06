@@ -30,7 +30,6 @@
 #import "HTEditVipContinueBackListCell.h"
 #import "HTMenuModle.h"
 #import "HTHoldCustomerEventManger.h"
-#import "HTChargeViewController.h"
 @interface HTCustomerReportViewController ()<UITableViewDelegate,UITableViewDataSource,HTNewSingVipSaleBaceInfoCellDelegate,HTTagsCloseTableViewCellDelegate,HTTagsTableViewCellDelegate,HTCustomerTapMoreControllerDelegate,HTEditVipContinueBackListCellDelegate>{
     Poper *poper;
 }
@@ -53,10 +52,7 @@
 @property (nonatomic,strong) NSString *moduleId;
 
 @property (nonatomic,assign) int page;
-/** window */
-@property (nonatomic, strong) UIWindow *window;
-/** 悬浮按钮 */
-@property (nonatomic, strong) UIButton *xuanFuButton;
+
 @end
 
 @implementation HTCustomerReportViewController
@@ -67,56 +63,7 @@
     [self loadAuth];
     [self createTb];
     
-    //延时加载window,注意我们需要在rootWindow创建完成之后再创建这个悬浮的按钮
-    [self performSelector:@selector(creatSuspendBtn) withObject:nil afterDelay:0.2];
 }
-
--(void)creatSuspendBtn{
-    //悬浮按钮
-    if (self.xuanFuButton) {
-        
-    }else{
-        self.xuanFuButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_xuanFuButton setImage:[UIImage imageNamed:@"shouyin"] forState:UIControlStateNormal];
-        CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-        CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-        
-        //添加悬浮按钮方式二:(利用UIWindow)
-        _xuanFuButton.frame = CGRectMake(screenWidth - 56 - 16,screenHeight - 56 - 40, 56, 56);
-        [_xuanFuButton addTarget:self action:@selector(suspendBtnClick) forControlEvents:UIControlEventTouchUpInside];
-        
-        //悬浮按钮所处的顶端UIWindow
-        _window = [self mainWindow];
-        [_window addSubview:_xuanFuButton];
-    }
-}
-
-- (UIWindow*)mainWindow{
-    id appDelegate = [UIApplication sharedApplication].delegate;
-    if (appDelegate && [appDelegate respondsToSelector:@selector(window)]) {
-        return [appDelegate window];
-    }
-    
-    NSArray *windows = [UIApplication sharedApplication].windows;
-    if ([windows count] == 1) {
-        return [windows firstObject];
-    } else {
-        for (UIWindow *window in windows) {
-            if (window.windowLevel == UIWindowLevelNormal) {
-                return window;
-            }
-        }
-    }
-    return nil;
-}
-
-
-- (void)suspendBtnClick{
-    HTChargeViewController *vc = [[HTChargeViewController alloc] init];
-    vc.phone = self.model.phone_cust;
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self loadData];
@@ -127,11 +74,9 @@
         self.topConstain.constant = -nav_height;
        [self setNavHidden];
     }
-    [self creatSuspendBtn];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [_xuanFuButton removeFromSuperview];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#222222"]}];
     [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
     //导航条不透明
@@ -328,10 +273,6 @@
         [HTHoldCustomerEventManger lookCustomerBillListWithCustomerId:[HTHoldNullObj getValueWithUnCheakValue:self.model.custId] andCustModel:model1];
     }else if ([tapKey isEqualToString:@"聊天"]){
         [HTHoldCustomerEventManger chatWithCustomerWithCustomerId:[HTHoldNullObj getValueWithUnCheakValue:self.model.custId] customerName:self.model.name andOpenId:[HTHoldNullObj getValueWithUnCheakValue:self.reportModel.baseMessage.openid]];
-    }else if ([tapKey isEqualToString:@"快速下单"]){
-        HTChargeViewController *vc = [[HTChargeViewController alloc] init];
-        vc.phone = self.model.phone_cust;
-        [self.navigationController pushViewController:vc animated:YES];
     }
     
 }
@@ -390,9 +331,6 @@
     if (self.authModel.timer) {
         [tapArr addObject:@"定时提醒"];
     }
-    
-    [tapArr addObject:@"快速下单"];
-    
     NSInteger i = tapArr.count % 3 > 0 ? tapArr.count / 3 + 1 : tapArr.count / 3;
     CGFloat height = 90 + (HMSCREENWIDTH / 3) * i;
     poper                     = [[Poper alloc] init];

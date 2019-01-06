@@ -55,13 +55,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="本次已购" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eKQ-PI-BLf">
-                        <rect key="frame" x="326" y="58.5" width="49.5" height="14.5"/>
+                        <rect key="frame" x="302" y="58.5" width="49.5" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.9882352941176471" green="0.36078431372549019" blue="0.49019607843137253" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8T8-zh-yjV">
-                        <rect key="frame" x="309" y="24.5" width="83" height="30"/>
+                        <rect key="frame" x="285" y="24.5" width="83" height="30"/>
                         <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="83" id="FQb-x3-Rpf"/>
@@ -93,7 +93,7 @@
                     <constraint firstItem="aia-YG-ka2" firstAttribute="centerY" secondItem="VpP-D6-6br" secondAttribute="centerY" id="ckZ-lS-uSn"/>
                     <constraint firstItem="VpP-D6-6br" firstAttribute="leading" secondItem="oDe-3W-5EX" secondAttribute="leading" id="foI-k7-5V3"/>
                     <constraint firstItem="aia-YG-ka2" firstAttribute="leading" secondItem="VpP-D6-6br" secondAttribute="trailing" constant="8" id="jVs-DF-sPy"/>
-                    <constraint firstAttribute="trailing" secondItem="8T8-zh-yjV" secondAttribute="trailing" constant="16" id="mew-Z3-WVU"/>
+                    <constraint firstAttribute="trailing" secondItem="8T8-zh-yjV" secondAttribute="trailing" constant="40" id="mew-Z3-WVU"/>
                     <constraint firstItem="xO5-cB-2jh" firstAttribute="centerY" secondItem="oDe-3W-5EX" secondAttribute="centerY" id="vrZ-09-yam"/>
                     <constraint firstItem="xO5-cB-2jh" firstAttribute="leading" secondItem="AUJ-3v-uqJ" secondAttribute="trailing" constant="5" id="zhF-iv-7Nd"/>
                 </constraints>

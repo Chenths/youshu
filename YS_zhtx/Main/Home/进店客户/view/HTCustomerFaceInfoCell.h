@@ -9,12 +9,12 @@
 
 
 #import <UIKit/UIKit.h>
-#import "HTNewFaceNoVipModel.h"
-//#import "HTFaceVipModel.h"
+#import "HTFaceNotVipModel.h"
+#import "HTFaceVipModel.h"
 @class HTCustomerFaceInfoCell;
 @protocol HTCustomerFaceInfoCellDelegate
 
-//-(void)deleleItemeWithCell:(HTCustomerFaceInfoCell *)cell;
+-(void)deleleItemeWithCell:(HTCustomerFaceInfoCell *)cell;
 
 -(void)receptionCustmerWithCell:(HTCustomerFaceInfoCell *)cell;
 
@@ -29,8 +29,8 @@
 
 @property (nonatomic,weak) id <HTCustomerFaceInfoCellDelegate> delegate;
 
-@property (nonatomic,strong) HTNewFaceNoVipModel *notVipModel;
+@property (nonatomic,strong) HTFaceNotVipModel *notVipModel;
 
-//@property (nonatomic,strong) HTFaceVipModel *vipModel;
+@property (nonatomic,strong) HTFaceVipModel *vipModel;
 
 @end

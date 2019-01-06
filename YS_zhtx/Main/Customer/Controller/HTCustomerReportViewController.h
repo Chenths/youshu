@@ -23,5 +23,4 @@ typedef NS_OPTIONS(NSUInteger, HTCustomerReportType) {
 
 @property (nonatomic,strong) NSString *customerFollowRecordId;
 
-@property (nonatomic, copy) NSString *imgUrlFromFace;
 @end

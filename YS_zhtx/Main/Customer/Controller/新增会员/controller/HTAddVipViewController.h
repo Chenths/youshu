@@ -19,5 +19,5 @@
 @property (nonatomic,strong) NSString *phone;
 //添加跟进记录使用id
 @property (nonatomic,strong) NSString *customerFollowRecordId;
-@property (nonatomic, assign) NSString *path;
+
 @end

@@ -5,7 +5,7 @@
 //  Created by mac on 2018/6/7.
 //  Copyright © 2018年 有术-新零售. All rights reserved.
 //
-#import "HTNewFaceVipModel.h"
+#import "HTFaceVipModel.h"
 #import "TYCyclePagerView.h"
 #import "HTFaceComingAlertView.h"
 #import "HTComingFaceCollectionCell.h"
@@ -66,7 +66,7 @@
     self.col.dataSource = self;
     self.col.delegate = self;
     [self.col registerNib:[UINib nibWithNibName:@"HTComingFaceCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"HTComingFaceCollectionCell"];
-    self.col.frame = CGRectMake((HMSCREENWIDTH - 320) / 2, 0, 320, 250);
+    self.col.frame = CGRectMake(0, 0, HMSCREENWIDTH - 32, self.receptionBt.y - 32);
     [self.backView addSubview:self.col];
     [self.backView insertSubview:self.col atIndex:0];
     [self.col reloadData];
@@ -86,7 +86,7 @@
 }
 - (TYCyclePagerViewLayout *)layoutForPagerView:(TYCyclePagerView *)pageView {
     TYCyclePagerViewLayout *layout = [[TYCyclePagerViewLayout alloc]init];
-    layout.itemSize = CGSizeMake(self.col.width, self.col.height);
+    layout.itemSize = CGSizeMake(self.col.width * 0.5, self.col.height);
     layout.itemSpacing = 10;
     layout.layoutType = TYCyclePagerTransformLayoutLinear;
     layout.itemHorizontalCenter = YES;
@@ -101,15 +101,10 @@
 }
 
 -(void)tap1Click{
-    
 }
 - (IBAction)repitClicked:(id)sender {
     HTCustomerReportViewController *vc = [[HTCustomerReportViewController alloc] init];
-    vc.customerType = HTCustomerReportTypeNomal;
-    HTCustomerListModel *mm = [[HTCustomerListModel alloc] init];
-    HTNewFaceVipModel *model = [_datas firstObject];
-    mm.custId = model.customerId;
-    vc.model = mm;
+    vc.customerType = HTCustomerReportTypeFacePush;
     [[HTShareClass shareClass].getCurrentNavController pushViewController:vc animated:YES];
      [self removeFromSuperview];
 }

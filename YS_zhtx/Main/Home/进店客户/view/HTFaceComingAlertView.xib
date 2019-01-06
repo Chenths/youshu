@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,24 +16,27 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sSn-pu-PQq">
-                    <rect key="frame" x="16" y="100" width="344" height="418"/>
+                    <rect key="frame" x="16" y="100" width="343" height="360"/>
                     <subviews>
-                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uOr-NW-ugz">
-                            <rect key="frame" x="72" y="369" width="200" height="29"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uOr-NW-ugz">
+                            <rect key="frame" x="268" y="0.0" width="75" height="360"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="200" id="weA-YH-sDA"/>
+                                <constraint firstAttribute="width" constant="75" id="weA-YH-sDA"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <state key="normal" title="查看更多">
+                            <state key="normal" title="更多">
                                 <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="moreBtClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="ssy-I2-f2J"/>
                             </connections>
                         </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="g-leftIcon" translatesAutoresizingMaskIntoConstraints="NO" id="k7O-45-DGE">
+                            <rect key="frame" x="307" y="170.5" width="20" height="20"/>
+                        </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gza-bL-Sjk">
-                            <rect key="frame" x="72" y="278" width="200" height="48"/>
+                            <rect key="frame" x="71" y="280" width="200" height="48"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="200" id="5fG-sh-KEE"/>
                                 <constraint firstAttribute="height" constant="48" id="jHG-6Y-d4p"/>
@@ -49,15 +51,18 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="418" id="Vtg-Ed-Fbl"/>
-                        <constraint firstAttribute="bottom" secondItem="Gza-bL-Sjk" secondAttribute="bottom" constant="92" id="bvM-8R-Gff"/>
+                        <constraint firstItem="uOr-NW-ugz" firstAttribute="top" secondItem="sSn-pu-PQq" secondAttribute="top" id="Dyf-2H-2rs"/>
+                        <constraint firstAttribute="trailing" secondItem="uOr-NW-ugz" secondAttribute="trailing" id="ICe-Vb-BXH"/>
+                        <constraint firstItem="k7O-45-DGE" firstAttribute="centerY" secondItem="uOr-NW-ugz" secondAttribute="centerY" id="RdF-S7-vE5"/>
+                        <constraint firstAttribute="height" constant="360" id="Vtg-Ed-Fbl"/>
+                        <constraint firstAttribute="bottom" secondItem="Gza-bL-Sjk" secondAttribute="bottom" constant="32" id="bvM-8R-Gff"/>
                         <constraint firstItem="Gza-bL-Sjk" firstAttribute="centerX" secondItem="sSn-pu-PQq" secondAttribute="centerX" id="cG2-lW-G9m"/>
-                        <constraint firstAttribute="bottom" secondItem="uOr-NW-ugz" secondAttribute="bottom" constant="20" id="eb3-JB-894"/>
-                        <constraint firstItem="uOr-NW-ugz" firstAttribute="centerX" secondItem="sSn-pu-PQq" secondAttribute="centerX" id="vZI-MG-cQQ"/>
+                        <constraint firstAttribute="trailing" secondItem="k7O-45-DGE" secondAttribute="trailing" constant="16" id="fSd-rG-hXj"/>
+                        <constraint firstAttribute="bottom" secondItem="uOr-NW-ugz" secondAttribute="bottom" id="nWa-6B-tbL"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qiE-cd-Y2T">
-                    <rect key="frame" x="167" y="568" width="42" height="42"/>
+                    <rect key="frame" x="166.5" y="510" width="42" height="42"/>
                     <state key="normal" image="g-colse">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -67,10 +72,10 @@
                 </button>
             </subviews>
             <constraints>
-                <constraint firstItem="sSn-pu-PQq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="100" id="0zd-Ar-uDn"/>
-                <constraint firstItem="qiE-cd-Y2T" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Drh-5b-I1G"/>
-                <constraint firstItem="sSn-pu-PQq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="krZ-mn-46f"/>
+                <constraint firstAttribute="trailing" secondItem="sSn-pu-PQq" secondAttribute="trailing" constant="16" id="LQT-HF-aHa"/>
+                <constraint firstItem="sSn-pu-PQq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="100" id="VCd-sA-T2u"/>
                 <constraint firstItem="qiE-cd-Y2T" firstAttribute="top" secondItem="sSn-pu-PQq" secondAttribute="bottom" constant="50" id="pI2-TZ-bLm"/>
+                <constraint firstItem="sSn-pu-PQq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="rC0-RM-ynq"/>
                 <constraint firstItem="qiE-cd-Y2T" firstAttribute="centerX" secondItem="sSn-pu-PQq" secondAttribute="centerX" id="x36-S0-52E"/>
             </constraints>
             <connections>
@@ -83,5 +88,6 @@
     </objects>
     <resources>
         <image name="g-colse" width="42" height="42"/>
+        <image name="g-leftIcon" width="20" height="20"/>
     </resources>
 </document>
