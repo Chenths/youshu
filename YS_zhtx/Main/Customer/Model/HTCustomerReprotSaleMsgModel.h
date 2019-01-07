@@ -42,7 +42,7 @@
 //储值
 @property (nonatomic,strong) NSString *store;
 //连带率
-@property (nonatomic,strong) NSString *rate;
+@property (nonatomic,strong) NSString *ralt;
 //
 @property (nonatomic,strong) NSString *salevolume;
 

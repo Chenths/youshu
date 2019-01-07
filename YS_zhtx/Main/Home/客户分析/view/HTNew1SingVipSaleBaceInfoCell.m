@@ -83,7 +83,7 @@
     self.jiandanjiaLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.unitprice].length == 0 ? @"暂无数据" : [HTHoldNullObj getValueWithUnCheakValue:model.unitprice];
     self.kedanjiaLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.avgprice].length == 0 ? @"暂无数据" : [HTHoldNullObj getValueWithUnCheakValue:model.avgprice];
     self.discount.text  = [HTHoldNullObj getValueWithUnCheakValue:model.avgdiscount].length == 0 ? @"/" : [HTHoldNullObj getValueWithUnCheakValue:model.avgdiscount];
-    self.serauilLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.rate].length == 0 ? @"暂无数据" :  [HTHoldNullObj getValueWithUnCheakValue:model.rate];
+    self.serauilLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.ralt].length == 0 ? @"暂无数据" :  [HTHoldNullObj getValueWithUnCheakValue:model.ralt];
     self.buyTimesLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.ordercount].length == 0 ? @"暂无数据" : [HTHoldNullObj getValueWithUnCheakValue:model.ordercount];
     self.totleNumsLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.salevolume].length == 0 ? @"暂无数据" : [HTHoldNullObj getValueWithUnCheakValue:model.salevolume];
     self.birthLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.birthday].length == 0 ? @"暂无数据" : [HTHoldNullObj getValueWithUnCheakValue:model.birthday];
