@@ -10,7 +10,7 @@ typedef void(^okBtClick)(void);
 
 @interface HTTelMsgAlertView : UIView
 
-+(void)showAlertWithName:(NSString *)customerName andPhone:(NSString *)phone andOkBt:(okBtClick) ok;
++(void)showAlertWithName:(NSString *)customerName andPhone:(NSString *)phone andCustomerId:(NSString *)customerId andOkBt:(okBtClick) ok;
 
 
 @end

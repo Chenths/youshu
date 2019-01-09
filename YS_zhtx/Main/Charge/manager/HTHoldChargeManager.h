@@ -17,7 +17,7 @@ typedef void(^GETModel)(HTCahargeProductModel *model);
 @interface HTHoldChargeManager : NSObject
 
 
-+(void)getProductDataFromBarcode:(NSString *)barcode andPhone:(NSString *)phone WithSucces:(Succes) succes;
++(void)getProductDataFromBarcode:(NSString *)barcode andPhone:(NSString *)phone andId:(NSString *)customerId WithSucces:(Succes) succes;
 
 +(void)getProductModelWithJsonData:(id) json withModel:(GETModel) getModel andSearchStr:(NSString *)searchStr;
 

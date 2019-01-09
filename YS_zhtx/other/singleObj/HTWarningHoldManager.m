@@ -24,6 +24,10 @@
         [self showAlartWithTitle:VIPWARNING([HTShareClass shareClass].reportWarnStandard.vipgxl,value) andFinalUrl:basehygxl];
     }else if ([warningTitle isEqualToString:@"活跃会员"]){
         [self showAlartWithTitle:VIPWARNING([HTShareClass shareClass].reportWarnStandard.hyhy,value) andFinalUrl:basehyhy];
+    }else if ([warningTitle isEqualToString:@"VIP新增数"]){
+        [self showAlartWithTitle:VIPWARNING([HTShareClass shareClass].reportWarnStandard.hyhy,value) andFinalUrl:basevipyxzs];
+    }else if ([warningTitle isEqualToString:@"老VIP成交数"]){
+        [self showAlartWithTitle:VIPWARNING([HTShareClass shareClass].reportWarnStandard.hyhy,value) andFinalUrl:baselvipycjs];
     }
 }
 

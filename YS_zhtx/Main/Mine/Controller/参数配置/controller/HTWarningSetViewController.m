@@ -114,11 +114,11 @@
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [NSMutableArray array];
-        NSArray *titles = @[@"连带率",@"折扣率",@"会员贡献率",@"活跃会员比例",@"销售换货率",@"销售退货率",@"剩余库存"];
-        NSArray *keys   = @[baseldl,basezkl,basehygxl,basehyhy,basehhl,basethl,basekcbz];
-        NSArray *units = @[@"",@"",@"%",@"%",@"%",@"%",@"件"];
-        NSArray *baseKeys = @[@"低于",@"低于",@"低于",@"低于",@"高于",@"高于",@"低于"];
-        NSArray *mostNums = @[@(10),@(10),@(100),@(100),@(100),@(100),@"1000000"];
+        NSArray *titles = @[@"店铺月销售额", @"VIP月新增数", @"老VIP月成交数", @"连带率",@"折扣率",@"老VIP贡献率",@"活跃会员比例",@"销售换货率",@"销售退货率",@"剩余库存"];
+        NSArray *keys   = @[basedpyxse, basevipyxzs, baselvipycjs, baseldl,basezkl,basehygxl,basehyhy,basehhl,basethl,basekcbz];
+        NSArray *units = @[@"", @"", @"", @"",@"",@"%",@"%",@"%",@"%",@"件"];
+        NSArray *baseKeys = @[@"低于", @"低于", @"低于", @"低于",@"低于",@"低于",@"低于",@"高于",@"高于",@"低于"];
+        NSArray *mostNums = @[@(100000000), @(1000000), @(1000000), @(10),@(10),@(100),@(100),@(100),@(100),@"1000000"];
         for (int i = 0; i < titles.count; i ++) {
             HTEarlyWarningModel *model = [[HTEarlyWarningModel alloc] init];
             model.title = titles[i];

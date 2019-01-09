@@ -141,7 +141,7 @@
     if ([HTHoldNullObj getValueWithUnCheakValue:self.orderModel.customer.phone].length > 0) {
         [MBProgressHUD showMessage:@""];
         NSDictionary *dic = @{
-                              @"phone":[HTHoldNullObj getValueWithUnCheakValue:self.orderModel.customer.phone],
+                              @"id":[HTHoldNullObj getValueWithUnCheakValue:self.orderModel.customer.customerid],
                               @"companyId":[HTShareClass shareClass].loginModel.companyId
                               };
         [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleCust,laodCust4App] params:dic success:^(id json) {
@@ -193,7 +193,7 @@
     if ([HTHoldNullObj getValueWithUnCheakValue:self.orderModel.customer.phone].length > 0) {
         [MBProgressHUD showMessage:@""];
         NSDictionary *dic = @{
-                              @"phone":[HTHoldNullObj getValueWithUnCheakValue:self.orderModel.customer.phone],
+                              @"id":[HTHoldNullObj getValueWithUnCheakValue:self.orderModel.customer.customerid],
                               @"companyId":[HTShareClass shareClass].loginModel.companyId
                               };
         [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleCust,laodCust4App] params:dic success:^(id json) {

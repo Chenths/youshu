@@ -64,6 +64,10 @@
         bt.hidden = NO;
     }else if ([title isEqualToString:@"VIP销售占比"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.vipgxl.floatValue){
         bt.hidden = NO;
+    }else if ([title isEqualToString:@"VIP新增数"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.vipyxzs.floatValue){
+        bt.hidden = NO;
+    }else if ([title isEqualToString:@"老VIP成交数"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.lvipycjs.floatValue){
+        bt.hidden = NO;
     }
 }
 

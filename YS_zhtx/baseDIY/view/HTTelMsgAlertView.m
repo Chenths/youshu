@@ -30,7 +30,7 @@
 @property (nonatomic,strong) NSString *telPhone;
 
 @property (nonatomic,strong) NSString *strTime;
-
+@property (nonatomic, strong) NSString *customerId;
 @end
 
 @implementation HTTelMsgAlertView
@@ -51,12 +51,13 @@
     self.layer.cornerRadius = 3;
 }
 
-+(void)showAlertWithName:(NSString *)customerName andPhone:(NSString *)phone andOkBt:(okBtClick)ok{
++(void)showAlertWithName:(NSString *)customerName andPhone:(NSString *)phone andCustomer:(NSString *)customerId andOkBt:(okBtClick)ok{
     HTTelMsgAlertView *alert = [[NSBundle mainBundle] loadNibNamed:@"HTTelMsgAlertView" owner:nil options:nil].lastObject;
     alert.frame = CGRectMake(16, HEIGHT - 220, HMSCREENWIDTH - 32, 220);
     alert.custInfoLabel.text = [NSString stringWithFormat:@"%@:%@",customerName,phone];
     alert.name = customerName;
     alert.telPhone = phone;
+    alert.customerId = customerId;
     if (ok) {
         alert.okBtClicked  = ok;
     }
@@ -99,7 +100,7 @@
     dispatch_resume(_timer);
     
     NSDictionary *dic = @{
-                          @"phone":[HTHoldNullObj getValueWithUnCheakValue:self.telPhone],
+                          @"customerId":[HTHoldNullObj getValueWithUnCheakValue:self.customerId],
                           @"type":@"1",
                           @"companyId":[HTShareClass shareClass].loginModel.companyId
                           };
@@ -125,7 +126,7 @@
         return;
     }
     NSDictionary *dic = @{
-                          @"phone":[HTHoldNullObj getValueWithUnCheakValue:self.telPhone],
+                          @"customerId":[HTHoldNullObj getValueWithUnCheakValue:self.customerId],
                           @"code":[HTHoldNullObj getValueWithUnCheakValue:self.msgTextField.text],
                           @"companyId":[HTShareClass shareClass].loginModel.companyId
                           };

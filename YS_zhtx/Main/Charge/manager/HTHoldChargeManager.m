@@ -57,12 +57,12 @@
  @param phone 用户电话
  @param succes 成功的操作
  */
-+(void)getProductDataFromBarcode:(NSString *)barcode andPhone:(NSString *)phone WithSucces:(Succes)succes{
++(void)getProductDataFromBarcode:(NSString *)barcode andPhone:(NSString *)phone andId:(NSString *)customerId WithSucces:(Succes)succes{
     NSDictionary *dic = @{
                           @"barcode": [self holdBarcode:barcode],
                           @"companyId":[HTShareClass shareClass].loginModel.companyId,
-                          @"phone":[HTHoldNullObj getValueWithUnCheakValue:phone],
                           @"scanType":@"BC",
+                          @"id":[HTHoldNullObj getValueWithUnCheakValue:customerId]
                           };
     [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleProduct,searchByBarcode] params:dic success:^(id json) {
         if ([[json[@"data"] getStringWithKey:@"inventoryState"] isEqualToString:@"1"] && [HTShareClass shareClass].isProductStockActive) {
@@ -73,7 +73,7 @@
                     HTBatchTurnInController *vc = [[HTBatchTurnInController alloc] init];
                     vc.dataArray = [@[model] mutableCopy];
                     vc.reloadList = ^{
-                        [HTHoldChargeManager getProductDataFromBarcode:barcode andPhone:phone WithSucces:succes];
+                        [HTHoldChargeManager getProductDataFromBarcode:barcode andPhone:phone andId:customerId WithSucces:succes];
                     };
                     [[HTShareClass shareClass].getCurrentNavController pushViewController:vc animated:YES];
                 } andSearchStr:barcode];

@@ -11,6 +11,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *holdLabel;
 @property (weak, nonatomic) IBOutlet UILabel *valueLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tailLabel;
 
 
 @end
@@ -28,7 +29,8 @@
 -(void)setModel:(HTEarlyWarningModel *)model{
     _model = model;
     self.titleLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.title];
-    self.holdLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.bacekey];
+    self.tailLabel.text = [NSString stringWithFormat:@"%@预警", [HTHoldNullObj getValueWithUnCheakValue:model.keyUnit]];
+    self.holdLabel.text = [NSString stringWithFormat:@"%@", [HTHoldNullObj getValueWithUnCheakValue:model.bacekey]];
     self.valueLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.keyValue].length == 0 ? @"未添加" : [HTHoldNullObj getValueWithUnCheakValue:model.keyValue];
 }
 @end

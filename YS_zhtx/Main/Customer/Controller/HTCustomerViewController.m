@@ -165,7 +165,10 @@
     }
     HTCustomerListModel *model = self.dataArray[indexPath.row];
     
-    [tapArr addObject:@"电话"];
+    if (![HTShareClass shareClass].hideVIPPhone) {
+        [tapArr addObject:@"电话"];
+    }
+    
     [tapArr addObject:@"账单"];
     
     if ([HTHoldNullObj getValueWithUnCheakValue:model.openid].length > 0) {
@@ -223,6 +226,7 @@
         [HTHoldCustomerEventManger chatWithCustomerWithCustomerId:[HTHoldNullObj getValueWithUnCheakValue:model.custId] customerName:model.name  andOpenId:[HTHoldNullObj getValueWithUnCheakValue:model.openid]];
     }else if ([tapKey isEqualToString:@"快速下单"]){
         HTChargeViewController *vc = [[HTChargeViewController alloc] init];
+        vc.customerId = model.custId;
         vc.phone = model.phone_cust;
         [self.navigationController pushViewController:vc animated:YES];
     }

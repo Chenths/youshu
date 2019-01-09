@@ -260,7 +260,7 @@
         [self repalceRequest:dic andIsStore:YES eventBt:sender];
     }else{
         __weak typeof(self) weakSelf = self;
-        [HTTelMsgAlertView showAlertWithName:[HTHoldNullObj getValueWithUnCheakValue:self.custModel.nickname] andPhone:self.custModel.phone andOkBt:^{
+        [HTTelMsgAlertView showAlertWithName:[HTHoldNullObj getValueWithUnCheakValue:self.custModel.nickname] andPhone:self.custModel.phone andCustomerId:self.custModel.custId andOkBt:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
             NSDictionary *dic = @{
                                   @"accountId":[HTHoldNullObj getValueWithUnCheakValue:strongSelf.custModel.account.storedPresented.accoutId]
@@ -286,7 +286,7 @@
         [self repalceRequest:dic andIsStore:YES eventBt:sender];
     }else{
         __weak typeof(self) weakSelf = self;
-        [HTTelMsgAlertView showAlertWithName:[HTHoldNullObj getValueWithUnCheakValue:self.custModel.nickname] andPhone:self.custModel.phone andOkBt:^{
+        [HTTelMsgAlertView showAlertWithName:[HTHoldNullObj getValueWithUnCheakValue:self.custModel.nickname] andPhone:self.custModel.phone andCustomerId:self.custModel.custId andOkBt:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
             NSDictionary *dic = @{
                                   @"accountId":[HTHoldNullObj getValueWithUnCheakValue:strongSelf.custModel.account.stored.accoutId]

@@ -230,7 +230,7 @@
     }
     self.holdBarcode = result;
     [self performSelector:@selector(clearStrWithStr:) withObject:result afterDelay:2];
-    [HTHoldChargeManager getProductDataFromBarcode:result andPhone:[HTHoldNullObj getValueWithUnCheakValue:self.custModel.phone] WithSucces:^(id json) {
+    [HTHoldChargeManager getProductDataFromBarcode:result andPhone:[HTHoldNullObj getValueWithUnCheakValue:self.custModel.phone] andId:[HTHoldNullObj getValueWithUnCheakValue:_custModel.custId] WithSucces:^(id json) {
         __weak typeof(self) weakSelf = self;
         [HTHoldChargeManager getProductModelWithJsonData:json withModel:^(HTCahargeProductModel *model) {
             __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -267,7 +267,7 @@
 -(void)searchProductWithBarCode:(NSString *)barcode{
     [self.view endEditing:YES];
     [MBProgressHUD showMessage:@""];
-    [HTHoldChargeManager getProductDataFromBarcode:barcode andPhone:[HTHoldNullObj getValueWithUnCheakValue:self.custModel.phone] WithSucces:^(id json) {
+    [HTHoldChargeManager getProductDataFromBarcode:barcode andPhone:[HTHoldNullObj getValueWithUnCheakValue:self.custModel.phone] andId:[HTHoldNullObj getValueWithUnCheakValue:self.custModel.custId] WithSucces:^(id json) {
         __weak typeof(self) weakSelf = self;
         [HTHoldChargeManager getProductModelWithJsonData:json withModel:^(HTCahargeProductModel *model) {
             __strong typeof(weakSelf) strongSelf = weakSelf;

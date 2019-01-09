@@ -97,6 +97,8 @@
 
 @property (nonatomic,strong) HTSelectedImgaeObject *selectdImg;
 
+@property (nonatomic, assign) BOOL hideVIPPhone;
+
 - (UINavigationController *) getCurrentNavController;
 
 @end

@@ -48,7 +48,7 @@
                     </constraints>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nk0-mK-4FO">
                     <rect key="frame" x="30" y="154.5" width="133.5" height="40"/>
@@ -99,6 +99,7 @@
                 <outlet property="behindLabel" destination="OeK-jc-KCv" id="6j8-ac-Xy2"/>
                 <outlet property="cancelBt" destination="nk0-mK-4FO" id="8dG-77-BD4"/>
                 <outlet property="okBt" destination="GgL-bb-Ezr" id="g0m-yE-bl3"/>
+                <outlet property="tailLabel" destination="fpA-tG-TjW" id="WIZ-Wb-FIJ"/>
                 <outlet property="titileLabel" destination="njQ-YQ-yi8" id="j17-hi-Iva"/>
                 <outlet property="valueTextField" destination="er3-Db-D7a" id="41t-Kt-o9L"/>
             </connections>

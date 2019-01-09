@@ -57,6 +57,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="holdLabel" destination="McZ-FH-lSs" id="dMi-mO-kGv"/>
+                <outlet property="tailLabel" destination="MgK-OL-361" id="iU5-8m-L3I"/>
                 <outlet property="titleLabel" destination="LMy-d4-ih5" id="KFj-jG-ndP"/>
                 <outlet property="valueLabel" destination="WUS-Vf-pxn" id="hfs-es-zz2"/>
             </connections>

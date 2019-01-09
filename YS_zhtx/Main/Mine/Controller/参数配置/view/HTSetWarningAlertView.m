@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *cancelBt;
 
 @property (weak, nonatomic) IBOutlet UIButton *okBt;
+@property (weak, nonatomic) IBOutlet UILabel *tailLabel;
 
 @end
 
@@ -42,6 +43,7 @@
     _model = model;
     self.titileLabel.text = [NSString stringWithFormat:@"%@预警设置",model.title];
     self.behindLabel.text = [NSString stringWithFormat:@"%@%@",model.title,model.bacekey];
+    self.tailLabel.text = [NSString stringWithFormat:@"%@将预警", model.keyUnit];
 }
 -(void)show{
     KLCPopup *pop = [KLCPopup popupWithContentView:self showType:KLCPopupShowTypeBounceInFromBottom dismissType:KLCPopupDismissTypeSlideOutToBottom maskType:KLCPopupMaskTypeDimmed dismissOnBackgroundTouch:YES dismissOnContentTouch:NO];

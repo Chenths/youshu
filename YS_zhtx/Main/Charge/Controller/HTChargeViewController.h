@@ -11,5 +11,5 @@
 @interface HTChargeViewController : HTCommonViewController
 
 @property (nonatomic,strong) NSString *phone;
-
+@property (nonatomic, strong) NSString *customerId;
 @end

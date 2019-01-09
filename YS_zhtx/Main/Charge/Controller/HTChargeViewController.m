@@ -200,7 +200,7 @@
  */
 -(void)okBtClickedWithStr:(NSString *)text{
     [self.view endEditing:YES];
-    if (![PhoneNumberTools isMobileNumber:text]) {
+    if (![PhoneNumberTools isMobileNumber:text] && !self.customerId) {
         [MBProgressHUD showError:@"请输入正确的电话号码"];
         return;
     }
@@ -211,7 +211,8 @@
     NSDictionary *dic = @{
                           @"bcProductIds":[HTHoldChargeManager getProductIdsFormArray:self.dataArray],
                           @"companyId":[HTShareClass shareClass].loginModel.companyId,
-                          @"phone":[HTHoldNullObj getValueWithUnCheakValue:text]
+                          @"phone":[HTHoldNullObj getValueWithUnCheakValue:text],
+                          @"id": [HTHoldNullObj getValueWithUnCheakValue:self.customerId]
                           };
     [MBProgressHUD showMessage:@""];
     [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleProduct,refreshBuyProductList] params:dic success:^(id json) {
@@ -318,7 +319,7 @@
 //    获取到结果清空判断字符串
     [self performSelector:@selector(clearStrWithStr:) withObject:result afterDelay:2];
 //   根据条码获取产品资料
-    [HTHoldChargeManager getProductDataFromBarcode:result andPhone:[HTHoldNullObj getValueWithUnCheakValue:self.phone] WithSucces:^(id json) {
+    [HTHoldChargeManager getProductDataFromBarcode:result andPhone:[HTHoldNullObj getValueWithUnCheakValue:self.phone] andId:[HTHoldNullObj getValueWithUnCheakValue:self.customerId] WithSucces:^(id json) {
         __weak typeof(self) weakSelf = self;
 //        处理产品资料
         [HTHoldChargeManager getProductModelWithJsonData:json withModel:^(HTCahargeProductModel *model) {
@@ -342,7 +343,7 @@
     }
     [MBProgressHUD showMessage:@""];
 //    请求产品资料
-    [HTHoldChargeManager getProductDataFromBarcode:barcode andPhone:[HTHoldNullObj getValueWithUnCheakValue:self.phone] WithSucces:^(id json) {
+    [HTHoldChargeManager getProductDataFromBarcode:barcode andPhone:[HTHoldNullObj getValueWithUnCheakValue:self.phone] andId:[HTHoldNullObj getValueWithUnCheakValue:self.customerId] WithSucces:^(id json) {
         __weak typeof(self) weakSelf = self;
 //        处理获取到的产品资料
         [HTHoldChargeManager getProductModelWithJsonData:json withModel:^(HTCahargeProductModel *model) {

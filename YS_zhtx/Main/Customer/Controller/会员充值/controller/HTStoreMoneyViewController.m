@@ -420,7 +420,7 @@
     [MBProgressHUD showMessage:@""];
     self.moneyTextField.enabled = YES;
     NSDictionary *dic = @{
-                          @"phone":[HTHoldNullObj getValueWithUnCheakValue:self.phoneNumber],
+                          @"id":[HTHoldNullObj getValueWithUnCheakValue:self.custId],
                           @"companyId":[HTShareClass shareClass].loginModel.companyId
                           };
     [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleCust,laodCust4App] params:dic success:^(id json) {
