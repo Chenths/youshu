@@ -35,9 +35,9 @@
     [super awakeFromNib];
     self.vipImg.userInteractionEnabled = YES;
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClicked:)];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClicked:)];
     
-    [self.vipImg addGestureRecognizer:tap];
+//    [self.vipImg addGestureRecognizer:tap];
     [self.receptionBt changeCornerRadiusWithRadius:3];
     [self.receptionBt changeBorderStyleColor:[UIColor colorWithHexString:@"333333"] withWidth:1];
     
@@ -129,7 +129,7 @@
 //        [self.delegate deleleItemeVipWithCell:self];
     }
 }
--(void)tapClicked:(UITapGestureRecognizer *)sender{
+//-(void)tapClicked:(UITapGestureRecognizer *)sender{
     /*
      NSMutableArray *photos = [NSMutableArray array];
      if (self.vipModel.imgs.count > 0) {
@@ -156,7 +156,7 @@
      [browser show];
      */
     
-}
+//}
 
 
 @end

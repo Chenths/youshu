@@ -11,6 +11,7 @@
 #import "HTComingFaceCollectionCell.h"
 #import "HTCustomerReportViewController.h"
 #import "HTMyShopCustomersCenterController.h"
+#import "HTCommingFaceNewCollectionViewCell.h"
 @interface HTFaceComingAlertView()<TYCyclePagerViewDelegate,TYCyclePagerViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UIButton *moreBt;
@@ -25,16 +26,26 @@
 
 @property (nonatomic,strong) NSArray *datas;
 
+@property (nonatomic, assign) BOOL isNew;
 @end
 
 
 @implementation HTFaceComingAlertView
-+(void)showWithDatas:(NSArray *)dataArray{
++(void)showWithDatas:(NSArray *)dataArray hiddenBottomBtn:(BOOL)hiddenBottom isNew:(BOOL)isNew{
     HTFaceComingAlertView *alet = [[self alloc] initWithAlertFrame:CGRectMake(0, 0, HMSCREENWIDTH, HEIGHT - SafeAreaBottomHeight)];
     [alet initSubviews];
     [alet createCol];
     alet.datas = dataArray;
     [alet.col reloadData];
+    if (hiddenBottom) {
+        alet.moreBt.hidden = YES;
+        alet.backView.backgroundColor = [UIColor colorWithHexString:@"ffffff"];
+    }
+    alet.isNew = isNew;
+    if (alet.isNew) {
+        alet.moreBt.hidden = YES;
+        alet.backView.backgroundColor = [UIColor clearColor];
+    }
     [[[UIApplication sharedApplication].delegate window] addSubview:alet];
 }
 - (instancetype)initWithAlertFrame:(CGRect)frame
@@ -45,6 +56,7 @@
     return alerView;
 }
 -(void)initSubviews{
+    
     [self.backView changeCornerRadiusWithRadius:3];
     [self.receptionBt changeCornerRadiusWithRadius:self.receptionBt.height * 0.5];
     [self.receptionBt changeBorderStyleColor:[UIColor colorWithHexString:@"222222"] withWidth:1];
@@ -66,7 +78,8 @@
     self.col.dataSource = self;
     self.col.delegate = self;
     [self.col registerNib:[UINib nibWithNibName:@"HTComingFaceCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"HTComingFaceCollectionCell"];
-    self.col.frame = CGRectMake((HMSCREENWIDTH - 320) / 2, 0, 320, 250);
+    [self.col registerNib:[UINib nibWithNibName:@"HTCommingFaceNewCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"HTCommingFaceNewCollectionViewCell"];
+    self.col.frame = CGRectMake((HMSCREENWIDTH - 16 - 16 - 320) / 2, 0, 320, 250);
     [self.backView addSubview:self.col];
     [self.backView insertSubview:self.col atIndex:0];
     [self.col reloadData];
@@ -75,13 +88,23 @@
     return self.datas.count;
 }
 - (UICollectionViewCell *)pagerView:(TYCyclePagerView *)pagerView cellForItemAtIndex:(NSInteger)index {
-    HTComingFaceCollectionCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"HTComingFaceCollectionCell" forIndex:index];
-    if (index == 1 && !self.isFirst) {
-    [self.col scrollToItemAtIndex:1 animate:NO];
-     self.isFirst = YES;
+    if (_isNew) {
+        HTCommingFaceNewCollectionViewCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"HTCommingFaceNewCollectionViewCell" forIndex:index];
+        if (index == 1 && !self.isFirst) {
+            [self.col scrollToItemAtIndex:1 animate:NO];
+            self.isFirst = YES;
+        }
+        cell.model = self.datas[index];
+        return cell ;
+    }else{
+        HTComingFaceCollectionCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"HTComingFaceCollectionCell" forIndex:index];
+        if (index == 1 && !self.isFirst) {
+            [self.col scrollToItemAtIndex:1 animate:NO];
+            self.isFirst = YES;
+        }
+        cell.model = self.datas[index];
+        return cell ;
     }
-    cell.model = self.datas[index];
-    return cell ;
     
 }
 - (TYCyclePagerViewLayout *)layoutForPagerView:(TYCyclePagerView *)pageView {

@@ -53,8 +53,7 @@
 @property (nonatomic,strong) NSString *moduleId;
 
 @property (nonatomic,assign) int page;
-/** window */
-@property (nonatomic, strong) UIWindow *window;
+
 /** 悬浮按钮 */
 @property (nonatomic, strong) UIButton *xuanFuButton;
 @end
@@ -73,7 +72,7 @@
 
 -(void)creatSuspendBtn{
     //悬浮按钮
-    if (self.xuanFuButton) {
+    if (self.xuanFuButton != nil && self.xuanFuButton.superview != nil) {
         
     }else{
         self.xuanFuButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -86,34 +85,18 @@
         [_xuanFuButton addTarget:self action:@selector(suspendBtnClick) forControlEvents:UIControlEventTouchUpInside];
         
         //悬浮按钮所处的顶端UIWindow
-        _window = [self mainWindow];
-        [_window addSubview:_xuanFuButton];
+        UIWindow* window = [[[UIApplication sharedApplication] delegate] window];
+
+        [window addSubview:_xuanFuButton];
     }
 }
 
-- (UIWindow*)mainWindow{
-    id appDelegate = [UIApplication sharedApplication].delegate;
-    if (appDelegate && [appDelegate respondsToSelector:@selector(window)]) {
-        return [appDelegate window];
-    }
-    
-    NSArray *windows = [UIApplication sharedApplication].windows;
-    if ([windows count] == 1) {
-        return [windows firstObject];
-    } else {
-        for (UIWindow *window in windows) {
-            if (window.windowLevel == UIWindowLevelNormal) {
-                return window;
-            }
-        }
-    }
-    return nil;
-}
 
 
 - (void)suspendBtnClick{
     HTChargeViewController *vc = [[HTChargeViewController alloc] init];
     vc.phone = self.model.phone_cust;
+    vc.customerId = self.model.custId;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -330,6 +313,7 @@
         [HTHoldCustomerEventManger chatWithCustomerWithCustomerId:[HTHoldNullObj getValueWithUnCheakValue:self.model.custId] customerName:self.model.name andOpenId:[HTHoldNullObj getValueWithUnCheakValue:self.reportModel.baseMessage.openid]];
     }else if ([tapKey isEqualToString:@"快速下单"]){
         HTChargeViewController *vc = [[HTChargeViewController alloc] init];
+        vc.customerId = self.model.custId;
         vc.phone = self.model.phone_cust;
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -373,7 +357,11 @@
    
  
     NSMutableArray  *tapArr = [NSMutableArray array];
-    [tapArr addObject:@"电话"];
+    
+    if (![HTShareClass shareClass].hideVIPPhone) {
+        [tapArr addObject:@"电话"];
+    }
+    
     if ([HTHoldNullObj getValueWithUnCheakValue:self.model.openid].length > 0) {
         [tapArr addObject:@"聊天"];
     }

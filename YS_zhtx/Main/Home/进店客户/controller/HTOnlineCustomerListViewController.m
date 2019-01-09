@@ -17,13 +17,13 @@
 #import "MJRefresh.h"
 #import "HTMenuModle.h"
 #import "HTCustomerFaceVipTableViewCell.h"
+#import "HTFaceComingAlertView.h"
 @interface HTOnlineCustomerListViewController ()<UITableViewDelegate,UITableViewDataSource,HTCustomerFaceInfoCellDelegate, HTCustomerFaceVIPCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *dataTableView;
 
 @property (strong,nonatomic) NSMutableArray *dataArray;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabBottomHeight;
-
 @end
 
 @implementation HTOnlineCustomerListViewController
@@ -71,23 +71,38 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (self.usrType == HTUSRERVIP) {
         HTNewFaceVipModel *model = self.dataArray[indexPath.row];
-        HTCustomerReportViewController *vc = [[HTCustomerReportViewController alloc] init];
-        HTCustomerListModel *mmm = [[HTCustomerListModel alloc] init];
-        mmm.custId = model.customerId;
-        vc.customerType = HTCustomerReportTypeNomal;
-        vc.model = mmm;
-        [self.navigationController pushViewController:vc animated:YES];
-    }else{
-        HTAddVipWithPhoneController *vc = [[HTAddVipWithPhoneController alloc] init];
-        HTNewFaceNoVipModel *model = self.dataArray[indexPath.row];
-        for (HTMenuModle *mmm in [HTShareClass shareClass].menuArray) {
-            if ([mmm.moduleName isEqualToString:@"customer"]) {
-                vc.moduleId = [mmm.moduleId stringValue];
-                break;
+//        HTCustomerReportViewController *vc = [[HTCustomerReportViewController alloc] init];
+//        HTCustomerListModel *mmm = [[HTCustomerListModel alloc] init];
+//        mmm.custId = model.customerId;
+//        vc.customerType = HTCustomerReportTypeNomal;
+//        vc.model = mmm;
+//        [self.navigationController pushViewController:vc animated:YES];
+        UIWindow* window = [[[UIApplication sharedApplication] delegate] window];
+        for (UIView *vvv in window.subviews) {
+            if ([vvv isKindOfClass:[HTFaceComingAlertView class]]) {
+                [vvv removeFromSuperview];
             }
         }
-        vc.faceModel = model;
-        [self.navigationController pushViewController:vc animated:YES];
+        [HTFaceComingAlertView showWithDatas:@[model] hiddenBottomBtn:YES isNew:NO];
+    }else{
+//        HTAddVipWithPhoneController *vc = [[HTAddVipWithPhoneController alloc] init];
+//        HTNewFaceNoVipModel *model = self.dataArray[indexPath.row];
+//        for (HTMenuModle *mmm in [HTShareClass shareClass].menuArray) {
+//            if ([mmm.moduleName isEqualToString:@"customer"]) {
+//                vc.moduleId = [mmm.moduleId stringValue];
+//                break;
+//            }
+//        }
+//        vc.faceModel = model;
+//        [self.navigationController pushViewController:vc animated:YES];
+        HTNewFaceVipModel *model = self.dataArray[indexPath.row];
+        UIWindow* window = [[[UIApplication sharedApplication] delegate] window];
+        for (UIView *vvv in window.subviews) {
+            if ([vvv isKindOfClass:[HTFaceComingAlertView class]]) {
+                [vvv removeFromSuperview];
+            }
+        }
+        [HTFaceComingAlertView showWithDatas:@[model] hiddenBottomBtn:YES isNew:YES];
     }
 }
 #pragma mark -CustomDelegate
@@ -107,6 +122,7 @@
     NSIndexPath *index = [self.dataTableView indexPathForCell:cell];
     HTNewFaceVipModel *model = self.dataArray[index.row];
     vc.phone = model.phone;
+    vc.customerId = model.customerId;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -142,6 +158,7 @@
     NSIndexPath *index = [self.dataTableView indexPathForCell:cell];
     HTNewFaceVipModel *model = self.dataArray[index.row];
     vc.phone = model.phone;
+    vc.customerId = model.customerId;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -162,6 +179,49 @@
 
 #pragma mark -private methods
 - (void)loadData{
+    /*
+    if (self.usrType == HTUSRERVIP) {
+//        @property (nonatomic, copy) NSString * customerId;
+//        @property (nonatomic, copy) NSString * customerName;
+//        @property (nonatomic, copy) NSString * enterTime;
+//        @property (nonatomic, copy) NSString * level;
+//        //老图
+//        @property (nonatomic, copy) NSString * libPath;
+//        @property (nonatomic, copy) NSString * phone;
+//        @property (nonatomic, copy) NSString * sex;
+//        //新图
+//        @property (nonatomic, copy) NSString * snapPath;
+        NSArray *vip = @[@{@"customerId" : @"1",
+                           @"customerName":@"老王",
+                           @"enterTime":@"11:20:33",
+                           @"level":@"白银会员",
+                           @"libPath":@"",
+                           @"phone":@"1821321312",
+                           @"sex":@"男",
+                           @"snapPath":@""}];
+        for (NSDictionary *dic1 in vip) {
+            HTNewFaceVipModel *model = [[HTNewFaceVipModel alloc] init];
+            [model setValuesForKeysWithDictionary:dic1];
+            [self.dataArray addObject:model];
+        }
+    }else{
+//        @property (nonatomic, copy) NSString *enterTime;
+//        @property (nonatomic, copy) NSString *path;
+//        @property (nonatomic, copy) NSString *userVipName;
+        NSArray *notVip = @[@{@"enterTime" : @"11:20:33",
+                              @"path":@"",
+                              @"userVipName":@"傻逼白"}];
+        for (NSDictionary *dic1 in notVip) {
+            HTNewFaceNoVipModel *model = [[HTNewFaceNoVipModel alloc] init];
+            [model setValuesForKeysWithDictionary:dic1];
+            [self.dataArray addObject:model];
+        }
+    }
+    [self.dataTableView.mj_header endRefreshing];
+    [self.dataTableView reloadData];
+         
+         */
+    
     NSDictionary *dic = @{
                           @"companyId":[HTShareClass shareClass].loginModel.companyId
                           };
@@ -177,15 +237,9 @@
         }else{
             NSArray *notVip = [json[@"data"] getArrayWithKey:@"individaul"];
             for (NSDictionary *dic1 in notVip) {
-//                if (arr.count > 0) {
-//                    NSDictionary *dic1 = [arr firstObject];
                     HTNewFaceNoVipModel *model = [[HTNewFaceNoVipModel alloc] init];
                     [model setValuesForKeysWithDictionary:dic1];
-//                    for (NSDictionary  *dic in arr) {
-//                        [model.imgs addObject:[dic getStringWithKey:@"path"]];
-//                    }
                     [self.dataArray addObject:model];
-//                }
             }
         }
         [self.dataTableView.mj_header endRefreshing];
@@ -197,6 +251,7 @@
         [self.dataTableView.mj_header endRefreshing];
         [MBProgressHUD showError:@"请检查你的网络" toView:self.view];
     }];
+     
 }
 -(void)createTb{
     self.dataTableView.delegate = self;
