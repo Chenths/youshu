@@ -49,13 +49,16 @@
 //颜家栋
 //#define baseUrl @"http://10.1.1.162:8080/"
 //#define baseUrl @"http://192.168.199.7:8080/"
+//姚丁浩
 #define baseUrl @"http://192.168.199.46:8080/"
+//颜家栋
 //#define baseUrl @"http://192.168.199.71:8080/"
 //#define baseUrl @"http://192.168.199.188:8080/"
 //#define baseUrl @"http://47.93.173.31:8080/"
 //#define baseUrl @"http://192.168.199.111:8080/"
 //#define baseUrl @"http://192.168.199.34:8080/"
 //#define baseUrl @"http://192.168.199.162:8080/"
+//#define baseUrl @"http://192.168.1.106:8080/"
 //#define baseUrl @"http://59.110.5.160:8090/"
 #else
 #define baseUrl @"http://59.110.5.160:8090/"
@@ -350,6 +353,9 @@ typedef NS_ENUM(NSInteger, ControllerType) {
 #define PRODUCTHOLDIMG @"g-goodsHoldImg"
 #define CUSTOMERHOLDIMG @"g-customerholdImg"
 
+#define basedpyxse @"monthTarget" //店铺月销售额
+#define basevipyxzs @"newMonthVIPNum" //VIP月新增数
+#define baselvipycjs @"MonthlyTurnover4OldVIPNum" // 老VIP月成交数
 #define baseldl  @"ldl"     //连带率
 #define basezkl  @"zkl"     //折扣率
 #define basexsje @"xsje"    //销售金额
@@ -372,7 +378,9 @@ typedef NS_ENUM(NSInteger, ControllerType) {
 #define ACTIVEVIPWARNING(a,b) [NSString stringWithFormat:@"活跃会员标准%@%@\n当前为:%@%@",a,@"%",b,@"%"]
 #define THLWARNING(a,b) [NSString stringWithFormat:@"退货率标准%@%@\n当前为:%@%@",a,@"%",b,@"%"]
 #define HHLWARNING(a,b) [NSString stringWithFormat:@"换货率标准%@%@\n当前为:%@%@",a,@"%",b,@"%"]
-
+#define NEWVIPWARNING(a,b) [NSString stringWithFormat:@"VIP新增数标准%@\n当前为:%@",a,b]
+#define OLDVIPWARNING(a,b) [NSString stringWithFormat:@"老VIP成交数标准%@\n当前为:%@",a,b]
+#define MonthSaleWARNING(a,b) [NSString stringWithFormat:@"营业额标准%@\n当前为:%@",a,b]
 
 
 

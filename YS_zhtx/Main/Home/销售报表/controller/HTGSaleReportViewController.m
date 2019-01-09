@@ -369,8 +369,8 @@
         NSArray *prefix2 = @[@"￥",@"",@"",@"",@"￥",@"",@"￥", @""];
         NSArray *prefix3 = @[@"￥",@"",@"",@"",@"￥",@"￥",@"￥", @""];
         NSArray *suffix1  = @[@"",@"件",@"单",@"",@"人",@"%",@"", @""];
-        NSArray *suffix2  = @[@"",@"件",@"%",@"%",@"",@"",@"", @"人"];
-        NSArray *suffix3  = @[@"",@"件",@"折",@"%",@"",@"",@"", @"人"];
+        NSArray *suffix2  = @[@"",@"件",@"%",@"%",@"",@"",@"", @""];
+        NSArray *suffix3  = @[@"",@"件",@"折",@"%",@"",@"",@"", @""];
         NSArray *imageName  = @[@"利润",@"矢量智能对象5",@"单量",@"连带率",@"进店人次",@"回头率",@"储值消费", @""];
         NSMutableArray *arr = [NSMutableArray array];
         NSMutableArray *cellArr = [NSMutableArray array];

@@ -64,9 +64,11 @@
         bt.hidden = NO;
     }else if ([title isEqualToString:@"VIP销售占比"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.vipgxl.floatValue){
         bt.hidden = NO;
-    }else if ([title isEqualToString:@"VIP新增数"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.vipyxzs.floatValue){
+    }else if ([title isEqualToString:@"VIP新增数"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.AnewMonthVIPNum.floatValue){
         bt.hidden = NO;
-    }else if ([title isEqualToString:@"老VIP成交数"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.lvipycjs.floatValue){
+    }else if ([title isEqualToString:@"老VIP成交数"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.MonthlyTurnover4OldVIPNum.floatValue){
+        bt.hidden = NO;
+    }else if ([title isEqualToString:@"营业额"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.monthTarget.floatValue){
         bt.hidden = NO;
     }
 }

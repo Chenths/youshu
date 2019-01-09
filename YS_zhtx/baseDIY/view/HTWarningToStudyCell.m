@@ -66,6 +66,27 @@
                            value:[UIColor redColor]
                            range:range];
         self.titleLabel.attributedText = mabstring1;
+    }else if([_model.warningStr rangeOfString:@"新增会员数"].length > 0){
+        NSRange range = [_model.warningStr rangeOfString:[NSString stringWithFormat:@"%@",[HTShareClass shareClass].reportWarnStandard.AnewMonthVIPNum]];
+        NSMutableAttributedString *mabstring1 = [[NSMutableAttributedString alloc] initWithString:_model.warningStr];
+        [mabstring1 addAttribute:NSForegroundColorAttributeName
+                           value:[UIColor redColor]
+                           range:range];
+        self.titleLabel.attributedText = mabstring1;
+    }else if([_model.warningStr rangeOfString:@"老会员成交个数"].length > 0){
+        NSRange range = [_model.warningStr rangeOfString:[NSString stringWithFormat:@"%@",[HTShareClass shareClass].reportWarnStandard.MonthlyTurnover4OldVIPNum]];
+        NSMutableAttributedString *mabstring1 = [[NSMutableAttributedString alloc] initWithString:_model.warningStr];
+        [mabstring1 addAttribute:NSForegroundColorAttributeName
+                           value:[UIColor redColor]
+                           range:range];
+        self.titleLabel.attributedText = mabstring1;
+    }else if([_model.warningStr rangeOfString:@"月销售目标"].length > 0){
+        NSRange range = [_model.warningStr rangeOfString:[NSString stringWithFormat:@"%@",[HTShareClass shareClass].reportWarnStandard.monthTarget]];
+        NSMutableAttributedString *mabstring1 = [[NSMutableAttributedString alloc] initWithString:_model.warningStr];
+        [mabstring1 addAttribute:NSForegroundColorAttributeName
+                           value:[UIColor redColor]
+                           range:range];
+        self.titleLabel.attributedText = mabstring1;
     }else{
         self.titleLabel.text = _model.warningStr;
         self.studyBt.hidden = YES;
@@ -85,6 +106,12 @@
         key = basehhl;
     }else if([self.model.warningStr rangeOfString:@"退货率"].length > 0){
         key = basethl;
+    }else if([self.model.warningStr rangeOfString:@"新增会员数"].length > 0){
+        key = basexzhy;
+    }else if([self.model.warningStr rangeOfString:@"老会员成交个数"].length > 0){
+        key = @"lhycjs";
+    }else if ([self.model.warningStr rangeOfString:@"月销售目标"].length > 0){
+        key = @"yxs";
     }
     HTWarningWebViewController *vc = [[HTWarningWebViewController alloc] init];
     vc.finallUrl = key;

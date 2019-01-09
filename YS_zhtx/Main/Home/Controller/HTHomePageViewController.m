@@ -218,10 +218,13 @@
         NSArray *sell = [json[@"data"] getArrayWithKey:@"sell"];
         
         NSDictionary *sellIndexs =@{
+                                    @"monthTarget":[NSIndexPath indexPathForRow:0 inSection:1],
                                     @"hygxl":[NSIndexPath indexPathForRow:2 inSection:1],
                                     @"ldl":[NSIndexPath indexPathForRow:3 inSection:1],
                                     @"thl":[NSIndexPath indexPathForRow:3 inSection:1],
                                     @"hhl":[NSIndexPath indexPathForRow:3 inSection:1],
+                                    @"newMonthVIPNum":[NSIndexPath indexPathForRow:7 inSection:1],
+                                    @"MonthlyTurnover4OldVIPNum":[NSIndexPath indexPathForRow:7 inSection:1]
                                     };
         NSDictionary *customerIndexs = @{
                                          @"hyhy":[NSIndexPath indexPathForRow:0 inSection:4]
@@ -288,6 +291,21 @@
                 model.warningStr = [NSString stringWithFormat:@"%@低于标准%@",[dic getStringWithKey:@"warningtypename"],[HTShareClass shareClass].reportWarnStandard.zkl];
                 if ([sellIndexs.allKeys containsObject:@"zkl"]) {
                     model.waringIndex = sellIndexs[@"zkl"];
+                }
+            }else if ([[dic getStringWithKey:@"warningtypecode"] isEqualToString:basevipyxzs] ){
+                model.warningStr = [NSString stringWithFormat:@"%@低于标准%@",[dic getStringWithKey:@"warningtypename"],[HTShareClass shareClass].reportWarnStandard.AnewMonthVIPNum];
+                if ([sellIndexs.allKeys containsObject:@"newMonthVIPNum"]) {
+                    model.waringIndex = sellIndexs[@"newMonthVIPNum"];
+                }
+            }else if ([[dic getStringWithKey:@"warningtypecode"] isEqualToString:baselvipycjs] ){
+                model.warningStr = [NSString stringWithFormat:@"%@低于标准%@",[dic getStringWithKey:@"warningtypename"],[HTShareClass shareClass].reportWarnStandard.MonthlyTurnover4OldVIPNum];
+                if ([sellIndexs.allKeys containsObject:@"MonthlyTurnover4OldVIPNum"]) {
+                    model.waringIndex = sellIndexs[@"MonthlyTurnover4OldVIPNum"];
+                }
+            }else if ([[dic getStringWithKey:@"warningtypecode"] isEqualToString:basedpyxse] ){
+                model.warningStr = [NSString stringWithFormat:@"%@低于标准%@",[dic getStringWithKey:@"warningtypename"],[HTShareClass shareClass].reportWarnStandard.monthTarget];
+                if ([sellIndexs.allKeys containsObject:@"monthTarget"]) {
+                    model.waringIndex = sellIndexs[@"monthTarget"];
                 }
             }
             [self.sellWarning addObject:model];

@@ -17,6 +17,8 @@
 - (void)setValue:(id)value forKey:(NSString *)key{
     if ([key isEqualToString:@"hygxl"]) {
         [self setValue:value forKey:@"vipgxl"];
+    }else if ([key isEqualToString:@"newMonthVIPNum"]){
+        [self setValue:value forKey:@"AnewMonthVIPNum"];
     }else{
         [super setValue:value forKey:key];
     }

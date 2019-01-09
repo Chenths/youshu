@@ -36,7 +36,7 @@
 
 @property (nonatomic,strong) NSString *zxcp ;// 滞销产品
 
-@property (nonatomic,strong) NSString *vipyxzs;//vip月新增数
-@property (nonatomic,strong) NSString *lvipycjs;//老vip月成交数
-
+@property (nonatomic,strong) NSString *AnewMonthVIPNum;//vip月新增数
+@property (nonatomic,strong) NSString *MonthlyTurnover4OldVIPNum;//老vip月成交数
+@property (nonatomic,strong) NSString *monthTarget;//店铺月销售额
 @end

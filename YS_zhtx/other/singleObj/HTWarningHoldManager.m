@@ -25,9 +25,11 @@
     }else if ([warningTitle isEqualToString:@"活跃会员"]){
         [self showAlartWithTitle:VIPWARNING([HTShareClass shareClass].reportWarnStandard.hyhy,value) andFinalUrl:basehyhy];
     }else if ([warningTitle isEqualToString:@"VIP新增数"]){
-        [self showAlartWithTitle:VIPWARNING([HTShareClass shareClass].reportWarnStandard.hyhy,value) andFinalUrl:basevipyxzs];
+        [self showAlartWithTitle:NEWVIPWARNING([HTShareClass shareClass].reportWarnStandard.AnewMonthVIPNum,value) andFinalUrl:basexzhy];
     }else if ([warningTitle isEqualToString:@"老VIP成交数"]){
-        [self showAlartWithTitle:VIPWARNING([HTShareClass shareClass].reportWarnStandard.hyhy,value) andFinalUrl:baselvipycjs];
+        [self showAlartWithTitle:OLDVIPWARNING([HTShareClass shareClass].reportWarnStandard.MonthlyTurnover4OldVIPNum,value) andFinalUrl:@"lhycjs"];
+    }else if ([warningTitle isEqualToString:@"营业额"]){
+        [self showAlartWithTitle:MonthSaleWARNING([HTShareClass shareClass].reportWarnStandard.monthTarget,value) andFinalUrl:@"yxs"];
     }
 }
 
