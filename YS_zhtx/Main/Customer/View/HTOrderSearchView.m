@@ -80,8 +80,8 @@
     }else if ([cellname isEqualToString:@"HTSearchCustomerCreaterCell"]){
         HTSearchCustomerCreaterCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTSearchCustomerCreaterCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.searchDic = self.searchDic;
         cell.type = 1;
+        cell.searchDic = self.searchDic;
         cell.alertHidd = ^{
             self.hidden = YES;
             self.coverView.hidden = YES;
