@@ -21,15 +21,15 @@
 #import "HTStoreMoneyViewController.h"
 #import "HTCustomMadeFieldAlertView.h"
 #import "HTChargeOrderModel.h"
-@interface HTFastCashierViewController ()<UITableViewDelegate,UITableViewDataSource,HTNewCustomerBaceInfoViewDelegate,HTCashierBottomViewDelegate,HTCustomMadeFieldAlertViewDelegate,UITextFieldDelegate>{
-    NSString *modleId;
-    NSString *customerid;
+#import "HTChooseCustomerViewController.h"
+#import "HTNewPayViewController.h"
+@interface HTFastCashierViewController ()<UITableViewDelegate,UITableViewDataSource,HTNewCustomerBaceInfoViewDelegate,HTCashierBottomViewDelegate,HTCustomMadeFieldAlertViewDelegate,UITextFieldDelegate, HTChooseCustomerDelegate>{
+    
 }
 //底部view
 @property (nonatomic,strong) NSMutableArray *dataArray;
 @property (nonatomic,strong) HTCashierBottomView *bottomView;
 @property (weak, nonatomic) IBOutlet UITableView *dataTableView;
-@property (nonatomic,strong) NSString *phone;
 @property (nonatomic,assign) BOOL isShow;
 //商品数量
 @property (nonatomic,assign) CGFloat goodsNumbers;
@@ -57,6 +57,9 @@
     [self bottomView];
     self.title = @"简易下单";
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImageName:@"g-goodsAdd" highImageName:@"g-goodsAdd" target:self action:@selector(addProductClicked:)] ;
+    if (self.phone) {
+        [self okBtClickedWithStr:self.phone];
+    }
 }
 
 #pragma mark -UITabelViewDelegate
@@ -115,12 +118,14 @@
  */
 -(void)okBtClickedWithStr:(NSString *)text{
     [self.view endEditing:YES];
-    if (![PhoneNumberTools isMobileNumber:text]) {
+    if (![PhoneNumberTools isMobileNumber:text] && !self.customerid) {
         [MBProgressHUD showError:@"请输入正确的电话号码"];
         return;
     }
+
     NSDictionary *dic = @{
                           @"bcProductIds":@"",
+                          @"id": [HTHoldNullObj getValueWithUnCheakValue:self.customerid],
                           @"companyId":[HTShareClass shareClass].loginModel.companyId,
                           @"phone":[HTHoldNullObj getValueWithUnCheakValue:text]
                           };
@@ -180,10 +185,23 @@
  添加vip电话
  */
 - (void)vipBtclicked{
-    HTCustomMadeFieldAlertView *phoneAlart =  [[HTCustomMadeFieldAlertView alloc] initWithTitle:@"请输入VIP手机号码" message:@"(凭此号码退换货）" delegate:self];
-    phoneAlart.textField.keyboardType =  UIKeyboardTypePhonePad;
-    [phoneAlart show];
+    HTChooseCustomerViewController *choose = [[HTChooseCustomerViewController alloc] init];
+    choose.delegate = self;
+    [self.navigationController pushViewController:choose animated:YES];
+//    HTCustomMadeFieldAlertView *phoneAlart =  [[HTCustomMadeFieldAlertView alloc] initWithTitle:@"请输入VIP手机号码" message:@"(凭此号码退换货）" delegate:self];
+//    phoneAlart.textField.keyboardType =  UIKeyboardTypePhonePad;
+//    [phoneAlart show];
 }
+
+- (void)sendDic:(NSDictionary *)dic WithModel:(HTCustomerListModel *)model
+{
+    if (![dic.allKeys containsObject:@"phone"]) {
+        self.customerid = model.custId;
+    }
+    NSLog(@"传回来");
+    [self okBtClickedWithStr:[dic objectForKey:@"phone"]];
+}
+
 #pragma mark -EventResponse
 -(void)addProductClicked:(UIBarButtonItem *)sender{
     HTFastEditProductViewController *vc = [[HTFastEditProductViewController alloc] init];
@@ -241,16 +259,17 @@
             }
         }
         HTChargeOrderModel *order = [HTChargeOrderModel yy_modelWithJSON:[json[@"data"] getDictionArrayWithKey:@"order"]];
-        HTSettleViewController *vc = [[HTSettleViewController alloc] init];
+        HTNewPayViewController *vc = [[HTNewPayViewController alloc] init];
+//        HTSettleViewController *vc = [[HTSettleViewController alloc] init];
         vc.orderModel = order;
         vc.products = self.productArray;
-        if ([HTShareClass shareClass].isPlatformOnlinePayActive) {
-            vc.payCode = [json[@"data"] getStringWithKey:@"payCode"];
-        }else{
-            vc.addUrl = [json[@"data"] getStringWithKey:@"adUrl"];
-        }
+//        if ([HTShareClass shareClass].isPlatformOnlinePayActive) {
+//            vc.payCode = [json[@"data"] getStringWithKey:@"payCode"];
+//        }else{
+//            vc.addUrl = [json[@"data"] getStringWithKey:@"adUrl"];
+//        }
         vc.custModel = strongSelf.custModel;
-        vc.requestNum = [json[@"data"] getStringWithKey:@"requestNum"];
+//        vc.requestNum = [json[@"data"] getStringWithKey:@"requestNum"];
         [strongSelf.navigationController pushViewController:vc animated:YES];
         strongSelf.bottomView.settelBt.enabled = YES;
     } error:^{

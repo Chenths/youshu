@@ -9,5 +9,6 @@
 #import "HTCommonViewController.h"
 
 @interface HTFastCashierViewController : HTCommonViewController
-
+@property (nonatomic, strong) NSString *customerid;
+@property (nonatomic, strong) NSString *phone;
 @end

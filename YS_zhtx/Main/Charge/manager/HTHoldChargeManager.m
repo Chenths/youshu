@@ -50,6 +50,7 @@
     }];
 }
 
+
 /**
  根据搜索的条码和用户电话获取产品数据
 
@@ -94,6 +95,7 @@
         [MBProgressHUD hideHUD];
         [MBProgressHUD showError:SeverERRORSTRING];
     } failure:^(NSError *error) {
+        [MBProgressHUD hideHUD];
         [MBProgressHUD showError:NETERRORSTRING];
     }];
     

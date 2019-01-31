@@ -48,7 +48,9 @@
 //#define baseUrl @"http://10.1.1.109:8090/"
 //颜家栋
 //#define baseUrl @"http://10.1.1.162:8080/"
-//#define baseUrl @"http://192.168.199.7:8080/"
+//#define baseUrl @"http://192.168.199.33:8080/"
+//唐鑫
+//#define baseUrl @"http://192.168.199.42:8080/"
 //姚丁浩
 #define baseUrl @"http://192.168.199.46:8080/"
 //颜家栋
@@ -59,6 +61,7 @@
 //#define baseUrl @"http://192.168.199.34:8080/"
 //#define baseUrl @"http://192.168.199.162:8080/"
 //#define baseUrl @"http://192.168.1.106:8080/"
+//#define baseUrl @"http://192.168.1.200:8080/"
 //#define baseUrl @"http://59.110.5.160:8090/"
 #else
 #define baseUrl @"http://59.110.5.160:8090/"
@@ -203,6 +206,8 @@
 #define refreshBuyProductList @"refresh_buy_product_list_4_app.html"
 //创建订单
 #define createOrder4App @"create_order_4_app.html"
+//检查库存
+#define chectProductNum @"verify_product_stock_4_app.html"
 //订单改价
 #define modifyOrderPrice4App @"modify_order_price_4_app.html"
 //改价的修改
@@ -338,6 +343,9 @@
 
 #define dateMenuWarningQuestion  @"data_menu_warning_question_4_app.html"
 
+#define loadStoreAllSeller @"load_shopping_guide_list_4_app.html"
+//下单并支付
+#define creatOrderAndPay  @"place_an_order_4_app.html"
 #pragma mark -宏
 
 

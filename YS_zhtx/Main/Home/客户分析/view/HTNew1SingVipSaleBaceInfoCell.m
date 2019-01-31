@@ -63,6 +63,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *heightLabel;
 @property (weak, nonatomic) IBOutlet UITextView *tipTextView;
 
+@property (weak, nonatomic) IBOutlet UILabel *wechatNum;
 
 
 @end
@@ -94,6 +95,8 @@
     self.heightLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.height].length == 0 ? @"暂无数据" : [HTHoldNullObj getValueWithUnCheakValue:model.height];
     self.heightLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.height].length == 0 ? @"暂无数据" : [HTHoldNullObj getValueWithUnCheakValue:model.height];
     self.tipTextView.text = [HTHoldNullObj getValueWithUnCheakValue:model.remark].length == 0 ? @"暂无数据" : [HTHoldNullObj getValueWithUnCheakValue:model.remark];
+    self.wechatNum.text = [HTHoldNullObj getValueWithUnCheakValue:model.wechat].length == 0 ? @"暂无数据" : [HTHoldNullObj getValueWithUnCheakValue:model.wechat];
+
 }
 
 //- (void)setModel:(HTSingleVipDataModel *)model{

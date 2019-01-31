@@ -7,7 +7,10 @@
 //
 
 #import "HTCommonViewController.h"
-
+#import "HTCustomerListModel.h"
+@protocol HTChooseCustomerDelegate <NSObject>
+- (void)sendDic:(NSDictionary *)dic WithModel:(HTCustomerListModel *)model; //声明协议方法
+@end
 @interface HTChooseCustomerViewController : HTCommonViewController
-
+@property (nonatomic, weak) id<HTChooseCustomerDelegate> delegate;
 @end

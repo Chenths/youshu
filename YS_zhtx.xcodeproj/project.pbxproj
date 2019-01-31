@@ -869,6 +869,39 @@
 		04AF9482211C1695008C847A /* HTSearchOrderStatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AF9480211C1695008C847A /* HTSearchOrderStatusCell.xib */; };
 		04AF9486211C178A008C847A /* HTOrderSearchCustomerTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AF9484211C178A008C847A /* HTOrderSearchCustomerTableCell.m */; };
 		04AF9487211C178A008C847A /* HTOrderSearchCustomerTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AF9485211C178A008C847A /* HTOrderSearchCustomerTableCell.xib */; };
+		04B0380021E71D550008160B /* HTChooseCustomerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B037FE21E71D550008160B /* HTChooseCustomerViewController.m */; };
+		04B0380121E71D550008160B /* HTChooseCustomerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B037FF21E71D550008160B /* HTChooseCustomerViewController.xib */; };
+		04B0380421E728C20008160B /* HTChooseCustomerListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0380321E728C20008160B /* HTChooseCustomerListModel.m */; };
+		04B0380821E728EE0008160B /* HTChooseCustomerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0380621E728EE0008160B /* HTChooseCustomerCell.m */; };
+		04B0380921E728EE0008160B /* HTChooseCustomerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B0380721E728EE0008160B /* HTChooseCustomerCell.xib */; };
+		04B0381221E8738D0008160B /* HTNewPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0381021E8738D0008160B /* HTNewPayViewController.m */; };
+		04B0381321E8738D0008160B /* HTNewPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B0381121E8738D0008160B /* HTNewPayViewController.xib */; };
+		04B0382221E87DC70008160B /* HTNewPayHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0382021E87DC70008160B /* HTNewPayHeaderTableViewCell.m */; };
+		04B0382321E87DC70008160B /* HTNewPayHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B0382121E87DC70008160B /* HTNewPayHeaderTableViewCell.xib */; };
+		04B0382721E87DE40008160B /* HTNewPayGoodsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0382521E87DE40008160B /* HTNewPayGoodsTableViewCell.m */; };
+		04B0382821E87DE40008160B /* HTNewPayGoodsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B0382621E87DE40008160B /* HTNewPayGoodsTableViewCell.xib */; };
+		04B0382C21E87E260008160B /* HTNewPayGoodsHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0382A21E87E260008160B /* HTNewPayGoodsHeaderTableViewCell.m */; };
+		04B0382D21E87E260008160B /* HTNewPayGoodsHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B0382B21E87E260008160B /* HTNewPayGoodsHeaderTableViewCell.xib */; };
+		04B0383121E87F060008160B /* HTNewPaySellerHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0382F21E87F060008160B /* HTNewPaySellerHeaderTableViewCell.m */; };
+		04B0383221E87F060008160B /* HTNewPaySellerHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B0383021E87F060008160B /* HTNewPaySellerHeaderTableViewCell.xib */; };
+		04B0383621E87F1E0008160B /* HTNewPaySellerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0383421E87F1E0008160B /* HTNewPaySellerTableViewCell.m */; };
+		04B0383721E87F1E0008160B /* HTNewPaySellerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B0383521E87F1E0008160B /* HTNewPaySellerTableViewCell.xib */; };
+		04B0383B21E881350008160B /* HTNewPayPayHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0383921E881350008160B /* HTNewPayPayHeaderTableViewCell.m */; };
+		04B0383C21E881350008160B /* HTNewPayPayHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B0383A21E881350008160B /* HTNewPayPayHeaderTableViewCell.xib */; };
+		04B0384021E881DC0008160B /* HTNewPayPayNormalKindTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0383E21E881DC0008160B /* HTNewPayPayNormalKindTableViewCell.m */; };
+		04B0384121E881DC0008160B /* HTNewPayPayNormalKindTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B0383F21E881DC0008160B /* HTNewPayPayNormalKindTableViewCell.xib */; };
+		04B0384521E881FE0008160B /* HTNewPayMixPayKindTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0384321E881FE0008160B /* HTNewPayMixPayKindTableViewCell.m */; };
+		04B0384621E881FE0008160B /* HTNewPayMixPayKindTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B0384421E881FE0008160B /* HTNewPayMixPayKindTableViewCell.xib */; };
+		04B0384A21E884F30008160B /* HTNewPayWriteOrderTipsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0384821E884F30008160B /* HTNewPayWriteOrderTipsTableViewCell.m */; };
+		04B0384B21E884F30008160B /* HTNewPayWriteOrderTipsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B0384921E884F30008160B /* HTNewPayWriteOrderTipsTableViewCell.xib */; };
+		04B0384F21EC3D0B0008160B /* HTNewPayGoodsFooterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0384D21EC3D0B0008160B /* HTNewPayGoodsFooterTableViewCell.m */; };
+		04B0385021EC3D0B0008160B /* HTNewPayGoodsFooterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B0384E21EC3D0B0008160B /* HTNewPayGoodsFooterTableViewCell.xib */; };
+		04B0385421F17FCC0008160B /* HTChargeMaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0385221F17FCB0008160B /* HTChargeMaskViewController.m */; };
+		04B0385521F17FCC0008160B /* HTChargeMaskViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B0385321F17FCB0008160B /* HTChargeMaskViewController.xib */; };
+		04B0385D21F1D0D20008160B /* HTSellerListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0385C21F1D0D20008160B /* HTSellerListModel.m */; };
+		04B0386121FEA4760008160B /* HTRFMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0385F21FEA4730008160B /* HTRFMTableViewCell.m */; };
+		04B0386221FEA4760008160B /* HTRFMTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B0386021FEA4730008160B /* HTRFMTableViewCell.xib */; };
+		04B0386521FEE6F30008160B /* HTCustRFMMeaasge.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0386421FEE6F30008160B /* HTCustRFMMeaasge.m */; };
 		04B299A7210724E500125350 /* HTSaleProductRankListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B299A5210724E500125350 /* HTSaleProductRankListController.m */; };
 		04B299A8210724E500125350 /* HTSaleProductRankListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B299A6210724E500125350 /* HTSaleProductRankListController.xib */; };
 		04B39EA8216F34CA00FC7D07 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B39E9D216F34CA00FC7D07 /* FMDatabaseQueue.m */; };
@@ -2453,6 +2486,57 @@
 		04AF9483211C178A008C847A /* HTOrderSearchCustomerTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTOrderSearchCustomerTableCell.h; sourceTree = "<group>"; };
 		04AF9484211C178A008C847A /* HTOrderSearchCustomerTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTOrderSearchCustomerTableCell.m; sourceTree = "<group>"; };
 		04AF9485211C178A008C847A /* HTOrderSearchCustomerTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTOrderSearchCustomerTableCell.xib; sourceTree = "<group>"; };
+		04B037FD21E71D550008160B /* HTChooseCustomerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTChooseCustomerViewController.h; sourceTree = "<group>"; };
+		04B037FE21E71D550008160B /* HTChooseCustomerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTChooseCustomerViewController.m; sourceTree = "<group>"; };
+		04B037FF21E71D550008160B /* HTChooseCustomerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTChooseCustomerViewController.xib; sourceTree = "<group>"; };
+		04B0380221E728C20008160B /* HTChooseCustomerListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTChooseCustomerListModel.h; sourceTree = "<group>"; };
+		04B0380321E728C20008160B /* HTChooseCustomerListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTChooseCustomerListModel.m; sourceTree = "<group>"; };
+		04B0380521E728EE0008160B /* HTChooseCustomerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTChooseCustomerCell.h; sourceTree = "<group>"; };
+		04B0380621E728EE0008160B /* HTChooseCustomerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTChooseCustomerCell.m; sourceTree = "<group>"; };
+		04B0380721E728EE0008160B /* HTChooseCustomerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTChooseCustomerCell.xib; sourceTree = "<group>"; };
+		04B0380F21E8738D0008160B /* HTNewPayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTNewPayViewController.h; sourceTree = "<group>"; };
+		04B0381021E8738D0008160B /* HTNewPayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTNewPayViewController.m; sourceTree = "<group>"; };
+		04B0381121E8738D0008160B /* HTNewPayViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTNewPayViewController.xib; sourceTree = "<group>"; };
+		04B0381F21E87DC70008160B /* HTNewPayHeaderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTNewPayHeaderTableViewCell.h; sourceTree = "<group>"; };
+		04B0382021E87DC70008160B /* HTNewPayHeaderTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTNewPayHeaderTableViewCell.m; sourceTree = "<group>"; };
+		04B0382121E87DC70008160B /* HTNewPayHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTNewPayHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		04B0382421E87DE40008160B /* HTNewPayGoodsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTNewPayGoodsTableViewCell.h; sourceTree = "<group>"; };
+		04B0382521E87DE40008160B /* HTNewPayGoodsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTNewPayGoodsTableViewCell.m; sourceTree = "<group>"; };
+		04B0382621E87DE40008160B /* HTNewPayGoodsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTNewPayGoodsTableViewCell.xib; sourceTree = "<group>"; };
+		04B0382921E87E260008160B /* HTNewPayGoodsHeaderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTNewPayGoodsHeaderTableViewCell.h; sourceTree = "<group>"; };
+		04B0382A21E87E260008160B /* HTNewPayGoodsHeaderTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTNewPayGoodsHeaderTableViewCell.m; sourceTree = "<group>"; };
+		04B0382B21E87E260008160B /* HTNewPayGoodsHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTNewPayGoodsHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		04B0382E21E87F060008160B /* HTNewPaySellerHeaderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTNewPaySellerHeaderTableViewCell.h; sourceTree = "<group>"; };
+		04B0382F21E87F060008160B /* HTNewPaySellerHeaderTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTNewPaySellerHeaderTableViewCell.m; sourceTree = "<group>"; };
+		04B0383021E87F060008160B /* HTNewPaySellerHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTNewPaySellerHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		04B0383321E87F1E0008160B /* HTNewPaySellerTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTNewPaySellerTableViewCell.h; sourceTree = "<group>"; };
+		04B0383421E87F1E0008160B /* HTNewPaySellerTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTNewPaySellerTableViewCell.m; sourceTree = "<group>"; };
+		04B0383521E87F1E0008160B /* HTNewPaySellerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTNewPaySellerTableViewCell.xib; sourceTree = "<group>"; };
+		04B0383821E881350008160B /* HTNewPayPayHeaderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTNewPayPayHeaderTableViewCell.h; sourceTree = "<group>"; };
+		04B0383921E881350008160B /* HTNewPayPayHeaderTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTNewPayPayHeaderTableViewCell.m; sourceTree = "<group>"; };
+		04B0383A21E881350008160B /* HTNewPayPayHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTNewPayPayHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		04B0383D21E881DC0008160B /* HTNewPayPayNormalKindTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTNewPayPayNormalKindTableViewCell.h; sourceTree = "<group>"; };
+		04B0383E21E881DC0008160B /* HTNewPayPayNormalKindTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTNewPayPayNormalKindTableViewCell.m; sourceTree = "<group>"; };
+		04B0383F21E881DC0008160B /* HTNewPayPayNormalKindTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTNewPayPayNormalKindTableViewCell.xib; sourceTree = "<group>"; };
+		04B0384221E881FE0008160B /* HTNewPayMixPayKindTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTNewPayMixPayKindTableViewCell.h; sourceTree = "<group>"; };
+		04B0384321E881FE0008160B /* HTNewPayMixPayKindTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTNewPayMixPayKindTableViewCell.m; sourceTree = "<group>"; };
+		04B0384421E881FE0008160B /* HTNewPayMixPayKindTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTNewPayMixPayKindTableViewCell.xib; sourceTree = "<group>"; };
+		04B0384721E884F30008160B /* HTNewPayWriteOrderTipsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTNewPayWriteOrderTipsTableViewCell.h; sourceTree = "<group>"; };
+		04B0384821E884F30008160B /* HTNewPayWriteOrderTipsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTNewPayWriteOrderTipsTableViewCell.m; sourceTree = "<group>"; };
+		04B0384921E884F30008160B /* HTNewPayWriteOrderTipsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTNewPayWriteOrderTipsTableViewCell.xib; sourceTree = "<group>"; };
+		04B0384C21EC3D0B0008160B /* HTNewPayGoodsFooterTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTNewPayGoodsFooterTableViewCell.h; sourceTree = "<group>"; };
+		04B0384D21EC3D0B0008160B /* HTNewPayGoodsFooterTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTNewPayGoodsFooterTableViewCell.m; sourceTree = "<group>"; };
+		04B0384E21EC3D0B0008160B /* HTNewPayGoodsFooterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTNewPayGoodsFooterTableViewCell.xib; sourceTree = "<group>"; };
+		04B0385121F17FCB0008160B /* HTChargeMaskViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTChargeMaskViewController.h; sourceTree = "<group>"; };
+		04B0385221F17FCB0008160B /* HTChargeMaskViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTChargeMaskViewController.m; sourceTree = "<group>"; };
+		04B0385321F17FCB0008160B /* HTChargeMaskViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTChargeMaskViewController.xib; sourceTree = "<group>"; };
+		04B0385B21F1D0D20008160B /* HTSellerListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTSellerListModel.h; sourceTree = "<group>"; };
+		04B0385C21F1D0D20008160B /* HTSellerListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTSellerListModel.m; sourceTree = "<group>"; };
+		04B0385E21FEA4730008160B /* HTRFMTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTRFMTableViewCell.h; sourceTree = "<group>"; };
+		04B0385F21FEA4730008160B /* HTRFMTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTRFMTableViewCell.m; sourceTree = "<group>"; };
+		04B0386021FEA4730008160B /* HTRFMTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTRFMTableViewCell.xib; sourceTree = "<group>"; };
+		04B0386321FEE6F20008160B /* HTCustRFMMeaasge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTCustRFMMeaasge.h; sourceTree = "<group>"; };
+		04B0386421FEE6F30008160B /* HTCustRFMMeaasge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTCustRFMMeaasge.m; sourceTree = "<group>"; };
 		04B299A4210724E500125350 /* HTSaleProductRankListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTSaleProductRankListController.h; sourceTree = "<group>"; };
 		04B299A5210724E500125350 /* HTSaleProductRankListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTSaleProductRankListController.m; sourceTree = "<group>"; };
 		04B299A6210724E500125350 /* HTSaleProductRankListController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTSaleProductRankListController.xib; sourceTree = "<group>"; };
@@ -3373,6 +3457,15 @@
 				0492511820D3955100DE9BA9 /* HTChangePriceViewController.h */,
 				0492511920D3955100DE9BA9 /* HTChangePriceViewController.m */,
 				0492511A20D3955100DE9BA9 /* HTChangePriceViewController.xib */,
+				04B037FD21E71D550008160B /* HTChooseCustomerViewController.h */,
+				04B037FE21E71D550008160B /* HTChooseCustomerViewController.m */,
+				04B037FF21E71D550008160B /* HTChooseCustomerViewController.xib */,
+				04B0380F21E8738D0008160B /* HTNewPayViewController.h */,
+				04B0381021E8738D0008160B /* HTNewPayViewController.m */,
+				04B0381121E8738D0008160B /* HTNewPayViewController.xib */,
+				04B0385121F17FCB0008160B /* HTChargeMaskViewController.h */,
+				04B0385221F17FCB0008160B /* HTChargeMaskViewController.m */,
+				04B0385321F17FCB0008160B /* HTChargeMaskViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3392,6 +3485,10 @@
 				04C752BE2121342300F2BBD0 /* HTAccoutInfoModel.m */,
 				04260F7D2122CE3700BCFA5B /* HTChargeOrderModel.h */,
 				04260F7E2122CE3700BCFA5B /* HTChargeOrderModel.m */,
+				04B0380221E728C20008160B /* HTChooseCustomerListModel.h */,
+				04B0380321E728C20008160B /* HTChooseCustomerListModel.m */,
+				04B0385B21F1D0D20008160B /* HTSellerListModel.h */,
+				04B0385C21F1D0D20008160B /* HTSellerListModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3399,6 +3496,7 @@
 		043DBDC320BE9EF200020936 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				04B0381421E87D490008160B /* newPay */,
 				04A66D1621353E32004AE9DE /* HTCashierCustomerTitleView.h */,
 				04A66D1821353E32004AE9DE /* HTCashierCustomerTitleView.m */,
 				04A66D1721353E32004AE9DE /* HTCashierCustomerTitleView.xib */,
@@ -3432,6 +3530,9 @@
 				042CACCF212A5BD2003098B5 /* HTChangePriceProductInfoCell.h */,
 				042CACD0212A5BD2003098B5 /* HTChangePriceProductInfoCell.m */,
 				042CACD1212A5BD2003098B5 /* HTChangePriceProductInfoCell.xib */,
+				04B0380521E728EE0008160B /* HTChooseCustomerCell.h */,
+				04B0380621E728EE0008160B /* HTChooseCustomerCell.m */,
+				04B0380721E728EE0008160B /* HTChooseCustomerCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3560,6 +3661,8 @@
 				0453EBCC212EAADA0064BF3D /* HTCustomerTagsModel.m */,
 				0416A5B921460EE500C9B96C /* HTCustomerPrudcutInfo.h */,
 				0416A5BA21460EE500C9B96C /* HTCustomerPrudcutInfo.m */,
+				04B0386321FEE6F20008160B /* HTCustRFMMeaasge.h */,
+				04B0386421FEE6F30008160B /* HTCustRFMMeaasge.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3610,6 +3713,9 @@
 				04C73C0320DA477000C62F17 /* HTCustomerProductInfoCell.h */,
 				04C73C0420DA477000C62F17 /* HTCustomerProductInfoCell.m */,
 				04C73C0520DA477000C62F17 /* HTCustomerProductInfoCell.xib */,
+				04B0385E21FEA4730008160B /* HTRFMTableViewCell.h */,
+				04B0385F21FEA4730008160B /* HTRFMTableViewCell.m */,
+				04B0386021FEA4730008160B /* HTRFMTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4956,6 +5062,43 @@
 			path = PNChart;
 			sourceTree = "<group>";
 		};
+		04B0381421E87D490008160B /* newPay */ = {
+			isa = PBXGroup;
+			children = (
+				04B0381F21E87DC70008160B /* HTNewPayHeaderTableViewCell.h */,
+				04B0382021E87DC70008160B /* HTNewPayHeaderTableViewCell.m */,
+				04B0382121E87DC70008160B /* HTNewPayHeaderTableViewCell.xib */,
+				04B0382921E87E260008160B /* HTNewPayGoodsHeaderTableViewCell.h */,
+				04B0382A21E87E260008160B /* HTNewPayGoodsHeaderTableViewCell.m */,
+				04B0382B21E87E260008160B /* HTNewPayGoodsHeaderTableViewCell.xib */,
+				04B0382421E87DE40008160B /* HTNewPayGoodsTableViewCell.h */,
+				04B0382521E87DE40008160B /* HTNewPayGoodsTableViewCell.m */,
+				04B0382621E87DE40008160B /* HTNewPayGoodsTableViewCell.xib */,
+				04B0384C21EC3D0B0008160B /* HTNewPayGoodsFooterTableViewCell.h */,
+				04B0384D21EC3D0B0008160B /* HTNewPayGoodsFooterTableViewCell.m */,
+				04B0384E21EC3D0B0008160B /* HTNewPayGoodsFooterTableViewCell.xib */,
+				04B0384721E884F30008160B /* HTNewPayWriteOrderTipsTableViewCell.h */,
+				04B0384821E884F30008160B /* HTNewPayWriteOrderTipsTableViewCell.m */,
+				04B0384921E884F30008160B /* HTNewPayWriteOrderTipsTableViewCell.xib */,
+				04B0382E21E87F060008160B /* HTNewPaySellerHeaderTableViewCell.h */,
+				04B0382F21E87F060008160B /* HTNewPaySellerHeaderTableViewCell.m */,
+				04B0383021E87F060008160B /* HTNewPaySellerHeaderTableViewCell.xib */,
+				04B0383321E87F1E0008160B /* HTNewPaySellerTableViewCell.h */,
+				04B0383421E87F1E0008160B /* HTNewPaySellerTableViewCell.m */,
+				04B0383521E87F1E0008160B /* HTNewPaySellerTableViewCell.xib */,
+				04B0383821E881350008160B /* HTNewPayPayHeaderTableViewCell.h */,
+				04B0383921E881350008160B /* HTNewPayPayHeaderTableViewCell.m */,
+				04B0383A21E881350008160B /* HTNewPayPayHeaderTableViewCell.xib */,
+				04B0383D21E881DC0008160B /* HTNewPayPayNormalKindTableViewCell.h */,
+				04B0383E21E881DC0008160B /* HTNewPayPayNormalKindTableViewCell.m */,
+				04B0383F21E881DC0008160B /* HTNewPayPayNormalKindTableViewCell.xib */,
+				04B0384221E881FE0008160B /* HTNewPayMixPayKindTableViewCell.h */,
+				04B0384321E881FE0008160B /* HTNewPayMixPayKindTableViewCell.m */,
+				04B0384421E881FE0008160B /* HTNewPayMixPayKindTableViewCell.xib */,
+			);
+			path = newPay;
+			sourceTree = "<group>";
+		};
 		04B39E9B216F34CA00FC7D07 /* fmdb */ = {
 			isa = PBXGroup;
 			children = (
@@ -6016,6 +6159,7 @@
 				0420F9A220F5F65400E785D5 /* HTBossSaleDescViewController.xib in Resources */,
 				0492511720D3682200DE9BA9 /* HTSettleViewController.xib in Resources */,
 				0489FFCD20DB45B9009B5964 /* HTMsgSetViewController.xib in Resources */,
+				04B0381321E8738D0008160B /* HTNewPayViewController.xib in Resources */,
 				0434D19E20C92C7D008E085F /* HTNewVipBaseInfoCell.xib in Resources */,
 				0466C406215C77AC004F9C58 /* HTChangeHeadImgHeaderView.xib in Resources */,
 				0439A1D820D113BF00BB5E9B /* HTFestivalViewController.xib in Resources */,
@@ -6024,6 +6168,7 @@
 				0492511C20D3955100DE9BA9 /* HTChangePriceViewController.xib in Resources */,
 				04C73C1920DA4CF900C62F17 /* HTStoreMoneyViewController.xib in Resources */,
 				0466C3FB215C7786004F9C58 /* HTCustEditHeadTableViewCell.xib in Resources */,
+				04B0380921E728EE0008160B /* HTChooseCustomerCell.xib in Resources */,
 				044F81D7212BE1EE007674EC /* HTPrinterViewController.xib in Resources */,
 				04852A1C20DCF28300589EBA /* HTGuideSaleDescItemCell.xib in Resources */,
 				047D760F21D0855500E7CB72 /* daily_report.caf in Resources */,
@@ -6051,6 +6196,7 @@
 				0420F9BA20F5F65400E785D5 /* HTBossSaleCompareDataInfoCell.xib in Resources */,
 				04A66D102134F8A2004AE9DE /* HTEditVipContinueBackListCell.xib in Resources */,
 				0476346C216B2723002DC90E /* HTRightNavBar.xib in Resources */,
+				04B0384121E881DC0008160B /* HTNewPayPayNormalKindTableViewCell.xib in Resources */,
 				04204CCB21798CF100BBFEAF /* HTChangeFastCashierViewController.xib in Resources */,
 				044DAD3321DF394700A4DE20 /* HTCustomerFaceVipTableViewCell.xib in Resources */,
 				0439A1B220D0F9A700BB5E9B /* HTSinglePropresslineCell.xib in Resources */,
@@ -6124,6 +6270,7 @@
 				04991B6420CE5864007AC4AF /* HTColorAndSizeFiltrateBox.xib in Resources */,
 				0458BF0620D2525900B79740 /* HTProductSyleSelectedCell.xib in Resources */,
 				0420F9E320F5F65400E785D5 /* HTBossLegendTableViewCell.xib in Resources */,
+				04B0385521F17FCC0008160B /* HTChargeMaskViewController.xib in Resources */,
 				04260F7C2122A4A000BCFA5B /* HTUnderstockListAlertView.xib in Resources */,
 				047189BB216079DD0063A736 /* JCHATAlbumViewController.xib in Resources */,
 				0489FFD220DB4AAB009B5964 /* HTRoleSelecteCell.xib in Resources */,
@@ -6152,6 +6299,7 @@
 				0489FFF520DB80C2009B5964 /* HTWarningSetViewController.xib in Resources */,
 				04A363EE20D8D8CB005757D5 /* HTReturnOrderInfoCell.xib in Resources */,
 				043B88FD212FE35600D8B0AF /* HTAddTagsViewController.xib in Resources */,
+				04B0383721E87F1E0008160B /* HTNewPaySellerTableViewCell.xib in Resources */,
 				043DBD9020BE9E4B00020936 /* Main.storyboard in Resources */,
 				0489006020DB9654009B5964 /* HTMineSetViewController.xib in Resources */,
 				0420F9D920F5F65400E785D5 /* HTBossMeClickedTableViewCell.xib in Resources */,
@@ -6165,6 +6313,7 @@
 				0420F9C620F5F65400E785D5 /* HTBrokenLineReportCell.xib in Resources */,
 				046436D22148E96C00976D82 /* HTChangeSettleViewController.xib in Resources */,
 				047D566220C0E7A1000348DC /* HTCustomerFiltrateBoxView.xib in Resources */,
+				04B0382821E87DE40008160B /* HTNewPayGoodsTableViewCell.xib in Resources */,
 				0489007E20DBAA8B009B5964 /* HTFastOrderStaueDetailCell.xib in Resources */,
 				0453EBA7212EA3F20064BF3D /* DNImagePicker.strings in Resources */,
 				04AF9473211C1484008C847A /* HTOrderSearchView.xib in Resources */,
@@ -6176,10 +6325,13 @@
 				045FB4A720C7B289004FE980 /* HTMonthSaleDescTableViewCell.xib in Resources */,
 				0420F9E420F5F65400E785D5 /* HTInventorybasicCell.xib in Resources */,
 				0420F9AA20F5F65400E785D5 /* HTBossSaleCompareListInfoTableCell.xib in Resources */,
+				04B0385021EC3D0B0008160B /* HTNewPayGoodsFooterTableViewCell.xib in Resources */,
+				04B0383C21E881350008160B /* HTNewPayPayHeaderTableViewCell.xib in Resources */,
 				0439A1D020D1106E00BB5E9B /* HTGuiderSaleListItemCell.xib in Resources */,
 				04C39FE920CF709300E2E309 /* HTInventorySaleInfoController.xib in Resources */,
 				0420F9D820F5F65400E785D5 /* HTMultitermBossContrastCell.xib in Resources */,
 				0439A18F20D0CB9C00BB5E9B /* HTSeemoreHeaderView.xib in Resources */,
+				04B0384B21E884F30008160B /* HTNewPayWriteOrderTipsTableViewCell.xib in Resources */,
 				04C73C0C20DA48DA00C62F17 /* HTCustomerProductListController.xib in Resources */,
 				04F5463720D8EF0F00D300E4 /* HTExchangeProductsDetailView.xib in Resources */,
 				04016EA521538B7800D32BD9 /* HTSaleGoodOrBadDetailController.xib in Resources */,
@@ -6206,6 +6358,7 @@
 				0420F9E820F5F65400E785D5 /* HTBossInventoryReportController.xib in Resources */,
 				0439A15820D0B37800BB5E9B /* HTGSaleReportViewController.xib in Resources */,
 				045FE6B5217D650300E18A2D /* HTStockProductListController.xib in Resources */,
+				04B0382321E87DC70008160B /* HTNewPayHeaderTableViewCell.xib in Resources */,
 				04B39EB6216F381600FC7D07 /* HTLogisticsCompanyCell.xib in Resources */,
 				0489006520DB9B1D009B5964 /* HTChangePasswordViewController.xib in Resources */,
 				047753F720C521FD008C8BA4 /* HTMonthOrYearGoalsDescCell.xib in Resources */,
@@ -6215,10 +6368,13 @@
 				045BEAC920CA31D7007CB614 /* HTTagsTableViewCell.xib in Resources */,
 				04F5464A20D8F81C00D300E4 /* HTReturnChargeViewController.xib in Resources */,
 				0453EB65212EA28D0064BF3D /* HTNewEditProductStyleController.xib in Resources */,
+				04B0384621E881FE0008160B /* HTNewPayMixPayKindTableViewCell.xib in Resources */,
 				0453EBC5212EA57E0064BF3D /* HTPostImgEditInfoTableViewCell.xib in Resources */,
 				045FB48420C7765B004FE980 /* HTGuiderSaleDataInfoTableViewCell.xib in Resources */,
 				04AF9478211C151E008C847A /* HTOrderCreateDateTableCell.xib in Resources */,
 				048CD11920BFC9E400BE2DFD /* HTGHomeHeadCollectionViewCell.xib in Resources */,
+				04B0383221E87F060008160B /* HTNewPaySellerHeaderTableViewCell.xib in Resources */,
+				04B0382D21E87E260008160B /* HTNewPayGoodsHeaderTableViewCell.xib in Resources */,
 				0453EBB0212EA3F20064BF3D /* imageResources.xcassets in Resources */,
 				0458BEE820D21CAE00B79740 /* HTProductImgListViewController.xib in Resources */,
 				047D568120C14262000348DC /* HTSearchBoxStylePlainTableViewCell.xib in Resources */,
@@ -6272,6 +6428,7 @@
 				045FB48920C77B12004FE980 /* HTGuiderDateSaleSurveyCell.xib in Resources */,
 				0420F9CF20F5F65400E785D5 /* HTBossLineReportCell.xib in Resources */,
 				0453EB60212EA1D60064BF3D /* HTPostProductStyleController.xib in Resources */,
+				04B0386221FEA4760008160B /* HTRFMTableViewCell.xib in Resources */,
 				0439A1FC20D1143D00BB5E9B /* HTBirthdayCustomerListController.xib in Resources */,
 				046D90F6213FD6C1009869D5 /* HTMessgeTableViewCell.xib in Resources */,
 				0453EB71212EA3680064BF3D /* HTNotAddImgProductCell.xib in Resources */,
@@ -6303,6 +6460,7 @@
 				04991B7320CE65B9007AC4AF /* HTProductStyleReertoyDetailCell.xib in Resources */,
 				04991B8C20CE7D7C007AC4AF /* HTTurnOutDiscountCell.xib in Resources */,
 				04016EB22153943E00D32BD9 /* HTGuiderSaleInfoCell.xib in Resources */,
+				04B0380121E71D550008160B /* HTChooseCustomerViewController.xib in Resources */,
 				045FB48E20C77D71004FE980 /* HTAgeAndeSexInfoReportCell.xib in Resources */,
 				044C246420FC6F8500B38E54 /* HTIndexBoxDescViewController.xib in Resources */,
 				047753E020C4EAC5008C8BA4 /* HTOrderInfoViewCell.xib in Resources */,
@@ -6397,6 +6555,7 @@
 				045FB4B720C7D9C9004FE980 /* HTIndexsModel.m in Sources */,
 				047189A0216079DD0063A736 /* JCHATAlertViewWait.m in Sources */,
 				04260F7F2122CE3700BCFA5B /* HTChargeOrderModel.m in Sources */,
+				04B0380821E728EE0008160B /* HTChooseCustomerCell.m in Sources */,
 				0421A4E021608160000DC687 /* MJPhotoToolbar.m in Sources */,
 				04AC4C2820FD8EEE009F9810 /* HTProductRankInfoModel.m in Sources */,
 				046096EA2175D5E400FC57C0 /* HTFeedbackController.m in Sources */,
@@ -6564,7 +6723,9 @@
 				04326A9920C68A6E00CF481D /* HTLegendTableViewCell.m in Sources */,
 				0458BF0520D2525900B79740 /* HTProductSyleSelectedCell.m in Sources */,
 				042CACD2212A5BD2003098B5 /* HTChangePriceProductInfoCell.m in Sources */,
+				04B0380021E71D550008160B /* HTChooseCustomerViewController.m in Sources */,
 				04C997B0214F5B6600860833 /* IQUIView+Hierarchy.m in Sources */,
+				04B0386521FEE6F30008160B /* HTCustRFMMeaasge.m in Sources */,
 				0420F97B20F5F65400E785D5 /* HTBossReportViewController.m in Sources */,
 				04852A2820DCFB1500589EBA /* HTGuiderSaleDescTopCell.m in Sources */,
 				047189B5216079DD0063A736 /* JCHATMessageContentView.m in Sources */,
@@ -6601,6 +6762,7 @@
 				0439A1BB20D0FCC200BB5E9B /* HTManyLineBarDataTableViewCell.m in Sources */,
 				048CD12420BFDB3100BE2DFD /* HTHomeItemsModel.m in Sources */,
 				0457D0A020EB75510020F288 /* HTOrderDetailProductModel.m in Sources */,
+				04B0382721E87DE40008160B /* HTNewPayGoodsTableViewCell.m in Sources */,
 				043DBE1D20BE9EF300020936 /* NSObject+Null.m in Sources */,
 				04E348D02133D7D300F6F520 /* HTEditVipHeadImgCell.m in Sources */,
 				04E348C62133D3FF00F6F520 /* HTEditVipCustLevelCell.m in Sources */,
@@ -6618,12 +6780,15 @@
 				044F81FC212BEBFD007674EC /* HTChangePrinterBrandController.m in Sources */,
 				0453EBB3212EA3F20064BF3D /* DNImageFlowViewController.m in Sources */,
 				04763470216C410D002DC90E /* HTGuiderDayModel.m in Sources */,
+				04B0380421E728C20008160B /* HTChooseCustomerListModel.m in Sources */,
 				047CDBA0214B9FE9004D2FFD /* HTStockInfoModel.m in Sources */,
 				04B39EBF216F4FF200FC7D07 /* NSString+upperOrlower.m in Sources */,
 				0420F99A20F5F65400E785D5 /* HTBossMeViewController.m in Sources */,
 				0439A1CA20D10F8B00BB5E9B /* HTGuiderListSaleController.m in Sources */,
 				04326A7A20C63BED00CF481D /* HTShopInventoryTunesInfoCell.m in Sources */,
 				0420F98420F5F65400E785D5 /* HTBossSaleBasicCompareModel.m in Sources */,
+				04B0384F21EC3D0B0008160B /* HTNewPayGoodsFooterTableViewCell.m in Sources */,
+				04B0384A21E884F30008160B /* HTNewPayWriteOrderTipsTableViewCell.m in Sources */,
 				04F4ED5621254ECB0089FFC3 /* NSString+Atribute.m in Sources */,
 				044097A820E2185B006C4B04 /* HTLoginDataModel.m in Sources */,
 				0420F99C20F5F65400E785D5 /* HTCompareReportCenterController.m in Sources */,
@@ -6644,6 +6809,7 @@
 				0420F9C220F5F65400E785D5 /* HTCompareHeadView.m in Sources */,
 				0439A1E520D113DE00BB5E9B /* HTNearFestivalTableViewCell.m in Sources */,
 				04C39FF220CF7AF100E2E309 /* HTTurnListTpyeOutViewCell.m in Sources */,
+				04B0381221E8738D0008160B /* HTNewPayViewController.m in Sources */,
 				04326A8D20C6730400CF481D /* HTRatioSliderView.m in Sources */,
 				0458BEE720D21CAE00B79740 /* HTProductImgListViewController.m in Sources */,
 				0420F98B20F5F65400E785D5 /* HTBossSelectedTimeModel.m in Sources */,
@@ -6677,6 +6843,7 @@
 				04ED1E7E20EA0E220036333B /* HTOrderListModel.m in Sources */,
 				0492511020D358BA00DE9BA9 /* HTCustomMadeFieldAlertView.m in Sources */,
 				044F81FB212BEBFD007674EC /* HTBlueToothPrinterController.m in Sources */,
+				04B0384521E881FE0008160B /* HTNewPayMixPayKindTableViewCell.m in Sources */,
 				043DBD9820BE9E4B00020936 /* main.m in Sources */,
 				04C7A4DB2140D64700726833 /* HTBillFiltrateBoxView.m in Sources */,
 				04E348CB2133D5F700F6F520 /* HTAddVipViewController.m in Sources */,
@@ -6692,6 +6859,7 @@
 				0476345F216AFF68002DC90E /* YPTabContentView.m in Sources */,
 				04C997AF214F5B6600860833 /* IQUIScrollView+Additions.m in Sources */,
 				04B39EBB216F404800FC7D07 /* HTScanLogistiscViewController.m in Sources */,
+				04B0382C21E87E260008160B /* HTNewPayGoodsHeaderTableViewCell.m in Sources */,
 				04C73BE820DA275900C62F17 /* HTCustomerTapMoreController.m in Sources */,
 				0486B42020ECA12F00D74128 /* HTHomeDataModel.m in Sources */,
 				04991B6220CE5856007AC4AF /* HTColorAndSizeFiltrateBox.m in Sources */,
@@ -6702,6 +6870,7 @@
 				047189AB216079DD0063A736 /* XHVoiceRecordHelper.m in Sources */,
 				04EEBDBD211A86E100FDA14F /* HTSearchCustomerCreaterCell.m in Sources */,
 				0407477C20EF3A220029FD60 /* JBBarChartView.m in Sources */,
+				04B0385D21F1D0D20008160B /* HTSellerListModel.m in Sources */,
 				0439A16120D0B60400BB5E9B /* HTBossSaleBasicInfoCell.m in Sources */,
 				047189C421607DB80063A736 /* JKNotifierBar.m in Sources */,
 				044F81D2212BE14F007674EC /* NSString+font.m in Sources */,
@@ -6740,6 +6909,7 @@
 				04645087213672D8001F2B8F /* HTEditVipManager.m in Sources */,
 				047D568520C1434B000348DC /* HTSearchBoxStyleBetweenTableViewCell.m in Sources */,
 				04ED1E8120EA0E3B0036333B /* HTOrderListProductModel.m in Sources */,
+				04B0385421F17FCC0008160B /* HTChargeMaskViewController.m in Sources */,
 				04763462216AFF68002DC90E /* UIViewController+YPTab.m in Sources */,
 				04ABC1EA20EE0D0A0066AB3A /* UICountingLabel.m in Sources */,
 				045BEAE620CA67E0007CB614 /* HTPieDataChartTableViewCell.m in Sources */,
@@ -6762,6 +6932,7 @@
 				043DBE1E20BE9EF300020936 /* UIBarButtonItem+Extension.m in Sources */,
 				0407478120EF3A220029FD60 /* JBShapeLineLayer.m in Sources */,
 				047CDB9A214B5270004D2FFD /* HTInventoryReportModel.m in Sources */,
+				04B0382221E87DC70008160B /* HTNewPayHeaderTableViewCell.m in Sources */,
 				0434D19420C9138C008E085F /* TYCyclePagerTransformLayout.m in Sources */,
 				046D90F9213FD6CC009869D5 /* HTMessgeModel.m in Sources */,
 				0471899E216079DD0063A736 /* JCHATConversationListCell.m in Sources */,
@@ -6853,6 +7024,7 @@
 				0439A1CF20D1106E00BB5E9B /* HTGuiderSaleListItemCell.m in Sources */,
 				0489FFE820DB7759009B5964 /* HTVipLevelNomalCell.m in Sources */,
 				0466C40A215C77BA004F9C58 /* HTCustEditHeadCollectionReusableView.m in Sources */,
+				04B0383621E87F1E0008160B /* HTNewPaySellerTableViewCell.m in Sources */,
 				04EC1E9F20CFC2F200AB10B5 /* HTProductInfoTableViewCell.m in Sources */,
 				04C997A5214F5B6600860833 /* IQTextView.m in Sources */,
 				047189A8216079DD0063A736 /* JCHATMessageTableView.m in Sources */,
@@ -6913,6 +7085,7 @@
 				04C73BED20DA288D00C62F17 /* HTCutomerTapMoreCell.m in Sources */,
 				04C73C1E20DA4F0D00C62F17 /* HTStoredAlertView.m in Sources */,
 				0453EBAD212EA3F20064BF3D /* UIView+DNImagePicker.m in Sources */,
+				04B0383121E87F060008160B /* HTNewPaySellerHeaderTableViewCell.m in Sources */,
 				0420F97C20F5F65400E785D5 /* HTBossSaleReportCompareController.m in Sources */,
 				043DBD8A20BE9E4B00020936 /* AppDelegate.m in Sources */,
 				04EEBDB8211A860900FDA14F /* HTCustomerSearchPhoneTableCell.m in Sources */,
@@ -6931,6 +7104,7 @@
 				047753E420C5174B008C8BA4 /* HTMeBaceInfoTableViewCell.m in Sources */,
 				047189B0216079DD0063A736 /* JCHATMoreView.m in Sources */,
 				048CD11D20BFCEEB00BE2DFD /* HTGHomeItemsCollectionCell.m in Sources */,
+				04B0386121FEA4760008160B /* HTRFMTableViewCell.m in Sources */,
 				0477540720C52E15008C8BA4 /* HTOnlineCustomerListViewController.m in Sources */,
 				0420F9A320F5F65400E785D5 /* HTBossSaleCompareListInfoTableCell.m in Sources */,
 				0453EBCD212EAADA0064BF3D /* HTCustomerTagsModel.m in Sources */,
@@ -6942,6 +7116,7 @@
 				0439A18D20D0CB7A00BB5E9B /* HTSeemoreHeaderView.m in Sources */,
 				043DBE3D20BEA5E700020936 /* Account.m in Sources */,
 				0439A1B120D0F9A700BB5E9B /* HTSinglePropresslineCell.m in Sources */,
+				04B0383B21E881350008160B /* HTNewPayPayHeaderTableViewCell.m in Sources */,
 				04204CC621798CF100BBFEAF /* HTEditFastProductModel.m in Sources */,
 				04C752C2212159E200F2BBD0 /* PhoneNumberTools.m in Sources */,
 				04CA20DC218014E0005F3E3A /* HTWarningHoldManager.m in Sources */,
@@ -7013,6 +7188,7 @@
 				0476344E216AF8A1002DC90E /* HTMessegeViewController.m in Sources */,
 				0453EBB9212EA3F20064BF3D /* DNTapDetectingImageView.m in Sources */,
 				04763479216C416D002DC90E /* HTGuiderDayItmeModel.m in Sources */,
+				04B0384021E881DC0008160B /* HTNewPayPayNormalKindTableViewCell.m in Sources */,
 				0453EB75212EA3930064BF3D /* HTProductColImgsTableCell.m in Sources */,
 				0421A4E321608160000DC687 /* SDWebImageManager+MJ.m in Sources */,
 				0486B4FA20ECBF0000D74128 /* HTGuiderDateSaleModel.m in Sources */,

@@ -37,26 +37,46 @@
         }
     }
     self.max = [NSString stringWithFormat:@"%lf",max];
-    self.tabHeight.constant = 48 * dataArray.count;
+    self.tabHeight.constant = 80 * dataArray.count;
     [self.tab reloadData];
 }
+
+-(void)setSecondArray:(NSArray *)secondArray{
+    _secondArray = secondArray;
+    CGFloat max = 1.0f;
+    for (HTHorizontalReportDataModel *model in secondArray) {
+        if (model.val.floatValue >= max) {
+            max = model.val.floatValue;
+        }
+    }
+    self.max = [NSString stringWithFormat:@"%lf",max];
+    self.tabHeight.constant = 80 * secondArray.count;
+    [self.tab reloadData];
+}
+
 #pragma mark -UITabelViewDelegate
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     HTSinglePropresslineCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTSinglePropresslineCell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     HTHorizontalReportDataModel *model =  self.dataArray[indexPath.row];
-    model.color = self.color;
+    model.color = [UIColor colorWithHexString:@"#614DB6"];
     model.max = self.max;
     cell.model = model;
+    HTHorizontalReportDataModel *secondModel =  self.secondArray[indexPath.row];
+    secondModel.color = [UIColor colorWithHexString:@"#FC5C7D"];
+    secondModel.max = self.max;
+    cell.secondModel = secondModel;
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 48;
+    return 80;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArray.count;;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    /*
     HTHorizontalReportDataModel *model =  self.dataArray[indexPath.row];
     HTCustomerViewController *vc = [[HTCustomerViewController alloc] init];
     vc.backImg = @"g-back";
@@ -80,6 +100,7 @@
      }else{
        [[HTShareClass shareClass].getCurrentNavController pushViewController:vc animated:YES];
      }
+     */
     
 }
 #pragma mark -CustomDelegate
@@ -98,7 +119,7 @@
     self.tab.backgroundColor = [UIColor clearColor];
     self.tab.scrollEnabled = NO;
     self.tab.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tabHeight.constant = 48 * 6;
+    self.tabHeight.constant = 80 * 6;
 }
 #pragma mark - getters and setters
 

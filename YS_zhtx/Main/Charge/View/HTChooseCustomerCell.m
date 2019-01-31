@@ -13,6 +13,10 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.ImageView.clipsToBounds = YES;
+    self.ImageView.layer.cornerRadius = 24;
+    self.levelLabel.clipsToBounds = YES;
+    self.levelLabel.layer.cornerRadius = 15.0 / 2;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

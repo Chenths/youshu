@@ -601,6 +601,7 @@
             NSDictionary * baseInfo = [json[@"data"] getDictionArrayWithKey:@"cust"];
             [self.requestDic setObject:[baseInfo  getStringWithKey:@"custleveldata"] forKey:@"model.custLevel_json"];
             [self.requestDic setObject:[baseInfo  getStringWithKey:@"height"] forKey:@"model.height"];
+            [self.requestDic setObject:[baseInfo getStringWithKey:@"wechat"] forKey:@"cust.wechat"];
             [self.requestDic setObject:[baseInfo  getStringWithKey:@"hobby"] forKey:@"model.hobby"];
             [self.requestDic setObject:[baseInfo  getStringWithKey:@"name"] forKey:@"model.name"];
             [self.requestDic setObject:[baseInfo  getStringWithKey:@"headimg"] forKey:@"headimg"];
@@ -735,7 +736,7 @@
         _cellsName = [NSMutableArray array];
         [_cellsName addObject:@[@"HTEditVipHeadImgCell",@"HTEditVipDefaulTypeCell",@"HTEditVipDefaulTypeCell",@"HTEditVipSexTypeCell",@"HTEditVipBirthTypeCell"]];
         [self.headsTitle addObject:@"基本信息"];
-        [_cellsName addObject:@[@"HTEditVipCustLevelCell",@"HTEditVipDefaulTypeCell",@"HTEditVipDefaulTypeCell",@"HTEditVipDefaulTypeCell", @"HTEditVipTipCell"]];
+        [_cellsName addObject:@[@"HTEditVipCustLevelCell",@"HTEditVipDefaulTypeCell",@"HTEditVipDefaulTypeCell",@"HTEditVipDefaulTypeCell",@"HTEditVipDefaulTypeCell", @"HTEditVipTipCell"]];
         [self.headsTitle addObject:@"客户资料"];
         [_cellsName addObject:@[@"HTTagsTableViewCell"]];
         [self.headsTitle addObject:@"个性标签"];

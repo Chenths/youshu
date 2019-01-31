@@ -12,11 +12,11 @@ typedef enum payType
     cashType,//现金支付
     posType,//刷卡支付
     storedType,//储值制服
-    aliType,//支付宝支付
+    aliType,//支付宝扫码支付
     storedSendType,//储值赠送支付
     alipayType,
     wetchatType,
-    
+    mixType,//组合支付
 }payType;
 
 @interface HTPrinterModel : NSObject

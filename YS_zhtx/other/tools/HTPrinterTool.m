@@ -875,6 +875,11 @@
             type = @"微信支付";
         }
             break;
+            
+            case mixType:
+        {
+            type = @"组合支付";
+        }
             break;
         default:
             break;

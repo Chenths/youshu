@@ -14,6 +14,8 @@
 
 -(void)settlerClicked;
 
+-(void)chooseSellerClicked:(UIButton *)button;
+
 @end
 
 @interface HTCashierBottomView : UIView
@@ -30,6 +32,10 @@
 @property (nonatomic,strong) NSString *totlePrice;
 
 @property (nonatomic,strong) NSString *productNum;
-
+@property (weak, nonatomic) IBOutlet UIButton *sellerChooseBtn;
+//平时0 特殊86
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *sellerChooseBtnWidth;
+//平时100 特殊73
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *payBtnWidht;
 
 @end

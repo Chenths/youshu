@@ -58,5 +58,6 @@
 @property (nonatomic,strong) NSString *hobby;
 @property (nonatomic,strong) NSString *height;
 @property (nonatomic,strong) NSString *remark;
-
+//微信
+@property (nonatomic,strong) NSString *wechat;
 @end

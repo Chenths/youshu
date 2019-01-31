@@ -18,6 +18,7 @@
 #import "HTMenuModle.h"
 #import "HTCustomerFaceVipTableViewCell.h"
 #import "HTFaceComingAlertView.h"
+#import "HTFastCashierViewController.h"
 @interface HTOnlineCustomerListViewController ()<UITableViewDelegate,UITableViewDataSource,HTCustomerFaceInfoCellDelegate, HTCustomerFaceVIPCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *dataTableView;
@@ -112,18 +113,27 @@
     HTCustomerReportViewController *vc = [[HTCustomerReportViewController alloc] init];
     HTCustomerListModel *mmm = [[HTCustomerListModel alloc] init];
     mmm.custId = model.customerId;
-    vc.customerType = HTCustomerReportTypeFacePush;
+    vc.customerType = HTCustomerReportTypeNomal;
     vc.model = mmm;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)repitBuyWithCell:(HTCustomerFaceInfoCell *)cell{
-    HTChargeViewController *vc = [[HTChargeViewController alloc] init];
-    NSIndexPath *index = [self.dataTableView indexPathForCell:cell];
-    HTNewFaceVipModel *model = self.dataArray[index.row];
-    vc.phone = model.phone;
-    vc.customerId = model.customerId;
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([HTShareClass shareClass].isProductActive) {
+        HTChargeViewController *vc = [[HTChargeViewController alloc] init];
+        NSIndexPath *index = [self.dataTableView indexPathForCell:cell];
+        HTNewFaceVipModel *model = self.dataArray[index.row];
+        vc.phone = model.phone;
+        vc.customerId = model.customerId;
+        [self.navigationController  pushViewController:vc animated:YES];
+    }else{
+        HTFastCashierViewController *vc = [[HTFastCashierViewController alloc] init];
+        NSIndexPath *index = [self.dataTableView indexPathForCell:cell];
+        HTNewFaceVipModel *model = self.dataArray[index.row];
+        vc.phone = model.phone;
+        vc.customerid = model.customerId;
+        [self.navigationController  pushViewController:vc animated:YES];
+    }
 }
 
 - (void)writeCutomerInfoWithCell:(HTCustomerFaceInfoCell *)cell{
@@ -154,12 +164,21 @@
 }
 
 - (void)repitBuyVipWithCell:(HTCustomerFaceInfoCell *)cell{
-    HTChargeViewController *vc = [[HTChargeViewController alloc] init];
-    NSIndexPath *index = [self.dataTableView indexPathForCell:cell];
-    HTNewFaceVipModel *model = self.dataArray[index.row];
-    vc.phone = model.phone;
-    vc.customerId = model.customerId;
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([HTShareClass shareClass].isProductActive) {
+        HTChargeViewController *vc = [[HTChargeViewController alloc] init];
+        NSIndexPath *index = [self.dataTableView indexPathForCell:cell];
+        HTNewFaceVipModel *model = self.dataArray[index.row];
+        vc.phone = model.phone;
+        vc.customerId = model.customerId;
+        [self.navigationController  pushViewController:vc animated:YES];
+    }else{
+        HTFastCashierViewController *vc = [[HTFastCashierViewController alloc] init];
+        NSIndexPath *index = [self.dataTableView indexPathForCell:cell];
+        HTNewFaceVipModel *model = self.dataArray[index.row];
+        vc.phone = model.phone;
+        vc.customerid = model.customerId;
+        [self.navigationController  pushViewController:vc animated:YES];
+    }
 }
 
 - (void)writeCutomerInfoVipWithCell:(HTCustomerFaceInfoCell *)cell{

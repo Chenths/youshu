@@ -9,5 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @interface HTNewPaySellerTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *selectImv;
+@property (weak, nonatomic) IBOutlet UIImageView *headerImv;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UITextField *priceTF;
+@property (weak, nonatomic) IBOutlet UITextField *biliTF;
+@property (weak, nonatomic) IBOutlet UIView *priceView;
+@property (weak, nonatomic) IBOutlet UIView *biliView;
+@property (weak, nonatomic) IBOutlet UILabel *zhiweiLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerImvLeft;
 
 @end

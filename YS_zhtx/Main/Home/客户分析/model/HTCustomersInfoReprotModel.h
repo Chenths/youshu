@@ -25,13 +25,13 @@
 
 @property (nonatomic,strong) NSArray *amountDistribute;
 
-@property (nonatomic,strong) NSArray *amountSecDistribute;
+@property (nonatomic,strong) NSArray *amountDistribute2;
 
 
 
 @property (nonatomic,strong) NSArray *customerConsumeTimeApp;
 
-@property (nonatomic,strong) NSArray *customerSecConsumeTimeApp;
+@property (nonatomic,strong) NSArray *customerConsumeTimeApp2;
 
 @property (nonatomic,strong) NSArray *consume;
 

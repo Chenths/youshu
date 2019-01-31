@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface HTCustAccoutModel : NSObject
-
+//储值
 @property (nonatomic,strong) HTAccoutInfoModel *stored;
-
+//积分
 @property (nonatomic,strong) HTAccoutInfoModel *integral;
-
+//储赠
 @property (nonatomic,strong) HTAccoutInfoModel *storedPresented;
 
 

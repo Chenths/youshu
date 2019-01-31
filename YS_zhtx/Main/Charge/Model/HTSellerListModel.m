@@ -9,5 +9,9 @@
 #import "HTSellerListModel.h"
 
 @implementation HTSellerListModel
-
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key{
+    if ([key isEqualToString:@"id"]) {
+        self.sellerId = value;
+    }
+}
 @end

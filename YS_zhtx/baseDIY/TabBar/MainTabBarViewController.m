@@ -19,6 +19,7 @@
 #import "HTCustomerViewController.h"
 #import "HTMineViewController.h"
 #import "HTFastCashierViewController.h"
+#import "HTNewPayViewController.h"//要注销
 #define homeImg @"g-boss"
 #define homeSelectedImg @"g-bossSelected"
 #define customerImg @"g-customer"
@@ -99,12 +100,16 @@ UIColor *MainViewColor = nil;
 
 #pragma mark - YHTabBarDelegate
 - (void)actionEventsOfBarCentItemClickWithTabBar:(YHTabBar *)tabBar{
+    
+    
     if ([HTShareClass shareClass].isProductActive) {
       [self.selectedViewController  pushViewController:[[HTChargeViewController alloc]init] animated:YES];
     }else{
       [self.selectedViewController  pushViewController:[[HTFastCashierViewController alloc]init] animated:YES];
     }
     
+//    HTNewPayViewController *pay = [[HTNewPayViewController alloc] init];
+//    [self.selectedViewController pushViewController:pay animated:YES];
 }
 -(void)msgClicked:(UIButton *)sender{
     HTMsgCenterViewController *vc = [[HTMsgCenterViewController alloc] init];

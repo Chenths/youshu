@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "HTCustRFMMeaasge.h"
 @interface HTRFMTableViewCell : UITableViewCell
-
+@property (weak, nonatomic) IBOutlet UILabel *left1;
+@property (weak, nonatomic) IBOutlet UILabel *left2;
+@property (weak, nonatomic) IBOutlet UILabel *left3;
+@property (weak, nonatomic) IBOutlet UILabel *right1;
+@property (weak, nonatomic) IBOutlet UILabel *right2;
+@property (weak, nonatomic) IBOutlet UILabel *right3;
+@property (nonatomic, strong) HTCustRFMMeaasge *model;
 @end

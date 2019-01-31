@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface HTNewPayPayHeaderTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *imv;
+@property (weak, nonatomic) IBOutlet UIButton *payHeaderLeft;
+@property (weak, nonatomic) IBOutlet UIButton *payHeaderRight;
 
 @end

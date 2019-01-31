@@ -10,7 +10,7 @@
 #import "HTPiesModel.h"
 #import "HTCustomerTagsModel.h"
 #import <Foundation/Foundation.h>
-
+#import "HTCustRFMMeaasge.h"
 @interface HTCustomerReportModel : NSObject
 //类别分类
 @property (nonatomic,strong) HTPiesModel *categoriesModel;
@@ -34,7 +34,7 @@
 @property (nonatomic,strong) HTCustomerReprotSaleMsgModel *baseMessage;
 
 @property (nonatomic,strong) HTCustomerTagsModel *tags;
-
-
+//RFM
+@property (nonatomic, strong) HTCustRFMMeaasge *custRFMMessage;
 
 @end

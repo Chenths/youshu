@@ -11,5 +11,5 @@
 @interface HTSinglePropresslineCell : UITableViewCell
 
 @property (nonatomic,strong) HTHorizontalReportDataModel *model;
-
+@property (nonatomic,strong) HTHorizontalReportDataModel *secondModel;
 @end

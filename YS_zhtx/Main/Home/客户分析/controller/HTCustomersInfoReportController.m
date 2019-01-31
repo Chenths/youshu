@@ -89,31 +89,34 @@
         cell.beginTime = self.customersModel.consumeTimeBegin;
         cell.endTime = self.customersModel.consumeTimeEnd;
         cell.companyId = self.companyId;
-        if (indexPath.row == 1) {
+        if (indexPath.row == 2) {
             cell.title = @"频次分布";
-            cell.color = [UIColor colorWithHexString:@"#614DB6"];
+//            cell.color = [UIColor colorWithHexString:@"#614DB6"];
+            cell.secondArray = self.customersModel.customerConsumeTimeApp2;
             cell.dataArray = self.customersModel.customerConsumeTimeApp;
         }
-        if (indexPath.row == 2) {
+        if (indexPath.row == 3) {
             cell.title = @"金额分布";
-            cell.color = [UIColor colorWithHexString:@"#FC5C7D"];
+//            cell.color = [UIColor colorWithHexString:@"#FC5C7D"];
+            cell.secondArray = self.customersModel.amountDistribute2;
             cell.dataArray = self.customersModel.amountDistribute;
         }
-        if (indexPath.row == 4) {
-            cell.title = @"频次分布";
-            cell.color = [UIColor colorWithHexString:@"#614DB6"];
-            cell.dataArray = self.customersModel.customerSecConsumeTimeApp;
-        }
-        if (indexPath.row == 5) {
-            cell.title = @"金额分布";
-            cell.color = [UIColor colorWithHexString:@"#FC5C7D"];
-            cell.dataArray = self.customersModel.amountSecDistribute;
-        }
+//        if (indexPath.row == 4) {
+//            cell.title = @"频次分布";
+//            cell.color = [UIColor colorWithHexString:@"#614DB6"];
+//            cell.dataArray = self.customersModel.customerSecConsumeTimeApp;
+//        }
+//        if (indexPath.row == 5) {
+//            cell.title = @"金额分布";
+//            cell.color = [UIColor colorWithHexString:@"#FC5C7D"];
+//            cell.dataArray = self.customersModel.amountSecDistribute;
+//        }
         return cell;
     }else if ([cellName isEqualToString:@"HTChooseBetweenDateCell"]) {
         HTChooseBetweenDateCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTChooseBetweenDateCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.index = indexPath;
+        cell.showColor = YES;
         cell.model = self.customersModel;
         return cell;
     }else if ([cellName isEqualToString:@"HTLineDataReportTableViewCell"]) {
@@ -206,9 +209,18 @@
             dateTimePickerView.betweenClickedOkBtn = ^(NSString *beginTime, NSString *endTime) {
                 __strong typeof(weakSelf) strongSelf = weakSelf;
                 if (indexPath.row == 0) {
-                  [strongSelf loadCustomerConsumeWithBeginTime:beginTime AndEndTime:endTime andType:YES];
+                    //第一开始时间
+                    self.customersModel.consumeTimeBegin = beginTime;
+                    //结束
+                    self.customersModel.consumeTimeEnd = endTime;
+                    
+                    [strongSelf loadCustomerConsumeWithBeginTime:beginTime AndEndTime:endTime andType:YES];
                 }else{
-                  [strongSelf loadCustomerConsumeWithBeginTime:beginTime AndEndTime:endTime andType:NO];
+                    //第二开始时间
+                    self.customersModel.consumeTimeSecBegin = beginTime;
+                    //第二结束时间
+                    self.customersModel.consumeTimeSecEnd = endTime;
+                    [strongSelf loadCustomerConsumeWithBeginTime:beginTime AndEndTime:endTime andType:NO];
                 }
             } ;
             [self.view addSubview:dateTimePickerView];
@@ -309,37 +321,47 @@
 -(void)loadCustomerConsumeWithBeginTime:(NSString *)beginTime AndEndTime:(NSString *)endTime andType:(BOOL)isFirst{
     NSDictionary *dic = @{
                           @"companyId":self.companyId,
-                          @"beginDate":beginTime,
-                          @"endDate":endTime
+                          @"beginDate":self.customersModel.consumeTimeBegin,
+                          @"endDate":self.customersModel.consumeTimeEnd,
+                          @"beginDateCom":self.customersModel.consumeTimeSecBegin,
+                          @"endDateCom":self.customersModel.consumeTimeSecEnd
                           };
     [MBProgressHUD showMessage:@""];
     [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleCustomerReport,loadcustomerConsumeReport] params:dic success:^(id json) {
         [MBProgressHUD hideHUD];
         NSArray *amount = [json[@"data"] getArrayWithKey:@"amount"];
+        NSArray *amount2 = [json[@"data"] getArrayWithKey:@"amount2"];
         NSArray *time = [json[@"data"] getArrayWithKey:@"time"];
+        NSArray *time2 = [json[@"data"] getArrayWithKey:@"time2"];
         NSMutableArray *arr = [NSMutableArray array];
         for (NSDictionary *dic in amount) {
             [arr addObject:[HTHorizontalReportDataModel yy_modelWithJSON:dic]];
         }
-        if (isFirst) {
-          self.customersModel.amountDistribute = arr;
-        }else{
-          self.customersModel.amountSecDistribute = arr;
+        
+        NSMutableArray *arr2 = [NSMutableArray array];
+        for (NSDictionary *dic in amount2) {
+            [arr2 addObject:[HTHorizontalReportDataModel yy_modelWithJSON:dic]];
         }
         
-        NSMutableArray *arr1 = [NSMutableArray array];
+          self.customersModel.amountDistribute = arr;
+        
+          self.customersModel.amountDistribute2 = arr2;
+        
+        
+        NSMutableArray *arr3 = [NSMutableArray array];
         for (NSDictionary *dic in time) {
-            [arr1 addObject:[HTHorizontalReportDataModel yy_modelWithJSON:dic]];
+            [arr3 addObject:[HTHorizontalReportDataModel yy_modelWithJSON:dic]];
         }
-        if (isFirst) {
-            self.customersModel.customerConsumeTimeApp = arr1;
-            self.customersModel.consumeTimeBegin = beginTime;
-            self.customersModel.consumeTimeEnd = endTime;
-        }else{
-            self.customersModel.customerSecConsumeTimeApp = arr1;
-            self.customersModel.consumeTimeSecBegin = beginTime;
-            self.customersModel.consumeTimeSecEnd = endTime;
+        
+        NSMutableArray *arr4 = [NSMutableArray array];
+        for (NSDictionary *dic in time2) {
+            [arr4 addObject:[HTHorizontalReportDataModel yy_modelWithJSON:dic]];
         }
+        
+        self.customersModel.customerConsumeTimeApp = arr3;
+        self.customersModel.customerConsumeTimeApp2 = arr4;
+
+     
         [self.tab reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:5];
     } error:^{
         [MBProgressHUD hideHUD];
@@ -396,21 +418,35 @@
     [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleCustomerReport,loadCustomerReport] params:dic success:^(id json) {
         [MBProgressHUD hideHUD];
         self.customersModel = [HTCustomersInfoReprotModel yy_modelWithJSON:json[@"data"]];
+        
         NSDateFormatter * yearF1 = [[NSDateFormatter alloc] init];
         [yearF1 setDateFormat:@"YYYY-MM-dd"];
         NSDateFormatter * yearF2 = [[NSDateFormatter alloc] init];
         [yearF2 setDateFormat:@"dd"];
+        
         NSString *whichDay = [yearF2 stringFromDate:[NSDate date]];
+        
         NSString *thisMonth = [yearF1 stringFromDate:[[NSDate date] dateBySubingDays:-1 * (whichDay.integerValue - 1)]];
         NSString *today    = [yearF1 stringFromDate:[NSDate date]];
+        
+        
+        
         self.customersModel.rankTimeBegin = thisMonth;
         self.customersModel.vipAddTimeBegin = thisMonth;
-        self.customersModel.consumeTimeBegin = thisMonth;
         self.customersModel.rankTimeEnd = today;
         self.customersModel.vipAddTimeEnd = today;
+        //选择开始时间
+        self.customersModel.consumeTimeBegin = thisMonth;
+        //选择结束时间
         self.customersModel.consumeTimeEnd = today;
-        self.customersModel.consumeTimeSecBegin = thisMonth;
-        self.customersModel.consumeTimeSecEnd = today;
+        
+        [self getLastMonthLastDay];
+        
+//        //选择开始时间2
+//        self.customersModel.consumeTimeSecBegin = thisMonth;
+//        //选择结束时间2
+//        self.customersModel.consumeTimeSecEnd = today;
+        
         if (self.customersModel.consume.count > 4) {
             [self.cellsName replaceObjectAtIndex:6 withObject:@[@"HTChooseBetweenDateCell",@"HTRankDataoboutCustomerCell",@"HTRankDataoboutCustomerCell",@"HTRankDataoboutCustomerCell"]];
             [self.footerArray replaceObjectAtIndex:6 withObject:@"会员消费榜"];
@@ -434,8 +470,12 @@
             [self.cellsName replaceObjectAtIndex:7 withObject:arr];
             [self.footerArray replaceObjectAtIndex:7 withObject:@""];
         }
-        self.customersModel.customerSecConsumeTimeApp = self.customersModel.customerConsumeTimeApp;
-        self.customersModel.amountSecDistribute = self.customersModel.amountDistribute;
+        
+
+//        self.customersModel.customerSecConsumeTimeApp = self.customersModel.customerConsumeTimeApp;
+
+//        self.customersModel.amountSecDistribute = self.customersModel.amountDistribute;
+        
         [self.tab reloadData];
         if (self.selectdWarning) {
             [self.tab scrollToRowAtIndexPath:self.selectdWarning.waringIndex atScrollPosition:UITableViewScrollPositionTop animated:YES];
@@ -448,6 +488,71 @@
         [MBProgressHUD showError:NETERRORSTRING];
     }];
 }
+
+- (void)getLastMonthLastDay{
+    //日历操作工具待会儿要用
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    //当前时间
+    NSDate *dateNow = [NSDate date];
+    //转换当前时间的格式为 XXXX-XX-XX
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateStr = [formatter stringFromDate:dateNow];
+    NSLog(@"dateNow-->%@",dateStr);
+    //获取 年月日
+    NSInteger year = [[dateStr substringToIndex:4] integerValue];
+    NSInteger month = [[dateStr substringWithRange:NSMakeRange(5, 2)] integerValue];
+    NSInteger day = [[dateStr substringFromIndex:8] integerValue];
+    NSLog(@"year -> %ld month -> %ld day -> %ld",(long)year,(long)month,(long)day);
+    
+    //NSDateComponents这个叫什么还真不知道。 大致理解为时间元,构造时间的
+    //构造当月的1号时间
+    NSDateComponents *firstDayCurrentMonth = [[NSDateComponents alloc] init];
+    [firstDayCurrentMonth setYear:year];
+    [firstDayCurrentMonth setMonth:month];
+    [firstDayCurrentMonth setDay:1];
+    //当月1号
+    NSDate *firstDayOfCurrentMonth = [calendar dateFromComponents:firstDayCurrentMonth];
+    NSLog(@"firstDayOfCurrentMonth -> %@",firstDayOfCurrentMonth);
+//    4.然后再获取上月一号时间:
+    
+    
+    //构造上月1号时间
+    month --;
+    //获取上月月份 没的说
+    if (month == 0) {
+        month = 12;
+        year--;
+    }
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    [dateComponents setYear:year];
+    [dateComponents setMonth:month];
+    [dateComponents setDay:1];
+    //上月1号时间
+    NSDate *firstDayOfLastMonth = [calendar dateFromComponents:dateComponents];
+    NSLog(@"firstDayOfLastMonth -> %@",firstDayOfLastMonth);
+    //上个月的最后一天的最后一秒
+    NSDate *lastDayOfLastlMonth = [firstDayOfCurrentMonth dateByAddingTimeInterval:-1];
+    NSLog(@"lastDayOfLastlMonth -> %@",lastDayOfLastlMonth);
+    
+    
+    NSDateFormatter *formatterfinal = [[NSDateFormatter alloc] init];
+    [formatterfinal setDateFormat:@"yyyy-MM-dd"];
+    //上月最后一天
+    NSString *finalEnd = [NSString stringWithFormat:@"%@", [formatterfinal stringFromDate:lastDayOfLastlMonth]];
+    
+    
+    NSDateFormatter *formatterbegin = [[NSDateFormatter alloc] init];
+    [formatterbegin setDateFormat:@"yyyy-MM"];
+    //上月最后一天
+    NSString *finalBegin = [NSString stringWithFormat:@"%@-01", [formatterbegin stringFromDate:lastDayOfLastlMonth]];
+
+    //选择开始时间2
+    self.customersModel.consumeTimeSecBegin = finalBegin;
+    //选择结束时间2
+    self.customersModel.consumeTimeSecEnd = finalEnd;
+}
+
 -(void)createTb{
     self.tab.delegate = self;
     self.tab.dataSource = self;
@@ -478,7 +583,7 @@
         _cellsName = [NSMutableArray array];
         [_cellsName addObject:@[@"HTTotleVipNumsTableViewCell",@"HTCustomersReportBaceInfoCell"]];
         [_cellsName addObject:@[@"HTLineDataReportTableViewCell"]];
-        [_cellsName addObject:@[@"HTChooseBetweenDateCell",@"HTDataPropressLineCell",@"HTDataPropressLineCell",@"HTChooseBetweenDateCell",@"HTDataPropressLineCell",@"HTDataPropressLineCell"]];
+        [_cellsName addObject:@[@"HTChooseBetweenDateCell",@"HTChooseBetweenDateCell",@"HTDataPropressLineCell",@"HTDataPropressLineCell"]];
         [_cellsName addObject:@[@"HTAgeAndeSexInfoReportCell"]];
         [_cellsName addObject:@[@"HTNewPieCellTableViewCell"]];
         [_cellsName addObject:@[@"HTDefaulDataLineTableViewCell",@"HTDefaulDataLineTableViewCell",@"HTManyLineBarDataTableViewCell"]];

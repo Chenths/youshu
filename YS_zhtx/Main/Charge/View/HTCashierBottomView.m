@@ -30,20 +30,33 @@
 @implementation HTCashierBottomView
 
 - (IBAction)vipBtClicked:(id)sender {
-    if (self.custModel.custId.length > 0) {
-        if (self.isShowAlert) {
-            [self.alertView tapCoverView];
-            self.isShowAlert = NO;
-        }else{
-          self.alertView = [HTNewCustomerBaceInfoView showAlertViewInView:[[UIApplication sharedApplication].delegate window] andDelegate:self withCustData:self.custModel];
-          self.isShowAlert = YES;
-        }
-    }else{
+//    if (self.custModel.custId.length > 0) {
+//        if (self.isShowAlert) {
+//            [self.alertView tapCoverView];
+//            self.isShowAlert = NO;
+//        }else{
+//          self.alertView = [HTNewCustomerBaceInfoView showAlertViewInView:[[UIApplication sharedApplication].delegate window] andDelegate:self withCustData:self.custModel];
+//          self.isShowAlert = YES;
+//        }
+//    }else{
         if (self.delegate) {
             [self.delegate vipBtclicked];
         }
-    }
+//    }
    
+}
+- (IBAction)selectSellerChooseBtn:(id)sender {
+    if (self.sellerChooseBtn.tag == 8001) {
+        if (self.delegate) {
+            [self.delegate chooseSellerClicked:(UIButton *)sender];
+        }
+        self.sellerChooseBtn.tag = 8002;
+    }else{
+        if (self.delegate) {
+            [self.delegate chooseSellerClicked:(UIButton *)sender];
+        }
+        self.sellerChooseBtn.tag = 8001;
+    }
 }
 - (IBAction)setterClicked:(id)sender {
     if (self.delegate) {

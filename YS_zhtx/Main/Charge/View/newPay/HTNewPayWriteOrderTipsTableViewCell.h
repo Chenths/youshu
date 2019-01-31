@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface HTNewPayWriteOrderTipsTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UITextView *tipLabel;
 
 @end

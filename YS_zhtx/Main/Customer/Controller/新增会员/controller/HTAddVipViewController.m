@@ -24,6 +24,8 @@
 #import "HTLoginDataPersonModel.h"
 #import "HTChooseHeadImgViewController.h"
 #import "HTFaceImgListModel.h"
+#import "HTChargeViewController.h"
+#import "HTFastCashierViewController.h"
 @interface HTAddVipViewController ()<UITableViewDelegate,UITableViewDataSource,HTTagsTableViewCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HTEditVipContinueBackListCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tab;
 @property (weak, nonatomic) IBOutlet UIButton *saveBt;
@@ -387,44 +389,129 @@
                 }else{
                     [MBProgressHUD showError:[NSString stringWithFormat:@"新增会员成功，添加跟进记录失败"]];
                 }
-                HTCustomerReportViewController *vc = [[HTCustomerReportViewController alloc] init];
-                HTCustomerListModel *model = [[HTCustomerListModel alloc] init];
-                model.custId = [json[@"data"] getStringWithKey:@"modelId"];
-                vc.model = model;
-                vc.customerType = HTCustomerReportTypeNomal;
-                [self.navigationController popViewControllerAnimated:NO];
-                [[HTShareClass shareClass].getCurrentNavController pushViewController:vc animated:YES];
+                if (self.isFromList) {
+                    NSDictionary *tempDic = @{@"phone" : self.phone};
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"addVipBackNoti" object:nil userInfo:tempDic];
+                    NSArray* temArray = self.navigationController.viewControllers;
+                    
+                    HTChargeViewController *test = [[HTChargeViewController alloc] init];
+                    HTFastCashierViewController *test2 = [[HTFastCashierViewController alloc] init];
+                    
+                    for(UIViewController *temVC in temArray)
+                        
+                    {
+                        if ([temVC isKindOfClass:[test class]]) {
+                            [self.navigationController popToViewController:temVC animated:YES];
+                        }else if([temVC isKindOfClass:[test2 class]]){
+                            [self.navigationController popToViewController:temVC animated:YES];
+                        }else{
+                            
+                        }
+                    }
+                    
+                }else{
+                    HTCustomerReportViewController *vc = [[HTCustomerReportViewController alloc] init];
+                    HTCustomerListModel *model = [[HTCustomerListModel alloc] init];
+                    model.custId = [json[@"data"] getStringWithKey:@"modelId"];
+                    vc.model = model;
+                    vc.customerType = HTCustomerReportTypeNomal;
+                    [self.navigationController popViewControllerAnimated:NO];
+                    [[HTShareClass shareClass].getCurrentNavController pushViewController:vc animated:YES];
+                }
             } error:^{
                 [MBProgressHUD hideHUD];
                 [MBProgressHUD showError:[NSString stringWithFormat:@"新增会员成功，添加跟进记录失败"]];
-                HTCustomerReportViewController *vc = [[HTCustomerReportViewController alloc] init];
-                HTCustomerListModel *model = [[HTCustomerListModel alloc] init];
-                model.custId = [json[@"data"] getStringWithKey:@"modelId"];
-                vc.model = model;
-                vc.customerType = HTCustomerReportTypeNomal;
-                [self.navigationController popViewControllerAnimated:NO];
-                [[HTShareClass shareClass].getCurrentNavController pushViewController:vc animated:YES];
+                if (self.isFromList) {
+                    NSDictionary *tempDic = @{@"phone" : self.phone};
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"addVipBackNoti" object:nil userInfo:tempDic];
+                    NSArray* temArray = self.navigationController.viewControllers;
+                    
+                    HTChargeViewController *test = [[HTChargeViewController alloc] init];
+                    HTFastCashierViewController *test2 = [[HTFastCashierViewController alloc] init];
+                    
+                    for(UIViewController *temVC in temArray)
+                        
+                    {
+                        if ([temVC isKindOfClass:[test class]]) {
+                            [self.navigationController popToViewController:temVC animated:YES];
+                        }else if([temVC isKindOfClass:[test2 class]]){
+                            [self.navigationController popToViewController:temVC animated:YES];
+                        }else{
+                            
+                        }
+                    }
+                }else{
+                    HTCustomerReportViewController *vc = [[HTCustomerReportViewController alloc] init];
+                    HTCustomerListModel *model = [[HTCustomerListModel alloc] init];
+                    model.custId = [json[@"data"] getStringWithKey:@"modelId"];
+                    vc.model = model;
+                    vc.customerType = HTCustomerReportTypeNomal;
+                    [self.navigationController popViewControllerAnimated:NO];
+                    [[HTShareClass shareClass].getCurrentNavController pushViewController:vc animated:YES];
+                }
             } failure:^(NSError *error) {
                 [MBProgressHUD hideHUD];
                 [MBProgressHUD showError:[NSString stringWithFormat:@"新增会员成功，添加跟进记录失败"]];
-                HTCustomerReportViewController *vc = [[HTCustomerReportViewController alloc] init];
-                HTCustomerListModel *model = [[HTCustomerListModel alloc] init];
-                model.custId = [json[@"data"] getStringWithKey:@"modelId"];
-                vc.model = model;
-                vc.customerType = HTCustomerReportTypeNomal;
-                [self.navigationController popViewControllerAnimated:NO];
-                [[HTShareClass shareClass].getCurrentNavController pushViewController:vc animated:YES];
+                if (self.isFromList) {
+                    NSDictionary *tempDic = @{@"phone" : self.phone};
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"addVipBackNoti" object:nil userInfo:tempDic];
+                    NSArray* temArray = self.navigationController.viewControllers;
+                    
+                    HTChargeViewController *test = [[HTChargeViewController alloc] init];
+                    HTFastCashierViewController *test2 = [[HTFastCashierViewController alloc] init];
+                    
+                    for(UIViewController *temVC in temArray)
+                        
+                    {
+                        if ([temVC isKindOfClass:[test class]]) {
+                            [self.navigationController popToViewController:temVC animated:YES];
+                        }else if([temVC isKindOfClass:[test2 class]]){
+                            [self.navigationController popToViewController:temVC animated:YES];
+                        }else{
+                            
+                        }
+                    }
+                }else{
+                    HTCustomerReportViewController *vc = [[HTCustomerReportViewController alloc] init];
+                    HTCustomerListModel *model = [[HTCustomerListModel alloc] init];
+                    model.custId = [json[@"data"] getStringWithKey:@"modelId"];
+                    vc.model = model;
+                    vc.customerType = HTCustomerReportTypeNomal;
+                    [self.navigationController popViewControllerAnimated:NO];
+                    [[HTShareClass shareClass].getCurrentNavController pushViewController:vc animated:YES];
+                }
             }];
         }else{
             [MBProgressHUD hideHUD];
             [MBProgressHUD showSuccess:@"新增会员成功"];
-            HTCustomerReportViewController *vc = [[HTCustomerReportViewController alloc] init];
-            HTCustomerListModel *model = [[HTCustomerListModel alloc] init];
-            model.custId = [json[@"data"] getStringWithKey:@"modelId"];
-            vc.model = model;
-            vc.customerType = HTCustomerReportTypeNomal;
-            [self.navigationController popViewControllerAnimated:NO];
-            [[HTShareClass shareClass].getCurrentNavController pushViewController:vc animated:YES];
+            if (self.isFromList) {
+                NSDictionary *tempDic = @{@"phone" : self.phone};
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"addVipBackNoti" object:nil userInfo:tempDic];
+                NSArray* temArray = self.navigationController.viewControllers;
+                
+                HTChargeViewController *test = [[HTChargeViewController alloc] init];
+                HTFastCashierViewController *test2 = [[HTFastCashierViewController alloc] init];
+                
+                for(UIViewController *temVC in temArray)
+                    
+                {
+                    if ([temVC isKindOfClass:[test class]]) {
+                        [self.navigationController popToViewController:temVC animated:YES];
+                    }else if([temVC isKindOfClass:[test2 class]]){
+                        [self.navigationController popToViewController:temVC animated:YES];
+                    }else{
+                        
+                    }
+                }
+            }else{
+                HTCustomerReportViewController *vc = [[HTCustomerReportViewController alloc] init];
+                HTCustomerListModel *model = [[HTCustomerListModel alloc] init];
+                model.custId = [json[@"data"] getStringWithKey:@"modelId"];
+                vc.model = model;
+                vc.customerType = HTCustomerReportTypeNomal;
+                [self.navigationController popViewControllerAnimated:NO];
+                [[HTShareClass shareClass].getCurrentNavController pushViewController:vc animated:YES];
+            }
         }
     } error:^{
         [MBProgressHUD hideHUD];
@@ -434,6 +521,10 @@
         [MBProgressHUD showError:NETERRORSTRING];
     }];
 }
+
+
+
+
 #pragma mark -private methods
 -(void)createTb{
     self.tab.delegate = self;
@@ -488,6 +579,7 @@
             [self.requestDic setObject:[baseInfo  getStringWithKey:@"birthday"] forKey:@"cust.birthday"];
             [self.requestDic setObject:[baseInfo  getStringWithKey:@"nickname"] forKey:@"cust.nickname"];
             [self.requestDic setObject:[baseInfo  getStringWithKey:@"phone"] forKey:@"cust.phone"];
+            [self.requestDic setObject:[baseInfo  getStringWithKey:@"wechat"] forKey:@"cust.wechat"];
             [self.requestDic setObject:[baseInfo  getStringWithKey:@"sex"] forKey:@"cust.sex"];
             [self.requestDic setObject:[baseInfo  getStringWithKey:@"headimg"] forKey:@"headimg"];
         }
@@ -560,7 +652,7 @@
         _cellsName = [NSMutableArray array];
         [_cellsName addObject:@[@"HTEditVipHeadImgCell",@"HTEditVipDefaulTypeCell",@"HTEditVipDefaulTypeCell",@"HTEditVipSexTypeCell",@"HTEditVipBirthTypeCell"]];
         [self.headsTitle addObject:@"基本信息"];
-        [_cellsName addObject:@[@"HTEditVipCustLevelCell",@"HTEditVipDefaulTypeCell",@"HTEditVipDefaulTypeCell",@"HTEditVipDefaulTypeCell"]];
+        [_cellsName addObject:@[@"HTEditVipCustLevelCell",@"HTEditVipDefaulTypeCell",@"HTEditVipDefaulTypeCell",@"HTEditVipDefaulTypeCell",@"HTEditVipDefaulTypeCell"]];
         [self.headsTitle addObject:@"客户资料"];
         [_cellsName addObject:@[@"HTTagsTableViewCell"]];
         [self.headsTitle addObject:@"个性标签"];

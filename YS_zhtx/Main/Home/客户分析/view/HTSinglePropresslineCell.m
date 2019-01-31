@@ -12,6 +12,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *indexTitle;
 @property (weak, nonatomic) IBOutlet UILabel *numberLabel;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressLabel;
+@property (weak, nonatomic) IBOutlet UIProgressView *secondProgressLabel;
+@property (weak, nonatomic) IBOutlet UILabel *secondNumberLabel;
 
 @end
 @implementation HTSinglePropresslineCell
@@ -37,5 +39,13 @@
     self.numberLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.val];
     self.progressLabel.progress = model.val.floatValue / model.max.floatValue;
     self.progressLabel.progressTintColor = model.color;
+}
+
+- (void)setSecondModel:(HTHorizontalReportDataModel *)secondModel
+{
+    _secondModel = secondModel;
+    self.secondNumberLabel.text = [HTHoldNullObj getValueWithUnCheakValue:secondModel.val];
+    self.secondProgressLabel.progress = secondModel.val.floatValue / secondModel.max.floatValue;
+    self.secondProgressLabel.progressTintColor = secondModel.color;
 }
 @end

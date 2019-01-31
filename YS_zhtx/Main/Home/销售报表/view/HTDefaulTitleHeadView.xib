@@ -24,17 +24,31 @@
                     <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cfb-bt-RER">
+                    <rect key="frame" x="368" y="10.5" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="FEX-1Z-IiZ"/>
+                        <constraint firstAttribute="width" constant="30" id="gnN-p9-LzF"/>
+                    </constraints>
+                    <state key="normal" title="Button" image="g-boxMore"/>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="cfb-bt-RER" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="6Kf-Yc-rCL"/>
                 <constraint firstItem="e7t-Ri-8MS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="LBh-tE-LoM"/>
+                <constraint firstAttribute="trailing" secondItem="cfb-bt-RER" secondAttribute="trailing" constant="16" id="TDD-dc-HrX"/>
                 <constraint firstItem="e7t-Ri-8MS" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="v7r-c6-IlG"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="addBtn" destination="cfb-bt-RER" id="4Wa-1S-zWC"/>
                 <outlet property="titleLabel" destination="e7t-Ri-8MS" id="WdH-x9-ZXa"/>
             </connections>
             <point key="canvasLocation" x="-16" y="273"/>
         </view>
     </objects>
+    <resources>
+        <image name="g-boxMore" width="31" height="31"/>
+    </resources>
 </document>

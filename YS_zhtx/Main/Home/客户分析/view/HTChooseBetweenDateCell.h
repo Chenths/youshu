@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 
 @interface HTChooseBetweenDateCell : UITableViewCell
-
+@property (nonatomic, assign) BOOL showColor;
 @property (nonatomic,strong) NSIndexPath *index;
 
 @property (nonatomic,strong) HTCustomersInfoReprotModel *model;

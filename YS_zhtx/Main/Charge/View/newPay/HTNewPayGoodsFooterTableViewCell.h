@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface HTNewPayGoodsFooterTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *oldPrice;
+@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *numLabel;
 
 @end

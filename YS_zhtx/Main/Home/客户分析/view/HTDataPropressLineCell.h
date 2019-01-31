@@ -16,6 +16,8 @@
 
 @property (nonatomic,strong) NSArray *dataArray;
 
+@property (nonatomic, strong) NSArray *secondArray;
+
 @property (nonatomic,strong) NSString *beginTime;
 
 @property (nonatomic,strong) NSString *endTime;

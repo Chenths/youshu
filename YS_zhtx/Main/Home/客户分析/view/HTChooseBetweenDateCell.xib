@@ -36,18 +36,29 @@
                         <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Od1-J7-Oxs">
+                        <rect key="frame" x="16" y="9" width="28" height="28"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="28" id="8MO-Ij-kTe"/>
+                            <constraint firstAttribute="height" constant="28" id="g41-1U-5Xf"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="36B-P2-4O4" secondAttribute="trailing" constant="16" id="03f-NX-8pj"/>
+                    <constraint firstItem="Od1-J7-Oxs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="ElC-sj-FLz"/>
                     <constraint firstItem="36B-P2-4O4" firstAttribute="leading" secondItem="giA-KW-hSb" secondAttribute="trailing" constant="8" id="KuJ-qg-CRD"/>
                     <constraint firstItem="Mde-Ta-rAZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Qlx-Ig-haO"/>
                     <constraint firstItem="Mde-Ta-rAZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="S1G-fn-FiI"/>
                     <constraint firstItem="36B-P2-4O4" firstAttribute="centerY" secondItem="Mde-Ta-rAZ" secondAttribute="centerY" id="aVG-XE-BYP"/>
                     <constraint firstItem="giA-KW-hSb" firstAttribute="centerY" secondItem="36B-P2-4O4" secondAttribute="centerY" id="fL8-GV-Vt1"/>
                     <constraint firstAttribute="bottom" secondItem="Mde-Ta-rAZ" secondAttribute="bottom" constant="13.5" id="u0Z-RJ-fko"/>
+                    <constraint firstItem="Od1-J7-Oxs" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="zir-9k-eGU"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="colorView" destination="Od1-J7-Oxs" id="zD1-4W-2Kj"/>
                 <outlet property="dateLabel" destination="Mde-Ta-rAZ" id="EXK-xf-roc"/>
                 <outlet property="descLabel" destination="giA-KW-hSb" id="aSC-6V-Vdt"/>
             </connections>

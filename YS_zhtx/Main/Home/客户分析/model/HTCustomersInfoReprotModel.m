@@ -15,13 +15,12 @@
     return @{
              @"addCustomer" : [HTSingleLineReportModel class],
              @"amountDistribute" : [HTHorizontalReportDataModel class],
-             @"amountSecDistribute": [HTHorizontalReportDataModel class],
+             @"amountDistribute2": [HTHorizontalReportDataModel class],
              @"customerConsumeTimeApp" : [HTHorizontalReportDataModel class],
-             @"customerSecConsumeTimeApp": [HTHorizontalReportDataModel class],
+             @"customerConsumeTimeApp2": [HTHorizontalReportDataModel class],
              @"consume" :[HTRankReportSingleCustomerModel class],
              @"storeAccount":[HTRankReportSingleCustomerModel class],
              };
 }
-
 
 @end

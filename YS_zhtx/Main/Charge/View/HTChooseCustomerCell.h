@@ -9,5 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface HTChooseCustomerCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *ImageView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ageLabel;
+@property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
+@property (weak, nonatomic) IBOutlet UILabel *levelLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *sexImv;
+@property (weak, nonatomic) IBOutlet UIButton *chooseBtn;
 
 @end

@@ -26,7 +26,7 @@
 #import "HTHoldCustomerEventManger.h"
 #import "MainTabBarViewController.h"
 #import "HTChargeViewController.h"
-
+#import "HTFastCashierViewController.h"
 @interface HTCustomerViewController()<HTCustomerFiltrateBoxViewDelegate,UITableViewDelegate,UITableViewDataSource,HTCustomSearchViewDelegate,HTNewCustomCustomerCellDelegate,HTCustomerTapMoreControllerDelegate,UITabBarControllerDelegate>{
     Poper  *poper;
     NSMutableArray * tapArr;
@@ -225,10 +225,17 @@
     }else if ([tapKey isEqualToString:@"聊天"]){
         [HTHoldCustomerEventManger chatWithCustomerWithCustomerId:[HTHoldNullObj getValueWithUnCheakValue:model.custId] customerName:model.name  andOpenId:[HTHoldNullObj getValueWithUnCheakValue:model.openid]];
     }else if ([tapKey isEqualToString:@"快速下单"]){
-        HTChargeViewController *vc = [[HTChargeViewController alloc] init];
-        vc.customerId = model.custId;
-        vc.phone = model.phone_cust;
-        [self.navigationController pushViewController:vc animated:YES];
+        if ([HTShareClass shareClass].isProductActive) {
+            HTChargeViewController *vc = [[HTChargeViewController alloc] init];
+            vc.customerId = model.custId;
+            vc.phone = model.phone_cust;
+            [self.navigationController  pushViewController:vc animated:YES];
+        }else{
+            HTFastCashierViewController *vc = [[HTFastCashierViewController alloc] init];
+            vc.customerid = model.custId;
+            vc.phone = model.phone_cust;
+            [self.navigationController  pushViewController:vc animated:YES];
+        }
     }
 }
 #pragma mark -EventResponse

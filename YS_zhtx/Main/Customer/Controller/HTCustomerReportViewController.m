@@ -31,6 +31,10 @@
 #import "HTMenuModle.h"
 #import "HTHoldCustomerEventManger.h"
 #import "HTChargeViewController.h"
+#import "HTCustomTextAlertView.h"
+#import "HTLoginDataPersonModel.h"
+#import "HTFastCashierViewController.h"
+#import "HTRFMTableViewCell.h"
 @interface HTCustomerReportViewController ()<UITableViewDelegate,UITableViewDataSource,HTNewSingVipSaleBaceInfoCellDelegate,HTTagsCloseTableViewCellDelegate,HTTagsTableViewCellDelegate,HTCustomerTapMoreControllerDelegate,HTEditVipContinueBackListCellDelegate>{
     Poper *poper;
 }
@@ -94,10 +98,17 @@
 
 
 - (void)suspendBtnClick{
-    HTChargeViewController *vc = [[HTChargeViewController alloc] init];
-    vc.phone = self.model.phone_cust;
-    vc.customerId = self.model.custId;
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([HTShareClass shareClass].isProductActive) {
+        HTChargeViewController *vc = [[HTChargeViewController alloc] init];
+        vc.customerId = self.model.custId;
+        vc.phone = self.model.phone_cust;
+        [self.navigationController  pushViewController:vc animated:YES];
+    }else{
+        HTFastCashierViewController *vc = [[HTFastCashierViewController alloc] init];
+        vc.customerid = self.model.custId;
+        vc.phone = self.model.phone_cust;
+        [self.navigationController  pushViewController:vc animated:YES];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -136,7 +147,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.isSeeMore = self.isSeeMore;
         if (self.finallTagsArray.count > 0) {
-          cell.model = self.finallTagsArray[self.customerType == HTCustomerReportTypeNomal ? (indexPath.row - 2) : indexPath.row];
+          cell.model = self.finallTagsArray[self.customerType == HTCustomerReportTypeNomal ? indexPath.row : indexPath.row];
         }
        
         cell.delegate = self;
@@ -165,7 +176,7 @@
     }else if([cellName isEqualToString:@"HTTagsCloseTableViewCell"]){
         HTTagsCloseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTTagsCloseTableViewCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.model = self.finallTagsArray[indexPath.row - 2];
+        cell.model = self.finallTagsArray[indexPath.row];
         cell.delegate = self;
         return cell;
     }else if([cellName isEqualToString:@"HTYearsSaleinfoLineReportCell"]){
@@ -180,6 +191,18 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.model = self.backLists[indexPath.row];
         cell.delegate = self;
+        return cell;
+    }else if ([cellName isEqualToString:@"HTRFMTableViewCell"]){
+        HTRFMTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTRFMTableViewCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.model = self.reportModel.custRFMMessage;
+//        if (self.reportModel.custRFMMessage.isCustomerRFM) {
+//            cell.hidden = NO;
+//        }else{
+//            cell.hidden = YES;
+//        }
+//        cell.model = self.backLists[indexPath.row];
+//        cell.delegate = self;
         return cell;
     }else{
         HTBuyHabitInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTBuyHabitInfoTableViewCell" forIndexPath:indexPath];
@@ -196,6 +219,7 @@
     return self.reportModel.colorModel ? self.sectionArray.count : 0;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
     NSString *header = self.sectionArray[section];
     if (header.length == 0) {
         return 0.001f;
@@ -213,15 +237,60 @@
         return nil;
     }else{
         HTDefaulTitleHeadView *head = [[NSBundle mainBundle] loadNibNamed:@"HTDefaulTitleHeadView" owner:nil options:nil].lastObject;
+        if ([self.sectionArray[section] isEqualToString:@"回访记录"]) {
+            head.addBtn.hidden = NO;
+            [head.addBtn addTarget:self action:@selector(addAction) forControlEvents:UIControlEventTouchUpInside];
+        }else{
+            head.addBtn.hidden = YES;
+        }
         head.title = self.sectionArray[section];
         return head;
     }
 }
+
+- (void)addAction{
+    NSLog(@"点击添加备注");
+    __weak typeof(self) weakSelf = self;
+    [HTCustomTextAlertView showAlertWithTitle:@"客户跟进记录" holdTitle:@"请输入客户跟进记录" orTextString:nil okBtclicked:^(NSString * textValue) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        HTContinueBackModel *model = [[HTContinueBackModel alloc] init];
+        model.desc = textValue;
+        HTLoginDataPersonModel *person = [HTShareClass shareClass].loginModel.person;
+        model.name = [HTHoldNullObj getValueWithUnCheakValue:[HTShareClass shareClass].loginModel.person.nickname];
+        NSDictionary *dic = @{
+                              @"followRecords":[@[model.desc] arrayToJsonString],
+                              @"model.customerId":[HTHoldNullObj getValueWithUnCheakValue:self.model.custId],
+                              @"moduleId":[HTHoldNullObj getValueWithUnCheakValue:self.customerFollowRecordId],
+                              @"model.name":[HTHoldNullObj getValueWithUnCheakValue:[HTShareClass shareClass].loginModel.person.nickname],
+                              };
+        [MBProgressHUD showMessage:@""];
+        [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleCust,addFollowRecord] params:dic success:^(id json1) {
+            [MBProgressHUD hideHUD];
+            if ([[json1 getStringWithKey:@"state"] isEqualToString:@"1"]) {
+                [MBProgressHUD showSuccess:@"添加跟进记录成功"];
+                [strongSelf.backLists addObject:model];
+                [strongSelf configBacksList];
+            }else{
+                [MBProgressHUD showError:[NSString stringWithFormat:@"添加跟进记录失败"]];
+            }
+        } error:^{
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:[NSString stringWithFormat:@"添加跟进记录失败"]];
+        } failure:^(NSError *error) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:[NSString stringWithFormat:@"添加跟进记录失败"]];
+        }];
+    } andCancleBtClicked:^{
+    }];
+}
+
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if ([[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[HTOffOrColseTableViewCell class]]) {
         self.isSeeMore = !self.isSeeMore;
         [self configCells];
-        [self.tab reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:5];
+//        [self.tab reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:5];
+        [self.tab reloadData];
     }
 }
 #pragma mark -CustomDelegate
@@ -232,10 +301,12 @@
             self.backImg = @"g-whiteback";
             [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#ffffff"]}];
             self.navigationController.navigationBar.clipsToBounds = YES;
+            self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImageName:@"more_white" highImageName:@"more_white" target:self action:@selector(moreBtClicked:)];
         }else{
             self.backImg = @"g-back";
             [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#222222"]}];
             self.navigationController.navigationBar.clipsToBounds = NO;
+            self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImageName:@"g-more" highImageName:@"g-more" target:self action:@selector(moreBtClicked:)];
         }
         UIImage *image = [self imageWithColor:[color colorWithAlphaComponent: scrollView.contentOffset.y  / 100]];
         [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
@@ -312,10 +383,17 @@
     }else if ([tapKey isEqualToString:@"聊天"]){
         [HTHoldCustomerEventManger chatWithCustomerWithCustomerId:[HTHoldNullObj getValueWithUnCheakValue:self.model.custId] customerName:self.model.name andOpenId:[HTHoldNullObj getValueWithUnCheakValue:self.reportModel.baseMessage.openid]];
     }else if ([tapKey isEqualToString:@"快速下单"]){
-        HTChargeViewController *vc = [[HTChargeViewController alloc] init];
-        vc.customerId = self.model.custId;
-        vc.phone = self.model.phone_cust;
-        [self.navigationController pushViewController:vc animated:YES];
+        if ([HTShareClass shareClass].isProductActive) {
+            HTChargeViewController *vc = [[HTChargeViewController alloc] init];
+            vc.customerId = self.model.custId;
+            vc.phone = self.model.phone_cust;
+            [self.navigationController  pushViewController:vc animated:YES];
+        }else{
+            HTFastCashierViewController *vc = [[HTFastCashierViewController alloc] init];
+            vc.customerid = self.model.custId;
+            vc.phone = self.model.phone_cust;
+            [self.navigationController  pushViewController:vc animated:YES];
+        }
     }
     
 }
@@ -445,6 +523,7 @@
     [self.tab registerNib:[UINib nibWithNibName:@"HTTagsCloseTableViewCell" bundle:nil] forCellReuseIdentifier:@"HTTagsCloseTableViewCell"];
     [self.tab registerNib:[UINib nibWithNibName:@"HTYearsSaleinfoLineReportCell" bundle:nil] forCellReuseIdentifier:@"HTYearsSaleinfoLineReportCell"];
      [self.tab registerNib:[UINib nibWithNibName:@"HTEditVipContinueBackListCell" bundle:nil] forCellReuseIdentifier:@"HTEditVipContinueBackListCell"];
+    [self.tab registerNib:[UINib nibWithNibName:@"HTRFMTableViewCell" bundle:nil] forCellReuseIdentifier:@"HTRFMTableViewCell"];
     
     UIView *v = [[UIView alloc] init];
     v.backgroundColor = [UIColor clearColor];
@@ -454,7 +533,7 @@
     self.tab.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tabBottomHeight.constant = SafeAreaBottomHeight;
     if (self.customerType == HTCustomerReportTypeNomal) {
-      self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImageName:@"g-more" highImageName:@"g-more" target:self action:@selector(moreBtClicked:)];
+      self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImageName:@"more_white" highImageName:@"more_white" target:self action:@selector(moreBtClicked:)];
     }
     self.tab.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         self.page ++;
@@ -605,19 +684,26 @@
             NSMutableArray * arr = [NSMutableArray array];
             [arr addObject:@"HTNewVipHeadCell"];
             [arr addObject:@"HTNewVipBaseInfoCell"];
+            [self.cellsName addObject:arr];
+            
+            NSMutableArray *tempArr = [NSMutableArray array];
             for (int i = 0;i < self.finallTagsArray.count ; i++) {
-                [arr addObject:@"HTTagsTableViewCell"];
+                [tempArr addObject:@"HTTagsTableViewCell"];
             }
             if (self.finallTagsArray.count > 1) {
-                [arr addObject:@"HTOffOrColseTableViewCell"];
+                [tempArr addObject:@"HTOffOrColseTableViewCell"];
             }
-            [self.cellsName addObject:arr];
+            [self.cellsName addObject:tempArr];
         }else{
             [self.finallTagsArray removeAllObjects];
             if (self.tagsArray.count  > 0) {
                 [self.finallTagsArray addObject:[self.tagsArray firstObject]];
             }
-            [_cellsName addObject:@[@"HTNewVipHeadCell",@"HTNewVipBaseInfoCell",@"HTTagsCloseTableViewCell"]];
+            [_cellsName addObject:@[@"HTNewVipHeadCell",@"HTNewVipBaseInfoCell"]];
+            [_cellsName addObject:@[@"HTTagsCloseTableViewCell"]];
+        }
+        if (self.reportModel.custRFMMessage.iscustomerrfm) {
+            [_cellsName addObject:@[@"HTRFMTableViewCell"]];
         }
         [_cellsName addObject:@[@"HTNew1SingVipSaleBaceInfoCell"]];
         [_cellsName addObject:@[@"HTBuyHabitInfoTableViewCell"]];
@@ -629,12 +715,21 @@
     for (int i = 0; i < self.backLists.count; i++) {
         [cells addObject:@"HTEditVipContinueBackListCell"];
     }
-    if (self.cellsName.count >= 5 ) {
-        [self.cellsName replaceObjectAtIndex:4 withObject:cells];
+    if (self.reportModel.custRFMMessage.iscustomerrfm) {
+        if (self.cellsName.count >= 7 ) {
+            [self.cellsName replaceObjectAtIndex:6 withObject:cells];
+        }else{
+            [self.cellsName addObject:cells];
+        }
     }else{
-        [self.cellsName addObject:cells];
+        if (self.cellsName.count >= 6 ) {
+            [self.cellsName replaceObjectAtIndex:5 withObject:cells];
+        }else{
+            [self.cellsName addObject:cells];
+        }
     }
-    [self.tab reloadSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:5];
+//    [self.tab reloadSections:[NSIndexSet indexSetWithIndex:5] withRowAnimation:5];
+    [self.tab reloadData];
 }
 
 #pragma mark - getters and setters
@@ -648,7 +743,11 @@
         [_cellsName addObject:@[@"HTYearsSaleinfoLineReportCell"]];
     }
     if (self.customerType == HTCustomerReportTypeNomal) {
-        [_cellsName addObject:@[@"HTNewVipHeadCell",@"HTNewVipBaseInfoCell",@"HTTagsCloseTableViewCell"]];
+        [_cellsName addObject:@[@"HTNewVipHeadCell",@"HTNewVipBaseInfoCell"]];
+        if (self.reportModel.custRFMMessage.iscustomerrfm) {
+            [_cellsName addObject:@[@"HTRFMTableViewCell"]];
+        }
+        [_cellsName addObject:@[@"HTTagsCloseTableViewCell"]];
         [_cellsName addObject:@[@"HTNew1SingVipSaleBaceInfoCell"]];
         [_cellsName addObject:@[@"HTBuyHabitInfoTableViewCell"]];
         [_cellsName addObject:@[@"HTYearsSaleinfoLineReportCell"]];
@@ -660,7 +759,11 @@
     if (!_sectionArray) {
         _sectionArray = [NSMutableArray array];
         [_sectionArray addObject:@""];
-        [_sectionArray addObject:@"会员信息"];
+        [_sectionArray addObject:@"客户标签"];
+        if (self.reportModel.custRFMMessage.iscustomerrfm) {
+            [_sectionArray addObject:@"RFM"];
+        }
+        [_sectionArray addObject:@"消费参数"];
         [_sectionArray addObject:@"消费习惯"];
         [_sectionArray addObject:@"消费频率"];
         [_sectionArray addObject:@"回访记录"];
@@ -669,9 +772,18 @@
 }
 -(HTIndexesBox *)indexBox{
     if (!_indexBox) {
-        NSArray *tites = @[@"会员信息",@"消费习惯",@"消费频率",@"回访记录"];
-        
-        NSArray *indexs = @[[NSIndexPath indexPathForRow:0 inSection:1],[NSIndexPath indexPathForRow:0 inSection:2],[NSIndexPath indexPathForRow:0 inSection:3],[NSIndexPath indexPathForRow:0 inSection:4]];
+        NSArray *tites = [NSArray array];
+        if (self.reportModel.custRFMMessage.iscustomerrfm) {
+            tites = @[@"客户标签",@"RFM",@"消费参数",@"基本资料", @"消费习惯",@"消费频率",@"回访记录"];
+        }else{
+            tites = @[@"客户标签",@"消费参数",@"基本资料", @"消费习惯",@"消费频率",@"回访记录"];
+        }
+        NSArray *indexs = [NSArray array];
+        if (self.reportModel.custRFMMessage.iscustomerrfm) {
+            indexs = @[[NSIndexPath indexPathForRow:0 inSection:0],[NSIndexPath indexPathForRow:0 inSection:1],[NSIndexPath indexPathForRow:0 inSection:2],[NSIndexPath indexPathForRow:0 inSection:3], [NSIndexPath indexPathForRow:0 inSection:4], [NSIndexPath indexPathForRow:0 inSection:5], [NSIndexPath indexPathForRow:0 inSection:6]];
+        }else{
+            indexs = @[[NSIndexPath indexPathForRow:0 inSection:0],[NSIndexPath indexPathForRow:0 inSection:1],[NSIndexPath indexPathForRow:0 inSection:2],[NSIndexPath indexPathForRow:0 inSection:3], [NSIndexPath indexPathForRow:0 inSection:4], [NSIndexPath indexPathForRow:0 inSection:5]];
+        }
         NSMutableArray *datas = [NSMutableArray array];
         for (int i = 0; i < tites.count;i++ ) {
             HTIndexsModel *model = [[HTIndexsModel alloc] init];
@@ -685,7 +797,7 @@
         __weak typeof(self) weakSelf = self;
         _indexBox.srollerToIndex = ^(NSIndexPath *index) {
             __strong typeof(weakSelf) strongSelf = weakSelf;
-            if (self.backLists.count == 0 && index.section == 4) {
+            if (self.backLists.count == 0 && index.section == 5) {
                 return ;
             }
             [strongSelf.tab scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionTop animated:YES];

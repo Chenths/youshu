@@ -151,6 +151,7 @@
 }
 
 -(void)vipBtclicked{
+    
 }
 
 -(void)dismissAlertViewFromBigView:(UIView *)alertView{

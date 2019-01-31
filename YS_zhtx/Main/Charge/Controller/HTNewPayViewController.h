@@ -7,7 +7,20 @@
 //
 
 #import "HTCommonViewController.h"
+#import "HTChargeOrderModel.h"
+#import "HTCustModel.h"
 
 @interface HTNewPayViewController : HTCommonViewController
+@property (nonatomic,strong) HTChargeOrderModel *orderModel;
+
+//@property (nonatomic,strong) NSString *addUrl;
+//
+//@property (nonatomic,strong) NSString *payCode;
+
+@property (nonatomic,strong) NSString *requestNum;
+
+@property (nonatomic,strong) NSArray *products;
+
+@property (nonatomic,strong) HTCustModel *custModel;
 
 @end

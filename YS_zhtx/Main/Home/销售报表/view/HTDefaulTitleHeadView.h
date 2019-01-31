@@ -11,5 +11,6 @@
 @interface HTDefaulTitleHeadView : UIView
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (nonatomic,strong) NSString *title;
+@property (weak, nonatomic) IBOutlet UIButton *addBtn;
 
 @end
