@@ -19,7 +19,16 @@
 #import "HTChargeOrderModel.h"
 #import "HTSettleViewController.h"
 #import "HTBatchTurnInController.h"
-@interface HTChargeViewController ()<UITableViewDataSource,UITableViewDelegate,HTCashierChooseSizeOrColorViewDelegate,HTScanCodeDelegate,HTWriteBarcodeViewDelegate,HTCashierBottomViewDelegate,HTCustomMadeFieldAlertViewDelegate>
+#import "HTChooseCustomerViewController.h"
+#import "HTShareClass.h"
+#import "HTLoginDataModel.h"
+#import "HTLoginDataPersonModel.h"
+#import "HTNewPayViewController.h"
+#import "Poper.h"
+#import "HTChargeMaskViewController.h"
+@interface HTChargeViewController ()<UITableViewDataSource,UITableViewDelegate,HTCashierChooseSizeOrColorViewDelegate,HTScanCodeDelegate,HTWriteBarcodeViewDelegate,HTCashierBottomViewDelegate,HTCustomMadeFieldAlertViewDelegate, HTChooseCustomerDelegate>{
+    Poper *poper;
+}
 //判断重复扫描
 @property (nonatomic,strong) NSString *holdBarcode;
 
@@ -54,7 +63,13 @@
     if (self.phone) {
         [self okBtClickedWithStr:self.phone];
     }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addVipBack:) name:@"addVipBackNoti" object:nil];
 }
+
+- (void)addVipBack:(NSNotification *)noti{
+    [self okBtClickedWithStr:[noti.userInfo objectForKey:@"phone"]];
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 #if defined (__i386__) || defined (__x86_64__)
@@ -127,72 +142,115 @@
     }
     self.bottomView.settelBt.enabled = NO;
     __weak typeof(self) weakSelf = self;
-    [HTHoldChargeManager createOrderWithProductJsonStr:[HTHoldChargeManager getbcProductJsonStrFormArray:self.dataArray] andCustId:[HTHoldNullObj getValueWithUnCheakValue:self.custModel.custId] WithSucces:^(id json) {
+    [self checkProductNum:[HTHoldChargeManager getbcProductJsonStrFormArray:self.dataArray] andCustId:[HTHoldNullObj getValueWithUnCheakValue:self.custModel.custId] WithSucces:^(id json) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
-//        库存异常
+        //        库存异常
         if ([[json[@"data"] getStringWithKey:@"inventoryState"] isEqualToString:@"1"]) {
             strongSelf.bottomView.settelBt.enabled = YES;
             NSArray *poductIds = [json[@"data"] getArrayWithKey:@"productIds"];
             //            获取无库存的产品数据
             NSArray *notInvens = [HTHoldChargeManager cheakIsLockPruductsFormLockArray:poductIds andDatas:strongSelf.dataArray];
             if (notInvens.count > 0) {
-//                弹框提示
+                //                弹框提示
                 [HTUnderstockListAlertView showAlertWithDataArray:notInvens btsArray:@[@"移出商品",@"调入库存"] okBtclicked:^{
-//                    调入库存
+                    //                    调入库存
                     HTBatchTurnInController *vc = [[HTBatchTurnInController alloc] init];
                     vc.dataArray = [notInvens mutableCopy];
                     [strongSelf.navigationController pushViewController:vc animated:YES];
                 } cancelClicked:^{
-//                    移除商品
+                    //                    移除商品
                     [strongSelf.dataArray removeObjectsInArray:notInvens];
                     [strongSelf.tab reloadData];
                 }];
             }
             return ;
         }
-        NSArray *detaillist = [json[@"data"][@"order"] getArrayWithKey:@"detaillist"];
-        HTChargeOrderModel *order = [HTChargeOrderModel yy_modelWithJSON:[json[@"data"] getDictionArrayWithKey:@"order"]];
+//        NSArray *detaillist = [json[@"data"][@"order"] getArrayWithKey:@"detaillist"];
+//        HTChargeOrderModel *order = [HTChargeOrderModel yy_modelWithJSON:[json[@"data"] getDictionArrayWithKey:@"order"]];
         NSMutableArray *copyArray = [NSMutableArray array];
         for (HTCahargeProductModel *model in strongSelf.dataArray) {
             NSDictionary *dic = [model yy_modelToJSONObject];
             HTCahargeProductModel *mm = [HTCahargeProductModel yy_modelWithJSON:dic];
             [copyArray addObject:mm];
         }
-//       根据返回值 为本地产品已被赋值的primarykey作为订单的唯一标识符
-           NSMutableArray *inKeys = [NSMutableArray array];
-            for (HTCahargeProductModel *model in copyArray) {
-                HTChargeProductInfoModel *mmm = model.selectedModel;
-                for (NSDictionary *dict in detaillist) {
-                if ([mmm.productId isEqualToString:[dict getStringWithKey:@"productid"]] && ![mmm.primaryKey isEqualToString:[dict getStringWithKey:@"id"]]) {
-//                    该商品primarykey为空 且未添加到其他商品上
-                    if (mmm.primaryKey.length == 0 && ![inKeys containsObject:[dict getStringWithKey:@"id"]]) {
-                        mmm.primaryKey = [dict getStringWithKey:@"id"];
-                        [inKeys addObject: [dict getStringWithKey:@"id"]];
-                        break;
-                    }
-                 
-                }
-            }
-        }
-        HTSettleViewController *vc = [[HTSettleViewController alloc] init];
-        vc.orderModel = order;
+        //       根据返回值 为本地产品已被赋值的primarykey作为订单的唯一标识符
+        NSMutableArray *inKeys = [NSMutableArray array];
+//        for (HTCahargeProductModel *model in copyArray) {
+//            HTChargeProductInfoModel *mmm = model.selectedModel;
+//            for (NSDictionary *dict in detaillist) {
+//                if ([mmm.productId isEqualToString:[dict getStringWithKey:@"productid"]] && ![mmm.primaryKey isEqualToString:[dict getStringWithKey:@"id"]]) {
+//                    //                    该商品primarykey为空 且未添加到其他商品上
+//                    if (mmm.primaryKey.length == 0 && ![inKeys containsObject:[dict getStringWithKey:@"id"]]) {
+//                        mmm.primaryKey = [dict getStringWithKey:@"id"];
+//                        [inKeys addObject: [dict getStringWithKey:@"id"]];
+//                        break;
+//                    }
+//
+//                }
+//            }
+//        }
+        //替换
+        //        HTSettleViewController *vc = [[HTSettleViewController alloc] init];
+        HTNewPayViewController *vc = [[HTNewPayViewController alloc] init];
+        
+        HTChargeOrderModel *orderModel = [[HTChargeOrderModel alloc] init];
+        orderModel.encodeFinal = self.bottomView.finallPrice;
+        orderModel.encodeTotal = self.bottomView.totlePrice;
+        
+        vc.orderModel = orderModel;
         vc.products = copyArray;
-        if ([HTShareClass shareClass].isPlatformOnlinePayActive) {
-        vc.payCode = [json[@"data"] getStringWithKey:@"payCode"];
-        }else{
-        vc.addUrl = [json[@"data"] getStringWithKey:@"adUrl"];
-        }
+//        if ([HTShareClass shareClass].isPlatformOnlinePayActive) {
+//            vc.payCode = [json[@"data"] getStringWithKey:@"payCode"];
+//        }else{
+//            vc.addUrl = [json[@"data"] getStringWithKey:@"adUrl"];
+//        }
         vc.custModel = strongSelf.custModel;
-        vc.requestNum = [json[@"data"] getStringWithKey:@"requestNum"];
+//        vc.requestNum = [json[@"data"] getStringWithKey:@"requestNum"];
         [strongSelf.navigationController pushViewController:vc animated:YES];
         strongSelf.bottomView.settelBt.enabled = YES;
     } error:^{
-         __strong typeof(weakSelf) strongSelf = weakSelf;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
         strongSelf.bottomView.settelBt.enabled = YES;
         
-    }] ;
+    }];
    
 }
+
+/**
+ 检查库存
+ @param productJsonStr 产品的数据构造的json字符串
+ @param custid 用户id
+ @param succes 成功操作
+ @param error1 失败的操作
+ */
+-(void)checkProductNum:(NSString *)productJsonStr andCustId:(NSString *)custid WithSucces:(Succes)succes error:(Erro) error1{
+    NSDictionary *dic = @{
+                          @"bcProductJsonStr":productJsonStr,
+                          @"companyId":[HTShareClass shareClass].loginModel.companyId,
+                          @"customerId":[HTHoldNullObj getValueWithUnCheakValue:custid]
+                          };
+    [MBProgressHUD showMessage:@""];
+    [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleOrder,chectProductNum] params:dic success:^(id json) {
+        if (succes) {
+            succes(json);
+        }
+        [MBProgressHUD hideHUD];
+    } error:^{
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:SeverERRORSTRING];
+        if (error1) {
+            error1();
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:NETERRORSTRING];
+        if (error1) {
+            error1();
+        }
+    }];
+}
+
+
 /**
  输入电话弹框 确认点击 如果已录入产品  获取用户信息并根据会员折扣刷新产品价
 
@@ -255,10 +313,26 @@
  添加vip电话
  */
 - (void)vipBtclicked{
-    HTCustomMadeFieldAlertView *phoneAlart =  [[HTCustomMadeFieldAlertView alloc] initWithTitle:@"请输入VIP手机号码" message:@"(凭此号码退换货）" delegate:self];
-    phoneAlart.textField.keyboardType =  UIKeyboardTypePhonePad;
-    [phoneAlart show];
+    HTChooseCustomerViewController *choose = [[HTChooseCustomerViewController alloc] init];
+    
+    choose.delegate = self;
+    [self.navigationController pushViewController:choose animated:YES];
+//    HTCustomMadeFieldAlertView *phoneAlart =  [[HTCustomMadeFieldAlertView alloc] initWithTitle:@"请输入VIP手机号码" message:@"(凭此号码退换货）" delegate:self];
+//    phoneAlart.textField.keyboardType =  UIKeyboardTypePhonePad;
+//    [phoneAlart show];
 }
+
+
+- (void)sendDic:(NSDictionary *)dic WithModel:(HTCustomerListModel *)model
+{
+    if (![dic.allKeys containsObject:@"phone"]) {
+        self.customerId = model.custId;
+    }
+    NSLog(@"传回来");
+    [self okBtClickedWithStr:[dic objectForKey:@"phone"]];
+}
+
+
 /**
  编辑商品资料不全商品
 
@@ -454,10 +528,54 @@
     }
     return _whiteBarcode;
 }
+
+/*
+
+- (void)chooseSellerClicked:(UIButton *)button
+{
+    if (button.tag == 8001) {
+        NSLog(@"当前为未弹出");
+        [button setImage:[UIImage imageNamed:@"chooseDown"] forState:UIControlStateNormal];
+        poper                     = [[Poper alloc] init];
+        poper.frame               = CGRectMake(0 ,0, HMSCREENWIDTH,HEIGHT - nav_height - 64 - 100);
+        //点击蒙板时的操作
+        HTChargeMaskViewController *vc  = [[HTChargeMaskViewController alloc] init];
+        [vc setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        //必要配置
+//        self.modalPresentationStyle = UIModalPresentationCurrentContext;
+//        self.providesPresentationContextTransitionStyle = YES;
+//        self.definesPresentationContext = YES;
+        
+        vc.transitioningDelegate  = poper;
+//        vc.view.frame = CGRectMake(0 , 0, HMSCREENWIDTH,HEIGHT - nav_height - 64 - 100);
+//        vc.dataArray = tapArr;
+//        vc.index  = indexPath.row;
+//        vc.delegate = self;
+//        vc.model = model;
+        [self presentViewController:vc animated:YES completion:nil];
+//        vc.view.superview.frame = CGRectMake(0 , 0, HMSCREENWIDTH,HEIGHT - nav_height - 64 - 100);
+//
+//        vc.view.superview.center = self.view.center;
+        
+        
+    }else{
+        NSLog(@"当前为弹出");
+        [button setImage:[UIImage imageNamed:@"chooseUp"] forState:UIControlStateNormal];
+        
+    }
+}
+*/
+
 -(HTCashierBottomView *)bottomView{
     if (!_bottomView) {
         _bottomView = [[NSBundle mainBundle] loadNibNamed:@"HTCashierBottomView" owner:nil options:nil].lastObject;
         _bottomView.frame = CGRectMake(0, HEIGHT - SafeAreaBottomHeight - 61, HMSCREENWIDTH, 61);
+//        if (1) {
+//            _bottomView.payBtnWidht.constant = 73;
+//            _bottomView.sellerChooseBtnWidth.constant = 64;
+//            NSString *defaultSeller = [HTShareClass shareClass].loginModel.person.nickname;
+//            [_bottomView.sellerChooseBtn setTitle:defaultSeller forState:UIControlStateNormal];
+//        }
         _bottomView.delegate = self;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.view addSubview:self->_bottomView];

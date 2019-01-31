@@ -27,4 +27,10 @@
     }
     return _encodeTotal;
 }
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key{
+    if ([key isEqualToString:@"id"]) {
+        self.orderId = value;
+    }
+}
+
 @end

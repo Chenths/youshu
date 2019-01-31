@@ -10,6 +10,8 @@
 
 @interface HTChargeProductInfoModel : NSObject
 
+@property (nonatomic,strong) NSString *name;
+
 @property (nonatomic,strong) NSString *barcode;
 
 @property (nonatomic,strong) NSString *color;
@@ -46,4 +48,7 @@
 
 @property (nonatomic,assign) BOOL isSelected;
 
+@property (nonatomic, strong) NSString *encodePrice;
+
+@property (nonatomic, strong) NSString *encodeFinialPrice;
 @end

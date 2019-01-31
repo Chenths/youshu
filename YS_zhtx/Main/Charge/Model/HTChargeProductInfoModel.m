@@ -7,7 +7,7 @@
 //
 
 #import "HTChargeProductInfoModel.h"
-
+#import "SecurityUtil.h"
 @implementation HTChargeProductInfoModel
 + (NSDictionary *)modelCustomPropertyMapper {
     
@@ -15,4 +15,18 @@
              @"productId" : @"id",
              };
 }
+
+-(NSString *)encodePrice{
+    if (!_encodePrice) {
+        return  _encodePrice = [SecurityUtil decryptAESData:self.price];
+    }
+    return _encodePrice;
+}
+-(NSString *)encodeFinialPrice{
+    if (!_encodeFinialPrice) {
+        return  _encodeFinialPrice = [SecurityUtil decryptAESData:self.finalprice];
+    }
+    return _encodeFinialPrice;
+}
+
 @end
