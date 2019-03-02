@@ -29,6 +29,8 @@
 #import "HTTelMsgAlertView.h"
 #import "HTCustomTextAlertView.h"
 #import "HTPrinterTool.h"
+#import "HTHoldOrderEventManager.h"
+#import "HTShowImg.h"
 @interface HTNewPayViewController ()<UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, paypayNormalDelegate, chooseSellerBackDelegate, UITextFieldDelegate, MFMessageComposeViewControllerDelegate>{
     BOOL isNormalPayKind;
     NSMutableArray *biliTFArr;
@@ -63,29 +65,15 @@
 @property (nonatomic, strong) NSMutableArray *noGiveScoreArr;
 @property (nonatomic, strong) UITextView *tipTextView;
 @property (nonatomic, strong) HTPrinterTool *printerManager;
+@property (nonatomic, strong) NSString *tipStr;
+
+
 @end
 
 @implementation HTNewPayViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-//    @property (nonatomic,strong) HTChargeOrderModel *orderModel;
-//
-//    @property (nonatomic,strong) NSString *addUrl;
-//
-//    @property (nonatomic,strong) NSString *payCode;
-//
-//    @property (nonatomic,strong) NSString *requestNum;
-//
-//    @property (nonatomic,strong) NSArray *products;
-//
-//    @property (nonatomic,strong) HTCustModel *custModel;
-    
-    
-//    //假数据
-//    _orderModel = [[HTChargeOrderModel alloc] init];
-//    _orderModel.encodeFinal = @"1000.0";
     _mixRemainPayNum = [_orderModel.encodeFinal floatValue];
     biliTFArr = [NSMutableArray array];
     priceTFArr = [NSMutableArray array];
@@ -102,8 +90,324 @@
     [self dealSellerData];
     [self createTb];
     [self creatBottomView];
-    // Do any additional setup after loading the view from its nib.
 }
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (textField.tag == 3000) {
+        if ([_custModel.custId isEqualToString:@""] || _custModel.custId == nil) {
+            [MBProgressHUD showError:@"非会员不可以使用"];
+            return NO;
+        }
+    }else if (textField.tag == 3001){
+        if ([_custModel.custId isEqualToString:@""] || _custModel.custId == nil) {
+            [MBProgressHUD showError:@"非会员不可以使用"];
+            return NO;
+        }else if(![HTShareClass shareClass].isPlatformOnlinePayActive){
+            [MBProgressHUD showError:@"当前店铺不可使用"];
+            return NO;
+        }
+    }else{
+        
+    }
+    
+    if (textField.tag >= 3000 && textField.tag < 4000) {
+        _mixRemainPayNum = [_orderModel.encodeFinal floatValue];
+        for (NSString * tempStr in _payKindMoneyArr) {
+            _mixRemainPayNum -= [tempStr floatValue];
+        }
+        if (_mixRemainPayNum < 0.001 && _mixRemainPayNum > -0.001) {
+            _mixPayHeaderLabel.text = @"已完成分配";
+            _mixPayHeaderBtn.hidden = YES;
+        }else{
+            _mixPayHeaderLabel.text = [NSString stringWithFormat:@"还有%.2f元未分配", _mixRemainPayNum];
+            _mixPayHeaderBtn.hidden = NO;
+        }
+    }else if (textField.tag >= 4000 && textField.tag < 5000){
+        _mixRemainSellNum = [_orderModel.encodeFinal floatValue];
+        for (NSString * tempStr in _paySellerArr) {
+            _mixRemainSellNum -= [tempStr floatValue];
+        }
+        CGFloat tempTotalBili = 100;
+        for (NSString * tempStr in _biliArr) {
+            tempTotalBili -= [tempStr floatValue];
+        }
+        if (_mixRemainSellNum < 0.001 && _mixRemainSellNum > -0.001) {
+            _mixSellHeaderLabel.text = @"已完成分配";
+            _mixSellHeaderBtn.hidden = YES;
+        }else{
+            _mixSellHeaderLabel.text = [NSString stringWithFormat:@"还有%.2f元/%.2f%%未分配", _mixRemainSellNum, tempTotalBili];
+            _mixSellHeaderBtn.hidden = NO;
+        }
+        
+    }else if (textField.tag >= 5000 && textField.tag < 6000){
+        _mixRemainSellNum = [_orderModel.encodeFinal floatValue];
+        for (NSString * tempStr in _paySellerArr) {
+            _mixRemainSellNum -= [tempStr floatValue];
+        }
+        CGFloat tempTotalBili = 100;
+        for (NSString * tempStr in _biliArr) {
+            tempTotalBili -= [tempStr floatValue];
+        }
+        if (_mixRemainSellNum < 0.001 && _mixRemainSellNum > -0.001) {
+            _mixSellHeaderLabel.text = @"已完成分配";
+            _mixSellHeaderBtn.hidden = YES;
+        }else{
+            _mixSellHeaderLabel.text = [NSString stringWithFormat:@"还有%.2f元/%.2f%%未分配", _mixRemainSellNum, tempTotalBili];
+            _mixSellHeaderBtn.hidden = NO;
+        }
+    }else{
+        
+    }
+    
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    textField.text = [NSString stringWithFormat:@"%.2f", [textField.text floatValue]];
+    if ([textField.text floatValue] == 0) {
+        textField.text = @"";
+    }
+    if (textField.tag >= 3000 && textField.tag < 4000) {
+        //组合支付输入框
+        NSInteger current = textField.tag - 3000;
+        [_payKindMoneyArr replaceObjectAtIndex:current withObject:textField.text];
+        [_dataTableView reloadData];
+    }else if(textField.tag >= 4000 && textField.tag < 5000){
+        //组合销售比例输入框
+        NSInteger current = textField.tag - 4000;
+        [_biliArr replaceObjectAtIndex:current withObject:textField.text];
+        CGFloat tempFloat = [textField.text floatValue] * [_orderModel.encodeFinal floatValue] / 100.0;
+        NSString *tempStr = [NSString stringWithFormat:@"%.2f", tempFloat];
+        [_paySellerArr replaceObjectAtIndex:current withObject:tempStr];
+        
+        //最后一个输入框自动补齐
+        int noDataNum = 0;
+        for (NSString *tempStr in _paySellerArr) {
+            if ([tempStr isEqualToString:@""]) {
+                noDataNum += 1;
+            }
+        }
+        NSInteger tempIndexBili = 0;
+        CGFloat tempRemainBili = 100.0;
+        NSInteger tempIndexPrice = 0;
+        CGFloat tempRemainPrice = [_orderModel.encodeFinal floatValue];
+        if (noDataNum == 1) {
+            for (int i = 0; i < _biliArr.count; i++) {
+                if ([_biliArr[i] isEqualToString:@""]) {
+                    tempIndexBili = i;
+                }else{
+                    tempRemainBili -= [_biliArr[i] floatValue];
+                }
+            }
+            
+            if (tempRemainBili < 0.001 && tempRemainBili > -0.001) {
+                [_biliArr replaceObjectAtIndex:tempIndexBili withObject:@""];
+            }else{
+                [_biliArr replaceObjectAtIndex:tempIndexBili withObject:[NSString stringWithFormat:@"%.2f", tempRemainBili]];
+            }
+            
+            
+            for (int i = 0; i < _paySellerArr.count; i++) {
+                if ([_paySellerArr[i] isEqualToString:@""]) {
+                    tempIndexPrice = i;
+                }else{
+                    tempRemainPrice -= [_paySellerArr[i] floatValue];
+                }
+            }
+            if (tempRemainPrice < 0.001 && tempRemainPrice > -0.001) {
+                [_paySellerArr replaceObjectAtIndex:tempIndexPrice withObject:@""];
+            }else{
+                [_paySellerArr replaceObjectAtIndex:tempIndexPrice withObject:[NSString stringWithFormat:@"%.2f", tempRemainPrice]];
+            }
+            
+        }
+        
+        
+        
+        [_dataTableView reloadData];
+        
+    }else if(textField.tag >= 5000 && textField.tag < 6000){
+        //组合销售 金额输入框
+        NSInteger current = textField.tag - 5000;
+        [_paySellerArr replaceObjectAtIndex:current withObject:textField.text];
+        CGFloat tempFloat = [textField.text floatValue] / [_orderModel.encodeFinal floatValue] * 100.0;
+        NSString *tempStr = [NSString stringWithFormat:@"%.2f", tempFloat];
+        if (tempFloat == 0) {
+            [_biliArr replaceObjectAtIndex:current withObject:@""];
+        }else{
+            [_biliArr replaceObjectAtIndex:current withObject:tempStr];
+        }
+        
+        //最后一个输入框自动补齐
+        int noDataNum = 0;
+        for (NSString *tempStr in _paySellerArr) {
+            if ([tempStr isEqualToString:@""]) {
+                noDataNum += 1;
+            }
+        }
+        NSInteger tempIndexBili = 0;
+        CGFloat tempRemainBili = 100.0;
+        NSInteger tempIndexPrice = 0;
+        CGFloat tempRemainPrice = [_orderModel.encodeFinal floatValue];
+        if (noDataNum == 1) {
+            for (int i = 0; i < _biliArr.count; i++) {
+                if ([_biliArr[i] isEqualToString:@""]) {
+                    tempIndexBili = i;
+                }else{
+                    tempRemainBili -= [_biliArr[i] floatValue];
+                }
+            }
+            if (tempRemainBili < 0.001 && tempRemainBili > -0.001) {
+                [_biliArr replaceObjectAtIndex:tempIndexBili withObject:@""];
+            }else{
+                [_biliArr replaceObjectAtIndex:tempIndexBili withObject:[NSString stringWithFormat:@"%.2f", tempRemainBili]];
+            }
+            
+            for (int i = 0; i < _paySellerArr.count; i++) {
+                if ([_paySellerArr[i] isEqualToString:@""]) {
+                    tempIndexPrice = i;
+                }else{
+                    tempRemainPrice -= [_paySellerArr[i] floatValue];
+                }
+            }
+            
+            if (tempRemainPrice < 0.001 && tempRemainPrice > -0.001) {
+                [_paySellerArr replaceObjectAtIndex:tempIndexPrice withObject:@""];
+            }else{
+                [_paySellerArr replaceObjectAtIndex:tempIndexPrice withObject:[NSString stringWithFormat:@"%.2f", tempRemainPrice]];
+            }
+        }
+        [_dataTableView reloadData];
+    }else{
+        
+    }
+    
+    
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    //判断是否 是 组合销售分配的输入框 如果是 判断 是否按得是删除 如果是 判断是否分配完 如果是 清空组合销售 所有框内容
+    if (textField.tag >= 3000 && textField.tag < 4000) {
+        
+    }else if (textField.tag >= 4000 && textField.tag < 5000){
+        if ([string isEqualToString:@""]) {
+            CGFloat ifTotal;
+            for (NSString *tempBili in _biliArr) {
+                ifTotal += [tempBili floatValue];
+            }
+            if (ifTotal - 100 < 0.001 && 100 - ifTotal < 0.001) {
+                for (UITextField *tempTF in biliTFArr) {
+                    tempTF.text = @"";
+                    
+                }
+                for (UITextField *tempTF in priceTFArr) {
+                    tempTF.text = @"";
+                    
+                }
+                NSMutableArray *tempArr = [NSMutableArray array];
+                for (int i = 0 ; i < _paySellerArr.count; i++) {
+                    [tempArr addObject:@""];
+                }
+                _paySellerArr = [NSMutableArray arrayWithArray:tempArr];
+                _biliArr = [NSMutableArray arrayWithArray:tempArr];
+                return NO;
+            }
+        }else{
+            
+        }
+    }else if (textField.tag >= 5000 && textField.tag < 6000){
+        if ([string isEqualToString:@""]) {
+            CGFloat ifTotal;
+            for (NSString *tempBili in _biliArr) {
+                ifTotal += [tempBili floatValue];
+            }
+            if (ifTotal - 100 < 0.001 && 100 - ifTotal < 0.001) {
+                for (UITextField *tempTF in biliTFArr) {
+                    tempTF.text = @"";
+                    
+                }
+                for (UITextField *tempTF in priceTFArr) {
+                    tempTF.text = @"";
+                    
+                }
+                NSMutableArray *tempArr = [NSMutableArray array];
+                for (int i = 0 ; i < _paySellerArr.count; i++) {
+                    [tempArr addObject:@""];
+                }
+                _paySellerArr = [NSMutableArray arrayWithArray:tempArr];
+                _biliArr = [NSMutableArray arrayWithArray:tempArr];
+                return NO;
+            }
+        }else{
+            
+        }
+    }else{
+        
+    }
+    
+    
+    BOOL isHaveDian = YES;
+    if ([string isEqualToString:@" "]) {
+        return NO;
+    }
+    
+    if ([textField.text rangeOfString:@"."].location == NSNotFound) {
+        isHaveDian = NO;
+    }
+    if ([string length] > 0) {
+        
+        unichar single = [string characterAtIndex:0];//当前输入的字符
+        if ((single >= '0' && single <= '9') || single == '.') {//数据格式正确
+            
+            if([textField.text length] == 0){
+                if(single == '.') {
+                    [MBProgressHUD showError:@"数据格式有误"];
+                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
+                    return NO;
+                }
+            }
+            
+            //输入的字符是否是小数点
+            if (single == '.') {
+                if(!isHaveDian)//text中还没有小数点
+                {
+                    isHaveDian = YES;
+                    return YES;
+                    
+                }else{
+                    [MBProgressHUD showError:@"数据格式有误"];
+                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
+                    return NO;
+                }
+            }else{
+                if (isHaveDian) {//存在小数点
+                    
+                    //判断小数点的位数
+                    NSRange ran = [textField.text rangeOfString:@"."];
+                    if (range.location <= ran.location + 2) {
+                        //                        return YES;
+                        return [self checkPayIfCanThisEditWithTextField:textField WithStr:string];
+                    }else{
+                        [MBProgressHUD showError:@"最多输入两位小数"];
+                        return NO;
+                    }
+                }else{
+                    //                    return YES;
+                    return [self checkPayIfCanThisEditWithTextField:textField WithStr:string];
+                }
+            }
+        }else{//输入的数据格式不正确
+            [MBProgressHUD showError:@"数据格式有误"];
+            [textField.text stringByReplacingCharactersInRange:range withString:@""];
+            return NO;
+        }
+    }else{
+        return YES;
+    }
+}
+
 
 - (UIToolbar *)buildSellKeyBoardHeader{
     self.mixSellHeaderView = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, HMSCREENWIDTH, 60)];
@@ -196,11 +500,6 @@
 
 - (void)dealMixData{
     HTSellerListModel *model = [[HTSellerListModel alloc] init];
-//    @property (nonatomic, strong) NSString * sellerId;
-//    @property (nonatomic, strong) NSString * loginName;
-//    @property (nonatomic, strong) NSString * name;
-//    @property (nonatomic, strong) NSString * roleId;
-//    @property (nonatomic, strong) NSString * roleName;
     model.sellerId = [NSString stringWithFormat:@"%@", [HTShareClass shareClass].loginModel.person.hTLoginDataPersonModelId];
     model.loginName = [NSString stringWithFormat:@"%@", [HTHoldNullObj getValueWithUnCheakValue:[HTShareClass shareClass].loginModel.person.loginName]];
     model.name = [NSString stringWithFormat:@"%@", [HTHoldNullObj getValueWithUnCheakValue:[HTShareClass shareClass].loginModel.person.name]];
@@ -249,6 +548,9 @@
 }
 
 - (NSString *)buildbcProductJsonStr{
+    if (_isFromFast) {
+        return self.bcProductStr;
+    }
     NSMutableArray *firstArr = [NSMutableArray array];
     //创建 bcProductJsonStr
     
@@ -258,7 +560,7 @@
         [tempDic setObject:model.selectedModel.productId forKey:@"productId"];
         if (model.isChange) {
             [tempDic setObject:@"true" forKey:@"isChangePrice"];
-            [tempDic setObject:_orderModel.encodeFinal forKey:@"changedPrice"];
+            [tempDic setObject:model.selectedModel.finalprice forKey:@"changedPrice"];
         }else{
             [tempDic setObject:model.selectedModel.discount forKey:@"discount"];
         }
@@ -320,7 +622,11 @@
         HTSellerListModel *model = _selectSellerArr[i];
         [tempDic setObject:@([model.sellerId integerValue]) forKey:@"guide"];
         [tempDic setObject:model.name forKey:@"name"];
-        [tempDic setObject:@([_biliArr[i] floatValue]) forKey:@"ratio"];
+        if ([_biliArr[i] isEqualToString:@""] || _biliArr[i] == nil) {
+            [tempDic setObject:[NSDecimalNumber decimalNumberWithString:@"0"] forKey:@"ratio"];
+        }else{
+            [tempDic setObject:[NSDecimalNumber decimalNumberWithString:_biliArr[i]] forKey:@"ratio"];
+        }
         [secondArr addObject:tempDic];
     }
     return [secondArr arrayToJsonString];
@@ -483,20 +789,30 @@
                           @"remark" : [HTHoldNullObj getValueWithUnCheakValue:orderStr]
                           };
     [MBProgressHUD showMessage:@""];
-    [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleOrder,creatOrderAndPay] params:dic success:^(id json) {
+    NSString *url;
+    if (_isFromFast) {
+        url = creatFastOrder;
+    }else{
+        url = creatOrderAndPay;
+    }
+    [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleOrder,url] params:dic success:^(id json) {
         [MBProgressHUD hideHUD];
         __strong typeof(weakSelf) strongSelf = self;
         NSDictionary *dataDic = [json getDictionArrayWithKey:@"data"];
         if ([json[@"isSuccess"] boolValue]) {
             if ([[dataDic objectForKey:@"state"] boolValue]) {
-                [strongSelf.orderModel setValuesForKeysWithDictionary:[dataDic objectForKey:@"order"]];
+//                if (!self.isFromFast) {
+                    [strongSelf.orderModel setValuesForKeysWithDictionary:[dataDic objectForKey:@"order"]];
+//                }
                 if (isNormalPayKind) {
                     switch (currentNormalPayKind) {
                         case 1:
                             [HTShareClass shareClass].printerModel.paytype = storedType;
+                            [HTShareClass shareClass].printerModel.storeValue = [NSString stringWithFormat:@"%@",[[dataDic objectForKey:@"order"] objectForKey:@"finalprice"]];
                             break;
                         case 2:
                             [HTShareClass shareClass].printerModel.paytype = storedSendType;
+                            [HTShareClass shareClass].printerModel.freeStoreValue = [NSString stringWithFormat:@"%@",[[dataDic objectForKey:@"order"] objectForKey:@"finalprice"]];
                             break;
                         case 3:
                             [HTShareClass shareClass].printerModel.paytype = wetchatType;
@@ -516,9 +832,10 @@
                     }
                 }else{
                     [HTShareClass shareClass].printerModel.paytype = mixType;
+                    [HTShareClass shareClass].printerModel.storeValue = [NSString stringWithFormat:@"%@",self.payKindMoneyArr[0]];
+                    [HTShareClass shareClass].printerModel.freeStoreValue = [NSString stringWithFormat:@"%@",self.payKindMoneyArr[1]];
                 }
                 
-                [HTShareClass shareClass].printerModel.storeValue = [NSString stringWithFormat:@"%@",self.orderModel.encodeFinal];
                 [strongSelf settleSuccessWithMsg:[dataDic objectForKey:@"sms"]];
                 [strongSelf print];
             }else{
@@ -541,10 +858,7 @@
 - (void)createTb{
     _dataTableView.dataSource = self;
     _dataTableView.delegate = self;
-    //设置预估行高
-//    _dataTableView.estimatedRowHeight = 300.0f;
-//    _dataTableView.rowHeight = UITableViewAutomaticDimension;
-//    _dataTableView.separatorColor = [UIColor colorWithHexString:@"#999999"];
+    
     _dataTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _dataTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     //头部
@@ -582,12 +896,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSLog(@"%@", _orderModel);
-//    NSLog(@"%@", _addUrl);
-//    NSLog(@"%@", _payCode);
-//    NSLog(@"%@", _requestNum);
-//    NSLog(@"%@", _products);
-//    NSLog(@"%@", _custModel);
+
     if (indexPath.section == 0) {
         HTNewPayHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTNewPayHeaderTableViewCell" forIndexPath:indexPath];
         [cell.headerImv sd_setImageWithURL:[NSURL URLWithString:_custModel.headImg] placeholderImage:[UIImage imageNamed:@"g-customerholdImg"]];
@@ -614,7 +923,17 @@
         HTCahargeProductModel * model = _products[indexPath.row];
         
         [cell.goodsHeaderImv sd_setImageWithURL:[NSURL URLWithString:[HTHoldNullObj getValueWithUnCheakValue:model.selectedModel.productimage]] placeholderImage:[UIImage imageNamed:@"g-customerholdImg"]];
-        cell.goodsName.text = [HTHoldNullObj getValueWithUnCheakValue:model.selectedModel.name];
+        cell.goodsHeaderImv.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+        cell.goodsHeaderImv.tag = 20000 + indexPath.row;
+        [cell.goodsHeaderImv addGestureRecognizer:tap];
+
+        
+        if (_isFromFast) {
+            cell.goodsName.text = [HTHoldNullObj getValueWithUnCheakValue:model.selectedModel.barcode];
+        }else{
+            cell.goodsName.text = [HTHoldNullObj getValueWithUnCheakValue:model.selectedModel.name];
+        }
         cell.goodsDetail.text = [NSString stringWithFormat:@"%@/%@/%@/%@/%@", [HTHoldNullObj getValueWithUnCheakValue:model.selectedModel.customtype], [HTHoldNullObj getValueWithUnCheakValue:model.selectedModel.color], [HTHoldNullObj getValueWithUnCheakValue:model.selectedModel.size], [HTHoldNullObj getValueWithUnCheakValue:model.selectedModel.year], [HTHoldNullObj getValueWithUnCheakValue:model.selectedModel.season]];
         cell.price.text = [NSString stringWithFormat:@"¥%@", [HTHoldNullObj getValueWithUnCheakValue:model.selectedModel.finalprice]];
         
@@ -624,7 +943,7 @@
         NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:oldPriceStr attributes:attribtDic];
         // 赋值
         cell.oldPrice.attributedText = attribtStr;
-        cell.saleLabel.text = [NSString stringWithFormat:@"%.1f折", [_orderModel.encodeFinal floatValue] / [_orderModel.encodeTotal floatValue] * 10];
+        cell.saleLabel.text = [NSString stringWithFormat:@"%.1f折", [model.selectedModel.finalprice floatValue] / [model.selectedModel.price floatValue] * 10];
         
         if ([_noGiveScoreArr containsObject:indexPath]) {
             cell.chooseImv.image = [UIImage imageNamed:@"singleUnselected"];
@@ -655,7 +974,11 @@
         HTNewPayWriteOrderTipsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTNewPayWriteOrderTipsTableViewCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.tipLabel.delegate = self;
-        cell.tipLabel.text = @"请输入订单备注内容";
+        if ([self.tipStr isEqualToString:@""] || self.tipStr == nil) {
+            cell.tipLabel.text = @"请输入订单备注内容";
+        }else{
+            cell.tipLabel.text = self.tipStr;
+        }
         cell.tipLabel.textColor = [UIColor colorWithHexString:@"#999999"];
         self.tipTextView = cell.tipLabel;
         return cell;
@@ -758,6 +1081,7 @@
         if (isNormalPayKind) {
             HTNewPayPayNormalKindTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTNewPayPayNormalKindTableViewCell" forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
             if ([_custModel.custId isEqualToString:@""] || _custModel.custId == nil) {
                 cell.type = 3;
             }else if(![HTShareClass shareClass].isPlatformOnlinePayActive){
@@ -773,11 +1097,13 @@
             if ([_payKindMoneyArr[indexPath.row] isEqualToString:@""] || [_payKindMoneyArr[indexPath.row] floatValue] == 0) {
                 cell.headerImv.image = [UIImage imageNamed:[NSString stringWithFormat:@"payIcon%ldn", indexPath.row + 1]];
                 cell.titleLabel.textColor = [UIColor colorWithHexString:@"#999999"];
+                cell.moneyTF.text = @"";
             }else{
                 cell.headerImv.image = [UIImage imageNamed:[NSString stringWithFormat:@"payIcon%ld", indexPath.row + 1]];
                 cell.titleLabel.text = @"#222222";
+                cell.moneyTF.text = _payKindMoneyArr[indexPath.row];
             }
-            
+            cell.moneyTF.delegate = self;
             switch (indexPath.row) {
                 case 0:
                     cell.titleLabel.text = @"储值支付";
@@ -802,331 +1128,25 @@
             }
             cell.moneyTF.tag = 3000 + indexPath.row;
             [cell.moneyTF setInputAccessoryView:_mixPayHeaderView];
-            cell.moneyTF.delegate = self;
+
             return cell;
         }
     }
     
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    if (textField.tag == 3000) {
-        if ([_custModel.custId isEqualToString:@""] || _custModel.custId == nil) {
-            [MBProgressHUD showError:@"非会员不可以使用"];
-            return NO;
-        }
-    }else if (textField.tag == 3001){
-        if ([_custModel.custId isEqualToString:@""] || _custModel.custId == nil) {
-            [MBProgressHUD showError:@"非会员不可以使用"];
-            return NO;
-        }else if(![HTShareClass shareClass].isPlatformOnlinePayActive){
-            [MBProgressHUD showError:@"当前店铺不可使用"];
-            return NO;
-        }
+- (void)tapAction:(id)sender{
+    UITapGestureRecognizer *singleTap = (UITapGestureRecognizer *)sender;
+    NSInteger index = singleTap.view.tag - 20000;
+    HTCahargeProductModel * model = _products[index];
+    if ([model.selectedModel.productimage isEqualToString:@""] || model.selectedModel.productimage == nil) {
+        [HTShowImg showSingleBigImvWithImg:nil WithUrlStr:[[model.product firstObject] productimage]];
     }else{
-        
+        [HTShowImg showSingleBigImvWithImg:nil WithUrlStr:model.selectedModel.productimage];
     }
-   
-    
-    if (textField.tag >= 3000 && textField.tag < 4000) {
-        _mixRemainPayNum = [_orderModel.encodeFinal floatValue];
-        for (NSString * tempStr in _payKindMoneyArr) {
-            _mixRemainPayNum -= [tempStr floatValue];
-        }
-        if (_mixRemainPayNum < 0.001 && _mixRemainPayNum > -0.001) {
-            _mixPayHeaderLabel.text = @"已完成分配";
-            _mixPayHeaderBtn.hidden = YES;
-        }else{
-            _mixPayHeaderLabel.text = [NSString stringWithFormat:@"还有%.2f元未分配", _mixRemainPayNum];
-            _mixPayHeaderBtn.hidden = NO;
-        }
-    }else if (textField.tag >= 4000 && textField.tag < 5000){
-        _mixRemainSellNum = [_orderModel.encodeFinal floatValue];
-        for (NSString * tempStr in _paySellerArr) {
-            _mixRemainSellNum -= [tempStr floatValue];
-        }
-        CGFloat tempTotalBili = 100;
-        for (NSString * tempStr in _biliArr) {
-            tempTotalBili -= [tempStr floatValue];
-        }
-        if (_mixRemainSellNum < 0.001 && _mixRemainSellNum > -0.001) {
-            _mixSellHeaderLabel.text = @"已完成分配";
-            _mixSellHeaderBtn.hidden = YES;
-        }else{
-            _mixSellHeaderLabel.text = [NSString stringWithFormat:@"还有%.2f元/%.2f%%未分配", _mixRemainSellNum, tempTotalBili];
-            _mixSellHeaderBtn.hidden = NO;
-        }
-        
-    }else if (textField.tag >= 5000 && textField.tag < 6000){
-        _mixRemainSellNum = [_orderModel.encodeFinal floatValue];
-        for (NSString * tempStr in _paySellerArr) {
-            _mixRemainSellNum -= [tempStr floatValue];
-        }
-        CGFloat tempTotalBili = 100;
-        for (NSString * tempStr in _biliArr) {
-            tempTotalBili -= [tempStr floatValue];
-        }
-        if (_mixRemainSellNum < 0.001 && _mixRemainSellNum > -0.001) {
-            _mixSellHeaderLabel.text = @"已完成分配";
-            _mixSellHeaderBtn.hidden = YES;
-        }else{
-            _mixSellHeaderLabel.text = [NSString stringWithFormat:@"还有%.2f元/%.2f%%未分配", _mixRemainSellNum, tempTotalBili];
-            _mixSellHeaderBtn.hidden = NO;
-        }
-    }else{
-        
-    }
-    
-    return YES;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    if ([textField.text floatValue] == 0) {
-        textField.text = @"";
-    }
-    if (textField.tag >= 3000 && textField.tag < 4000) {
-        //组合支付输入框
-        NSInteger current = textField.tag - 3000;
-        [_payKindMoneyArr replaceObjectAtIndex:current withObject:textField.text];
-        [_dataTableView reloadData];
-    }else if(textField.tag >= 4000 && textField.tag < 5000){
-        //组合销售比例输入框
-        NSInteger current = textField.tag - 4000;
-        [_biliArr replaceObjectAtIndex:current withObject:textField.text];
-        CGFloat tempFloat = [textField.text floatValue] * [_orderModel.encodeFinal floatValue] / 100.0;
-        NSString *tempStr = [NSString stringWithFormat:@"%.2f", tempFloat];
-        [_paySellerArr replaceObjectAtIndex:current withObject:tempStr];
-        
-        //最后一个输入框自动补齐
-        int noDataNum = 0;
-        for (NSString *tempStr in _paySellerArr) {
-            if ([tempStr isEqualToString:@""]) {
-                noDataNum += 1;
-            }
-        }
-        NSInteger tempIndexBili = 0;
-        CGFloat tempRemainBili = 100.0;
-        NSInteger tempIndexPrice = 0;
-        CGFloat tempRemainPrice = [_orderModel.encodeFinal floatValue];
-        if (noDataNum == 1) {
-            for (int i = 0; i < _biliArr.count; i++) {
-                if ([_biliArr[i] isEqualToString:@""]) {
-                    tempIndexBili = i;
-                }else{
-                    tempRemainBili -= [_biliArr[i] floatValue];
-                }
-            }
-            
-            if (tempRemainBili < 0.001 && tempRemainBili > -0.001) {
-                [_biliArr replaceObjectAtIndex:tempIndexBili withObject:@""];
-            }else{
-                [_biliArr replaceObjectAtIndex:tempIndexBili withObject:[NSString stringWithFormat:@"%.2f", tempRemainBili]];
-            }
-            
-            
-            for (int i = 0; i < _paySellerArr.count; i++) {
-                if ([_paySellerArr[i] isEqualToString:@""]) {
-                    tempIndexPrice = i;
-                }else{
-                    tempRemainPrice -= [_paySellerArr[i] floatValue];
-                }
-            }
-            if (tempRemainPrice < 0.001 && tempRemainPrice > -0.001) {
-                [_paySellerArr replaceObjectAtIndex:tempIndexPrice withObject:@""];
-            }else{
-                [_paySellerArr replaceObjectAtIndex:tempIndexPrice withObject:[NSString stringWithFormat:@"%.2f", tempRemainPrice]];
-            }
-            
-        }
-        
-        
-        
-        [_dataTableView reloadData];
-    
-    }else if(textField.tag >= 5000 && textField.tag < 6000){
-        //组合销售 金额输入框
-        NSInteger current = textField.tag - 5000;
-        [_paySellerArr replaceObjectAtIndex:current withObject:textField.text];
-        CGFloat tempFloat = [textField.text floatValue] / [_orderModel.encodeFinal floatValue] * 100.0;
-        NSString *tempStr = [NSString stringWithFormat:@"%.2f", tempFloat];
-        if (tempFloat == 0) {
-            [_biliArr replaceObjectAtIndex:current withObject:@""];
-        }else{
-            [_biliArr replaceObjectAtIndex:current withObject:tempStr];
-        }
-        
-        //最后一个输入框自动补齐
-        int noDataNum = 0;
-        for (NSString *tempStr in _paySellerArr) {
-            if ([tempStr isEqualToString:@""]) {
-                noDataNum += 1;
-            }
-        }
-        NSInteger tempIndexBili = 0;
-        CGFloat tempRemainBili = 100.0;
-        NSInteger tempIndexPrice = 0;
-        CGFloat tempRemainPrice = [_orderModel.encodeFinal floatValue];
-        if (noDataNum == 1) {
-            for (int i = 0; i < _biliArr.count; i++) {
-                if ([_biliArr[i] isEqualToString:@""]) {
-                    tempIndexBili = i;
-                }else{
-                    tempRemainBili -= [_biliArr[i] floatValue];
-                }
-            }
-            if (tempRemainBili < 0.001 && tempRemainBili > -0.001) {
-                [_biliArr replaceObjectAtIndex:tempIndexBili withObject:@""];
-            }else{
-                [_biliArr replaceObjectAtIndex:tempIndexBili withObject:[NSString stringWithFormat:@"%.2f", tempRemainBili]];
-            }
-            
-            for (int i = 0; i < _paySellerArr.count; i++) {
-                if ([_paySellerArr[i] isEqualToString:@""]) {
-                    tempIndexPrice = i;
-                }else{
-                    tempRemainPrice -= [_paySellerArr[i] floatValue];
-                }
-            }
-            
-            if (tempRemainPrice < 0.001 && tempRemainPrice > -0.001) {
-                [_paySellerArr replaceObjectAtIndex:tempIndexPrice withObject:@""];
-            }else{
-                [_paySellerArr replaceObjectAtIndex:tempIndexPrice withObject:[NSString stringWithFormat:@"%.2f", tempRemainPrice]];
-            }
-        }
-        
-        
-        [_dataTableView reloadData];
-    }else{
-        
-    }
-    
     
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    //判断是否 是 组合销售分配的输入框 如果是 判断 是否按得是删除 如果是 判断是否分配完 如果是 清空组合销售 所有框内容
-    if (textField.tag >= 3000 && textField.tag < 4000) {
-        
-    }else if (textField.tag >= 4000 && textField.tag < 5000){
-        if ([string isEqualToString:@""]) {
-            CGFloat ifTotal;
-            for (NSString *tempBili in _biliArr) {
-                ifTotal += [tempBili floatValue];
-            }
-            if (ifTotal - 100 < 0.001 && 100 - ifTotal < 0.001) {
-                for (UITextField *tempTF in biliTFArr) {
-                    tempTF.text = @"";
-                    
-                }
-                for (UITextField *tempTF in priceTFArr) {
-                    tempTF.text = @"";
-                    
-                }
-                NSMutableArray *tempArr = [NSMutableArray array];
-                for (int i = 0 ; i < _paySellerArr.count; i++) {
-                    [tempArr addObject:@""];
-                }
-                _paySellerArr = [NSMutableArray arrayWithArray:tempArr];
-                _biliArr = [NSMutableArray arrayWithArray:tempArr];
-                return NO;
-            }
-        }else{
-            
-        }
-    }else if (textField.tag >= 5000 && textField.tag < 6000){
-        if ([string isEqualToString:@""]) {
-            CGFloat ifTotal;
-            for (NSString *tempBili in _biliArr) {
-                ifTotal += [tempBili floatValue];
-            }
-            if (ifTotal - 100 < 0.001 && 100 - ifTotal < 0.001) {
-                for (UITextField *tempTF in biliTFArr) {
-                    tempTF.text = @"";
-                    
-                }
-                for (UITextField *tempTF in priceTFArr) {
-                    tempTF.text = @"";
-                    
-                }
-                NSMutableArray *tempArr = [NSMutableArray array];
-                for (int i = 0 ; i < _paySellerArr.count; i++) {
-                    [tempArr addObject:@""];
-                }
-                _paySellerArr = [NSMutableArray arrayWithArray:tempArr];
-                _biliArr = [NSMutableArray arrayWithArray:tempArr];
-                return NO;
-            }
-        }else{
-            
-        }
-    }else{
-        
-    }
-    
-    
-    BOOL isHaveDian = YES;
-    if ([string isEqualToString:@" "]) {
-        return NO;
-    }
-    
-    if ([textField.text rangeOfString:@"."].location == NSNotFound) {
-        isHaveDian = NO;
-    }
-    if ([string length] > 0) {
-        
-        unichar single = [string characterAtIndex:0];//当前输入的字符
-        if ((single >= '0' && single <= '9') || single == '.') {//数据格式正确
-            
-            if([textField.text length] == 0){
-                if(single == '.') {
-                    [MBProgressHUD showError:@"数据格式有误"];
-                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
-                    return NO;
-                }
-            }
-            
-            //输入的字符是否是小数点
-            if (single == '.') {
-                if(!isHaveDian)//text中还没有小数点
-                {
-                    isHaveDian = YES;
-                    return YES;
-                    
-                }else{
-                    [MBProgressHUD showError:@"数据格式有误"];
-                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
-                    return NO;
-                }
-            }else{
-                if (isHaveDian) {//存在小数点
-                    
-                    //判断小数点的位数
-                    NSRange ran = [textField.text rangeOfString:@"."];
-                    if (range.location <= ran.location + 2) {
-//                        return YES;
-                        return [self checkPayIfCanThisEditWithTextField:textField WithStr:string];
-                    }else{
-                        [MBProgressHUD showError:@"最多输入两位小数"];
-                        return NO;
-                    }
-                }else{
-//                    return YES;
-                    return [self checkPayIfCanThisEditWithTextField:textField WithStr:string];
-                }
-            }
-        }else{//输入的数据格式不正确
-            [MBProgressHUD showError:@"数据格式有误"];
-            [textField.text stringByReplacingCharactersInRange:range withString:@""];
-            return NO;
-        }
-    }else{
-        return YES;
-    }
-}
 
 - (BOOL)checkPayIfCanThisEditWithTextField:(UITextField *)textField WithStr:(NSString *)str{
     NSInteger tag = textField.tag;
@@ -1300,6 +1320,7 @@
         textView.text = @"请输入订单备注内容";
         textView.textColor = [UIColor colorWithHexString:@"#999999"];
     }
+    self.tipStr = textView.text;
 }
 
 -(BOOL)textViewShouldBeginEditing:(UITextView *)textView
@@ -1520,6 +1541,7 @@
     [HTShareClass shareClass].printerModel.orderId = self.orderModel.orderId;
     [HTShareClass shareClass].printerModel.orderNo = self.orderModel.ordernum;
     [HTShareClass shareClass].printerModel.telPhone = self.custModel.phone;
+    [HTShareClass shareClass].printerModel.salerName = self.orderModel.salername;
     [self.products enumerateObjectsUsingBlock:^(HTCahargeProductModel * obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSMutableDictionary *printDic = [NSMutableDictionary dictionary];
         HTChargeProductInfoModel *md = obj.selectedModel ;
@@ -1534,6 +1556,7 @@
     }];
     [HTShareClass shareClass].printerModel.orderDesc = self.tipTextView.text;
     //    发送打印请求
+//    [HTHoldOrderEventManager printOrderInfoWithOrderId:self.orderModel.orderId];
     [self.printerManager print];
 }
 /**
