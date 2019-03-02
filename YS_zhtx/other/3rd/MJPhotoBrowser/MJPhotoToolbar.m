@@ -52,14 +52,16 @@
     // 保存图片按钮
     CGFloat btnWidth = self.bounds.size.height;
     _saveImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_saveImageBtn setHidden:YES];
-    _saveImageBtn.frame = CGRectMake(20, 0, btnWidth, btnWidth);
+    [_saveImageBtn setHidden:NO];
+    _saveImageBtn.frame = CGRectMake(0, 0, [UIScreen mainScreen].applicationFrame.size.width, btnWidth);
     _saveImageBtn.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    [_saveImageBtn setImage:[UIImage imageNamed:@"MJPhotoBrowser.bundle/save_icon.png"] forState:UIControlStateNormal];
-    
-    [_saveImageBtn setImage:[UIImage imageNamed:@"MJPhotoBrowser.bundle/save_icon_highlighted.png"] forState:UIControlStateHighlighted];
-    
-    [_saveImageBtn setImage:[UIImage imageNamed:@"photo-gallery-trashcan.png"] forState:UIControlStateHighlighted];
+//    [_saveImageBtn setImage:[UIImage imageNamed:@"MJPhotoBrowser.bundle/save_icon.png"] forState:UIControlStateNormal];
+//
+//    [_saveImageBtn setImage:[UIImage imageNamed:@"MJPhotoBrowser.bundle/save_icon_highlighted.png"] forState:UIControlStateHighlighted];
+//
+//    [_saveImageBtn setImage:[UIImage imageNamed:@"photo-gallery-trashcan.png"] forState:UIControlStateHighlighted];
+    _saveImageBtn.backgroundColor = [UIColor blackColor];
+    [_saveImageBtn setTitle:@"保存图片" forState:UIControlStateNormal];
     [_saveImageBtn addTarget:self action:@selector(downLoadImg) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_saveImageBtn];
     
@@ -73,7 +75,7 @@
 }
 
 - (void)downLoadImg {
-    if ( [Delegate respondsToSelector:@selector(DeleteThisImage:)] ) {
+    if ( [Delegate respondsToSelector:@selector(downLoadThisImage:)] ) {
         [Delegate downLoadThisImage:_currentPhotoIndex];
     }
 }

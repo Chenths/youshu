@@ -7,6 +7,7 @@
 //
 
 #import "HTChangePriceProductInfoCell.h"
+#import "HTShowImg.h"
 @interface HTChangePriceProductInfoCell()
 
 @property (weak, nonatomic) IBOutlet UILabel *barcodeTitle;
@@ -43,6 +44,10 @@
     
     self.selectedImg.image = [UIImage imageNamed:chargeModel.isSelected ? @"singleSelected" :@"singleUnselected"];
     [self.productImg sd_setImageWithURL:[NSURL URLWithString:chargeModel.selectedModel.productimage] placeholderImage:[UIImage imageNamed:PRODUCTHOLDIMG]];
+    self.productImg.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
+    [self.productImg addGestureRecognizer:tap];
+
     self.barcodeTitle.text  = [HTHoldNullObj getValueWithUnCheakValue:chargeModel.selectedModel.barcode];
     self.finallPriceLabel.text = [NSString stringWithFormat:@"¥%@",[HTHoldNullObj getValueWithBigDecmalObj:chargeModel.selectedModel.finalprice]];
     self.priceLabel.text = [NSString stringWithFormat:@"¥%@",[HTHoldNullObj getValueWithBigDecmalObj:chargeModel.selectedModel.price]];
@@ -54,6 +59,16 @@
     self.onOffBt.on = [chargeModel.hasGivePoint isEqualToString:@"0"] ? NO : YES;
     self.sendStateLabel.text = [chargeModel.hasGivePoint isEqualToString:@"0"] ? @"取消赠送" : @"赠送积分";
 }
+
+- (void)tapAction{
+    if ([_chargeModel.selectedModel.productimage isEqualToString:@""] || _chargeModel.selectedModel.productimage == nil) {
+        [HTShowImg showSingleBigImvWithImg:nil WithUrlStr:[[_chargeModel.product firstObject] productimage]];
+    }else{
+        [HTShowImg showSingleBigImvWithImg:nil WithUrlStr:_chargeModel.selectedModel.productimage];
+    }
+    
+}
+
 -(void)setIndex:(NSIndexPath *)index{
     _index = index;
     self.indexLabel.text = [NSString stringWithFormat:@"%ld",index.row + 1];

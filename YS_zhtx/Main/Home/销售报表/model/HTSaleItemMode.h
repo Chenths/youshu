@@ -9,5 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface HTSaleItemMode : NSObject
-
+@property (nonatomic, copy) NSString *headerImvName;
+@property (nonatomic, copy) NSString *titleStr;
+@property (nonatomic, copy) NSString *perDescribeStr;
+@property (nonatomic, copy) NSString *describeStr;
+@property (nonatomic, copy) NSString *sufDescribeStr;
 @end

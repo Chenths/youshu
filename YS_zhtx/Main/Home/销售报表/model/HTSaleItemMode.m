@@ -9,5 +9,17 @@
 #import "HTSaleItemMode.h"
 
 @implementation HTSaleItemMode
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key{
+    
+}
+
+- (void)setDescribeStr:(NSString *)describeStr
+{
+    if ([describeStr isEqualToString:@"****"]) {
+        _describeStr = describeStr;
+    }else{
+        _describeStr = [NSString stringWithFormat:@"%.2f", [describeStr floatValue]];
+    }
+}
 
 @end

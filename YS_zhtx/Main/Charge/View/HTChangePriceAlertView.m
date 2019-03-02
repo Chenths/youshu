@@ -12,7 +12,7 @@
 
 #import "HTCahargeProductModel.h"
 #import "HTChangePriceAlertView.h"
-
+#import "HTShowImg.h"
 @interface HTChangePriceAlertView()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -130,6 +130,13 @@
         UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(btx, 0, imgWidth, imgWidth)];
         HTCahargeProductModel *mmm = selectedArray[i];
         [image sd_setImageWithURL:[NSURL URLWithString:mmm.selectedModel.productimage] placeholderImage:[UIImage imageNamed:PRODUCTHOLDIMG]];
+        image.userInteractionEnabled = YES;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+        image.tag = 20000 + i;
+        [image addGestureRecognizer:tap];
+
+        
         [self.backScollerView addSubview:image];
         btx = btx + imgWidth + space;
     }
@@ -138,6 +145,17 @@
     self.backScollerView.showsHorizontalScrollIndicator = NO;
 }
 
+- (void)tapAction:(id)sender{
+    UITapGestureRecognizer *tap = (UITapGestureRecognizer *)sender;
+    NSInteger index = tap.view.tag;
+    HTCahargeProductModel *model = _selectedArray[index];
+    if ([model.selectedModel.productimage isEqualToString:@""] || model.selectedModel.productimage == nil) {
+        [HTShowImg showSingleBigImvWithImg:nil WithUrlStr:[[model.product firstObject] productimage]];
+    }else{
+        [HTShowImg showSingleBigImvWithImg:nil WithUrlStr:model.selectedModel.productimage];
+    }
+    
+}
 
 //代理
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{

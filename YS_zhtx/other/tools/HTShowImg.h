@@ -10,4 +10,5 @@
 
 @interface HTShowImg : NSObject
 
++(void)showSingleBigImvWithImg:(UIImage *)img WithUrlStr:(NSString *)str;
 @end

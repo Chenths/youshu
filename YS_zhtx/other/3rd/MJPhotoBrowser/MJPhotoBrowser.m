@@ -72,7 +72,7 @@
 - (void)createToolbar
 {
     CGFloat barHeight = 44;
-    CGFloat barY = self.view.frame.size.height - barHeight;
+    CGFloat barY = self.view.frame.size.height - barHeight - SafeAreaBottomHeight;
     _toolbar = [[MJPhotoToolbar alloc] init];
     _toolbar.Delegate = self;
     _toolbar.frame = CGRectMake(0, barY, self.view.frame.size.width, barHeight);
@@ -82,22 +82,47 @@
     [self updateTollbarState];
 }
 
+//保存图片完成之后的回调
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error
+  contextInfo:(void *)contextInfo
+{
+    // Was there an error?
+    if (error != NULL)
+    {
+        // Show error message…
+        [MBProgressHUD showError:@"图片保存失败"];
+    }
+    else  // No errors
+    {
+        // Show message image successfully saved
+        [MBProgressHUD showError:@"图片保存成功"];
+    }
+}
 - (void)downLoadThisImage:(NSInteger)ThisImageIndex {
-//    MJPhoto *photo = [_photos objectAtIndex:ThisImageIndex];
-////    JPIMMessageModel *messageModel = [_conversation getMessage:photo.messageId];
-//    if (![[self jsonStringToDictionary:messageModel.content] objectForKey:kimgresource]) {
-//        _progress= [NSProgress progressWithTotalUnitCount:100];
-//        [_progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionNew context:nil];
-//        [JMSGMessageManager getMetaImageFromMessage:messageModel withConversation:_conversation withProgress:_progress succeedBlock:^(NSData *image) {
-//            JPIMMessageModel * model = [_conversation getMessage:photo.messageId];
-//            NSLog(@"download img successs %@,",model.content);
-//            [_photos removeObjectAtIndex:_currentPhotoIndex];
-//            [_photos insertObject:[[self jsonStringToDictionary:messageModel.content] objectForKey:kimgresource] atIndex:_currentPhotoIndex];
-//            [self setCurrentPhotoIndex:_currentPhotoIndex];
-//        } failBlock:^(NSError *error) {
-//            NSLog(@"download img error");
-//        }];
-//    }
+    
+    NSURL *url = [_photos[ThisImageIndex] url];
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    UIImage *img;
+    //从网络下载图片
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    img = [UIImage imageWithData:data];
+    // 保存图片到相册中
+    UIImageWriteToSavedPhotosAlbum(img,self, @selector(image:didFinishSavingWithError:contextInfo:),nil);
+    //    MJPhoto *photo = [_photos objectAtIndex:ThisImageIndex];
+    ////    JPIMMessageModel *messageModel = [_conversation getMessage:photo.messageId];
+    //    if (![[self jsonStringToDictionary:messageModel.content] objectForKey:kimgresource]) {
+    //        _progress= [NSProgress progressWithTotalUnitCount:100];
+    //        [_progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionNew context:nil];
+    //        [JMSGMessageManager getMetaImageFromMessage:messageModel withConversation:_conversation withProgress:_progress succeedBlock:^(NSData *image) {
+    //            JPIMMessageModel * model = [_conversation getMessage:photo.messageId];
+    //            NSLog(@"download img successs %@,",model.content);
+    //            [_photos removeObjectAtIndex:_currentPhotoIndex];
+    //            [_photos insertObject:[[self jsonStringToDictionary:messageModel.content] objectForKey:kimgresource] atIndex:_currentPhotoIndex];
+    //            [self setCurrentPhotoIndex:_currentPhotoIndex];
+    //        } failBlock:^(NSError *error) {
+    //            NSLog(@"download img error");
+    //        }];
+    //    }
 }
 
 

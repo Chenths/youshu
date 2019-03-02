@@ -9,6 +9,7 @@
 #import "HTCashierChooseSizeOrColorView.h"
 #import "HTProductSyleSelectedCell.h"
 #import "HTAccount.h"
+#import "HTShowImg.h"
 @interface HTCashierChooseSizeOrColorView()<UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UIImageView *productImg;
@@ -64,7 +65,9 @@
     [UIView animateWithDuration:0.3 animations:^{
         alrtView.frame = CGRectMake(0,(bigView.frame.size.height - 410), bigView.frame.size.width, 410);
     }];
+    
 }
+
 #pragma mark -UITabelViewDelegate
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     HTProductSyleSelectedCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTProductSyleSelectedCell" forIndexPath:indexPath];
@@ -188,6 +191,25 @@
     self.inventoryLabel.text = [NSString stringWithFormat:@"库存 %@ 件",model.selectedModel ? mmm.inventory : @"?"];
     self.finallPriceLabel.text = [NSString stringWithFormat:@"¥%@",mmm.finalprice];
     self.totalPrice.text = [NSString stringWithFormat:@"¥%@",mmm.price];
+    
+    if ([_model.selectedModel.productimage isEqualToString:@""] || _model.selectedModel.productimage == nil) {
+        
+        [self.productImg sd_setImageWithURL:[NSURL URLWithString:[[_model.product firstObject] productimage]]];
+    }else{
+        [self.productImg sd_setImageWithURL:[NSURL URLWithString:_model.selectedModel.productimage]];
+    }
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
+    [self.productImg addGestureRecognizer:tap];
+}
+
+- (void)tapAction{
+    if ([_model.selectedModel.productimage isEqualToString:@""] || _model.selectedModel.productimage == nil) {
+        [HTShowImg showSingleBigImvWithImg:nil WithUrlStr:[[_model.product firstObject] productimage]];
+    }else{
+        [HTShowImg showSingleBigImvWithImg:nil WithUrlStr:_model.selectedModel.productimage];
+    }
+    
 }
 
 

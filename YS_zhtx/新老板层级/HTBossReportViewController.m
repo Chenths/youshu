@@ -5,7 +5,13 @@
 //  Created by mac on 2018/4/17.
 //  Copyright © 2018年 zhtxwl_hx. All rights reserved.
 //
-#import "HTBossSaleBasicInfoCell.h"
+#import "HTSaleItemHeaderTableViewCell.h"
+#import "HTSaleItemBottmTableViewCell.h"
+#import "HTSaleItemPayKindTableViewCell.h"
+#import "HTSaleItemDetailTableViewCell.h"
+#import "HTSaleOtherDetailTableViewCell.h"
+#import "HTSaleItemMode.h"
+//#import "HTBossSaleBasicInfoCell.h"
 #import "HTNewPieCellTableViewCell.h"
 #import "HTBossDayRankListCell.h"
 #import "HTStaffSaleRankListCell.h"
@@ -23,7 +29,7 @@
 #import "HTBossCompareViewController.h"
 #import "NSDate+Manager.h"
 #import "HTPiesModel.h"
-@interface HTBossReportViewController ()<UITableViewDataSource,UITableViewDelegate,HTBossSelectedShopViewDelegate,HTNewPieCellTableViewCellDelegate>
+@interface HTBossReportViewController ()<UITableViewDataSource,UITableViewDelegate,HTBossSelectedShopViewDelegate,HTNewPieCellTableViewCellDelegate, chooseShowPayDetailDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *dataTableView;
 
@@ -65,6 +71,10 @@
 @property (nonatomic,strong) NSArray *dateArray;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *BtbottomConstains;
 
+@property (nonatomic,strong) NSString *type;
+@property (nonatomic, assign) NSInteger currentSelectShowPayKindType;
+@property (nonatomic, strong) NSMutableArray *payKindDetailLeftArr;
+@property (nonatomic, strong) NSMutableArray *payKindDetailRightArr;
 @end
 
 @implementation HTBossReportViewController
@@ -79,6 +89,24 @@
     [self createTapView];
     [self createTb];
 }
+
+- (void)selectChooseShowPayKindType:(NSInteger)type
+{
+    if (type == _currentSelectShowPayKindType - 1) {
+        _currentSelectShowPayKindType = 0;
+    }else{
+        
+        if (type == 0) {
+            _currentSelectShowPayKindType = 1;
+            [_firstSectionArray replaceObjectAtIndex:5 withObject:_payKindDetailLeftArr];
+        }else{
+            _currentSelectShowPayKindType = 2;
+            [_firstSectionArray replaceObjectAtIndex:5 withObject:_payKindDetailRightArr];
+        }
+    }
+    [self.dataTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:0];
+}
+
 #pragma mark -UITabelViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.alertTableView) {
@@ -95,11 +123,65 @@
     switch (indexPath.section) {
         case 0:
             {
-                HTBossSaleBasicInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTBossSaleBasicInfoCell" forIndexPath:indexPath];
-                cell.model = self.dataArray[indexPath.section][indexPath.row];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
-                return cell;
+                if (indexPath.row == 0 || indexPath.row == 3) {
+                    HTSaleItemHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTSaleItemHeaderTableViewCell" forIndexPath:indexPath];
+                    cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, cell.bounds.size.width);
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    NSArray *tempArr = [NSArray arrayWithArray:_firstSectionArray];
+                    cell.hideRedPoint = YES;
+                    cell.dataArr = tempArr[indexPath.row];
+                    return  cell;
+                }else if (indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 4) {
+                    HTSaleItemBottmTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTSaleItemBottmTableViewCell" forIndexPath:indexPath];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, cell.bounds.size.width);
+                    NSArray *tempArr = [NSArray arrayWithArray:_firstSectionArray];
+                    cell.delegate = self;
+                    //1 4 是此时 消费 充值金额的indexPath
+                    if (indexPath.section == 0 && indexPath.row == 4) {
+                        cell.ifShowDownImv = YES;
+                    }else{
+                        cell.ifShowDownImv = NO;
+                    }
+                    cell.currentSelectShowPayKindType = self.currentSelectShowPayKindType;
+                    cell.dataArr = tempArr[indexPath.row];
+                    return  cell;
+                }else if (indexPath.row == 5) {
+                    HTSaleItemPayKindTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTSaleItemPayKindTableViewCell" forIndexPath:indexPath];
+                    cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, cell.bounds.size.width);
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    NSArray *tempArr = [NSArray arrayWithArray:_firstSectionArray];
+                    if (_currentSelectShowPayKindType == 0) {
+                        cell.hidden = YES;
+                    }else if (_currentSelectShowPayKindType == 1){
+                        cell.hidden = NO;
+                    }else{
+                        cell.hidden = NO;
+                    }
+                    cell.dataArr = tempArr[indexPath.row];
+                    return  cell;
+                }else if (indexPath.row >= 6 && indexPath.row <= 9) {
+                    HTSaleItemDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTSaleItemDetailTableViewCell" forIndexPath:indexPath];
+                    cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, cell.bounds.size.width);
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    NSArray *tempArr = [NSMutableArray arrayWithArray:_firstSectionArray];
+                    cell.hideRedPoint = YES;
+                    cell.dataArr = tempArr[indexPath.row];
+                    return  cell;
+                }else if (indexPath.row >= 10 && indexPath.row <= 15){
+                    HTSaleOtherDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTSaleOtherDetailTableViewCell" forIndexPath:indexPath];
+                    cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, cell.bounds.size.width);
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    NSArray *tempArr = [NSArray arrayWithArray:_firstSectionArray];
+                    cell.hideRedPoint = YES;
+                    cell.dataArr = tempArr[indexPath.row];
+                    return  cell;
+                }
+//                HTBossSaleBasicInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTBossSaleBasicInfoCell" forIndexPath:indexPath];
+//                cell.model = self.dataArray[indexPath.section][indexPath.row];
+//                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//                cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+//                return cell;
             }
             break;
         case 2:
@@ -190,7 +272,13 @@
     switch (indexPath.section) {
         case 0:
             {
-                return 100;
+                if (indexPath.section == 0 && indexPath.row == 5 && _currentSelectShowPayKindType == 0) {
+                    return 0.01;
+                }
+//                return 100;
+                self.dataTableView.rowHeight = UITableViewAutomaticDimension;
+                self.dataTableView.estimatedRowHeight = 300;
+                return self.dataTableView.rowHeight;
             }
             break;
         case 1:
@@ -412,7 +500,12 @@
     [self.view addSubview:self.alertTableView];
     UIView *footView = [[UIView alloc] init];
     footView.backgroundColor = [UIColor clearColor];
-    [self.dataTableView registerNib:[UINib nibWithNibName:@"HTBossSaleBasicInfoCell" bundle:nil] forCellReuseIdentifier:@"HTBossSaleBasicInfoCell"];
+//    [self.dataTableView registerNib:[UINib nibWithNibName:@"HTBossSaleBasicInfoCell" bundle:nil] forCellReuseIdentifier:@"HTBossSaleBasicInfoCell"];
+    [self.dataTableView registerNib:[UINib nibWithNibName:@"HTSaleItemHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:@"HTSaleItemHeaderTableViewCell"];
+    [self.dataTableView registerNib:[UINib nibWithNibName:@"HTSaleItemBottmTableViewCell" bundle:nil] forCellReuseIdentifier:@"HTSaleItemBottmTableViewCell"];
+    [self.dataTableView registerNib:[UINib nibWithNibName:@"HTSaleItemPayKindTableViewCell" bundle:nil] forCellReuseIdentifier:@"HTSaleItemPayKindTableViewCell"];
+    [self.dataTableView registerNib:[UINib nibWithNibName:@"HTSaleItemDetailTableViewCell" bundle:nil] forCellReuseIdentifier:@"HTSaleItemDetailTableViewCell"];
+    [self.dataTableView registerNib:[UINib nibWithNibName:@"HTSaleOtherDetailTableViewCell" bundle:nil] forCellReuseIdentifier:@"HTSaleOtherDetailTableViewCell"];
     [self.dataTableView registerNib:[UINib nibWithNibName:@"HTNewPieCellTableViewCell" bundle:nil] forCellReuseIdentifier:@"HTNewPieCellTableViewCell"];
     [self.dataTableView registerNib:[UINib nibWithNibName:@"HTBossDayRankListCell" bundle:nil] forCellReuseIdentifier:@"HTBossDayRankListCell"];
      [self.dataTableView registerNib:[UINib nibWithNibName:@"HTStaffSaleRankListCell" bundle:nil] forCellReuseIdentifier:@"HTStaffSaleRankListCell"];
@@ -434,6 +527,120 @@
         HTSectionOpenModel *sectionmodel = self.sectionTitleArray[tag];
         if (tag == 0) {
             [self.firstSectionArray removeAllObjects];
+            
+            //销售概况
+            NSArray *titleArr1 =@[@[@"销售额 (元)"], @[@"消费", @"储值消费"], @[@"储赠消费"], @[@"营业收入 (元)"], @[@"消费", @"充值金额"], @[@"微信支付", @"支付宝支付", @"现金支付", @"刷卡支付"], @[@"单量", @"销量 (件)"], @[@"利润 (元)", @"折扣"], @[@"件单价", @"客单价"], @[@"连带率"]];
+            NSArray *iconArr1 = @[@[@"bXiaoShouE"], @[@"", @""], @[@""], @[@"bYingYeShouRu"], @[@"", @""], @[@"bWeiXinPay", @"bAliPay", @"bRMBPay", @"bPosPay"], @[@"bDanLiang", @"bXiaoLiang"], @[@"bLiRun", @"bZheKou"], @[@"bJianDanJia", @"bKeDanJia"], @[@"bLianDaiLv"]];
+            NSArray *perDescribeArr1 = @[@[@"¥"], @[@"¥", @"¥"], @[@"¥"], @[@"¥"], @[@"¥", @"¥"], @[@"¥", @"¥", @"¥", @"¥"], @[@"", @""], @[@"¥", @""], @[@"¥", @"¥"], @[@""]];
+            NSArray *sufDescribeArr1 = @[@[@""], @[@"", @""], @[@""], @[@""], @[@"", @""], @[@"", @"", @"", @""], @[@"", @""], @[@"", @""], @[@"", @""], @[@""]];;
+            NSArray *describeKeyArr1 = @[@[@"saleAmount"], @[@"noStoreCon", @"consumeStore"], @[@"consumePreStore"], @[@"turnoverAmount"], @[@"noStoreCon", @"store"], @[@"weChat", @"aliPay", @"cash", @"isPos"], @[@"orderCount", @"orderProducts"], @[@"profit", @"discount"], @[@"piecePrice", @"customerTransaction"], @[@"related"]];
+            
+            for (int i = 0; i < titleArr1.count; i++) {
+                NSArray *tempTitleArr = titleArr1[i];
+                NSArray *tempIconArr = iconArr1[i];
+                NSArray *tempperDescribeArr = perDescribeArr1[i];
+                NSArray *tempSufDescribeArr = sufDescribeArr1[i];
+                NSArray *tempDescribeArr = describeKeyArr1[i];
+                NSMutableArray *arr11 = [NSMutableArray array];
+                for (int j = 0; j < tempTitleArr.count; j++) {
+                    HTSaleItemMode *tempModel = [[HTSaleItemMode alloc] init];
+                    tempModel.titleStr = tempTitleArr[j];
+                    tempModel.headerImvName = tempIconArr[j];
+                    tempModel.perDescribeStr = tempperDescribeArr[j];
+                    tempModel.describeStr = [json[@"data"] getStringWithKey:tempDescribeArr[j]];
+                    tempModel.sufDescribeStr = tempSufDescribeArr[j];
+                    [arr11 addObject:tempModel];
+                }
+                [self.firstSectionArray addObject:arr11];
+            }
+            
+            self.currentSelectShowPayKindType = 0;
+            
+            self.payKindDetailLeftArr = [NSMutableArray array];
+            self.payKindDetailRightArr = [NSMutableArray array];
+            //销售概括备用数据
+            //1.消费中的详细支付种类
+            NSArray *titleTemp =@[@"微信支付", @"支付宝支付", @"现金支付", @"刷卡支付"];
+            NSArray *iconTemp = @[@"bWeiXinPay", @"bAliPay", @"bRMBPay", @"bPosPay"];
+            NSArray *perDescribeTemp = @[@"¥", @"¥", @"¥", @"¥"];
+            NSArray *sufDescribeTemp = @[@"", @"", @"", @""];
+            NSArray *describeKeyTemp = @[@"weChat", @"aliPay", @"cash", @"isPos"];
+            for (int i = 0; i < titleTemp.count; i++) {
+                HTSaleItemMode *tempModel = [[HTSaleItemMode alloc] init];
+                tempModel.titleStr = titleTemp[i];
+                tempModel.headerImvName = iconTemp[i];
+                tempModel.perDescribeStr = perDescribeTemp[i];
+                tempModel.describeStr = [json[@"data"] getStringWithKey:describeKeyTemp[i]];
+                tempModel.sufDescribeStr = sufDescribeTemp[i];
+                [self.payKindDetailLeftArr addObject:tempModel];
+            }
+            //2.充值金额中的详细支付种类
+            NSArray *titleTemp2 =@[@"微信支付", @"支付宝支付", @"现金支付", @"刷卡支付"];
+            NSArray *iconTemp2 = @[@"bWeiXinPay", @"bAliPay", @"bRMBPay", @"bPosPay"];
+            NSArray *perDescribeTemp2 = @[@"¥", @"¥", @"¥", @"¥"];
+            NSArray *sufDescribeTemp2 = @[@"", @"", @"", @""];
+            NSArray *describeKeyTemp2 = @[@"weChatStore", @"aliPayStore", @"cashStore", @"isPosStore"];
+            for (int i = 0; i < titleTemp2.count; i++) {
+                HTSaleItemMode *tempModel = [[HTSaleItemMode alloc] init];
+                tempModel.titleStr = titleTemp2[i];
+                tempModel.headerImvName = iconTemp2[i];
+                tempModel.perDescribeStr = perDescribeTemp2[i];
+                tempModel.describeStr = [json[@"data"] getStringWithKey:describeKeyTemp2[i]];
+                tempModel.sufDescribeStr = sufDescribeTemp2[i];
+                [self.payKindDetailRightArr addObject:tempModel];
+            }
+            
+            //退换概况
+            NSArray *titleArr2 =@[@[@"退货数量", @"换货数量"], @[@"退货金额 (元)", @"换货差额 (元)"], @[@"退货率", @"换货率"]];
+            NSArray *iconArr2 = @[@[@"cyanPoint", @"cyanPoint"], @[@"cyanPoint", @"cyanPoint"], @[@"cyanPoint", @"cyanPoint"]];
+            NSArray *perDescribeArr2 = @[@[@"", @""], @[@"¥", @"¥"], @[@"", @""]];
+            NSArray *sufDescribeArr2 = @[@[@"", @""], @[@"", @""], @[@"%", @"%"]];;
+            NSArray *describeKeyArr2 = @[@[@"returnProducts", @"exchangeProducts"], @[@"returnAmount", @"exchangeAndReturnAmount"], @[@"returnRate", @"exchangeRate"]];
+            for (int i = 0; i < titleArr2.count; i++) {
+                NSMutableArray *arr22 = [NSMutableArray array];
+                NSArray *tempTitleArr = titleArr2[i];
+                NSArray *tempIconArr = iconArr2[i];
+                NSArray *tempperDescribeArr = perDescribeArr2[i];
+                NSArray *tempSufDescribeArr = sufDescribeArr2[i];
+                NSArray *tempDescribeArr = describeKeyArr2[i];
+                for (int j = 0; j < tempTitleArr.count; j++) {
+                    HTSaleItemMode *tempModel = [[HTSaleItemMode alloc] init];
+                    tempModel.titleStr = tempTitleArr[j];
+                    tempModel.headerImvName = tempIconArr[j];
+                    tempModel.perDescribeStr = tempperDescribeArr[j];
+                    tempModel.describeStr = [json[@"data"] getStringWithKey:tempDescribeArr[j]];
+                    tempModel.sufDescribeStr = tempSufDescribeArr[j];
+                    [arr22 addObject:tempModel];
+                }
+                [self.firstSectionArray addObject:arr22];
+            }
+            
+            //会员概况
+            NSArray *titleArr3 =@[@[@"新增会员", @"新增标签"], @[@"新增储值", @"新增储值赠送"], @[@"VIP成交人数", @"回头率"]];
+            NSArray *iconArr3 = @[@[@"purplePoint", @"purplePoint"], @[@"purplePoint", @"purplePoint"], @[@"purplePoint", @"purplePoint"]];
+            NSArray *perDescribeArr3 = @[@[@"", @""], @[@"¥", @"¥"], @[@"", @""]];
+            NSArray *sufDescribeArr3 = @[@[@"", @""], @[@"", @""], @[@"", @"%"]];;
+            NSArray *describeKeyArr3 = @[@[@"newCustomerCount", @"tagCount"], @[@"store", @"giveStore"], @[@"oldCustomerCount", @"backUpRate"]];
+            for (int i = 0; i < titleArr3.count; i++) {
+                NSArray *tempTitleArr = titleArr3[i];
+                NSArray *tempIconArr = iconArr3[i];
+                NSArray *tempperDescribeArr = perDescribeArr3[i];
+                NSArray *tempSufDescribeArr = sufDescribeArr3[i];
+                NSArray *tempDescribeArr = describeKeyArr3[i];
+                NSMutableArray *arr33 = [NSMutableArray array];
+                for (int j = 0; j < tempTitleArr.count; j++) {
+                    HTSaleItemMode *tempModel = [[HTSaleItemMode alloc] init];
+                    tempModel.titleStr = tempTitleArr[j];
+                    tempModel.headerImvName = tempIconArr[j];
+                    tempModel.perDescribeStr = tempperDescribeArr[j];
+                    tempModel.describeStr = [json[@"data"] getStringWithKey:tempDescribeArr[j]];
+                    tempModel.sufDescribeStr = tempSufDescribeArr[j];
+                    [arr33 addObject:tempModel];
+                }
+                [self.firstSectionArray addObject:arr33];
+            }
+            
+            /*
             NSArray *titles1 = @[@"利润",@"销量",@"单量",@"连带率",@"进店人次",@"回头率",@"储值消费"];
              NSArray *titles2 = @[@"营业额",@"换货数量",@"VIP销售占比",@"退货率",@"客单价",@"新增标签",@"支付宝支付"];
              NSArray *titles3 = @[@"退换差额",@"退货数量",@"折扣",@"换货率",@"件单价",@"新增储值",@"微信支付"];
@@ -464,6 +671,7 @@
                 model.imgName = imageName[i];
                 [self.firstSectionArray addObject:model];
             }
+             */
             sectionmodel.isOpen = YES;
         }
         if (tag == 1) {
