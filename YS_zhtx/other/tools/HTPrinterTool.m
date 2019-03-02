@@ -50,7 +50,31 @@
             }else if ([isNul isEqualToString:@"0"]){
                 if ([dataDic getDictionArrayWithKey:@"printInfo"]) {
                     [[HTShareClass shareClass].printerModel setValuesForKeysWithDictionary:[dataDic getDictionArrayWithKey:@"printInfo"]];
+                    [HTShareClass shareClass].printerModel.salerName = [[dataDic getDictionArrayWithKey:@"printInfo"] objectForKey:@"seller"];
                     self->isReceipt = YES;
+                    
+                    NSString *payType = [[dataDic objectForKey:@"printInfo"] objectForKey:@"payType"];
+                    if ([self IsChinese:payType]) {
+                        
+                        if ([payType isEqualToString:@"现金支付"]) {
+                            [HTShareClass shareClass].printerModel.paytype = cashType;
+                        }else if ([payType isEqualToString:@"刷卡支付"]) {
+                            [HTShareClass shareClass].printerModel.paytype = posType;
+                        }else if ([payType isEqualToString:@"现金支付"]) {
+                            [HTShareClass shareClass].printerModel.paytype = cashType;
+                        }else if ([payType isEqualToString:@"储值支付"]) {
+                            [HTShareClass shareClass].printerModel.paytype = storedType;
+                        }else if ([payType isEqualToString:@"储赠支付"]) {
+                            [HTShareClass shareClass].printerModel.paytype = storedSendType;
+                        }else if ([payType isEqualToString:@"支付宝支付"]) {
+                            [HTShareClass shareClass].printerModel.paytype = alipayType;
+                        }else if ([payType isEqualToString:@"微信支付"]) {
+                            [HTShareClass shareClass].printerModel.paytype = wetchatType;
+                        }else{
+                            [HTShareClass shareClass].printerModel.paytype = mixType;
+                        }
+                    }
+                    
                     [self print];
                 }
             }
@@ -64,6 +88,21 @@
     }];
 }
 
+-(BOOL)IsChinese:(NSString *)str {
+    if (![str isKindOfClass:[NSString class]]) {
+        return NO;
+    }
+    for(int i=0; i< [str length];i++){
+        int a = [str characterAtIndex:i];
+        if( a > 0x4e00 && a < 0x9fff)
+        {
+            return YES;
+        }
+        
+    }
+    return NO;
+    
+}
 
 
 - (void)savePrintDataWithOrderId:(NSString *) orderId{
@@ -205,7 +244,7 @@
             if (pages < 2 ) {
                 pages = 2;
             }
-#ifndef __OPTIMIZE__
+#ifdef DEBUG
             pages = 1;
 #else
 #endif
@@ -431,7 +470,7 @@
         [content appendString:[self getHeaderWithString:shortName]];
         [content appendString:[self getShopName]];
         [content appendString:[self newLine]];
-        [content appendString:[self salerTextWith:[HTShareClass shareClass].loginModel.person.name]];
+        [content appendString:[self salerTextWith:[HTShareClass shareClass].printerModel.salerName]];
         [content appendString:[self saleNumber:[HTShareClass shareClass].printerModel.orderNo]];
         [content appendString:[self getAddress]];
         [content appendString:[self getLine]];
@@ -449,7 +488,7 @@
         [content appendString:[[NSString stringWithFormat:@"%@",[HTShareClass shareClass].printerModel.date] string24WithVersion:self.version]];
         [content appendString:[self tipsText]];
         [content appendString:[self newLine]];
-//#ifndef __OPTIMIZE__
+//#ifdef DEBUG
 //        [content appendString: [[NSString stringWithFormat:@"%@",
 //                                 [self jsonStringWithDic:printDic]] string24WithVersion:self.version]];
 //#else
@@ -501,7 +540,7 @@
                     [content appendString:[[NSString stringWithFormat:@"%@",model.returnTime]  string24WithVersion:self.version]];
                     [content appendString:[self tipsText]];
                     [content appendString:[self newLine]];
-//#ifndef __OPTIMIZE__
+//#ifdef DEBUG
 //                    [content appendString: [[NSString stringWithFormat:@"%@",
 //                                             [self jsonStringWithDic:printDic1]] string24WithVersion:self.version]];
 //
@@ -555,7 +594,7 @@
         [content appendString:[[NSString stringWithFormat:@"%@",[HTShareClass shareClass].printerModel.returnTime]  string24WithVersion:self.version]];
         [content appendString:[self tipsText]];
         [content appendString:[self newLine]];
-//#ifndef __OPTIMIZE__
+//#ifdef DEBUG
 //        [content appendString: [[NSString stringWithFormat:@"%@",
 //                                 [self jsonStringWithDic:printDic1]] string24WithVersion:self.version]];
 //
@@ -753,6 +792,9 @@
             NSMutableString *lineStr = [NSMutableString string];
             for (NSString *str  in keyArr) {
                 NSMutableString *value =   [str isEqualToString:@"discount"] ? ( [dic[str] floatValue] == 0.0f || [dic[str] floatValue] == 1.0f ) ? [@"1" mutableCopy] : [dic[str] floatValue] < 0 ? [@"/" mutableCopy]:  [[dic getStringWithKey:str ] mutableCopy] : [[dic getStringWithKey:str ] mutableCopy];
+                if ([str isEqualToString:@"discount"]) {
+                    value = [[NSString stringWithFormat:@"%.2f", [value floatValue] * 10] mutableCopy];
+                }
                 NSString *typeStr = headsDic[str];
                 CGFloat width1 = [self toGbk:typeStr];
                 for (int i = 0 ; i < 22; i ++) {
@@ -795,6 +837,9 @@
             NSMutableString *lineStr = [NSMutableString string];
             for (NSString *str  in keyArr) {
                 NSMutableString *value =   [str isEqualToString:@"discount"] ? ( [dic[str] floatValue] == 0.0f || [dic[str] floatValue] == 1.0f ) ? [@"1" mutableCopy] : [dic[str] floatValue] < 0 ? [@"/" mutableCopy]:  [[dic getStringWithKey:str ] mutableCopy] : [[dic getStringWithKey:str ] mutableCopy];
+                if ([str isEqualToString:@"discount"]) {
+                    value = [[NSString stringWithFormat:@"%.2f", [value floatValue] * 10] mutableCopy];
+                }
                 NSString *typeStr = headsDic[str];
                 CGFloat width1 = [self toGbk:typeStr];
                 for (int i = 0 ; i < 22; i ++) {
@@ -851,12 +896,12 @@
             break;
         case storedType:
         {
-            type = @"存储支付";
+            type = @"储值支付";
         }
             break;
         case storedSendType:
         {
-            type = @"存储赠送支付";
+            type = @"储赠支付";
         }
             break;
        case aliType:
@@ -904,9 +949,15 @@
             break;
         case storedType:
         {
-            type = @"存储支付";
+            type = @"储值支付";
         }
-            break; case
+            break;
+        case storedSendType:
+        {
+            type = @"储赠支付";
+        }
+            break;
+        case
         aliType:
         {
             type = @"扫码支付";
@@ -922,6 +973,11 @@
         wetchatType:
         {
             type = @"微信支付";
+        }
+            break;
+        case mixType:
+        {
+            type = @"组合支付";
         }
             break;
         default:
@@ -952,7 +1008,9 @@
     return [[NSString stringWithFormat:@"优惠券: %@",money] string24WithVersion:self.version];
 }
 - (NSString *) tipsText{
-    return [@"请保管好收银小票以作退换货凭证！\n谢谢惠顾" string24WithVersion:self.version];
+    return [@"请保管好收银小票以作退换货凭证,出售商品无质量问题不予退换,最终解释权归本店所有! \n谢谢惠顾!" string24WithVersion:self.version];
+//            请保管好收银小票以作退换货凭证！\n谢谢惠顾
+            
 }
 - (NSString *) salerTextWith:(NSString *) saler{
     return [[NSString stringWithFormat:@"导购: %@",saler] string24WithVersion:self.version];
@@ -1032,7 +1090,7 @@
                               @"brand":[[HTShareClass shareClass].loginModel.company[@"shortName"] length] > 0 ? [HTShareClass shareClass].loginModel.company[@"shortName"] : @"",
                               @"company":[self getCompanyName],
                               @"address":[[HTShareClass shareClass].loginModel.company[@"address"] length] > 0  ? [HTShareClass shareClass].loginModel.company[@"address"] : @"" ,
-                              @"seller":[HTShareClass shareClass].loginModel.person.name,
+                              @"seller":[HTShareClass shareClass].printerModel.salerName,
                               @"orderId":[HTHoldNullObj getValueWithUnCheakValue: model.orderId],
                               @"orderNo":[HTHoldNullObj getValueWithUnCheakValue:model.orderNo],
                               @"productCount": @(model.goodsList.count) ,
@@ -1136,7 +1194,7 @@
         [content appendText:[self getHeaderWithString:shortName] alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleBig];
         [content appendText:[self getShopName] alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleMiddle];
         [content appendNewLine];
-        [content appendText:[self salerTextWith:[HTShareClass shareClass].loginModel.person.name] alignment:HLTextAlignmentLeft];
+        [content appendText:[self salerTextWith:[HTShareClass shareClass].printerModel.salerName] alignment:HLTextAlignmentLeft];
         [content appendText:[self saleNumber:[HTShareClass shareClass].printerModel.orderNo] alignment:HLTextAlignmentLeft];
         [content appendText:[self getAddress] alignment:HLTextAlignmentLeft];
         [content appendSeperatorLine];
@@ -1268,6 +1326,9 @@
             for (NSString *str  in keyArr) {
                 
                 NSMutableString *value =   [str isEqualToString:@"discount"] ? ( [dic[str] floatValue] == 0.0f || [dic[str] floatValue] == 1.0f ) ? [@"1" mutableCopy] : [dic[str] floatValue] < 0 ? [@"/" mutableCopy]:  [[dic getStringWithKey:str ] mutableCopy] : [[dic getStringWithKey:str ] mutableCopy];
+                if ([str isEqualToString:@"discount"]) {
+                    value = [[NSString stringWithFormat:@"%.2f", [value floatValue] * 10] mutableCopy];
+                }
                 NSString *typeStr = headsDic[str];
                 CGFloat width1 = [self toGbk:typeStr];
                 for (int i = 0 ; i < 22; i ++) {
@@ -1323,6 +1384,9 @@
             for (NSString *str  in keyArr) {
                 
                 NSMutableString *value =   [str isEqualToString:@"discount"] ? ( [dic[str] floatValue] == 0.0f || [dic[str] floatValue] == 1.0f ) ? [@"1" mutableCopy] : [dic[str] floatValue] < 0 ? [@"/" mutableCopy]:  [[dic getStringWithKey:str ] mutableCopy] : [[dic getStringWithKey:str ] mutableCopy];
+                if ([str isEqualToString:@"discount"]) {
+                    value = [[NSString stringWithFormat:@"%.2f", [value floatValue] * 10] mutableCopy];
+                }
                 NSString *typeStr = headsDic[str];
                 CGFloat width1 = [self toGbk:typeStr];
                 for (int i = 0 ; i < 22; i ++) {

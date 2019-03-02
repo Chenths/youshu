@@ -16,13 +16,18 @@
     // Initialization code
 }
 - (IBAction)saleGoodOrBadClicked:(id)sender {
-    
+    if([[[HTShareClass shareClass].loginModel.company getStringWithKey:@"type"] isEqualToString:@"AGENT"]||[[[HTShareClass shareClass].loginModel.company getStringWithKey:@"type"] isEqualToString:@"BOSS"]){
+        return;
+    }
     HTSaleGoodOrBadCenterController *vc = [[HTSaleGoodOrBadCenterController alloc] init];
     vc.companyId = self.companyId;
     [[HTShareClass shareClass].getCurrentNavController pushViewController:vc animated:YES];
     
 }
 - (IBAction)turnReportListClicked:(id)sender {
+    if([[[HTShareClass shareClass].loginModel.company getStringWithKey:@"type"] isEqualToString:@"AGENT"]||[[[HTShareClass shareClass].loginModel.company getStringWithKey:@"type"] isEqualToString:@"BOSS"]){
+        return;
+    }
     HTTurnListTypeDescViewController *vc = [[HTTurnListTypeDescViewController alloc] init];
     vc.companyId = self.companyId;
     [[HTShareClass shareClass].getCurrentNavController pushViewController:vc animated:YES];

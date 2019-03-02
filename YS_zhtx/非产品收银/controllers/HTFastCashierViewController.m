@@ -157,8 +157,12 @@
  结算点击
  */
 -(void)settlerClicked{
-    
+    if (self.dataArray.count == 0) {
+        [MBProgressHUD showError:@"请添加商品"];
+        return;
+    }
     NSMutableArray *dataArr = [NSMutableArray array];
+    self.productArray = [NSMutableArray array];
     for (HTFastPrudoctModel *model in self.dataArray) {
         for (int i = 0; i < model.numbers.integerValue; i++) {
             NSDictionary *dic = @{
@@ -176,6 +180,8 @@
             producModel.finalprice = [HTHoldNullObj getValueWithUnCheakValue:[model getFinallPriceWithPrice:model.price andDiscount:model.discount]];
             producModel.discount = model.discount;
             dModel.product = @[producModel];
+            //新加的 因为快速下单结算没有selectedmodel
+            dModel.selectedModel = producModel;
             [self.productArray addObject:dModel];
         }
     }
@@ -219,6 +225,49 @@
 #pragma mark -private methods
 //下单
 - (void)createOrderWithBcString:(NSString *) bcProductStr AndBqString:(NSString *)bqStr{
+   
+//    HTChargeOrderModel *order = [HTChargeOrderModel yy_modelWithJSON:[json[@"data"] getDictionArrayWithKey:@"order"]];
+    
+    HTNewPayViewController *vc = [[HTNewPayViewController alloc] init];
+    //        HTSettleViewController *vc = [[HTSettleViewController alloc] init];
+    CGFloat final = 0.0f;
+    CGFloat total = 0.0f;
+    for (HTFastPrudoctModel *model  in self.dataArray) {
+        self.goodsNumbers += model.numbers.integerValue;
+        final += [ [model getFinallPriceWithPrice:model.price andDiscount:model.discount] intValue] * model.numbers.integerValue;
+        total  += [model.price intValue] * model.numbers.integerValue;
+    }
+    NSDictionary *dic = @{@"encodeTotal" : [NSString stringWithFormat:@"%.2f", total], @"encodeFinal" : [NSString stringWithFormat:@"%.2f", final]};
+    HTChargeOrderModel *order = [[HTChargeOrderModel alloc] init];
+    [order setValuesForKeysWithDictionary:dic];
+    vc.orderModel = order;
+    vc.isFromFast = YES;
+    vc.products = self.productArray;
+    vc.bcProductStr = bcProductStr;
+    //        if ([HTShareClass shareClass].isPlatformOnlinePayActive) {
+    //            vc.payCode = [json[@"data"] getStringWithKey:@"payCode"];
+    //        }else{
+    //            vc.addUrl = [json[@"data"] getStringWithKey:@"adUrl"];
+    //        }
+    vc.custModel = self.custModel;
+    //        vc.requestNum = [json[@"data"] getStringWithKey:@"requestNum"];
+    [self.navigationController pushViewController:vc animated:YES];
+    self.bottomView.settelBt.enabled = YES;
+ /*
+  NSMutableArray *inKeys = [NSMutableArray array];
+  for (HTCahargeProductModel *model in self.productArray) {
+  HTChargeProductInfoModel *mmm = model.selectedModel;
+  for (NSDictionary *dict in detaillist) {
+  if ([mmm.barcode isEqualToString:[dict getStringWithKey:@"barcode"]] && ![mmm.primaryKey isEqualToString:[dict getStringWithKey:@"id"]]) {
+  //                    该商品primarykey为空 且未添加到其他商品上
+  if (mmm.primaryKey.length == 0 && ![inKeys containsObject:[dict getStringWithKey:@"id"]]) {
+  mmm.primaryKey = [dict getStringWithKey:@"id"];
+  [inKeys addObject: [dict getStringWithKey:@"id"]];
+  break;
+  }
+  }
+  }
+  }
     [MBProgressHUD showMessage:@""];
     __weak typeof(self ) weakSelf = self;
     NSDictionary *dic = @{
@@ -262,7 +311,9 @@
         HTNewPayViewController *vc = [[HTNewPayViewController alloc] init];
 //        HTSettleViewController *vc = [[HTSettleViewController alloc] init];
         vc.orderModel = order;
+        vc.isFromFast = YES;
         vc.products = self.productArray;
+        vc.bcProductStr = bcProductStr;
 //        if ([HTShareClass shareClass].isPlatformOnlinePayActive) {
 //            vc.payCode = [json[@"data"] getStringWithKey:@"payCode"];
 //        }else{
@@ -283,6 +334,7 @@
         [MBProgressHUD hideHUD];
         [MBProgressHUD showError:NETERRORSTRING];
     }];
+  */
 }
 //计算商品数量 及总价
 - (void)sumTotle{

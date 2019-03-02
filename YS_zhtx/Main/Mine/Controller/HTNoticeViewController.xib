@@ -22,9 +22,8 @@
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eK8-eN-B26">
                     <rect key="frame" x="15" y="30" width="345" height="607"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <string key="text">优化功能： 
-
-           修改界面显示及交互逻辑</string>
+                    <string key="text">正常下单逻辑、改价、打印信息逻辑页面优化快速下单逻辑、改价、打印信息逻辑页面优化客户分析的频次金额对比优化客户详情页优化，资料添加微信号和备注功能App端新增组合支付,组合销售功能
+</string>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>

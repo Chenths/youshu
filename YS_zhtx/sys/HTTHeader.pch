@@ -42,7 +42,7 @@
 #import "JCHATStringUtils.h"
 #pragma mark -网络请求地址
 
-#ifndef __OPTIMIZE__
+#ifdef DEBUG
 //这里执行的是debug模式下
 //余静
 //#define baseUrl @"http://10.1.1.109:8090/"
@@ -52,7 +52,7 @@
 //唐鑫
 //#define baseUrl @"http://192.168.199.42:8080/"
 //姚丁浩
-#define baseUrl @"http://192.168.199.46:8080/"
+//#define baseUrl @"http://192.168.199.46:8080/"
 //颜家栋
 //#define baseUrl @"http://192.168.199.71:8080/"
 //#define baseUrl @"http://192.168.199.188:8080/"
@@ -62,7 +62,15 @@
 //#define baseUrl @"http://192.168.199.162:8080/"
 //#define baseUrl @"http://192.168.1.106:8080/"
 //#define baseUrl @"http://192.168.1.200:8080/"
-//#define baseUrl @"http://59.110.5.160:8090/"
+#define baseUrl ({\
+NSString *tmp;\
+if ([[NSUserDefaults standardUserDefaults] objectForKey:@"baseUrl"]) {\
+tmp = [[NSUserDefaults standardUserDefaults] objectForKey:@"baseUrl"];\
+}else{\
+tmp = @"http://192.168.199.46:8080/";\
+}\
+tmp;\
+})
 #else
 #define baseUrl @"http://59.110.5.160:8090/"
 //#define baseUrl @"http://47.93.173.31:8080/"
@@ -346,6 +354,8 @@
 #define loadStoreAllSeller @"load_shopping_guide_list_4_app.html"
 //下单并支付
 #define creatOrderAndPay  @"place_an_order_4_app.html"
+//简易下单
+#define creatFastOrder    @"no_product_place_an_order_4_app.html"
 #pragma mark -宏
 
 

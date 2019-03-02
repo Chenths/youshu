@@ -178,126 +178,191 @@
     [self.tab reloadData];
 }
 - (IBAction)finshClicked:(id)sender {
-    NSMutableDictionary *dataDic = [NSMutableDictionary dictionary];
-    __block CGFloat totlePrice = 0.0f;
-    __weak typeof(self) weakSelf =  self;
-//    [self.dataArray enumerateObjectsUsingBlock:^(HTCahargeProductModel  *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    if (_isReturn) {
+        NSMutableDictionary *dataDic = [NSMutableDictionary dictionary];
+        __block CGFloat totlePrice = 0.0f;
+        __weak typeof(self) weakSelf =  self;
+        [self.dataArray enumerateObjectsUsingBlock:^(HTCahargeProductModel  *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            HTChargeProductInfoModel *changeModel = obj.selectedModel;
+            if (obj.isChange) {
+                for (HTCahargeProductModel *mmm in strongSelf.oldDataArray) {
+                    HTChargeProductInfoModel *mod = mmm.selectedModel;
+                    if ([changeModel.primaryKey isEqualToString:mod.primaryKey]) {
+                        if (changeModel.finalprice.intValue != mod.finalprice.intValue || ![[NSString stringWithFormat:@"%@",changeModel.discount] isEqualToString:[NSString stringWithFormat:@"%@",mod.discount]]|| obj.hasGivePoint.length > 0) {
+                            NSDictionary *valueDic  = @{
+                                                        @"finalPrice":[SecurityUtil encryptAESData: [NSString stringWithFormat:@"%@",changeModel.finalprice]],
+                                                        @"discount": changeModel.discount,
+                                                        @"hasGivePoint":[HTHoldNullObj getValueWithUnCheakValue:obj.hasGivePoint],
+                                                        };
+                            [dataDic setObject:valueDic forKey:changeModel.primaryKey];
+                        }
+                        break;
+                    }
+                }
+            }
+            totlePrice += changeModel.finalprice.floatValue;
+        }];
+        if (dataDic.allKeys.count == 0) {
+            __weak typeof(self) weakSelf = self;
+            HTCustomDefualAlertView *alert =  [[HTCustomDefualAlertView alloc] initAlertWithTitle:@"当前订单未进行修改，是否退出改价" btsArray:@[@"不退出",@"退出改价"] okBtclicked:^{
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                [strongSelf.navigationController popViewControllerAnimated:YES];
+            } cancelClicked:^{
+            }];
+            [alert show];
+            return;
+        }
+        if (self.isReturn) {
+            NSDictionary *dic = @{
+                                  @"orderId":self.orderModel.orderId,
+                                  @"orderJsonStr":[dataDic jsonStringWithDic],
+                                  @"companyId":[HTShareClass shareClass].loginModel.companyId,
+                                  @"productCount":@(self.dataArray.count),
+                                  @"exchangeProductPrice":[HTHoldNullObj getValueWithUnCheakValue:self.changePrice],
+                                  };
+            [MBProgressHUD showMessage:@""];
+            __weak typeof(self) weakSelf = self;
+            [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleOrder,repalceProductModifyPrice] params:dic success:^(id json) {
+                [MBProgressHUD hideHUD];
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                strongSelf.didChange(strongSelf.dataArray, [json[@"data"] getStringWithKey:@"wechatPayOrderId"], [json[@"data"] getStringWithKey:@"finalPrice"], [json[@"data"] getStringWithKey:@"payCode"]);
+                [strongSelf.navigationController popViewControllerAnimated:YES];
+                [strongSelf.dataArray enumerateObjectsUsingBlock:^(HTCahargeProductModel   *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    obj.isChange = NO;
+                    obj.isSelected = NO;
+                    obj.isChangePrice = NO;
+                }];
+            } error:^{
+                [MBProgressHUD hideHUD];
+                [MBProgressHUD showError:SeverERRORSTRING];
+            } failure:^(NSError *error) {
+                [MBProgressHUD hideHUD];
+                [MBProgressHUD showError:NETERRORSTRING];
+            }];
+        }
+    }else{
+        NSMutableDictionary *dataDic = [NSMutableDictionary dictionary];
+        __block CGFloat totlePrice = 0.0f;
+        __weak typeof(self) weakSelf =  self;
+        //    [self.dataArray enumerateObjectsUsingBlock:^(HTCahargeProductModel  *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
-    BOOL ifChange = 0;
-    for (HTCahargeProductModel *obj in self.dataArray) {
-        HTChargeProductInfoModel *changeModel = obj.selectedModel;
-        if (obj.isChange) {
-            for (HTCahargeProductModel *mmm in strongSelf.oldDataArray) {
-                HTChargeProductInfoModel *mod = mmm.selectedModel;
-//                if ([changeModel.primaryKey isEqualToString:mod.primaryKey]) {
+        BOOL ifChange = 0;
+        for (HTCahargeProductModel *obj in self.dataArray) {
+            HTChargeProductInfoModel *changeModel = obj.selectedModel;
+            if (obj.isChange) {
+                for (HTCahargeProductModel *mmm in strongSelf.oldDataArray) {
+                    HTChargeProductInfoModel *mod = mmm.selectedModel;
+                    //                if ([changeModel.primaryKey isEqualToString:mod.primaryKey]) {
                     if (changeModel.finalprice.intValue != mod.finalprice.intValue || ![[NSString stringWithFormat:@"%@",changeModel.discount] isEqualToString:[NSString stringWithFormat:@"%@",mod.discount]]|| obj.hasGivePoint.length > 0) {
-//                        NSDictionary *valueDic  = @{
-//                                                    @"finalPrice":[SecurityUtil encryptAESData: [NSString stringWithFormat:@"%@",changeModel.finalprice]],
-//                                                    @"discount": changeModel.discount,
-//                                                    @"hasGivePoint":[HTHoldNullObj getValueWithUnCheakValue:obj.hasGivePoint],
-//                                                    };
-//                        [dataDic setObject:changeModel.finalprice forKey:@"finalPrice"];
+                        //                        NSDictionary *valueDic  = @{
+                        //                                                    @"finalPrice":[SecurityUtil encryptAESData: [NSString stringWithFormat:@"%@",changeModel.finalprice]],
+                        //                                                    @"discount": changeModel.discount,
+                        //                                                    @"hasGivePoint":[HTHoldNullObj getValueWithUnCheakValue:obj.hasGivePoint],
+                        //                                                    };
+                        //                        [dataDic setObject:changeModel.finalprice forKey:@"finalPrice"];
                         ifChange = 1;
                     }
                     break;
-//                }
+                    //                }
+                }
             }
+            totlePrice += changeModel.finalprice.floatValue;
         }
-        totlePrice += changeModel.finalprice.floatValue;
-    }
-//    }];
-    if (!ifChange) {
-        __weak typeof(self) weakSelf = self;
-        HTCustomDefualAlertView *alert =  [[HTCustomDefualAlertView alloc] initAlertWithTitle:@"当前订单未进行修改，是否退出改价" btsArray:@[@"不退出",@"退出改价"] okBtclicked:^{
-            __strong typeof(weakSelf) strongSelf = weakSelf;
+        //    }];
+        if (!ifChange) {
+            __weak typeof(self) weakSelf = self;
+            HTCustomDefualAlertView *alert =  [[HTCustomDefualAlertView alloc] initAlertWithTitle:@"当前订单未进行修改，是否退出改价" btsArray:@[@"不退出",@"退出改价"] okBtclicked:^{
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                [strongSelf.navigationController popViewControllerAnimated:YES];
+            } cancelClicked:^{
+                
+            }];
+            [alert show];
+            return;
+        }else{
+            self.didChange(strongSelf.dataArray, @"", [NSString stringWithFormat:@"%.2f", totlePrice], @"");
             [strongSelf.navigationController popViewControllerAnimated:YES];
-        } cancelClicked:^{
-            
-        }];
-        [alert show];
-        return;
-    }else{
-        self.didChange(strongSelf.dataArray, @"", [NSString stringWithFormat:@"%.2f", totlePrice], @"");
-        [strongSelf.navigationController popViewControllerAnimated:YES];
-    }
-//    if (self.isReturn) {
-//        NSDictionary *dic = @{
-//                              @"orderId":self.orderModel.orderId,
-//                              @"orderJsonStr":[dataDic jsonStringWithDic],
-//                              @"companyId":[HTShareClass shareClass].loginModel.companyId,
-//                              @"productCount":@(self.dataArray.count),
-//                              @"exchangeProductPrice":[HTHoldNullObj getValueWithUnCheakValue:self.changePrice],
-//                              };
-//        [MBProgressHUD showMessage:@""];
-//        __weak typeof(self) weakSelf = self;
-//        [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleOrder,repalceProductModifyPrice] params:dic success:^(id json) {
-//            [MBProgressHUD hideHUD];
-//            __strong typeof(weakSelf) strongSelf = weakSelf;
-//            strongSelf.didChange(strongSelf.dataArray, [json[@"data"] getStringWithKey:@"wechatPayOrderId"], [json[@"data"] getStringWithKey:@"finalPrice"], [json[@"data"] getStringWithKey:@"payCode"]);
-//            [strongSelf.navigationController popViewControllerAnimated:YES];
-//            [strongSelf.dataArray enumerateObjectsUsingBlock:^(HTCahargeProductModel   *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//                obj.isChange = NO;
-//                obj.isSelected = NO;
-//                obj.isChangePrice = NO;
-//            }];
-//        } error:^{
-//            [MBProgressHUD hideHUD];
-//            [MBProgressHUD showError:SeverERRORSTRING];
-//        } failure:^(NSError *error) {
-//            [MBProgressHUD hideHUD];
-//            [MBProgressHUD showError:NETERRORSTRING];
-//        }];
-//    }else{
+        }
+        //    if (self.isReturn) {
+        //        NSDictionary *dic = @{
+        //                              @"orderId":self.orderModel.orderId,
+        //                              @"orderJsonStr":[dataDic jsonStringWithDic],
+        //                              @"companyId":[HTShareClass shareClass].loginModel.companyId,
+        //                              @"productCount":@(self.dataArray.count),
+        //                              @"exchangeProductPrice":[HTHoldNullObj getValueWithUnCheakValue:self.changePrice],
+        //                              };
+        //        [MBProgressHUD showMessage:@""];
+        //        __weak typeof(self) weakSelf = self;
+        //        [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleOrder,repalceProductModifyPrice] params:dic success:^(id json) {
+        //            [MBProgressHUD hideHUD];
+        //            __strong typeof(weakSelf) strongSelf = weakSelf;
+        //            strongSelf.didChange(strongSelf.dataArray, [json[@"data"] getStringWithKey:@"wechatPayOrderId"], [json[@"data"] getStringWithKey:@"finalPrice"], [json[@"data"] getStringWithKey:@"payCode"]);
+        //            [strongSelf.navigationController popViewControllerAnimated:YES];
+        //            [strongSelf.dataArray enumerateObjectsUsingBlock:^(HTCahargeProductModel   *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        //                obj.isChange = NO;
+        //                obj.isSelected = NO;
+        //                obj.isChangePrice = NO;
+        //            }];
+        //        } error:^{
+        //            [MBProgressHUD hideHUD];
+        //            [MBProgressHUD showError:SeverERRORSTRING];
+        //        } failure:^(NSError *error) {
+        //            [MBProgressHUD hideHUD];
+        //            [MBProgressHUD showError:NETERRORSTRING];
+        //        }];
+        //    }else{
         //请求订单状态是否为以支付
-//        NSDictionary *dict = @{
-//                               @"orderId"    :  self.orderModel.orderId,
-//                               @"companyId"  :[HTShareClass shareClass].loginModel.companyId
-//                               };
-//        [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleOrder,queryOrderState] params:dict success:^(id json) {
-//
-//            if ([[json[@"data"] getStringWithKey:@"state"] isEqualToString:@"2"]) {
-//                [MBProgressHUD hideHUD];
-//                [MBProgressHUD showSuccess:@"该订单已支付成功，不能进行该操作"];
-//                [self dismissViewControllerAnimated:YES completion:nil];
-//                if (self.didpay) {
-//                    self.didpay();
-//                }
-//                return ;
-//            }else{
-//        NSDictionary *dic = @{
-//                              @"orderId":self.orderModel.orderId,
-//                              @"orderJsonStr":[dataDic jsonStringWithDic],
-//                              @"companyId":[HTShareClass shareClass].loginModel.companyId,
-//                              @"productCount":@(self.dataArray.count)
-//                              };
-//        [MBProgressHUD showMessage:@""];
-//        __weak typeof(self) weakSelf = self;
-//        [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleOrder,modifyOrderPrice4App] params:dic success:^(id json) {
-//            [MBProgressHUD hideHUD];
-//            __strong typeof(weakSelf) strongSelf = weakSelf;
-//            strongSelf.didChange(strongSelf.dataArray, [json[@"data"] getStringWithKey:@"wechatPayOrderId"], [json[@"data"] getStringWithKey:@"finalPrice"], [json[@"data"] getStringWithKey:@"payCode"]);
-//            [strongSelf.navigationController popViewControllerAnimated:YES];
-//            [strongSelf.dataArray enumerateObjectsUsingBlock:^(HTCahargeProductModel   *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//                obj.isChange = NO;
-//                obj.isSelected = NO;
-//                obj.isChangePrice = NO;
-//            }];
-//        } error:^{
-//            [MBProgressHUD hideHUD];
-//            [MBProgressHUD showError:SeverERRORSTRING];
-//        } failure:^(NSError *error) {
-//            [MBProgressHUD hideHUD];
-//            [MBProgressHUD showError:NETERRORSTRING];
-//        }];
-//            }
-//      } error:^{
-//          [MBProgressHUD hideHUD];
-//          [MBProgressHUD showError:SeverERRORSTRING];
-//      } failure:^(NSError *error) {
-//          [MBProgressHUD hideHUD];
-//          [MBProgressHUD showError:NETERRORSTRING];
-//      }];
-//    }
+        //        NSDictionary *dict = @{
+        //                               @"orderId"    :  self.orderModel.orderId,
+        //                               @"companyId"  :[HTShareClass shareClass].loginModel.companyId
+        //                               };
+        //        [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleOrder,queryOrderState] params:dict success:^(id json) {
+        //
+        //            if ([[json[@"data"] getStringWithKey:@"state"] isEqualToString:@"2"]) {
+        //                [MBProgressHUD hideHUD];
+        //                [MBProgressHUD showSuccess:@"该订单已支付成功，不能进行该操作"];
+        //                [self dismissViewControllerAnimated:YES completion:nil];
+        //                if (self.didpay) {
+        //                    self.didpay();
+        //                }
+        //                return ;
+        //            }else{
+        //        NSDictionary *dic = @{
+        //                              @"orderId":self.orderModel.orderId,
+        //                              @"orderJsonStr":[dataDic jsonStringWithDic],
+        //                              @"companyId":[HTShareClass shareClass].loginModel.companyId,
+        //                              @"productCount":@(self.dataArray.count)
+        //                              };
+        //        [MBProgressHUD showMessage:@""];
+        //        __weak typeof(self) weakSelf = self;
+        //        [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleOrder,modifyOrderPrice4App] params:dic success:^(id json) {
+        //            [MBProgressHUD hideHUD];
+        //            __strong typeof(weakSelf) strongSelf = weakSelf;
+        //            strongSelf.didChange(strongSelf.dataArray, [json[@"data"] getStringWithKey:@"wechatPayOrderId"], [json[@"data"] getStringWithKey:@"finalPrice"], [json[@"data"] getStringWithKey:@"payCode"]);
+        //            [strongSelf.navigationController popViewControllerAnimated:YES];
+        //            [strongSelf.dataArray enumerateObjectsUsingBlock:^(HTCahargeProductModel   *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        //                obj.isChange = NO;
+        //                obj.isSelected = NO;
+        //                obj.isChangePrice = NO;
+        //            }];
+        //        } error:^{
+        //            [MBProgressHUD hideHUD];
+        //            [MBProgressHUD showError:SeverERRORSTRING];
+        //        } failure:^(NSError *error) {
+        //            [MBProgressHUD hideHUD];
+        //            [MBProgressHUD showError:NETERRORSTRING];
+        //        }];
+        //            }
+        //      } error:^{
+        //          [MBProgressHUD hideHUD];
+        //          [MBProgressHUD showError:SeverERRORSTRING];
+        //      } failure:^(NSError *error) {
+        //          [MBProgressHUD hideHUD];
+        //          [MBProgressHUD showError:NETERRORSTRING];
+        //      }];
+        //    }
+    }
 }
 - (IBAction)changePriceClicked:(id)sender {
     if (self.selectedArray.count == 0) {

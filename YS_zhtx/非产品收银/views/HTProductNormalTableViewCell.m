@@ -25,8 +25,16 @@
 -(void)textFieledDidChange:(NSNotification *)notice{
     if (notice.object == self.valueTextField) {
         self.model.value = self.valueTextField.text;
+        if ([self.model.value containsString:self.model.pre]) {
+            self.model.value = [self.model.value stringByReplacingOccurrencesOfString:self.model.pre withString:@""];
+        }
+        
+        if ([self.model.value containsString:self.model.suf]) {
+            self.model.value = [self.model.value stringByReplacingOccurrencesOfString:self.model.suf withString:@""];
+        }
     }
 }
+
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if (self.model.value.length > 0) {
         self.valueTextField.text = [NSString stringWithFormat:@"%@%@%@",self.model.pre,self.model.value,self.model.suf];
@@ -39,7 +47,7 @@
     _model = model;
     self.titleLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.title];
     if (model.value.length > 0) {
-        self.valueTextField.text = [NSString stringWithFormat:@"%@%@%@",model.pre,model.value,model.suf];
+        self.valueTextField.text = [NSString stringWithFormat:@"%@%@%@",self.model.pre,self.model.value,self.model.suf];
     }
     self.valueTextField.keyboardType = model.keyBroardType;
 }

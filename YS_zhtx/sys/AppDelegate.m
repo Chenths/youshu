@@ -30,7 +30,7 @@
 
 static NSString *appKey = @"5094545990eb415462160e31";
 static NSString *channel = @"App Store";
-#ifndef __OPTIMIZE__
+#ifdef DEBUG
 //这里执行的是debug模式下
 static BOOL isProduction = YES ;
 #else

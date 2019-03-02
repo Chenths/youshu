@@ -109,10 +109,23 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if ([cellname isEqualToString:@"HTOrderDetailSimpleTableViewCell"]) {
             cell.nameLabel.text = [[_groupGuide objectAtIndex:indexPath.row] objectForKey:@"name"];
-            cell.detailLabel.text = [NSString stringWithFormat:@"¥%@", [[_groupGuide objectAtIndex:indexPath.row] objectForKey:@"money"]];
+            
+            double d = [[[_groupGuide objectAtIndex:indexPath.row] objectForKey:@"money"] doubleValue];
+            NSString *dStr = [NSString stringWithFormat:@"%f", d];
+            NSDecimalNumber *dn = [NSDecimalNumber decimalNumberWithString:dStr];
+            cell.detailLabel.text = [dn stringValue];
+            
+//            cell.detailLabel.text = [NSString stringWithFormat:@"¥%.2f", [[_groupGuide objectAtIndex:indexPath.row] objectForKey:@"money"]];
         }else{
             cell.nameLabel.text = [[_groupPay objectAtIndex:indexPath.row] objectForKey:@"paytype"];
-            cell.detailLabel.text = [NSString stringWithFormat:@"¥%@", [[_groupPay objectAtIndex:indexPath.row] objectForKey:@"money"]];
+            if (_groupPay.count > indexPath.row) {
+                
+                double d = [[[_groupPay objectAtIndex:indexPath.row] objectForKey:@"money"] doubleValue];
+                NSString *dStr = [NSString stringWithFormat:@"%f", d];
+                NSDecimalNumber *dn = [NSDecimalNumber decimalNumberWithString:dStr];
+                cell.detailLabel.text = [dn stringValue];
+            }
+//            cell.detailLabel.text = [NSString stringWithFormat:@"¥%@", [[_groupPay objectAtIndex:indexPath.row] objectForKey:@"money"]];
         }
         
         return cell;

@@ -134,6 +134,13 @@
 #pragma mark -EventResponse
 
 - (IBAction)exchangeClicked:(id)sender {
+
+    for (int i = 0; i < self.dataArray.count; i++) {
+        HTOrderDetailProductModel *model = self.dataArray[i];
+        model.discount = [NSString stringWithFormat:@"%.2f", [model.discount floatValue] / 10];
+        [self.dataArray replaceObjectAtIndex:i withObject:model];
+    }
+    
     if (self.selctedArray.count == 0) {
         [MBProgressHUD showError:@"请选择退货商品"];
         return;
@@ -186,6 +193,8 @@
  
 }
 - (IBAction)returnClicked:(id)sender {
+    
+    
     if (self.selctedArray.count == 0) {
         [MBProgressHUD showError:@"请选择退货商品"];
         return;
@@ -203,6 +212,12 @@
             vc.custModel = custModel;
             vc.orderId = [HTHoldNullObj getValueWithUnCheakValue:self.orderModel.orderId];
             vc.isReturnAll = self.selctedArray.count == self.nomorArray.count ? YES : NO;
+            
+            for (int i = 0; i < self.dataArray.count; i++) {
+                HTOrderDetailProductModel *model = self.dataArray[i];
+                model.discount = [NSString stringWithFormat:@"%.2f", [model.discount floatValue] / 10];
+                [self.dataArray replaceObjectAtIndex:i withObject:model];
+            }
             vc.returnProducts = self.selctedArray;
             vc.orderModel = self.orderModel;
             [self.navigationController pushViewController:vc animated:YES];
@@ -215,6 +230,11 @@
         }];
     }else{
         HTReturnSettleViewController *vc = [[HTReturnSettleViewController alloc] init];
+        for (int i = 0; i < self.dataArray.count; i++) {
+            HTOrderDetailProductModel *model = self.dataArray[i];
+            model.discount = [NSString stringWithFormat:@"%.2f", [model.discount floatValue] / 10];
+            [self.dataArray replaceObjectAtIndex:i withObject:model];
+        }
         vc.returnProducts = self.selctedArray;
         vc.orderId = [HTHoldNullObj getValueWithUnCheakValue:self.orderModel.orderId];
         vc.isReturnAll = self.selctedArray.count == self.nomorArray.count ? YES : NO;

@@ -213,6 +213,8 @@
             if ([strongSelf.orderModel.paytype isEqualToString:@"储值支付"]) {
                 [HTShareClass shareClass].printerModel.returnPayType = storedType;
                 HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:[NSString stringWithFormat: @"已将%.2f元,退至该VIP储值账户 ",totle] btTitle:@"确定"  okBtclicked:^{
+                    //临时解决  不知道以前为何要注释掉
+                    
 //                    [strongSelf.navigationController  popViewControllerAnimated:YES];
                     [MBProgressHUD showError:@"退货成功"];
                 }];

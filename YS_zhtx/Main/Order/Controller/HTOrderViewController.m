@@ -293,7 +293,7 @@
                           @"reason":[HTHoldNullObj getValueWithUnCheakValue:reson],
                           @"companyId":[HTShareClass shareClass].loginModel.companyId
                           };
-    [MBProgressHUD showMessage:@""];
+//    [MBProgressHUD showMessage:@""];
     [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,apiStoreOrder,orderRefundWechate4App] params:dic success:^(id json) {
         [MBProgressHUD hideHUD];
         if ([[json getStringWithKey:@"state"] isEqualToString:@"0"]) {
@@ -452,7 +452,7 @@
     NSMutableDictionary *postDic = [NSMutableDictionary dictionary];
     [postDic setValuesForKeysWithDictionary:dic];
     [postDic setValuesForKeysWithDictionary:self.searchDic];
-    [MBProgressHUD showMessage:@""];
+//    [MBProgressHUD showMessage:@""];
     [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleModel,loadOrderList] params:postDic success:^(id json) {
         if (self.page == 1) {
             [self.dataArray removeAllObjects];
@@ -514,7 +514,7 @@
     NSDictionary *dic = @{
                           @"moduleId":[HTHoldNullObj getValueWithUnCheakValue:self.moduleModel.moduleId]
                           };
-    [MBProgressHUD showMessage:@""];
+//    [MBProgressHUD showMessage:@""];
     [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleModel,loadModuleAuth] params:dic success:^(id json) {
         [MBProgressHUD hideHUD];
         self.authModel = [HTCustomerAuth yy_modelWithJSON:[json[@"data"] getDictionArrayWithKey:@"moduleAuthorityRule"]];

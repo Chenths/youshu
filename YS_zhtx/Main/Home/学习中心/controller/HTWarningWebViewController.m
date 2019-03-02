@@ -6,7 +6,7 @@
 //  Copyright © 2017年 zhtxwl_hx. All rights reserved.
 //
 //
-#ifndef __OPTIMIZE__
+#ifdef DEBUG
 #define categoreUrl  @"http://xx.24v5.com/study/studyItemListPage.html?nohead=1&type="
 #else
 #define categoreUrl  @"http://xx.24v5.com/study/studyItemListPage.html?nohead=1&type="

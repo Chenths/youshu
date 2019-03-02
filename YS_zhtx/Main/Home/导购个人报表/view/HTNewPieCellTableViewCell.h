@@ -30,6 +30,8 @@
 @property (nonatomic,strong) NSString *beginTime;
 
 @property (nonatomic,strong) NSString *endTime;
+//如果是库存页面 老板层级 不可点击
+@property (nonatomic, assign) BOOL isFromInventoryInfo;
 
 @property (nonatomic,weak) id <HTNewPieCellTableViewCellDelegate> delegate;
 

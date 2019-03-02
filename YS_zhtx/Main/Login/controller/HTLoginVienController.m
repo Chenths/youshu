@@ -11,6 +11,7 @@
 #import "HTLoginVienController.h"
 #import "MainTabBarViewController.h"
 #import "IQKeyboardManager.h"
+#import "HTCustomTextAlertView.h"
 @interface HTLoginVienController ()<UITextFieldDelegate>
 {
    
@@ -22,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIView *loginBackView;
 
 @property (weak, nonatomic) IBOutlet UIButton *loginBt;
+@property (weak, nonatomic) IBOutlet UIImageView *longinImv;
 
 
 
@@ -37,7 +39,30 @@
     [super viewDidLoad];
     [self initSubviews];
     self.backImg = @"";
+    //添加更换baseURL宏的地方
+#ifdef DEBUG
+        UITapGestureRecognizer *tapGesturRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapImvAction)];
+        [self.longinImv addGestureRecognizer:tapGesturRecognizer];
+#else
+#endif
 }
+
+- (void)tapImvAction{
+    NSString *tmp;
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"baseUrl"]) {
+        tmp = [[NSUserDefaults standardUserDefaults] objectForKey:@"baseUrl"];
+    }else{
+        tmp = @"http://192.168.199.46:8080/";
+    }
+    [HTCustomTextAlertView showAlertWithTitle:@"输入服务器地址" holdTitle:@"" orTextString:tmp okBtclicked:^(NSString * textValue) {
+        if (![textValue isEqualToString:@""]) {
+            NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+            [user setObject:textValue forKey:@"baseUrl"];
+        }
+    } andCancleBtClicked:^{
+    }];
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 }
@@ -97,7 +122,6 @@
 #pragma mark -private methods
 -(void)initSubviews{
     [self.loginBt changeCornerRadiusWithRadius:3];
-    
     shopNameField = [YJJTextField yjj_textField];
     shopNameField.frame = CGRectMake(0, 0, self.loginBackView.width, 80);
     shopNameField.maxLength = 100;

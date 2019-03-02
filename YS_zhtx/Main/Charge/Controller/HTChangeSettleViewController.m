@@ -315,6 +315,7 @@
 }
 //查询扫码支付结果
 - (IBAction)refreshPayResultClicked:(id)sender {
+    return;
     [MBProgressHUD showMessage:@""];
     [self autoQueryStateRequest];
 }
@@ -524,6 +525,7 @@
     return  image;
 }
 -(void)configUi{
+    
     if (self.custModel.custId.length > 0) {
         self.storedMoneyLabel.hidden = NO;
         self.storedSendMoneyLabel.hidden = NO;
@@ -638,6 +640,7 @@
     self.detailView.returnProducts = self.returnArray;
     self.detailView.changeProducts = self.products;
     self.detailView.orderPrice = self.orderModel.encodeFinal;
+    self.refreshBt.hidden = YES;
 }
 -(void)holdPayResultWithJson:(id)json andEventSender:(UIButton *)sender{
     [MBProgressHUD hideHUD];
@@ -757,7 +760,7 @@
         [printDic setObject:[NSString stringWithFormat:@"%@",md.barcode] forKey:@"productCode"];
         [printDic setObject:[NSString stringWithFormat:@"%@",md.size] forKey:@"size"];
         [printDic setObject:[NSString stringWithFormat:@"%@",md.color] forKey:@"colorNum"];
-        [printDic setObject:[NSString stringWithFormat:@"%@", md.finalprice] forKey:@"singlePrice"];
+        [printDic setObject:[NSString stringWithFormat:@"%@", md.totalprice] forKey:@"singlePrice"];
         [printDic setObject: [[NSString stringWithFormat:@"%@", md.discount] isEqualToString:@"0.0"]  ?  @"1" : [NSString stringWithFormat:@"%@", md.discount].length == 0 ? @"-10.0" : [NSString stringWithFormat:@"%@", md.discount] forKey:@"discount"];
         [printDic setObject:[NSString stringWithFormat:@"%@", md.finalprice ]forKey:@"salePrice"];
         [printDic setObject:@"1" forKey:@"count"];

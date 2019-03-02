@@ -82,6 +82,9 @@
     HTInventoryDescInfoCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HTInventoryDescInfoCollectionCell" forIndexPath:indexPath];
     cell.backgroundColor = [UIColor whiteColor];
     cell.model = self.model.data[indexPath.row];
+    if([[[HTShareClass shareClass].loginModel.company getStringWithKey:@"type"] isEqualToString:@"AGENT"]||[[[HTShareClass shareClass].loginModel.company getStringWithKey:@"type"] isEqualToString:@"BOSS"]){
+        cell.userInteractionEnabled = NO;
+    }
     return cell;
 }
 

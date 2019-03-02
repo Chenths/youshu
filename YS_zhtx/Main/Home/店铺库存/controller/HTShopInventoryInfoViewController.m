@@ -75,6 +75,7 @@
                 [arr addObject:@"supplierModel"];
             }
         }
+        cell.isFromInventoryInfo = YES;
         HTPiesModel *model = [self.inventoryModel valueForKey:arr[indexPath.section - 2]];
         model.searchKey = searchKey[indexPath.section - 2];
         cell.companyId = self.companyId;

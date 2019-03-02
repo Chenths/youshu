@@ -7,7 +7,9 @@
 //
 
 #import "HTNewPayMixPayKindTableViewCell.h"
+@interface HTNewPayMixPayKindTableViewCell ()<UITextFieldDelegate>
 
+@end
 @implementation HTNewPayMixPayKindTableViewCell
 
 - (void)awakeFromNib {

@@ -37,5 +37,6 @@
 @property (nonatomic,strong) NSString *ispos;
 //mpayType
 @property (nonatomic,strong) NSString *mpaymenttype;
+@property (nonatomic, strong) NSString *salername;
 @end
 

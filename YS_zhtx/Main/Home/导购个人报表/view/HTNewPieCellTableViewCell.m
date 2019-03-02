@@ -130,7 +130,11 @@
     return footer;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    if([[[HTShareClass shareClass].loginModel.company getStringWithKey:@"type"] isEqualToString:@"AGENT"]||[[[HTShareClass shareClass].loginModel.company getStringWithKey:@"type"] isEqualToString:@"BOSS"]){
+        if (_isFromInventoryInfo) {
+            return;            
+        }
+    }
     if ([[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[HTInventoryInfoDescCell class] ]) {
         NSMutableDictionary *dic = [NSMutableDictionary dictionary];
         HTPieDataItem *model = self.dataArray[indexPath.row];

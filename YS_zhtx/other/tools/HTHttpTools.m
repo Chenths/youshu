@@ -45,7 +45,7 @@
                                       [HTShareClass shareClass].loginId  : @"-1"]
                                       forHTTPHeaderField:@"App-Login-Id"];
     
-#ifndef __OPTIMIZE__
+#ifdef DEBUG
     manager.requestSerializer.timeoutInterval = 200.f;
 #else
     //这里执行的是release模式下
@@ -135,7 +135,7 @@
                      forHTTPHeaderField:@"App-Login-Id"];
     
     
-    #ifndef __OPTIMIZE__
+    #ifdef DEBUG
     manager.requestSerializer.timeoutInterval = 200.f;
     #else
     //这里执行的是release模式下
@@ -227,7 +227,7 @@
                      forHTTPHeaderField:@"App-Login-Id"];
     
     
-#ifndef __OPTIMIZE__
+#ifdef DEBUG
     manager.requestSerializer.timeoutInterval = 200.f;
 #else
     //这里执行的是release模式下

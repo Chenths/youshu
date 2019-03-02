@@ -902,6 +902,18 @@
 		04B0386121FEA4760008160B /* HTRFMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0385F21FEA4730008160B /* HTRFMTableViewCell.m */; };
 		04B0386221FEA4760008160B /* HTRFMTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B0386021FEA4730008160B /* HTRFMTableViewCell.xib */; };
 		04B0386521FEE6F30008160B /* HTCustRFMMeaasge.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0386421FEE6F30008160B /* HTCustRFMMeaasge.m */; };
+		04B15BED22252469006837F3 /* HTSaleItemHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B15BEB22252469006837F3 /* HTSaleItemHeaderTableViewCell.m */; };
+		04B15BEE22252469006837F3 /* HTSaleItemHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B15BEC22252469006837F3 /* HTSaleItemHeaderTableViewCell.xib */; };
+		04B15BF222252493006837F3 /* HTSaleItemBottmTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B15BF022252493006837F3 /* HTSaleItemBottmTableViewCell.m */; };
+		04B15BF322252493006837F3 /* HTSaleItemBottmTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B15BF122252493006837F3 /* HTSaleItemBottmTableViewCell.xib */; };
+		04B15BF7222524BA006837F3 /* HTSaleItemPayKindTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B15BF5222524BA006837F3 /* HTSaleItemPayKindTableViewCell.m */; };
+		04B15BF8222524BA006837F3 /* HTSaleItemPayKindTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B15BF6222524BA006837F3 /* HTSaleItemPayKindTableViewCell.xib */; };
+		04B15BFC222524DC006837F3 /* HTSaleItemDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B15BFA222524DC006837F3 /* HTSaleItemDetailTableViewCell.m */; };
+		04B15BFD222524DC006837F3 /* HTSaleItemDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B15BFB222524DC006837F3 /* HTSaleItemDetailTableViewCell.xib */; };
+		04B15C0122253FA1006837F3 /* HTSaleOtherDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B15BFF22253FA1006837F3 /* HTSaleOtherDetailTableViewCell.m */; };
+		04B15C0222253FA1006837F3 /* HTSaleOtherDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B15C0022253FA1006837F3 /* HTSaleOtherDetailTableViewCell.xib */; };
+		04B15C0522262ADB006837F3 /* HTSaleItemMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B15C0422262ADB006837F3 /* HTSaleItemMode.m */; };
+		04B15C082229114B006837F3 /* HTShowImg.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B15C072229114A006837F3 /* HTShowImg.m */; };
 		04B299A7210724E500125350 /* HTSaleProductRankListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B299A5210724E500125350 /* HTSaleProductRankListController.m */; };
 		04B299A8210724E500125350 /* HTSaleProductRankListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B299A6210724E500125350 /* HTSaleProductRankListController.xib */; };
 		04B39EA8216F34CA00FC7D07 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B39E9D216F34CA00FC7D07 /* FMDatabaseQueue.m */; };
@@ -2537,6 +2549,25 @@
 		04B0386021FEA4730008160B /* HTRFMTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTRFMTableViewCell.xib; sourceTree = "<group>"; };
 		04B0386321FEE6F20008160B /* HTCustRFMMeaasge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTCustRFMMeaasge.h; sourceTree = "<group>"; };
 		04B0386421FEE6F30008160B /* HTCustRFMMeaasge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTCustRFMMeaasge.m; sourceTree = "<group>"; };
+		04B15BEA22252469006837F3 /* HTSaleItemHeaderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTSaleItemHeaderTableViewCell.h; sourceTree = "<group>"; };
+		04B15BEB22252469006837F3 /* HTSaleItemHeaderTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTSaleItemHeaderTableViewCell.m; sourceTree = "<group>"; };
+		04B15BEC22252469006837F3 /* HTSaleItemHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTSaleItemHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		04B15BEF22252493006837F3 /* HTSaleItemBottmTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTSaleItemBottmTableViewCell.h; sourceTree = "<group>"; };
+		04B15BF022252493006837F3 /* HTSaleItemBottmTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTSaleItemBottmTableViewCell.m; sourceTree = "<group>"; };
+		04B15BF122252493006837F3 /* HTSaleItemBottmTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTSaleItemBottmTableViewCell.xib; sourceTree = "<group>"; };
+		04B15BF4222524BA006837F3 /* HTSaleItemPayKindTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTSaleItemPayKindTableViewCell.h; sourceTree = "<group>"; };
+		04B15BF5222524BA006837F3 /* HTSaleItemPayKindTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTSaleItemPayKindTableViewCell.m; sourceTree = "<group>"; };
+		04B15BF6222524BA006837F3 /* HTSaleItemPayKindTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTSaleItemPayKindTableViewCell.xib; sourceTree = "<group>"; };
+		04B15BF9222524DC006837F3 /* HTSaleItemDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTSaleItemDetailTableViewCell.h; sourceTree = "<group>"; };
+		04B15BFA222524DC006837F3 /* HTSaleItemDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTSaleItemDetailTableViewCell.m; sourceTree = "<group>"; };
+		04B15BFB222524DC006837F3 /* HTSaleItemDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTSaleItemDetailTableViewCell.xib; sourceTree = "<group>"; };
+		04B15BFE22253FA1006837F3 /* HTSaleOtherDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTSaleOtherDetailTableViewCell.h; sourceTree = "<group>"; };
+		04B15BFF22253FA1006837F3 /* HTSaleOtherDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTSaleOtherDetailTableViewCell.m; sourceTree = "<group>"; };
+		04B15C0022253FA1006837F3 /* HTSaleOtherDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTSaleOtherDetailTableViewCell.xib; sourceTree = "<group>"; };
+		04B15C0322262ADB006837F3 /* HTSaleItemMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTSaleItemMode.h; sourceTree = "<group>"; };
+		04B15C0422262ADB006837F3 /* HTSaleItemMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTSaleItemMode.m; sourceTree = "<group>"; };
+		04B15C062229114A006837F3 /* HTShowImg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTShowImg.h; sourceTree = "<group>"; };
+		04B15C072229114A006837F3 /* HTShowImg.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTShowImg.m; sourceTree = "<group>"; };
 		04B299A4210724E500125350 /* HTSaleProductRankListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTSaleProductRankListController.h; sourceTree = "<group>"; };
 		04B299A5210724E500125350 /* HTSaleProductRankListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTSaleProductRankListController.m; sourceTree = "<group>"; };
 		04B299A6210724E500125350 /* HTSaleProductRankListController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTSaleProductRankListController.xib; sourceTree = "<group>"; };
@@ -4054,6 +4085,8 @@
 				048CD11F20BFD25200BE2DFD /* HTGetPhoneType.m */,
 				043DBDFC20BE9EF200020936 /* HTHttpTools.h */,
 				043DBDFD20BE9EF200020936 /* HTHttpTools.m */,
+				04B15C062229114A006837F3 /* HTShowImg.h */,
+				04B15C072229114A006837F3 /* HTShowImg.m */,
 				043DBE0020BE9EF200020936 /* SQL数据库 */,
 			);
 			path = tools;
@@ -5457,6 +5490,8 @@
 				044C246C20FCA1BA00B38E54 /* HTBigOrderModel.m */,
 				04AC4C2620FD8EEE009F9810 /* HTProductRankInfoModel.h */,
 				04AC4C2720FD8EEE009F9810 /* HTProductRankInfoModel.m */,
+				04B15C0322262ADB006837F3 /* HTSaleItemMode.h */,
+				04B15C0422262ADB006837F3 /* HTSaleItemMode.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -5506,6 +5541,21 @@
 				04852A2520DCFB1500589EBA /* HTGuiderSaleDescTopCell.h */,
 				04852A2620DCFB1500589EBA /* HTGuiderSaleDescTopCell.m */,
 				04852A2720DCFB1500589EBA /* HTGuiderSaleDescTopCell.xib */,
+				04B15BEA22252469006837F3 /* HTSaleItemHeaderTableViewCell.h */,
+				04B15BEB22252469006837F3 /* HTSaleItemHeaderTableViewCell.m */,
+				04B15BEC22252469006837F3 /* HTSaleItemHeaderTableViewCell.xib */,
+				04B15BEF22252493006837F3 /* HTSaleItemBottmTableViewCell.h */,
+				04B15BF022252493006837F3 /* HTSaleItemBottmTableViewCell.m */,
+				04B15BF122252493006837F3 /* HTSaleItemBottmTableViewCell.xib */,
+				04B15BF4222524BA006837F3 /* HTSaleItemPayKindTableViewCell.h */,
+				04B15BF5222524BA006837F3 /* HTSaleItemPayKindTableViewCell.m */,
+				04B15BF6222524BA006837F3 /* HTSaleItemPayKindTableViewCell.xib */,
+				04B15BF9222524DC006837F3 /* HTSaleItemDetailTableViewCell.h */,
+				04B15BFA222524DC006837F3 /* HTSaleItemDetailTableViewCell.m */,
+				04B15BFB222524DC006837F3 /* HTSaleItemDetailTableViewCell.xib */,
+				04B15BFE22253FA1006837F3 /* HTSaleOtherDetailTableViewCell.h */,
+				04B15BFF22253FA1006837F3 /* HTSaleOtherDetailTableViewCell.m */,
+				04B15C0022253FA1006837F3 /* HTSaleOtherDetailTableViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -6131,6 +6181,7 @@
 				047D566C20C0F480000348DC /* HTFiltrateCollectionStyleCell.xib in Resources */,
 				0439A1AD20D0F8A500BB5E9B /* HTDataPropressLineCell.xib in Resources */,
 				04204CD121798CF100BBFEAF /* HTFastNoProductInventoryTurnInController.xib in Resources */,
+				04B15BEE22252469006837F3 /* HTSaleItemHeaderTableViewCell.xib in Resources */,
 				0420F99920F5F65400E785D5 /* HTBossSelecteCompareTimeController.xib in Resources */,
 				044DAD2E21DE237600A4DE20 /* HTOrderDetailSimpleTableViewCell.xib in Resources */,
 				044F81F9212BEBFD007674EC /* HTChangePrinterBrandController.xib in Resources */,
@@ -6236,6 +6287,7 @@
 				04852A0D20DC91F600589EBA /* HTOrderInfoDetailTableCell.xib in Resources */,
 				0453EBBF212EA4A20064BF3D /* HTPostProductDescInfoCell.xib in Resources */,
 				0471898B216079DD0063A736 /* JCHATConversationListViewController.xib in Resources */,
+				04B15BF8222524BA006837F3 /* HTSaleItemPayKindTableViewCell.xib in Resources */,
 				046096CB2175CD5F00FC57C0 /* README.txt in Resources */,
 				0453EBAA212EA3F20064BF3D /* DNImagePickerController.strings in Resources */,
 				04A66D1921353E33004AE9DE /* HTCashierCustomerTitleView.xib in Resources */,
@@ -6271,6 +6323,7 @@
 				0458BF0620D2525900B79740 /* HTProductSyleSelectedCell.xib in Resources */,
 				0420F9E320F5F65400E785D5 /* HTBossLegendTableViewCell.xib in Resources */,
 				04B0385521F17FCC0008160B /* HTChargeMaskViewController.xib in Resources */,
+				04B15BFD222524DC006837F3 /* HTSaleItemDetailTableViewCell.xib in Resources */,
 				04260F7C2122A4A000BCFA5B /* HTUnderstockListAlertView.xib in Resources */,
 				047189BB216079DD0063A736 /* JCHATAlbumViewController.xib in Resources */,
 				0489FFD220DB4AAB009B5964 /* HTRoleSelecteCell.xib in Resources */,
@@ -6426,6 +6479,7 @@
 				0420F9D220F5F65400E785D5 /* HTBossSelectedShopView.xib in Resources */,
 				0489FFE020DB7570009B5964 /* HTVipLevelAndSaleController.xib in Resources */,
 				045FB48920C77B12004FE980 /* HTGuiderDateSaleSurveyCell.xib in Resources */,
+				04B15BF322252493006837F3 /* HTSaleItemBottmTableViewCell.xib in Resources */,
 				0420F9CF20F5F65400E785D5 /* HTBossLineReportCell.xib in Resources */,
 				0453EB60212EA1D60064BF3D /* HTPostProductStyleController.xib in Resources */,
 				04B0386221FEA4760008160B /* HTRFMTableViewCell.xib in Resources */,
@@ -6464,6 +6518,7 @@
 				045FB48E20C77D71004FE980 /* HTAgeAndeSexInfoReportCell.xib in Resources */,
 				044C246420FC6F8500B38E54 /* HTIndexBoxDescViewController.xib in Resources */,
 				047753E020C4EAC5008C8BA4 /* HTOrderInfoViewCell.xib in Resources */,
+				04B15C0222253FA1006837F3 /* HTSaleOtherDetailTableViewCell.xib in Resources */,
 				04F5462120D8E33700D300E4 /* HTChangeOrderProductController.xib in Resources */,
 				047189AA216079DD0063A736 /* JCHATShowTimeCell.xib in Resources */,
 				04B39EB2216F364D00FC7D07 /* express_code_data.txt in Resources */,
@@ -6583,6 +6638,7 @@
 				04204CCE21798CF100BBFEAF /* HTFastCashierViewController.m in Sources */,
 				047189B8216079DD0063A736 /* JCHATChatTable.m in Sources */,
 				0407C3B020EA209F00E8FB8F /* HTOrderProductInfoCollectionCell.m in Sources */,
+				04B15C0522262ADB006837F3 /* HTSaleItemMode.m in Sources */,
 				045E7E312181A612007FC84A /* HTWarningToStudyCell.m in Sources */,
 				044F81D6212BE1EE007674EC /* HTPrinterViewController.m in Sources */,
 				045BEAD320CA523D007CB614 /* HTNew1SingVipSaleBaceInfoCell.m in Sources */,
@@ -6773,6 +6829,7 @@
 				04991B7A20CE7530007AC4AF /* HTTurnInNumbersCell.m in Sources */,
 				04EBDE2121BA6A7C0069595B /* HTHoldNullObj.m in Sources */,
 				0489FFDF20DB7570009B5964 /* HTVipLevelAndSaleController.m in Sources */,
+				04B15BF222252493006837F3 /* HTSaleItemBottmTableViewCell.m in Sources */,
 				048CD11120BF984C00BE2DFD /* YJJTextField.m in Sources */,
 				04326AA020C6940A00CF481D /* HTShopingGuideReportController.m in Sources */,
 				04ABC1B120EDE9B40066AB3A /* HTPieDataItem.m in Sources */,
@@ -6815,6 +6872,7 @@
 				0420F98B20F5F65400E785D5 /* HTBossSelectedTimeModel.m in Sources */,
 				0439A18820D0C9B600BB5E9B /* HTSeemoreFooterView.m in Sources */,
 				04F4ED5C212556D80089FFC3 /* HTHoldSettleManager.m in Sources */,
+				04B15C0122253FA1006837F3 /* HTSaleOtherDetailTableViewCell.m in Sources */,
 				044EDF4A211D6E7B008136A6 /* HTSelectedProductStyleAlert.m in Sources */,
 				04852A1620DCEF9C00589EBA /* HTGuideSaleDescInfoController.m in Sources */,
 				04C997A7214F5B6600860833 /* IQTitleBarButtonItem.m in Sources */,
@@ -6850,6 +6908,7 @@
 				043DBE4320BEA62000020936 /* NSString+md5.m in Sources */,
 				0439A1FB20D1143D00BB5E9B /* HTBirthdayCustomerListController.m in Sources */,
 				047189AD216079DD0063A736 /* JCHATMessageTextView.m in Sources */,
+				04B15C082229114B006837F3 /* HTShowImg.m in Sources */,
 				04B39EA8216F34CA00FC7D07 /* FMDatabaseQueue.m in Sources */,
 				04F7427A213D265700992745 /* HTContinueBackModel.m in Sources */,
 				04204CE121798CF100BBFEAF /* HTFastProductViewCell.m in Sources */,
@@ -7000,6 +7059,7 @@
 				04E348B72133D07400F6F520 /* HTEditVipDefaulTypeCell.m in Sources */,
 				04F5462520D8E5BE00D300E4 /* HTChangeProductHomeViewController.m in Sources */,
 				043DBE1920BE9EF300020936 /* GTMBase64.m in Sources */,
+				04B15BFC222524DC006837F3 /* HTSaleItemDetailTableViewCell.m in Sources */,
 				044C246720FC9A4700B38E54 /* EmployeeContributionModel.m in Sources */,
 				04A5A7BF2139100200E85D4D /* GuAgeview.m in Sources */,
 				04326A8420C65FB300CF481D /* HTInventoryDescInfoCollectionCell.m in Sources */,
@@ -7175,9 +7235,11 @@
 				0420F98F20F5F65400E785D5 /* HTBossCustomerInfoController.m in Sources */,
 				04C997AA214F5B6600860833 /* IQPreviousNextView.m in Sources */,
 				0420F9FF20F5FE9A00E785D5 /* HTAgentStoreSectionHead.m in Sources */,
+				04B15BED22252469006837F3 /* HTSaleItemHeaderTableViewCell.m in Sources */,
 				04ABC1DD20EE0B450066AB3A /* PNBarChart.m in Sources */,
 				044F820D212BECD2007674EC /* HTPrinterModel.m in Sources */,
 				04991B9120CE7EA9007AC4AF /* HTTuneTypeTableViewCell.m in Sources */,
+				04B15BF7222524BA006837F3 /* HTSaleItemPayKindTableViewCell.m in Sources */,
 				04C997A9214F5B6600860833 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				0458BF0920D2574E00B79740 /* HTWriteBarcodeView.m in Sources */,
 				043DBE2920BE9EF300020936 /* HTCommonViewController.m in Sources */,
@@ -7354,6 +7416,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

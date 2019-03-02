@@ -145,7 +145,7 @@
     [self checkProductNum:[HTHoldChargeManager getbcProductJsonStrFormArray:self.dataArray] andCustId:[HTHoldNullObj getValueWithUnCheakValue:self.custModel.custId] WithSucces:^(id json) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         //        库存异常
-        if ([[json[@"data"] getStringWithKey:@"inventoryState"] isEqualToString:@"1"]) {
+        if ([[json[@"data"] getStringWithKey:@"inventoryState"] isEqualToString:@"1"] && [HTShareClass shareClass].isProductStockActive) {
             strongSelf.bottomView.settelBt.enabled = YES;
             NSArray *poductIds = [json[@"data"] getArrayWithKey:@"productIds"];
             //            获取无库存的产品数据
@@ -190,7 +190,7 @@
 //            }
 //        }
         //替换
-        //        HTSettleViewController *vc = [[HTSettleViewController alloc] init];
+//                HTSettleViewController *vc = [[HTSettleViewController alloc] init];
         HTNewPayViewController *vc = [[HTNewPayViewController alloc] init];
         
         HTChargeOrderModel *orderModel = [[HTChargeOrderModel alloc] init];

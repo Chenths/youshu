@@ -41,12 +41,17 @@
 }
 
 - (void)back{
-    int index = (int)[[self.navigationController viewControllers]indexOfObject:self];
-    if (index > 2) {
-        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:(index-2)] animated:YES];
-    }else{
-        [self.navigationController popToRootViewControllerAnimated:YES];
-        
+//    int index = (int)[[self.navigationController viewControllers]indexOfObject:self];
+//    if (index > 2) {
+//        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:(index-2)] animated:YES];
+//    }else{
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+//
+//    }
+    self.isTap = YES;
+    [self.navigationController popViewControllerAnimated:YES];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(cancelSelectedBrand)]) {
+        [self.delegate cancelSelectedBrand];
     }
 }
 

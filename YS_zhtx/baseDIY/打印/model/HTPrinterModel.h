@@ -90,5 +90,6 @@ typedef enum payType
 @property (nonatomic,strong) NSMutableDictionary *lastOrderPrintDic;
 
 @property (nonatomic,strong) NSMutableArray *afterSalesList;
-
+//组合销售新增多人销售名字
+@property (nonatomic, strong) NSString *salerName;
 @end
