@@ -10,9 +10,9 @@
 
 @interface HTHoldCustomerEventManger : NSObject
 
-+(void)storedForCustomerWithCustomerPhone:(NSString *)tel;
++(void)storedForCustomerWithCustomerPhone:(NSString *)tel WithId:(NSString *)custId;
 
-+(void)deduedForCustomerWithCustomerPhone:(NSString *)tel;
++(void)deduedForCustomerWithCustomerPhone:(NSString *)tel WithId:(NSString *)custId;
 
 +(void)editCustomerWithCustomerId:(NSString *)customerId;
 

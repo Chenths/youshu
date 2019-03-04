@@ -172,7 +172,7 @@
  */
 - (void)stroeMoneyClicked{
     if (self.custModel) {
-       [HTHoldCustomerEventManger storedForCustomerWithCustomerPhone:self.custModel.phone];
+       [HTHoldCustomerEventManger storedForCustomerWithCustomerPhone:self.custModel.phone WithId:self.custModel.custId];
     }
 }
 /**

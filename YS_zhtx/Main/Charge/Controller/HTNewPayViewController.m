@@ -29,8 +29,7 @@
 #import "HTTelMsgAlertView.h"
 #import "HTCustomTextAlertView.h"
 #import "HTPrinterTool.h"
-#import "HTHoldOrderEventManager.h"
-#import "HTShowImg.h"
+
 @interface HTNewPayViewController ()<UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, paypayNormalDelegate, chooseSellerBackDelegate, UITextFieldDelegate, MFMessageComposeViewControllerDelegate>{
     BOOL isNormalPayKind;
     NSMutableArray *biliTFArr;
@@ -923,10 +922,6 @@
         HTCahargeProductModel * model = _products[indexPath.row];
         
         [cell.goodsHeaderImv sd_setImageWithURL:[NSURL URLWithString:[HTHoldNullObj getValueWithUnCheakValue:model.selectedModel.productimage]] placeholderImage:[UIImage imageNamed:@"g-customerholdImg"]];
-        cell.goodsHeaderImv.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-        cell.goodsHeaderImv.tag = 20000 + indexPath.row;
-        [cell.goodsHeaderImv addGestureRecognizer:tap];
 
         
         if (_isFromFast) {
@@ -1135,17 +1130,6 @@
     
 }
 
-- (void)tapAction:(id)sender{
-    UITapGestureRecognizer *singleTap = (UITapGestureRecognizer *)sender;
-    NSInteger index = singleTap.view.tag - 20000;
-    HTCahargeProductModel * model = _products[index];
-    if ([model.selectedModel.productimage isEqualToString:@""] || model.selectedModel.productimage == nil) {
-        [HTShowImg showSingleBigImvWithImg:nil WithUrlStr:[[model.product firstObject] productimage]];
-    }else{
-        [HTShowImg showSingleBigImvWithImg:nil WithUrlStr:model.selectedModel.productimage];
-    }
-    
-}
 
 
 - (BOOL)checkPayIfCanThisEditWithTextField:(UITextField *)textField WithStr:(NSString *)str{

@@ -100,6 +100,7 @@
 -(void)stroeMoneyClicked{
     HTStoreMoneyViewController *vc = [[HTStoreMoneyViewController alloc] init];
     vc.handType    = HAND_TYPE_STORED;
+    vc.custId = self.custModel.custId;
     vc.phoneNumber = self.userPhoneNumber;
     [self.navigationController pushViewController:vc animated:YES];
 }
