@@ -101,6 +101,7 @@
     HTStoreMoneyViewController *vc = [[HTStoreMoneyViewController alloc] init];
     vc.handType    = HAND_TYPE_STORED;
     vc.phoneNumber = self.userPhoneNumber;
+    vc.custId = self.custModel.custId;
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)dismissAlertViewFromBigView:(UIView *)alertView{

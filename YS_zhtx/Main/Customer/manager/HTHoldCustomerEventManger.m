@@ -63,7 +63,8 @@
     }
     [[HTShareClass shareClass].getCurrentNavController pushViewController:vc animated:YES];
 }
-+(void)storedForCustomerWithCustomerPhone:(NSString *)tel;{
++(void)storedForCustomerWithCustomerPhone:(NSString *)tel WithId:(NSString *)custId{
+
     HTStoreMoneyViewController *vc = [[HTStoreMoneyViewController alloc] init];
     vc.handType = HAND_TYPE_STORED;
     for (HTMenuModle *mode in [HTShareClass shareClass].menuArray) {
@@ -72,10 +73,12 @@
             break;
         }
     }
+    vc.custId = custId;
     vc.phoneNumber = [HTHoldNullObj getValueWithUnCheakValue:tel];
     [[HTShareClass shareClass].getCurrentNavController pushViewController:vc animated:YES];
 }
-+(void)deduedForCustomerWithCustomerPhone:(NSString *)tel;{
++(void)deduedForCustomerWithCustomerPhone:(NSString *)tel WithId:(NSString *)custId{
+
     HTStoreMoneyViewController *vc = [[HTStoreMoneyViewController alloc] init];
     vc.handType = HAND_TYPE_DEDUED;
     for (HTMenuModle *mode in [HTShareClass shareClass].menuArray) {
@@ -84,6 +87,7 @@
             break;
         }
     }
+    vc.custId = custId;
     vc.phoneNumber = [HTHoldNullObj getValueWithUnCheakValue:tel];
     [[HTShareClass shareClass].getCurrentNavController pushViewController:vc animated:YES];
 }

@@ -69,7 +69,8 @@
 }
 -(void)stroeMoneyClicked{
     [self.alertView tapCoverView];
-    [HTHoldCustomerEventManger storedForCustomerWithCustomerPhone:self.custModel.phone];
+    [HTHoldCustomerEventManger storedForCustomerWithCustomerPhone:self.custModel.phone WithId:self.custModel.custId];
+
 }
 
 -(void)setCustModel:(HTCustModel *)custModel{

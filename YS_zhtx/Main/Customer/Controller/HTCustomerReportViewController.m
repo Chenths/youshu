@@ -367,9 +367,11 @@
 - (void) didTapWithString:(NSString *)tapKey andIndex:(NSInteger) index{
     
     if ([tapKey isEqualToString:@"充值"]) {
-        [HTHoldCustomerEventManger storedForCustomerWithCustomerPhone:[HTHoldNullObj getValueWithUnCheakValue:self.reportModel.baseMessage.phone]];
+        [HTHoldCustomerEventManger storedForCustomerWithCustomerPhone:[HTHoldNullObj getValueWithUnCheakValue:self.reportModel.baseMessage.phone] WithId:self.model.custId];
+
     }else if ([tapKey isEqualToString:@"扣除"]) {
-        [HTHoldCustomerEventManger deduedForCustomerWithCustomerPhone:[HTHoldNullObj getValueWithUnCheakValue:self.reportModel.baseMessage.phone]];
+        [HTHoldCustomerEventManger deduedForCustomerWithCustomerPhone:[HTHoldNullObj getValueWithUnCheakValue:self.reportModel.baseMessage.phone] WithId:self.model.custId];
+
     }else if ([tapKey isEqualToString:@"编辑"]) {
         [HTHoldCustomerEventManger editCustomerWithCustomerId:[HTHoldNullObj getValueWithUnCheakValue:self.model.custId]];
     }else if ([tapKey isEqualToString:@"定时提醒"]) {
