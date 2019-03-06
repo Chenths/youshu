@@ -7,6 +7,7 @@
 //
 
 #import "HTCustomerProductInfoCell.h"
+#import "HTShowImg.h"
 @interface  HTCustomerProductInfoCell()
 @property (weak, nonatomic) IBOutlet UILabel *barcode;
 @property (weak, nonatomic) IBOutlet UILabel *finallPrice;
@@ -43,6 +44,13 @@
     
     [self.productig sd_setImageWithURL:[NSURL URLWithString:model.productimage] placeholderImage:[UIImage imageNamed:PRODUCTHOLDIMG]];
     
+    self.productig.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
+    [self.productig addGestureRecognizer:tap];
+}
+
+- (void)tapAction{
+    [HTShowImg showSingleBigImvWithImg:nil WithUrlStr:_model.productimage];
 }
 
 @end

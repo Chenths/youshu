@@ -7,9 +7,15 @@
 //
 #import "HTHorizontalReportDataModel.h"
 #import <UIKit/UIKit.h>
-
+@protocol SinglePropressDelegate <NSObject>
+- (void)selectBtnWithIfTopBtn:(BOOL)isTop WithIndexRow:(NSInteger)row;
+@end
 @interface HTSinglePropresslineCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIButton *topBtn;
+@property (weak, nonatomic) IBOutlet UIButton *bottomBtn;
 @property (nonatomic,strong) HTHorizontalReportDataModel *model;
 @property (nonatomic,strong) HTHorizontalReportDataModel *secondModel;
+@property (nonatomic, weak) id<SinglePropressDelegate>delegate;
+@property (nonatomic, strong) NSIndexPath *indexPath;
 @end

@@ -106,6 +106,10 @@
     //从网络下载图片
     NSData *data = [NSData dataWithContentsOfURL:url];
     img = [UIImage imageWithData:data];
+    if (img == nil) {
+        [MBProgressHUD showError:@"图片保存失败"];
+        return;
+    }
     // 保存图片到相册中
     UIImageWriteToSavedPhotosAlbum(img,self, @selector(image:didFinishSavingWithError:contextInfo:),nil);
     //    MJPhoto *photo = [_photos objectAtIndex:ThisImageIndex];

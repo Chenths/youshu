@@ -315,7 +315,7 @@
 }
 //查询扫码支付结果
 - (IBAction)refreshPayResultClicked:(id)sender {
-    return;
+//    return;
     [MBProgressHUD showMessage:@""];
     [self autoQueryStateRequest];
 }
@@ -360,7 +360,7 @@
                 __strong typeof(weakSelf) strongSelf = weakSelf;
                 strongSelf.products = backArray;
                 strongSelf.orderModel.finalprice = finalPrice;
-                strongSelf.payCode = payCode;
+//                strongSelf.payCode = payCode;
                 strongSelf.wechatPayOrderId = wechatPayOrderId;
                 [strongSelf configUi];
             };
@@ -606,7 +606,7 @@
         self.storedSendBt.enabled = NO;
         self.cashPayBt.enabled = NO;
         self.posBt.enabled = NO;
-        _timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(autoQueryStateRequest) userInfo:nil repeats:YES];
+//        _timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(autoQueryStateRequest) userInfo:nil repeats:NO];
       }else if ([self.orderModel.paytype isEqualToString:@"2"]){
         self.refreshBt.hidden = YES;
         self.storedBt.enabled = YES;
@@ -640,7 +640,7 @@
     self.detailView.returnProducts = self.returnArray;
     self.detailView.changeProducts = self.products;
     self.detailView.orderPrice = self.orderModel.encodeFinal;
-    self.refreshBt.hidden = YES;
+//    self.refreshBt.hidden = YES;
 }
 -(void)holdPayResultWithJson:(id)json andEventSender:(UIButton *)sender{
     [MBProgressHUD hideHUD];
@@ -665,6 +665,13 @@
         [HTShareClass shareClass].printerModel.returnPayType = cashType ;
     }else if (sender.tag - 1000 == 3){
         [HTShareClass shareClass].printerModel.returnPayType = posType ;
+    }
+    if ([[json[@"data"] getStringWithKey:@"paytype"] isEqualToString:@"1"]) {
+        if ([[json[@"data"] getStringWithKey:@"mpaymenttype"] isEqualToString:@"1"]) {
+            [HTShareClass shareClass].printerModel.returnPayType = wetchatType;
+        }else{
+            [HTShareClass shareClass].printerModel.returnPayType = alipayType;
+        }
     }
     if (self.orderModel.encodeFinal.floatValue < 0) {
         __weak typeof(self) weakSelf = self;
@@ -813,7 +820,7 @@
 }
 - (void)autoQueryStateRequest{
     NSDictionary *dic = @{
-                          @"payCompany":@"",
+//                          @"payCompany":@"",
                           };
     [self repalceRequest:dic andIsStore:NO eventBt:nil];
 }
@@ -844,6 +851,8 @@
         }else{
             [self holdPayResultWithJson:json andEventSender:sender];
         }
+        [_timer invalidate];
+        _timer = nil;
     } error:^{
         [MBProgressHUD hideHUD];
         [MBProgressHUD showError:SeverERRORSTRING];

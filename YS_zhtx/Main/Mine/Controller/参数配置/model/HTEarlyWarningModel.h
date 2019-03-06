@@ -21,5 +21,5 @@
 
 @property (nonatomic,strong) NSNumber *mostNum;
 
-
+@property (nonatomic,strong) NSString *preStr;
 @end

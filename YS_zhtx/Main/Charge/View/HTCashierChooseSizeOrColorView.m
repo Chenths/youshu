@@ -109,7 +109,7 @@
     [self tapCoverView];
 }
 - (IBAction)delProductClicked:(id)sender {
-    HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:@"是否删除该商品" btsArray:@[@"删除",@"确定"] okBtclicked:^{
+    HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:@"是否删除该商品" btsArray:@[@"取消",@"确定"] okBtclicked:^{
         if (self.delegate && [self.delegate respondsToSelector:@selector(delClickWithProduct:)]) {
             [self.delegate delClickWithProduct:self.model];
         }

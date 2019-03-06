@@ -28,6 +28,7 @@
 #import "HTDayChartReportViewController.h"
 #import "HTWarningWebViewController.h"
 #import "HTWarningModel.h"
+#import "HTWarningSetViewController.h"
 @interface HTHomePageViewController ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,HTGHomeHeadCollectionViewCellDelegate,UITabBarControllerDelegate,UITabBarDelegate>
 
 
@@ -54,10 +55,17 @@
     if (self.isBoss) {
         self.title = self.companyName;
         [self loadComanyRestand];
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem creatBarButtonItemWithTitle:@"指标设置" target:self action:@selector(setAction)];
     }
     [self createTb];
     [self createData];
     [self loadWarning];
+}
+- (void)setAction{
+    HTWarningSetViewController *controller1 = [[HTWarningSetViewController alloc] init];
+    controller1.yp_tabItemTitle = @"预警参数";
+    controller1.companyId = self.companyId;
+    [self.navigationController pushViewController:controller1 animated:YES];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -390,9 +398,7 @@
     self.dataCollectionView.showsHorizontalScrollIndicator = NO;
     [self.dataCollectionView registerNib:[UINib nibWithNibName:@"HTGHomeHeadCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"HTGHomeHeadCollectionViewCell"];
     [self.dataCollectionView registerNib:[UINib nibWithNibName:@"HTGHomeItemsCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"HTGHomeItemsCollectionCell"];
-    if (self.isBoss) {
-        self.navigationItem.rightBarButtonItem = nil;
-    }
+    
     if (!self.isBoss) {
       self.navigationItem.title = [[HTShareClass shareClass].loginModel.company getStringWithKey:@"fullname"];
     }

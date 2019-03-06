@@ -23,4 +23,8 @@
 @property (nonatomic,strong) NSString *endTime;
 
 @property (nonatomic,strong) NSString *companyId;
+
+@property (nonatomic, strong) NSString *secBeginTime;
+
+@property (nonatomic, strong) NSString *secEndTime;
 @end

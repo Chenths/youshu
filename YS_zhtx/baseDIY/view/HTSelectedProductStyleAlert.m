@@ -57,7 +57,9 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSDictionary *dic = [self.dataArray[indexPath.row] firstObject];
     cell.textLabel.textColor = [UIColor colorWithHexString:@"#222222"];
-    cell.textLabel.attributedText = [self getAttFormBehindStr:self.searchStr behindColor:[UIColor colorWithHexString:@"#F53434"] andStr:[dic getStringWithKey:@"stylecode"]];
+    if (self.searchStr.length <= [[dic getStringWithKey:@"stylecode"] length]) {
+        cell.textLabel.attributedText = [self getAttFormBehindStr:self.searchStr behindColor:[UIColor colorWithHexString:@"#F53434"] andStr:[dic getStringWithKey:@"stylecode"]];
+    }
     cell.detailTextLabel.text = [dic getStringWithKey:@"name"];
     cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#222222"];
     return cell;

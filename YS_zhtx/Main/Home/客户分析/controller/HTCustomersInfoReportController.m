@@ -89,6 +89,8 @@
         cell.beginTime = self.customersModel.consumeTimeBegin;
         cell.endTime = self.customersModel.consumeTimeEnd;
         cell.companyId = self.companyId;
+        cell.secBeginTime = self.customersModel.consumeTimeSecBegin;
+        cell.secEndTime = self.customersModel.consumeTimeSecEnd;
         if (indexPath.row == 2) {
             cell.title = @"频次分布";
 //            cell.color = [UIColor colorWithHexString:@"#614DB6"];

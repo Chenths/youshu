@@ -28,6 +28,16 @@
 
 #pragma mark -CustomDelegate
 
+- (IBAction)topBtnSelect:(id)sender {
+    if ([_delegate respondsToSelector:@selector(selectBtnWithIfTopBtn:WithIndexRow:)]) {
+        [_delegate selectBtnWithIfTopBtn:YES WithIndexRow:_indexPath.row];
+    }
+}
+- (IBAction)bottomBtnSelect:(id)sender {
+    if ([_delegate respondsToSelector:@selector(selectBtnWithIfTopBtn:WithIndexRow:)]) {
+        [_delegate selectBtnWithIfTopBtn:NO WithIndexRow:_indexPath.row];
+    }
+}
 #pragma mark -EventResponse
 
 #pragma mark -private methods

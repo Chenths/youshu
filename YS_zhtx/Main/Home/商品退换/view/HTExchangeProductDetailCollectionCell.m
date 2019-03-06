@@ -7,6 +7,7 @@
 //
 
 #import "HTExchangeProductDetailCollectionCell.h"
+#import "HTShowImg.h"
 @interface HTExchangeProductDetailCollectionCell()
 @property (weak, nonatomic) IBOutlet UIImageView *productImg;
 @property (weak, nonatomic) IBOutlet UILabel *totalPrice;
@@ -25,6 +26,14 @@
     self.totalPrice.text = [NSString stringWithFormat:@"¥%@",[HTHoldNullObj getValueWithBigDecmalObj:model.totalprice]];
     self.barcode.text = [HTHoldNullObj getValueWithUnCheakValue:model.barcode];
     self.finallPrice.text = [NSString stringWithFormat:@"¥%@",[HTHoldNullObj getValueWithBigDecmalObj:model.finalprice]];
+
+    self.productImg.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
+    [self.productImg addGestureRecognizer:tap];
+}
+
+- (void)tapAction{
+        [HTShowImg showSingleBigImvWithImg:nil WithUrlStr:_model.image];
 }
 
 @end

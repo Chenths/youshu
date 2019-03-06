@@ -7,7 +7,7 @@
 //
 #import "HTOrderOrProductState.h"
 #import "HTOrderProductInfoCollectionCell.h"
-
+#import "HTShowImg.h"
 @interface HTOrderProductInfoCollectionCell()
 
 @property (weak, nonatomic) IBOutlet UIImageView *productImg;
@@ -30,5 +30,12 @@
       self.stateImg.image = [UIImage imageNamed:[HTOrderOrProductState getProductStateFormOrderString:model.state]];
     }
     
+    self.productImg.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
+    [self.productImg addGestureRecognizer:tap];
+}
+
+- (void)tapAction{
+    [HTShowImg showSingleBigImvWithImg:nil WithUrlStr:_model.productImage];
 }
 @end

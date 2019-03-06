@@ -7,6 +7,7 @@
 //
 
 #import "HTProductImgCollectionViewCell.h"
+#import "HTShowImg.h"
 @interface HTProductImgCollectionViewCell()
 
 @property (weak, nonatomic) IBOutlet UIImageView *productImg;
@@ -34,7 +35,16 @@
         self.holdLabel.hidden = YES;
     }
     self.priceLabel.text = [NSString stringWithFormat:@"¥%@",model.finalprice];
+    self.productImg.userInteractionEnabled = YES;
+
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
+    [self.productImg addGestureRecognizer:tap];
 }
+
+- (void)tapAction{
+    [HTShowImg showSingleBigImvWithImg:nil WithUrlStr:_model.image];
+}
+
 -(void)setProductModel:(HTChargeProductInfoModel *)productModel{
     _productModel = productModel;
     self.holdLabel.hidden = YES;

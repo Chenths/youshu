@@ -9,7 +9,7 @@
 #import "HTSinglePropresslineCell.h"
 #import "HTDataPropressLineCell.h"
 #import "HTCustomerViewController.h"
-@interface HTDataPropressLineCell()<UITableViewDataSource,UITableViewDelegate>
+@interface HTDataPropressLineCell()<UITableViewDataSource,UITableViewDelegate, SinglePropressDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *titlelabel;
 @property (weak, nonatomic) IBOutlet UITableView *tab;
@@ -58,7 +58,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     HTSinglePropresslineCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTSinglePropresslineCell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    cell.delegate = self;
     HTHorizontalReportDataModel *model =  self.dataArray[indexPath.row];
     model.color = [UIColor colorWithHexString:@"#614DB6"];
     model.max = self.max;
@@ -66,8 +66,63 @@
     HTHorizontalReportDataModel *secondModel =  self.secondArray[indexPath.row];
     secondModel.color = [UIColor colorWithHexString:@"#FC5C7D"];
     secondModel.max = self.max;
+    cell.indexPath = indexPath;
     cell.secondModel = secondModel;
     return cell;
+}
+
+- (void)selectBtnWithIfTopBtn:(BOOL)isTop WithIndexRow:(NSInteger)row{
+    if (isTop) {
+        HTHorizontalReportDataModel *model =  self.dataArray[row];
+        HTCustomerViewController *vc = [[HTCustomerViewController alloc] init];
+        vc.backImg = @"g-back";
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        [dic setObject:[HTHoldNullObj getValueWithUnCheakValue:self.companyId] forKey:@"companyId"];
+        [dic setObject:[HTHoldNullObj getValueWithUnCheakValue:self.beginTime] forKey:@"beginDate"];
+        [dic setObject:[HTHoldNullObj getValueWithUnCheakValue:self.endTime] forKey:@"endDate"];
+        if ([self.title isEqualToString:@"频次分布"]) {
+            [dic setObject:@(row + 1) forKey:@"rate"];
+            vc.title = [NSString stringWithFormat:@"%@次",@(row + 1)];
+        }else{
+            [dic setObject:[HTHoldNullObj getValueWithUnCheakValue:model.start] forKey:@"beginMoney"];
+            [dic setObject:[HTHoldNullObj getValueWithUnCheakValue:model.end] forKey:@"endMoney"];
+            vc.title = model.key;
+        }
+        vc.sendDic = dic;
+        vc.companyId = self.companyId;
+        if ([[[HTShareClass shareClass].loginModel.company getStringWithKey:@"type"] isEqualToString:@"AGENT"]||[[[HTShareClass shareClass].loginModel.company getStringWithKey:@"type"] isEqualToString:@"BOSS"]) {
+            [MBProgressHUD showError:@"请登录该店铺查看相关数据"];
+            return;
+        }else{
+            [[HTShareClass shareClass].getCurrentNavController pushViewController:vc animated:YES];
+        }
+    }else{
+        HTHorizontalReportDataModel *model =  self.secondArray[row];
+        HTCustomerViewController *vc = [[HTCustomerViewController alloc] init];
+        vc.backImg = @"g-back";
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        [dic setObject:[HTHoldNullObj getValueWithUnCheakValue:self.companyId] forKey:@"companyId"];
+        [dic setObject:[HTHoldNullObj getValueWithUnCheakValue:self.secBeginTime] forKey:@"beginDate"];
+        [dic setObject:[HTHoldNullObj getValueWithUnCheakValue:self.secEndTime] forKey:@"endDate"];
+        if ([self.title isEqualToString:@"频次分布"]) {
+            [dic setObject:@(row + 1) forKey:@"rate"];
+            vc.title = [NSString stringWithFormat:@"%@次",@(row + 1)];
+        }else{
+            [dic setObject:[HTHoldNullObj getValueWithUnCheakValue:model.start] forKey:@"beginMoney"];
+            [dic setObject:[HTHoldNullObj getValueWithUnCheakValue:model.end] forKey:@"endMoney"];
+            vc.title = model.key;
+        }
+        vc.sendDic = dic;
+        vc.companyId = self.companyId;
+        if ([[[HTShareClass shareClass].loginModel.company getStringWithKey:@"type"] isEqualToString:@"AGENT"]||[[[HTShareClass shareClass].loginModel.company getStringWithKey:@"type"] isEqualToString:@"BOSS"]) {
+            [MBProgressHUD showError:@"请登录该店铺查看相关数据"];
+            return;
+        }else{
+            [[HTShareClass shareClass].getCurrentNavController pushViewController:vc animated:YES];
+        }
+    }
+    
+    
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 80;

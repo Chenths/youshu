@@ -232,11 +232,11 @@
         vc.returnArray = self.exchangeArray;
         vc.timeoutJobId = [json[@"data"][@"order"] getStringWithKey:@"timeoutjobid"];
         vc.wechatPayOrderId = [json[@"data"] getStringWithKey:@"wechatPayOrderId"];
-        if ([HTShareClass shareClass].isPlatformOnlinePayActive) {
-            vc.payCode = [json[@"data"] getStringWithKey:@"payCode"];
-        }else{
-            vc.addUrl = [json[@"data"] getStringWithKey:@"adUrl"];
-        }
+//        if ([HTShareClass shareClass].isPlatformOnlinePayActive) {
+//            vc.payCode = [json[@"data"] getStringWithKey:@"payCode"];
+//        }else{
+//            vc.addUrl = [json[@"data"] getStringWithKey:@"adUrl"];
+//        }
         [strongSelf.navigationController pushViewController:vc animated:YES];
         strongSelf.bottomView.settelBt.enabled = YES;
     } error:^{

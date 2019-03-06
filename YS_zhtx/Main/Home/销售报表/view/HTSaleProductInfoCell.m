@@ -7,6 +7,7 @@
 //
 
 #import "HTSaleProductInfoCell.h"
+#import "HTShowImg.h"
 @interface HTSaleProductInfoCell()
 
 @property (weak, nonatomic) IBOutlet UIImageView *productImg;
@@ -35,5 +36,14 @@
     self.barcode.text = [HTHoldNullObj getValueWithUnCheakValue:model.stylecode];
     self.catAndYearLabel.text = [NSString stringWithFormat:@"类别:%@(%@%@)",[HTHoldNullObj getValueWithUnCheakValue:model.customertype],[HTHoldNullObj getValueWithUnCheakValue:model.year],[HTHoldNullObj getValueWithUnCheakValue:model.season]];
     self.productCount.text = [NSString stringWithFormat:@"%@件",model.count];
+    self.productImg.userInteractionEnabled = YES;
+
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
+    [self.productImg addGestureRecognizer:tap];
 }
+
+- (void)tapAction{
+    [HTShowImg showSingleBigImvWithImg:nil WithUrlStr:_model.image];
+}
+
 @end

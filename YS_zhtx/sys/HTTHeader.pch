@@ -67,7 +67,7 @@ NSString *tmp;\
 if ([[NSUserDefaults standardUserDefaults] objectForKey:@"baseUrl"]) {\
 tmp = [[NSUserDefaults standardUserDefaults] objectForKey:@"baseUrl"];\
 }else{\
-tmp = @"http://192.168.199.46:8080/";\
+tmp = @"http://192.168.199.33:8080/";\
 }\
 tmp;\
 })
@@ -387,6 +387,10 @@ typedef NS_ENUM(NSInteger, ControllerType) {
 #define basehyhtl @"hyhtl"  //会员回头率
 #define basezxcp  @"zxcp"   //滞销产品
 #define basekcbz  @"kcbz"   //库存不足
+//2019.3 add
+#define basedl @"dl" //单量
+#define basexl @"xl" //销量
+#define basehtl @"htl" //回头率
 
 
 //警告数据

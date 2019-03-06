@@ -9,6 +9,7 @@
 #define space 8
 #import "HTCustomerOrderInfoCell.h"
 #import "HTOrderOrProductState.h"
+#import "HTShowImg.h"
 @interface HTCustomerOrderInfoCell()
 
 @property (weak, nonatomic) IBOutlet UIButton *printBt;
@@ -68,6 +69,11 @@
         HTOrderListProductModel *mmm = model.orderDetails[i];
          UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(btx, 0, imgWidth, imgWidth)];
          [image sd_setImageWithURL:[NSURL URLWithString:mmm.productImage] placeholderImage:[UIImage imageNamed:PRODUCTHOLDIMG]];
+        image.userInteractionEnabled = YES;
+        image.tag = 20000 + i;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+        [image addGestureRecognizer:tap];
+    
          [self.productBack addSubview:image];
          btx = btx + imgWidth + space;
         if ([[HTOrderOrProductState getProductStateFormOrderString:mmm
@@ -93,6 +99,14 @@
     }
     self.productBack.contentSize = CGSizeMake(btx + imgWidth, imgWidth);
 }
+
+- (void)tapAction:(id)sender{
+    UITapGestureRecognizer *tap = (UITapGestureRecognizer *)sender;
+    NSInteger index = tap.view.tag - 20000;
+    HTOrderListProductModel *mmm = _model.orderDetails[index];
+    [HTShowImg showSingleBigImvWithImg:nil WithUrlStr:mmm.productImage];
+}
+
 - (IBAction)printClicked:(id)sender {
     if (self.delegate && [self.delegate respondsToSelector:@selector(printClickedWithCell:)]) {
         [self.delegate printClickedWithCell:self];

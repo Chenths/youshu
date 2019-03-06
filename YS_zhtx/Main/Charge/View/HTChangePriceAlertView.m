@@ -147,7 +147,7 @@
 
 - (void)tapAction:(id)sender{
     UITapGestureRecognizer *tap = (UITapGestureRecognizer *)sender;
-    NSInteger index = tap.view.tag;
+    NSInteger index = tap.view.tag - 20000;
     HTCahargeProductModel *model = _selectedArray[index];
     if ([model.selectedModel.productimage isEqualToString:@""] || model.selectedModel.productimage == nil) {
         [HTShowImg showSingleBigImvWithImg:nil WithUrlStr:[[model.product firstObject] productimage]];

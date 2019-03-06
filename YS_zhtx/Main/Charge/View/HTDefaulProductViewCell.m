@@ -8,6 +8,7 @@
 
 #import "HTDefaulProductViewCell.h"
 #import "HTOrderOrProductState.h"
+#import "HTShowImg.h"
 @interface HTDefaulProductViewCell()
 @property (weak, nonatomic) IBOutlet UILabel *barcodeTitle;
 @property (weak, nonatomic) IBOutlet UILabel *finallPriceLabel;
@@ -69,9 +70,25 @@
     
     self.finallPriceLabel.text = [NSString stringWithFormat:@"¥%@",orderProductModel.finalprice];
     self.priceLabel.text = [NSString stringWithFormat:@"¥%@",orderProductModel.totalprice];
-    self.stateLabel.text = [[HTHoldNullObj getValueWithUnCheakValue:orderProductModel.discount] isEqualToString:@"-10"] ? @"/": [NSString stringWithFormat:@"%@折",[HTHoldNullObj getValueWithBigDecmalObj:orderProductModel.discount]];
+    self.stateLabel.text = [[HTHoldNullObj getValueWithUnCheakValue:orderProductModel.discount] isEqualToString:@"-10"] ? @"/": [NSString stringWithFormat:@"%.1lf折",orderProductModel.discount.floatValue * 10];
     
+    self.productImg.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
+    [self.productImg addGestureRecognizer:tap];
 }
+
+- (void)tapAction{
+    if (_orderProductModel) {
+        [HTShowImg showSingleBigImvWithImg:nil WithUrlStr:_orderProductModel.image];
+    }else{
+        if ([_chargeModel.selectedModel.productimage isEqualToString:@""] || _chargeModel.selectedModel.productimage == nil) {
+            [HTShowImg showSingleBigImvWithImg:nil WithUrlStr:[[_chargeModel.product firstObject] productimage]];
+        }else{
+            [HTShowImg showSingleBigImvWithImg:nil WithUrlStr:_chargeModel.selectedModel.productimage];
+        }
+    }
+}
+
 -(void)setChargeModel:(HTCahargeProductModel *)chargeModel{
     _chargeModel = chargeModel;
     self.selectedImg.hidden = NO;
@@ -91,6 +108,10 @@
     self.value3Label.hidden = YES;
     self.holdImg.hidden = YES;
     self.stateLabel.text =  [[HTHoldNullObj getValueWithUnCheakValue:chargeModel.selectedModel.discount] isEqualToString:@"-10"] ? @"/": [NSString stringWithFormat:@"%.1lf折",chargeModel.selectedModel.discount.floatValue * 10];
+    
+    self.productImg.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
+    [self.productImg addGestureRecognizer:tap];
 }
 
 -(void)setExcOrReProductModel:(HTOrderDetailProductModel *)orderProductModel{
@@ -128,7 +149,7 @@
     
     self.finallPriceLabel.text = [NSString stringWithFormat:@"¥%@",orderProductModel.finalprice];
     self.priceLabel.text = [NSString stringWithFormat:@"¥%@",orderProductModel.totalprice];
-    self.stateLabel.text = [[HTHoldNullObj getValueWithUnCheakValue:orderProductModel.discount] isEqualToString:@"-10"] ? @"/": [NSString stringWithFormat:@"%@折",[HTHoldNullObj getValueWithBigDecmalObj:orderProductModel.discount]];
+    self.stateLabel.text = [[HTHoldNullObj getValueWithUnCheakValue:orderProductModel.discount] isEqualToString:@"-10"] ? @"/": [NSString stringWithFormat:@"%.1lf折",orderProductModel.discount.floatValue * 10];
 }
 
 

@@ -521,6 +521,8 @@
                 [MBProgressHUD showError:@"该订单尚未完成支付"];
             }
         }
+        [_timer invalidate];
+        _timer = nil;
     } severError:^{
         [MBProgressHUD hideHUD];
         sender.enabled = YES;

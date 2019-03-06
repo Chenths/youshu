@@ -83,7 +83,9 @@
             [tempArr replaceObjectAtIndex:5 withObject:_payKindDetailRightArr];
         }
     }
-    [self.tab reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:0];
+    NSIndexPath *indexpath1 = [NSIndexPath indexPathForRow:5 inSection:1];
+    NSIndexPath *indexpath2 = [NSIndexPath indexPathForRow:4 inSection:1];
+    [self.tab reloadRowsAtIndexPaths:@[indexpath1, indexpath2] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark -UITabelViewDelegate

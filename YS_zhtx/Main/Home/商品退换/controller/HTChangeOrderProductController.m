@@ -137,7 +137,7 @@
 
     for (int i = 0; i < self.dataArray.count; i++) {
         HTOrderDetailProductModel *model = self.dataArray[i];
-        model.discount = [NSString stringWithFormat:@"%.2f", [model.discount floatValue] / 10];
+        model.discount = [NSString stringWithFormat:@"%.2f", [model.discount floatValue] / 1];
         [self.dataArray replaceObjectAtIndex:i withObject:model];
     }
     
@@ -215,7 +215,7 @@
             
             for (int i = 0; i < self.dataArray.count; i++) {
                 HTOrderDetailProductModel *model = self.dataArray[i];
-                model.discount = [NSString stringWithFormat:@"%.2f", [model.discount floatValue] / 10];
+                model.discount = [NSString stringWithFormat:@"%.2f", [model.discount floatValue] / 1];
                 [self.dataArray replaceObjectAtIndex:i withObject:model];
             }
             vc.returnProducts = self.selctedArray;
@@ -232,7 +232,7 @@
         HTReturnSettleViewController *vc = [[HTReturnSettleViewController alloc] init];
         for (int i = 0; i < self.dataArray.count; i++) {
             HTOrderDetailProductModel *model = self.dataArray[i];
-            model.discount = [NSString stringWithFormat:@"%.2f", [model.discount floatValue] / 10];
+            model.discount = [NSString stringWithFormat:@"%.2f", [model.discount floatValue] / 1];
             [self.dataArray replaceObjectAtIndex:i withObject:model];
         }
         vc.returnProducts = self.selctedArray;
