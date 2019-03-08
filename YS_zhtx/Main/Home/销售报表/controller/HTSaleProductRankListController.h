@@ -13,5 +13,5 @@
 @property (nonatomic,strong) HTShopSaleReportModel *model;
 
 @property (nonatomic,strong) NSString *companyId;
-
+@property (nonatomic, strong) NSString *ids;
 @end

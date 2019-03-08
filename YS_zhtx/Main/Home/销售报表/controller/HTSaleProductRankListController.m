@@ -88,7 +88,8 @@
                           @"endDate":[HTHoldNullObj getValueWithUnCheakValue:self.model.productEndTime],
                           @"season":[HTHoldNullObj getValueWithUnCheakValue:self.model.season],
                           @"pageNo":@(page),
-                          @"pageSize":@"10"
+                          @"pageSize":@"10",
+                          @"ids":self.ids
                           };
     [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleSaleReport,loadSaleProductRankReport] params:dic success:^(id json) {
         if (page == 1) {

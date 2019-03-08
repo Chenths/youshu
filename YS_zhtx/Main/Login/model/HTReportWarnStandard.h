@@ -39,4 +39,7 @@
 @property (nonatomic,strong) NSString *AnewMonthVIPNum;//vip月新增数
 @property (nonatomic,strong) NSString *MonthlyTurnover4OldVIPNum;//老vip月成交数
 @property (nonatomic,strong) NSString *monthTarget;//店铺月销售额
+//2019.3add
+@property (nonatomic, strong) NSString *dl;
+@property (nonatomic, strong) NSString *xl;
 @end

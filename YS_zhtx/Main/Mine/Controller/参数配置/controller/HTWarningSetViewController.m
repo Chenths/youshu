@@ -176,11 +176,11 @@
         }
          */
         NSArray *titles = @[@[@"店铺目标", @"折扣率", @"单量", @"连带率", @"销量", @"客单价"], @[@"新增VIP数量", @"老VIP成交数",@"VIP贡献率", @"VIP回头率", @"活跃会员占比"], @[@"剩余库存"]];
-        NSArray *keys = @[@[basedpyxse,basezkl, basedl, baseldl, basexl, basekdj],@[basevipyxzs, baselvipycjs,basehygxl, basehtl, basehyhy],@[basekcbz]];
+        NSArray *keys = @[@[basedpyxse,basezkl, basedl, baseldl, basexl, basekdj],@[basevipyxzs, baselvipycjs,basehygxl, basehyhtl, basehyhy],@[basekcbz]];
         NSArray *units = @[@[@"", @"", @"单", @"",@"件",@""],@[@"人",@"人",@"%",@"%",@"%"], @[@"件"]];
         NSArray *preArr = @[@[@"¥", @"", @"", @"",@"",@"¥"],@[@"",@"",@"",@"",@""], @[@""]];
         NSArray *baseKeys = @[@[@"低于", @"低于", @"低于", @"低于",@"低于",@"低于"],@[@"低于",@"低于",@"低于",@"低于",@"低于"], @[@"低于"]];
-        NSArray *mostNums = @[@[@"100000000", @"1", @"10000", @"1000",@"1000000",@"1000000"],@[@"100000",@"100000",@"10",@"10",@"10"], @[@"1000"]];
+        NSArray *mostNums = @[@[@"100000000", @"10", @"10000", @"1000",@"1000000",@"1000000"],@[@"100000",@"100000",@"100",@"100",@"100"], @[@"1000"]];
 
         for (int i = 0; i < titles.count; i ++) {
             NSArray *tempTitle = titles[i];

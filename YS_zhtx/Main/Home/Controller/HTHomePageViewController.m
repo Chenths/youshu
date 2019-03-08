@@ -225,14 +225,20 @@
         NSArray *customer = [json[@"data"] getArrayWithKey:@"customer"];
         NSArray *sell = [json[@"data"] getArrayWithKey:@"sell"];
         
+        //这里的index指的是对应的报表中的位置  点击之后滚动到指定位置
         NSDictionary *sellIndexs =@{
                                     @"monthTarget":[NSIndexPath indexPathForRow:0 inSection:1],
-                                    @"hygxl":[NSIndexPath indexPathForRow:2 inSection:1],
-                                    @"ldl":[NSIndexPath indexPathForRow:3 inSection:1],
-                                    @"thl":[NSIndexPath indexPathForRow:3 inSection:1],
-                                    @"hhl":[NSIndexPath indexPathForRow:3 inSection:1],
-                                    @"newMonthVIPNum":[NSIndexPath indexPathForRow:7 inSection:1],
-                                    @"MonthlyTurnover4OldVIPNum":[NSIndexPath indexPathForRow:7 inSection:1]
+                                    @"hygxl":[NSIndexPath indexPathForRow:0 inSection:5],
+                                    @"ldl":[NSIndexPath indexPathForRow:8 inSection:1],
+                                    @"thl":[NSIndexPath indexPathForRow:0 inSection:2],
+                                    @"hhl":[NSIndexPath indexPathForRow:0 inSection:2],
+                                    @"newMonthVIPNum":[NSIndexPath indexPathForRow:0 inSection:3],
+                                    @"MonthlyTurnover4OldVIPNum":[NSIndexPath indexPathForRow:0 inSection:3],
+                                    @"zkl":[NSIndexPath indexPathForRow:7 inSection:1],
+                                    @"dl":[NSIndexPath indexPathForRow:3 inSection:1],
+                                    @"xl":[NSIndexPath indexPathForRow:3 inSection:1],
+                                    @"hyhtl":[NSIndexPath indexPathForRow:2 inSection:3],
+                                    @"kdj":[NSIndexPath indexPathForRow:7 inSection:1]
                                     };
         NSDictionary *customerIndexs = @{
                                          @"hyhy":[NSIndexPath indexPathForRow:0 inSection:4]
@@ -266,6 +272,11 @@
                 model.warningStr = [NSString stringWithFormat:@"%@低于标准%@",[dic getStringWithKey:@"warningtypename"],[HTShareClass shareClass].reportWarnStandard.zkl];
                 if ([customerIndexs.allKeys containsObject:@"zkl"]) {
                     model.waringIndex = customerIndexs[@"zkl"];
+                }
+            }else if ([[dic getStringWithKey:@"warningtypecode"] isEqualToString:basekdj] ){
+                model.warningStr = [NSString stringWithFormat:@"%@低于标准%@",[dic getStringWithKey:@"warningtypename"],[HTShareClass shareClass].reportWarnStandard.kdj];
+                if ([customerIndexs.allKeys containsObject:@"kdj"]) {
+                    model.waringIndex = customerIndexs[@"kdj"];
                 }
             }
             [self.customerWarning addObject:model];
@@ -314,6 +325,41 @@
                 model.warningStr = [NSString stringWithFormat:@"%@低于标准%@",[dic getStringWithKey:@"warningtypename"],[HTShareClass shareClass].reportWarnStandard.monthTarget];
                 if ([sellIndexs.allKeys containsObject:@"monthTarget"]) {
                     model.waringIndex = sellIndexs[@"monthTarget"];
+                }
+            }else if ([[dic getStringWithKey:@"warningtypecode"] isEqualToString:baseldl] ){
+                model.warningStr = [NSString stringWithFormat:@"%@低于标准%@",[dic getStringWithKey:@"warningtypename"],[HTShareClass shareClass].reportWarnStandard.monthTarget];
+                if ([sellIndexs.allKeys containsObject:@"monthTarget"]) {
+                    model.waringIndex = sellIndexs[@"monthTarget"];
+                }
+            }else if ([[dic getStringWithKey:@"warningtypecode"] isEqualToString:basedpyxse] ){
+                model.warningStr = [NSString stringWithFormat:@"%@低于标准%@",[dic getStringWithKey:@"warningtypename"],[HTShareClass shareClass].reportWarnStandard.monthTarget];
+                if ([sellIndexs.allKeys containsObject:@"monthTarget"]) {
+                    model.waringIndex = sellIndexs[@"monthTarget"];
+                }
+            }else if ([[dic getStringWithKey:@"warningtypecode"] isEqualToString:basedpyxse] ){
+                model.warningStr = [NSString stringWithFormat:@"%@低于标准%@",[dic getStringWithKey:@"warningtypename"],[HTShareClass shareClass].reportWarnStandard.monthTarget];
+                if ([sellIndexs.allKeys containsObject:@"monthTarget"]) {
+                    model.waringIndex = sellIndexs[@"monthTarget"];
+                }
+            }else if ([[dic getStringWithKey:@"warningtypecode"] isEqualToString:basehyhtl]){
+                model.warningStr = [NSString stringWithFormat:@"%@低于标准%@",[dic getStringWithKey:@"warningtypename"],[HTShareClass shareClass].reportWarnStandard.hyhtl];
+                if ([sellIndexs.allKeys containsObject:@"hyhtl"]) {
+                    model.waringIndex = sellIndexs[@"hyhtl"];
+                }
+            }else if ([[dic getStringWithKey:@"warningtypecode"] isEqualToString:basedl]){
+                model.warningStr = [NSString stringWithFormat:@"%@低于标准%@",[dic getStringWithKey:@"warningtypename"],[HTShareClass shareClass].reportWarnStandard.dl];
+                if ([sellIndexs.allKeys containsObject:@"dl"]) {
+                    model.waringIndex = sellIndexs[@"dl"];
+                }
+            }else if ([[dic getStringWithKey:@"warningtypecode"] isEqualToString:basexl]){
+                model.warningStr = [NSString stringWithFormat:@"%@低于标准%@",[dic getStringWithKey:@"warningtypename"],[HTShareClass shareClass].reportWarnStandard.xl];
+                if ([sellIndexs.allKeys containsObject:@"xl"]) {
+                    model.waringIndex = sellIndexs[@"xl"];
+                }
+            }else if ([[dic getStringWithKey:@"warningtypecode"] isEqualToString:basekdj] ){
+                model.warningStr = [NSString stringWithFormat:@"%@低于标准%@",[dic getStringWithKey:@"warningtypename"],[HTShareClass shareClass].reportWarnStandard.kdj];
+                if ([sellIndexs.allKeys containsObject:@"kdj"]) {
+                    model.waringIndex = sellIndexs[@"kdj"];
                 }
             }
             [self.sellWarning addObject:model];

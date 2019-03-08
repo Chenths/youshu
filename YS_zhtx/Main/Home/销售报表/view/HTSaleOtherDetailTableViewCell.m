@@ -79,7 +79,25 @@
 }
 
 -(void)holdBt:(UIButton *)bt  value:(NSString *)value andTitle:(NSString *)title{
-    if ([title isEqualToString:@"折扣"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.zkl.floatValue) {
+    if ([title isEqualToString:@"销售额 (元)"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.monthTarget.floatValue) {
+        bt.hidden = NO;
+    }else if ([title isEqualToString:@"折扣率"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.zkl.floatValue) {
+        bt.hidden = NO;
+    }else if ([title isEqualToString:@"单量"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.dl.floatValue) {
+        bt.hidden = NO;
+    }else if ([title isEqualToString:@"销量 (件)"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.xl.floatValue) {
+        bt.hidden = NO;
+    }else if ([title isEqualToString:@"客单价"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.kdj.floatValue) {
+        bt.hidden = NO;
+    }else if ([title isEqualToString:@"新增会员"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.AnewMonthVIPNum.floatValue) {
+        bt.hidden = NO;
+    }else if ([title isEqualToString:@"会员成交人数"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.MonthlyTurnover4OldVIPNum.floatValue) {
+        bt.hidden = NO;
+    }else if ([title isEqualToString:@"会员贡献率"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.vipgxl.floatValue) {
+        bt.hidden = NO;
+    }else if ([title isEqualToString:@"回头率"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.hyhtl.floatValue) {
+        bt.hidden = NO;
+    }else if ([title isEqualToString:@"活跃会员占比"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.hyvip.floatValue) {
         bt.hidden = NO;
     }else if ([title isEqualToString:@"连带率"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.ldl.floatValue){
         bt.hidden = NO;
@@ -89,11 +107,11 @@
         bt.hidden = NO;
     }else if ([title isEqualToString:@"VIP销售占比"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.vipgxl.floatValue){
         bt.hidden = NO;
-    }else if ([title isEqualToString:@"新增会员"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.AnewMonthVIPNum.floatValue){
+    }else if ([title isEqualToString:@"VIP新增数"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.AnewMonthVIPNum.floatValue){
         bt.hidden = NO;
-    }else if ([title isEqualToString:@"VIP成交人数"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.MonthlyTurnover4OldVIPNum.floatValue){
+    }else if ([title isEqualToString:@"老VIP成交数"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.MonthlyTurnover4OldVIPNum.floatValue){
         bt.hidden = NO;
-    }else if ([title isEqualToString:@"销售额 (元)"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.monthTarget.floatValue){
+    }else if ([title isEqualToString:@"营业额"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.monthTarget.floatValue){
         bt.hidden = NO;
     }
 }

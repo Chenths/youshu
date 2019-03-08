@@ -538,7 +538,7 @@
         [tempTotalArr addObject:arr2];
         
         //会员概况
-        NSArray *titleArr3 =@[@[@"新增会员", @"新增标签"], @[@"新增储值", @"新增储值赠送"], @[@"VIP成交人数", @"回头率"]];
+        NSArray *titleArr3 =@[@[@"新增会员", @"新增标签"], @[@"新增储值", @"新增储值赠送"], @[@"会员成交人数", @"回头率"]];
         NSArray *iconArr3 = @[@[@"purplePoint", @"purplePoint"], @[@"purplePoint", @"purplePoint"], @[@"purplePoint", @"purplePoint"]];
         NSArray *perDescribeArr3 = @[@[@"", @""], @[@"¥", @"¥"], @[@"", @""]];
         NSArray *sufDescribeArr3 = @[@[@"", @""], @[@"", @""], @[@"", @"%"]];;

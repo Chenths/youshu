@@ -87,6 +87,41 @@
                            value:[UIColor redColor]
                            range:range];
         self.titleLabel.attributedText = mabstring1;
+    }else if([_model.warningStr rangeOfString:@"销量"].length > 0){
+        NSRange range = [_model.warningStr rangeOfString:[NSString stringWithFormat:@"%@",[HTShareClass shareClass].reportWarnStandard.xl]];
+        NSMutableAttributedString *mabstring1 = [[NSMutableAttributedString alloc] initWithString:_model.warningStr];
+        [mabstring1 addAttribute:NSForegroundColorAttributeName
+                           value:[UIColor redColor]
+                           range:range];
+        self.titleLabel.attributedText = mabstring1;
+    }else if([_model.warningStr rangeOfString:@"单量"].length > 0){
+        NSRange range = [_model.warningStr rangeOfString:[NSString stringWithFormat:@"%@",[HTShareClass shareClass].reportWarnStandard.dl]];
+        NSMutableAttributedString *mabstring1 = [[NSMutableAttributedString alloc] initWithString:_model.warningStr];
+        [mabstring1 addAttribute:NSForegroundColorAttributeName
+                           value:[UIColor redColor]
+                           range:range];
+        self.titleLabel.attributedText = mabstring1;
+    }else if([_model.warningStr rangeOfString:@"回头率"].length > 0){
+        NSRange range = [_model.warningStr rangeOfString:[NSString stringWithFormat:@"%@",[HTShareClass shareClass].reportWarnStandard.hyhtl]];
+        NSMutableAttributedString *mabstring1 = [[NSMutableAttributedString alloc] initWithString:_model.warningStr];
+        [mabstring1 addAttribute:NSForegroundColorAttributeName
+                           value:[UIColor redColor]
+                           range:range];
+        self.titleLabel.attributedText = mabstring1;
+    }else if([_model.warningStr rangeOfString:@"店铺目标"].length > 0){
+        NSRange range = [_model.warningStr rangeOfString:[NSString stringWithFormat:@"%@",[HTShareClass shareClass].reportWarnStandard.monthTarget]];
+        NSMutableAttributedString *mabstring1 = [[NSMutableAttributedString alloc] initWithString:_model.warningStr];
+        [mabstring1 addAttribute:NSForegroundColorAttributeName
+                           value:[UIColor redColor]
+                           range:range];
+        self.titleLabel.attributedText = mabstring1;
+    }else if([_model.warningStr rangeOfString:@"客单价"].length > 0){
+        NSRange range = [_model.warningStr rangeOfString:[NSString stringWithFormat:@"%@",[HTShareClass shareClass].reportWarnStandard.kdj]];
+        NSMutableAttributedString *mabstring1 = [[NSMutableAttributedString alloc] initWithString:_model.warningStr];
+        [mabstring1 addAttribute:NSForegroundColorAttributeName
+                           value:[UIColor redColor]
+                           range:range];
+        self.titleLabel.attributedText = mabstring1;
     }else{
         self.titleLabel.text = _model.warningStr;
         self.studyBt.hidden = YES;
@@ -112,6 +147,8 @@
         key = @"lhycjs";
     }else if ([self.model.warningStr rangeOfString:@"月销售目标"].length > 0){
         key = @"yxs";
+    }else if ([self.model.warningStr rangeOfString:@"客单价"].length > 0){
+        key = @"kdj";
     }
     HTWarningWebViewController *vc = [[HTWarningWebViewController alloc] init];
     vc.finallUrl = key;

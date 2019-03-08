@@ -33,6 +33,8 @@
 #import "HTSaleProductInfoCell.h"
 #import "HTSeemoreFooterView.h"
 #import "HTSaleProductRankListController.h"
+#import "HTChooseBetweenDateCell.h"
+#import "HTShopSaleReportModel.h"
 @interface HTBossReportViewController ()<UITableViewDataSource,UITableViewDelegate,HTBossSelectedShopViewDelegate,HTNewPieCellTableViewCellDelegate, chooseShowPayDetailDelegate, HTSeasonChooseHeaderCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *dataTableView;
@@ -59,6 +61,8 @@
 @property (nonatomic,strong) NSMutableArray *fourthSectionArray;
 //第5组数据
 @property (nonatomic,strong) NSMutableArray *fifthSectionArray;
+//第6组数据
+@property (nonatomic,strong) NSMutableArray *sixthSectionArray;
 
 @property (nonatomic,strong) NSString *beginTime;
 
@@ -79,6 +83,8 @@
 @property (nonatomic, assign) NSInteger currentSelectShowPayKindType;
 @property (nonatomic, strong) NSMutableArray *payKindDetailLeftArr;
 @property (nonatomic, strong) NSMutableArray *payKindDetailRightArr;
+//0 全部 1234 春夏秋冬
+@property (nonatomic, strong) NSString *currentSeason;
 @end
 
 @implementation HTBossReportViewController
@@ -231,32 +237,32 @@
                 return cell;
             }
                 break;
+            
             case 5:
             {
-                
-                HTSeasonChooseHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTSeasonChooseHeaderCell" forIndexPath:indexPath];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.delegate = self;
-                //                cell.model = self.reportModel;
-                return  cell;
-                
-            }
-                break;
-                
-            case 6:
-            {
-                HTSaleProductInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTSaleProductInfoCell" forIndexPath:indexPath];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                //                cell.model = self.reportModel.productRank[indexPath.row - 2];
-                return  cell;
-            }
-                break;
-            default:{
-                UITableViewCell *cell = [[UITableViewCell alloc ] init];
-                return cell;
-            }
-                break;
+                if (indexPath.row == 0){
+                    HTSeasonChooseHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTSeasonChooseHeaderCell" forIndexPath:indexPath];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    cell.delegate = self;
+                    HTShopSaleReportModel *model = [[HTShopSaleReportModel alloc] init];
+                    model.season = self.currentSeason;
+                    cell.model = model;
+                    return  cell;
+                }else{
+                    HTProductRankInfoModel *mm = _sixthSectionArray[indexPath.row];
+                    HTSaleProductInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTSaleProductInfoCell" forIndexPath:indexPath];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    cell.model = mm;
+                    return  cell;
+                }
         }
+        break;
+    default:{
+        UITableViewCell *cell = [[UITableViewCell alloc ] init];
+        return cell;
+    }
+        break;
+    }
     }
     UITableViewCell *cell = [[UITableViewCell alloc ] init];
     return cell;
@@ -264,19 +270,42 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     HTSectionOpenModel *model = self.sectionTitleArray[section];
     NSArray *tempSectionArr = [self.dataArray objectAtIndex:section];
-    return tableView == self.alertTableView ? self.alertArr.count :  model.isOpen ?  [tempSectionArr count] : 0;
+    if (tableView == self.alertTableView) {
+        return self.alertArr.count;
+    }else{
+        if (model.isOpen) {
+            if (section == 5) {
+                if ([tempSectionArr count] > 5) {
+                    return 6;
+                }else{
+                    return [tempSectionArr count];
+                }
+            }else{
+                return tempSectionArr.count;
+            }
+        }else{
+            return 0;
+        }
+    }
 }
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return tableView == self.alertTableView ? 1 : self.dataArray.count;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    if (section == 6) {
+    if (section == 5) {
         HTSeemoreFooterView *footer = [[NSBundle mainBundle] loadNibNamed:@"HTSeemoreFooterView" owner:nil options:nil].lastObject;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(seemore:)];
         footer.tag = 500 + section;
         [footer addGestureRecognizer:tap];
+        HTSectionOpenModel *model = _sectionTitleArray[section];
+        if (model.isOpen && _sixthSectionArray.count > 5) {
+            footer.hidden = NO;
+        }else{
+            footer.hidden = YES;
+        }
         return footer;
     }else{
         return [[UIView alloc] init];
@@ -287,63 +316,49 @@
 -(void)seemore:(UITapGestureRecognizer *)tap{
     UIView *vv = tap.view;
     NSInteger index = vv.tag - 500;
-    /*
-    //    销售贡献查看更多
-    if (index == 6) {
-        NSMutableArray *arr = [NSMutableArray array];
-        for (int i = 0; i < self.reportModel.employeeContribution.data.count; i++) {
-            [arr addObject:@"HTGuideSaleInfoTableViewCell"];
-        }
-        [self.cellsName replaceObjectAtIndex:6 withObject:arr];
-        [self.footArray replaceObjectAtIndex:6 withObject:@""];
+    
+    
+    HTSaleProductRankListController *vc = [[HTSaleProductRankListController alloc] init];
+    HTShopSaleReportModel *model = [[HTShopSaleReportModel alloc] init];
+    model.productBeginTime = self.beginTime;
+    model.productEndTime = self.endTime;
+    model.season = self.currentSeason;
+    vc.model = model;
+    vc.ids = self.ids;
+    vc.companyId = [[HTShareClass shareClass].loginModel.companyId stringValue];
+    //        vc.model = self.reportModel;
+    //        vc.companyId = self.companyId;
+    if (self.pushVc) {
+        self.pushVc(vc);
     }
-    //    大单排行查看更多
-    if (index == 7) {
-        NSMutableArray *arr = [NSMutableArray array];
-        for (int i = 0; i < self.reportModel.bigOrderMap.count; i++) {
-            [arr addObject:@"HTGudieSaleRankListCell"];
-        }
-        [self.cellsName replaceObjectAtIndex:7 withObject:arr];
-        [self.footArray replaceObjectAtIndex:7 withObject:@""];
-    }
-    */
-    //    产品销量榜
-    if (index == 5) {
-        HTSaleProductRankListController *vc = [[HTSaleProductRankListController alloc] init];
-//        vc.model = self.reportModel;
-//        vc.companyId = self.companyId;
-        [self.navigationController pushViewController:vc animated:YES];
-        return;
-    }
-    [self.dataTableView reloadSections:[NSIndexSet indexSetWithIndex:index] withRowAnimation:0];
+    
 }
 
 -(void)loadSeasonData{
-    return;
-    /*
     NSDictionary *dic = @{
-                          @"companyId":self.companyId,
-                          @"beginDate":[HTHoldNullObj getValueWithUnCheakValue:self.reportModel.productBeginTime],
-                          @"endDate":[HTHoldNullObj getValueWithUnCheakValue:self.reportModel.productEndTime],
-                          @"season":[HTHoldNullObj getValueWithUnCheakValue:self.reportModel.season]
+                          @"companyId":[HTShareClass shareClass].loginModel.companyId,
+                          @"beginDate":[HTHoldNullObj getValueWithUnCheakValue:self.beginTime],
+                          @"endDate":[HTHoldNullObj getValueWithUnCheakValue:self.endTime],
+                          @"ids":self.ids,
+                          @"season":[HTHoldNullObj getValueWithUnCheakValue:self.currentSeason]
                           };
     [MBProgressHUD showMessage:@""];
     [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleSaleReport,loadSaleProductRankReport] params:dic success:^(id json) {
         [MBProgressHUD hideHUD];
-        NSMutableArray *products = [NSMutableArray array];
-        for (NSDictionary *dic in json[@"data"]) {
-            [products addObject:[HTProductRankInfoModel yy_modelWithJSON:dic]];
+        
+        [self.sixthSectionArray removeAllObjects];
+        HTShopSaleReportModel *model = [[HTShopSaleReportModel alloc] init];
+        model.season = self.currentSeason;
+        [self.sixthSectionArray addObject:model];
+        
+        NSMutableArray *tempArr = [NSMutableArray arrayWithArray:json[@"data"]];
+        for (int i = 0; i < tempArr.count; i++) {
+            HTProductRankInfoModel *mm = [[HTProductRankInfoModel alloc] init];
+            [mm setValuesForKeysWithDictionary:tempArr[i]];
+            [self.sixthSectionArray addObject:mm];
         }
-        self.reportModel.productRank =  products;
-        NSMutableArray *arr1 = [NSMutableArray array];
-        [arr1 addObject:@"HTChooseBetweenDateCell"];
-        [arr1 addObject:@"HTSeasonChooseHeaderCell"];
-        for (int i = 0; i < self.reportModel.productRank.count; i++) {
-            [arr1 addObject:@"HTSaleProductInfoCell"];
-        }
-        [self.cellsName replaceObjectAtIndex:10 withObject:arr1];
-        [self.footArray replaceObjectAtIndex:10 withObject:@"产品销量榜"];
-        [self.tab reloadSections:[NSIndexSet indexSetWithIndex:10] withRowAnimation:0];
+        
+        [self.dataTableView reloadSections:[NSIndexSet indexSetWithIndex:5] withRowAnimation:0];
     } error:^{
         [MBProgressHUD hideHUD];
         [MBProgressHUD showError:SeverERRORSTRING];
@@ -351,7 +366,6 @@
         [MBProgressHUD hideHUD];
         [MBProgressHUD showError:NETERRORSTRING];
     }];
-     */
 }
 
 
@@ -374,7 +388,7 @@
     return tableView == self.alertTableView ? 0 : 44;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (section == 6) {
+    if (section == 5) {
         return 47;
     }else{
         return 0.01;
@@ -417,17 +431,24 @@
             return 48;
         }
             break;
-            
+        case 5:
+        {
+            if (indexPath.row == 0) {
+                return 49;
+            }else{
+                return 84;
+            }
+        }
+            break;
         default:
             break;
     }
     return 120;
 }
 -(void)selectedSeasonWithIndex:(NSInteger)index{
-    /*
-    self.reportModel.season = [NSString stringWithFormat:@"%ld",index];
+    
+    self.currentSeason = [NSString stringWithFormat:@"%ld",index];
     [self loadSeasonData];
-     */
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -460,6 +481,19 @@
             [self tapBackView];
             [self.dataTableView reloadData];
         }
+    }
+    if ([[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[HTChooseBetweenDateCell class]]) {
+        HcdDateTimePickerView * dateTimePickerView = [[HcdDateTimePickerView alloc] initWithDatePickerMode:DatePickerDateMode defaultDateTime:[[NSDate alloc]initWithTimeIntervalSinceNow:1000] WithIsBeteewn:YES];
+        dateTimePickerView.topViewColor = [UIColor colorWithHexString:@"F8F8F8"];
+        __weak typeof(self)  weakSelf = self;
+        dateTimePickerView.betweenClickedOkBtn = ^(NSString *beginTime, NSString *endTime) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+//            strongSelf.reportModel.productBeginTime = beginTime;
+//            strongSelf.reportModel.productEndTime = endTime;
+            [strongSelf loadSeasonData];
+        } ;
+        [self.view addSubview:dateTimePickerView];
+        [dateTimePickerView showHcdDateTimePicker];
     }
 }
 #pragma mark -CustomDelegate
@@ -611,10 +645,12 @@
     self.beginTime = thisMonth;
     self.endTime = today;
 }
+
 - (void)createTb{
     
     self.dataTableView.dataSource = self;
     self.dataTableView.delegate = self;
+    self.dataTableView.frame = CGRectMake(0, 44, HMSCREENWIDTH , HEIGHT- tar_height - nav_height - SafeAreaBottomHeight - 44 - 40);
     self.alertTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, HMSCREENWIDTH, 0) style:UITableViewStylePlain];
     self.alertTableView.dataSource = self;
     self.alertTableView.delegate = self;
@@ -623,6 +659,9 @@
     UIView *footView = [[UIView alloc] init];
     footView.backgroundColor = [UIColor clearColor];
     //    [self.dataTableView registerNib:[UINib nibWithNibName:@"HTBossSaleBasicInfoCell" bundle:nil] forCellReuseIdentifier:@"HTBossSaleBasicInfoCell"];
+    [self.dataTableView registerNib:[UINib nibWithNibName:@"HTChooseBetweenDateCell" bundle:nil] forCellReuseIdentifier:@"HTChooseBetweenDateCell"];
+    [self.dataTableView registerNib:[UINib nibWithNibName:@"HTSeasonChooseHeaderCell" bundle:nil] forCellReuseIdentifier:@"HTSeasonChooseHeaderCell"];
+    [self.dataTableView registerNib:[UINib nibWithNibName:@"HTSaleProductInfoCell" bundle:nil] forCellReuseIdentifier:@"HTSaleProductInfoCell"];
     [self.dataTableView registerNib:[UINib nibWithNibName:@"HTSaleItemHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:@"HTSaleItemHeaderTableViewCell"];
     [self.dataTableView registerNib:[UINib nibWithNibName:@"HTSaleItemBottmTableViewCell" bundle:nil] forCellReuseIdentifier:@"HTSaleItemBottmTableViewCell"];
     [self.dataTableView registerNib:[UINib nibWithNibName:@"HTSaleItemPayKindTableViewCell" bundle:nil] forCellReuseIdentifier:@"HTSaleItemPayKindTableViewCell"];
@@ -833,6 +872,23 @@
             [self.thirdSectionArray addObject:mm];
             sectionmodel.isOpen = YES;
         }
+        
+        if (tag == 5) {
+            [self.sixthSectionArray removeAllObjects];
+            HTShopSaleReportModel *model = [[HTShopSaleReportModel alloc] init];
+            self.currentSeason = 0;
+            model.season = self.currentSeason;
+            [self.sixthSectionArray addObject:model];
+            
+            NSMutableArray *tempArr = [NSMutableArray arrayWithArray:json[@"data"]];
+            for (int i = 0; i < tempArr.count; i++) {
+                HTProductRankInfoModel *mm = [[HTProductRankInfoModel alloc] init];
+                [mm setValuesForKeysWithDictionary:tempArr[i]];
+                [self.sixthSectionArray addObject:mm];
+                sectionmodel.isOpen = YES;
+            }
+        }
+        
         NSIndexSet *indexSet=[[NSIndexSet alloc] initWithIndex:tag];
         [self.dataTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
         [MBProgressHUD hideHUD];
@@ -906,9 +962,17 @@
     }
     return _fifthSectionArray;
 }
+
+- (NSMutableArray *)sixthSectionArray{
+    if (!_sixthSectionArray) {
+        _sixthSectionArray = [NSMutableArray array];
+    }
+    return _sixthSectionArray;
+}
+
 - (NSMutableArray *)sectionTitleArray{
     if (!_sectionTitleArray) {
-        NSArray *arr =  @[@"基本概况",@"营业趋势",@"销售品类占比",@"大单排行榜",@"员工销售排行榜"];
+        NSArray *arr =  @[@"基本概况",@"营业趋势",@"销售品类占比",@"大单排行榜",@"员工销售排行榜", @"产品销量榜"];
         _sectionTitleArray = [NSMutableArray array];
         for (int i = 0 ; i < arr.count; i++ ) {
             HTSectionOpenModel *model = [[HTSectionOpenModel alloc] init];
@@ -922,7 +986,7 @@
 }
 - (NSArray *)dataArray{
     if (!_dataArray) {
-        _dataArray = @[self.firstSectionArray,self.secondSectionArray,self.thirdSectionArray,self.fourthSectionArray,self.fifthSectionArray];
+        _dataArray = @[self.firstSectionArray,self.secondSectionArray,self.thirdSectionArray,self.fourthSectionArray,self.fifthSectionArray, self.sixthSectionArray];
     }
     return _dataArray;
 }
