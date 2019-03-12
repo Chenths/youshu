@@ -40,7 +40,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.2195</string>
+	<string>2.2198</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -71,7 +71,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>0.4.15</string>
+	<string>0.4.17</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>mqzoneopensdk</string>
@@ -99,6 +99,8 @@
 		<string>QQ41E586C6</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
 	<true/>
 	<key>MOBAppKey</key>
 	<string>1538d02204b74</string>
@@ -170,6 +172,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UISupportsDocumentBrowser</key>
+	<true/>
 	<key>jpush.cn</key>
 	<dict>
 		<key>NSExceptionAllowsInsecureHTTPLoads</key>

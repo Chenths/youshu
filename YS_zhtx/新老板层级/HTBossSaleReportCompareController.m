@@ -302,7 +302,7 @@
         HTSectionOpenModel *model = self.sectionTitleArray[tag];
         if (tag == 0) {
             [self.firstArray removeAllObjects];
-            NSArray *titles = @[@"利润",@"营业额",@"退换差额",@"销量",@"换货数量",@"退货数量",@"单量",@"VIP销售占比",@"折扣",@"连带率",@"退货率",@"换货率",@"进店人次",@"客单价",@"件单价",@"回头率",@"新增标签",@"新增储值",@"储值消费",@"支付宝支付",@"微信支付"];
+            NSArray *titles = @[@"利润",@"营业额",@"退换差额",@"销量",@"换货数量",@"退货数量",@"单量",@"VIP销售占比",@"折扣率",@"连带率",@"退货率",@"换货率",@"进店人次",@"客单价",@"件单价",@"回头率",@"新增标签",@"新增储值",@"储值消费",@"支付宝支付",@"微信支付"];
              NSArray *keys = @[@"profit",@"saleAmount",@"exchangeAmount",@"orderProducts",@"exchangeProducts",@"returnProducts",@"orderCount",@"vipSaleScale",@"discount",@"related",@"returnRate",@"exchangeRate",@"flowCountIn",@"customerTransaction",@"piecePrice",@"backUpRate",@"tagCount",@"store",@"consumeStore",@"aliPay",@"weChat"];
             //后缀
             NSArray *suf = @[@"",@"",@"",@"件",@"件",@"件",@"",@"%",@"",@"",@"%",@"%",@"",@"",@"",@"%",@"",@"",@"",@"",@""];

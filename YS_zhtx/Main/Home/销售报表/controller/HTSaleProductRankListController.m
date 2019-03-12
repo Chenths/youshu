@@ -83,13 +83,13 @@
 #pragma private methods
 -(void)loadSeasonDataWithPage:(int)page{
     NSDictionary *dic = @{
-                          @"companyId":self.companyId,
+                          @"companyId":[HTHoldNullObj getValueWithUnCheakValue:self.companyId],
                           @"beginDate":[HTHoldNullObj getValueWithUnCheakValue:self.model.productBeginTime],
                           @"endDate":[HTHoldNullObj getValueWithUnCheakValue:self.model.productEndTime],
                           @"season":[HTHoldNullObj getValueWithUnCheakValue:self.model.season],
                           @"pageNo":@(page),
                           @"pageSize":@"10",
-                          @"ids":self.ids
+                          @"ids":[HTHoldNullObj getValueWithUnCheakValue:self.ids]
                           };
     [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleSaleReport,loadSaleProductRankReport] params:dic success:^(id json) {
         if (page == 1) {

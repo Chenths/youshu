@@ -192,7 +192,7 @@
     }
 }
 - (IBAction)discountClicked:(id)sender {
-    [HTWarningHoldManager holdWarningWithTitle:@"折扣" andWarningValue:[HTHoldNullObj getValueWithUnCheakValue:self.model.discount]];
+    [HTWarningHoldManager holdWarningWithTitle:@"折扣率" andWarningValue:[HTHoldNullObj getValueWithUnCheakValue:self.model.discount]];
 }
 - (IBAction)ldClicked:(id)sender {
     [HTWarningHoldManager holdWarningWithTitle:@"连带率" andWarningValue:[HTHoldNullObj getValueWithUnCheakValue:self.model.serialUP]];

@@ -9,5 +9,8 @@
 #import "HTProductRankInfoModel.h"
 
 @implementation HTProductRankInfoModel
-
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+    
+}
 @end

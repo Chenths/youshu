@@ -101,6 +101,7 @@
     }else{
         HTGHomeItemsCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HTGHomeItemsCollectionCell" forIndexPath:indexPath];
         cell.model = self.dataArray[indexPath.row];
+        cell.companyId = self.companyId;
         HTHomeItemsModel *model = self.dataArray[indexPath.row];
         if ([model.title isEqualToString:@"销售报表"] ){
             cell.warningArr = self.sellWarning;
@@ -217,10 +218,10 @@
                           };
     [MBProgressHUD showMessage:@""];
     __weak typeof(self) weakSelf = self;
-    [self.customerWarning removeAllObjects];
-    [self.sellWarning removeAllObjects];
     [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleWarn,dateMenuWarningQuestion] params:dic success:^(id json) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
+        [self.customerWarning removeAllObjects];
+        [self.sellWarning removeAllObjects];
         [MBProgressHUD hideHUD];
         NSArray *customer = [json[@"data"] getArrayWithKey:@"customer"];
         NSArray *sell = [json[@"data"] getArrayWithKey:@"sell"];
@@ -262,7 +263,7 @@
                 }
             }else if ([[dic getStringWithKey:@"warningtypecode"] isEqualToString:basehyhy] ){
                 model.warningStr = [NSString stringWithFormat:@"%@低于标准%@",[dic getStringWithKey:@"warningtypename"],[HTShareClass shareClass].reportWarnStandard.hyhy];
-                model.waringIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+                model.waringIndex = customerIndexs[@"hyhy"];
             }else if ([[dic getStringWithKey:@"warningtypecode"] isEqualToString:baseldl] ){
                 model.warningStr = [NSString stringWithFormat:@"%@低于标准%@",[dic getStringWithKey:@"warningtypename"],[HTShareClass shareClass].reportWarnStandard.ldl];
                 if ([customerIndexs.allKeys containsObject:@"ldl"]) {

@@ -260,7 +260,7 @@
         [self repalceRequest:dic andIsStore:YES eventBt:sender];
     }else{
         __weak typeof(self) weakSelf = self;
-        [HTTelMsgAlertView showAlertWithName:[HTHoldNullObj getValueWithUnCheakValue:self.custModel.nickname] andPhone:self.custModel.phone andCustomerId:self.custModel.custId andOkBt:^{
+        [HTTelMsgAlertView showAlertWithName:[HTHoldNullObj getValueWithUnCheakValue:self.custModel.nickname] andPhone:self.custModel.phone andCustomerId:self.custModel.customerid andOkBt:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
             NSDictionary *dic = @{
                                   @"accountId":[HTHoldNullObj getValueWithUnCheakValue:strongSelf.custModel.account.storedPresented.accoutId]
@@ -286,7 +286,8 @@
         [self repalceRequest:dic andIsStore:YES eventBt:sender];
     }else{
         __weak typeof(self) weakSelf = self;
-        [HTTelMsgAlertView showAlertWithName:[HTHoldNullObj getValueWithUnCheakValue:self.custModel.nickname] andPhone:self.custModel.phone andCustomerId:self.custModel.custId andOkBt:^{
+
+        [HTTelMsgAlertView showAlertWithName:[HTHoldNullObj getValueWithUnCheakValue:self.custModel.nickname] andPhone:[HTHoldNullObj getValueWithUnCheakValue:self.custModel.phone] andCustomerId:[HTHoldNullObj getValueWithUnCheakValue:self.custModel.customerid] andOkBt:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
             NSDictionary *dic = @{
                                   @"accountId":[HTHoldNullObj getValueWithUnCheakValue:strongSelf.custModel.account.stored.accoutId]
@@ -651,7 +652,9 @@
     }
     if ([[json[@"data"] getStringWithKey:@"state"] isEqualToString:@"-1"]){
         HTAccoutInfoModel *accoun = self.custModel.account.integral;
-        HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:[NSString stringWithFormat:@"积分余不足,退货失败，应扣除%@积分,余额为%@",[json[@"data"] getStringWithKey:@"deductpoints"],accoun.balance ?  accoun.balance :@"0"] btTitle:@"确定" okBtclicked:nil];
+        HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:[NSString stringWithFormat:@"积分余不足,退货失败，应扣除%@积分,余额为%@",[json[@"data"] getStringWithKey:@"deductpoints"],accoun.balance ?  accoun.balance :@"0"] btTitle:@"确定" okBtclicked:^{
+            
+        }];
         [alert notTochShow];
         return;
     }
@@ -697,10 +700,16 @@
     if ([[json[@"data"] getStringWithKey:@"state"] isEqualToString:@"-1"]){
        if ([json[@"data"] getStringWithKey:@"deductpoints"].length > 0) {
         HTAccoutInfoModel *accoun = self.custModel.account.integral;
-        HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:[NSString stringWithFormat:@"积分余不足,退货失败，应扣除%@积分,余额为%@",[json[@"data"] getStringWithKey:@"deductpoints"],accoun.balance ?  accoun.balance :@"0"] btTitle:@"确定" okBtclicked:nil];
+           HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:[NSString stringWithFormat:@"积分余不足,退货失败，应扣除%@积分,余额为%@",[json[@"data"] getStringWithKey:@"deductpoints"],accoun.balance ?  accoun.balance :@"0"] btTitle:@"确定" okBtclicked:^{
+               
+           }];
         [alert notTochShow];
        }else{
-           HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:[NSString stringWithFormat:@"储值余额不足,退货失败，应扣除%@,余额为%@",[json[@"data"] getStringWithKey:@"balance"],self.orderModel.encodeFinal] btTitle:@"确定" okBtclicked:nil];
+           HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:[NSString stringWithFormat:@"储值余额不足,退货失败，应扣除%@,余额为%@",self.orderModel.encodeFinal, [json[@"data"] getStringWithKey:@"balance"]] btTitle:@"确定" okBtclicked:^{
+               
+           }];
+
+           
            [alert notTochShow];
        }
         return;
@@ -846,13 +855,14 @@
     [postDic setValuesForKeysWithDictionary:dic];
     sender.enabled = NO;
     [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleOrder,exchangeReplaceProduct4App] params:postDic success:^(id json) {
+        [MBProgressHUD hideHUD];
         if (isStroe) {
             [self holdStoredPayResultWithJson:json andEventSender:sender];
         }else{
             [self holdPayResultWithJson:json andEventSender:sender];
         }
-        [_timer invalidate];
-        _timer = nil;
+//        [_timer invalidate];
+//        _timer = nil;
     } error:^{
         [MBProgressHUD hideHUD];
         [MBProgressHUD showError:SeverERRORSTRING];

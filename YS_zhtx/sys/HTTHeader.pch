@@ -67,7 +67,7 @@ NSString *tmp;\
 if ([[NSUserDefaults standardUserDefaults] objectForKey:@"baseUrl"]) {\
 tmp = [[NSUserDefaults standardUserDefaults] objectForKey:@"baseUrl"];\
 }else{\
-tmp = @"http://192.168.199.46:8080/";\
+tmp = @"http://192.168.199.56:8080/";\
 }\
 tmp;\
 })
@@ -402,6 +402,10 @@ typedef NS_ENUM(NSInteger, ControllerType) {
 #define NEWVIPWARNING(a,b) [NSString stringWithFormat:@"VIP新增数标准%@\n当前为:%@",a,b]
 #define OLDVIPWARNING(a,b) [NSString stringWithFormat:@"老VIP成交数标准%@\n当前为:%@",a,b]
 #define MonthSaleWARNING(a,b) [NSString stringWithFormat:@"营业额标准%@\n当前为:%@",a,b]
+#define DLWARNING(a,b) [NSString stringWithFormat:@"单量标准%@\n当前为:%@",a,b]
+#define XLWARNING(a,b) [NSString stringWithFormat:@"销量标准%@\n当前为:%@",a,b]
+#define KDJWARNING(a,b) [NSString stringWithFormat:@"客单价标准%@\n当前为:%@",a,b]
+#define HTLWARNING(a,b) [NSString stringWithFormat:@"回头率标准%@%@\n当前为:%@%@",a,@"%",b,@"%"]
 
 
 

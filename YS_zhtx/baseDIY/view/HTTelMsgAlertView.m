@@ -50,8 +50,8 @@
     self.layer.masksToBounds = YES;
     self.layer.cornerRadius = 3;
 }
-
-+(void)showAlertWithName:(NSString *)customerName andPhone:(NSString *)phone andCustomer:(NSString *)customerId andOkBt:(okBtClick)ok{
++ (void)showAlertWithName:(NSString *)customerName andPhone:(NSString *)phone andCustomerId:(NSString *)customerId andOkBt:(okBtClick)ok
+{
     HTTelMsgAlertView *alert = [[NSBundle mainBundle] loadNibNamed:@"HTTelMsgAlertView" owner:nil options:nil].lastObject;
     alert.frame = CGRectMake(16, HEIGHT - 220, HMSCREENWIDTH - 32, 220);
     alert.custInfoLabel.text = [NSString stringWithFormat:@"%@:%@",customerName,phone];
@@ -64,6 +64,7 @@
     KLCPopup *pop = [KLCPopup popupWithContentView:alert showType:KLCPopupShowTypeBounceInFromBottom dismissType:KLCPopupDismissTypeSlideOutToBottom maskType:KLCPopupMaskTypeDimmed dismissOnBackgroundTouch:NO dismissOnContentTouch:NO];
     [pop show];
 }
+
 - (IBAction)cancelClicked:(id)sender {
    [KLCPopup dismissAllPopups];
 }
@@ -121,6 +122,7 @@
 }
 
 - (IBAction)okClicekd:(id)sender {
+    
     if (self.msgTextField.text.length == 0) {
         [MBProgressHUD showError:@"请获取验证码"];
         return;
@@ -148,7 +150,6 @@
         [MBProgressHUD showError:NETERRORSTRING];
     }];
     
-   
 }
 
 

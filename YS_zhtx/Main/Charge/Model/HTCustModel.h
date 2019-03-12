@@ -11,8 +11,10 @@
 @interface HTCustModel : NSObject
 
 @property (nonatomic,strong) NSString *nickname;
-
+//店铺id
 @property (nonatomic,strong) NSString *custId;
+//平台id
+@property (nonatomic, strong) NSString *customerid;
 
 @property (nonatomic,strong) NSString *sex;
 

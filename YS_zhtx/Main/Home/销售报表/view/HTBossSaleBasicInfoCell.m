@@ -54,7 +54,7 @@
     }
 }
 -(void)holdBt:(UIButton *)bt  value:(NSString *)value andTitle:(NSString *)title{
-    if ([title isEqualToString:@"折扣"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.zkl.floatValue) {
+    if ([title isEqualToString:@"折扣率"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.zkl.floatValue) {
         bt.hidden = NO;
     }else if ([title isEqualToString:@"连带率"] && value.floatValue < [HTShareClass shareClass].reportWarnStandard.ldl.floatValue){
         bt.hidden = NO;

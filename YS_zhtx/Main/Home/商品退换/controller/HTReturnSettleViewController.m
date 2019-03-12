@@ -268,6 +268,7 @@
     NSMutableDictionary *printDic = [NSMutableDictionary dictionary];
     [printDic setObject:[HTShareClass shareClass].loginModel.person.name forKey:@"returnGuider"];
     [printDic setObject:self.orderId forKey:@"returnOrderId"];
+    [printDic setObject:self.orderId forKey:@"orderId"];
     [printDic setObject:[NSString stringWithFormat:@"%0.lf",(0 - totle)] forKey:@"returnOrderFinalPrice"];
     if ([self.orderModel.paytype isEqualToString:@"储值支付"]) {
         [printDic setObject:[NSString stringWithFormat:@"%0.lf",(0 - totle)]forKey:@"returnStoreValue"];
@@ -278,6 +279,7 @@
     [printDic setObject:self.orderModel.ordernum forKey:@"returnOrderNo"];
     [printDic setObject:[HTHoldNullObj getValueWithUnCheakValue:self.custModel.phone ] forKey:@"telPhone"];
     [[HTShareClass shareClass].printerModel setValuesForKeysWithDictionary:printDic];
+    
     __weak typeof(self) weakSelf = self;
     self.printTool.presentNext = ^(UIViewController *vc){
         __strong typeof(weakSelf) strongSelf = weakSelf;

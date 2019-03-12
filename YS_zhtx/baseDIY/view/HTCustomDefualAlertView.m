@@ -90,6 +90,7 @@
 }
 - (IBAction)singleOkBt:(id)sender {
     self.okBtClicked();
+    [MBProgressHUD hideHUD];
     [pop dismiss:YES];
 }
 

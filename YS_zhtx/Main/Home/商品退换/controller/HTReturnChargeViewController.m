@@ -321,6 +321,7 @@
         if ([[json[@"data"][@"order"] getStringWithKey:@"state"] isEqualToString:@"-1"]){
             strongSelf.bottomView.settelBt.enabled = YES;
             HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:[NSString stringWithFormat:@"积分余不足,退货失败，应扣除%@积分,余额为%@",[json[@"data"][@"order"] getStringWithKey:@"deductpoints"],self.custModel.account.stored.balance ?  self.custModel.account.stored.balance :@"0"] btTitle:@"确定" okBtclicked:^{
+                NSLog(@"点击确认");
             }];
             [alert show];
             return ;
