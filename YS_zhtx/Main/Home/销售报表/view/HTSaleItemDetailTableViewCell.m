@@ -24,8 +24,12 @@
 - (void)setDataArr:(NSArray *)dataArr{
     if (dataArr.count == 1) {
         _leftModel = dataArr[0];
+        if ([_leftModel.titleStr isEqualToString:@"单量"] || [_leftModel.titleStr isEqualToString:@"销量 (件)"]) {
+            _leftDetail.text = [NSString stringWithFormat:@"%@%ld%@", _leftModel.perDescribeStr, [_leftModel.describeStr integerValue], _leftModel.sufDescribeStr];
+        }else{
+            self.leftDetail.text = [NSString stringWithFormat:@"%@%@%@", _leftModel.perDescribeStr,_leftModel.describeStr, _leftModel.sufDescribeStr];
+        }
         self.leftTitle.text = _leftModel.titleStr;
-        self.leftDetail.text = [NSString stringWithFormat:@"%@%@%@", _leftModel.perDescribeStr,_leftModel.describeStr, _leftModel.sufDescribeStr];
         self.leftImv.image = [UIImage imageNamed:_leftModel.headerImvName];
         self.leftRedBtn.hidden = YES;
         
@@ -43,7 +47,11 @@
         
         _leftModel = dataArr[0];
         self.leftTitle.text = _leftModel.titleStr;
-        self.leftDetail.text = [NSString stringWithFormat:@"%@%@%@", _leftModel.perDescribeStr,_leftModel.describeStr, _leftModel.sufDescribeStr];
+        if ([_leftModel.titleStr isEqualToString:@"单量"] || [_leftModel.titleStr isEqualToString:@"销量 (件)"]) {
+            _leftDetail.text = [NSString stringWithFormat:@"%@%ld%@", _leftModel.perDescribeStr, [_leftModel.describeStr integerValue], _leftModel.sufDescribeStr];
+        }else{
+            self.leftDetail.text = [NSString stringWithFormat:@"%@%@%@", _leftModel.perDescribeStr,_leftModel.describeStr, _leftModel.sufDescribeStr];
+        }
         self.leftImv.image = [UIImage imageNamed:_leftModel.headerImvName];
         self.leftRedBtn.hidden = YES;
         
@@ -54,7 +62,11 @@
         
         _rightModel = dataArr[1];
         self.rightTitle.text = _rightModel.titleStr;
-        self.rightDetail.text = [NSString stringWithFormat:@"%@%@%@", _rightModel.perDescribeStr,_rightModel.describeStr, _rightModel.sufDescribeStr];
+        if ([_rightModel.titleStr isEqualToString:@"单量"] || [_rightModel.titleStr isEqualToString:@"销量 (件)"]) {
+            _rightDetail.text = [NSString stringWithFormat:@"%@%ld%@", _rightModel.perDescribeStr, [_rightModel.describeStr integerValue], _rightModel.sufDescribeStr];
+        }else{
+            _rightDetail.text = [NSString stringWithFormat:@"%@%@%@", _rightModel.perDescribeStr,_rightModel.describeStr, _rightModel.sufDescribeStr];
+        }
         self.rightImv.image = [UIImage imageNamed:_rightModel.headerImvName];
         self.rightRedBtn.hidden = YES;
         

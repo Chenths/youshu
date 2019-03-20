@@ -41,7 +41,11 @@
     if (dataArr.count == 1) {
         _leftModel = dataArr[0];
         self.leftLabel.text = _leftModel.titleStr;
-        self.leftDetailLabel.text = [NSString stringWithFormat:@"%@%@%@", _leftModel.perDescribeStr,_leftModel.describeStr, _leftModel.sufDescribeStr];
+        if ([_leftModel.titleStr containsString:@"数量"] || [_leftModel.titleStr containsString:@"新增标签"] || [_leftModel.titleStr containsString:@"新增会员"] || [_leftModel.titleStr containsString:@"成交人数"]) {
+            self.leftDetailLabel.text = [NSString stringWithFormat:@"%@%ld%@", _leftModel.perDescribeStr,[_leftModel.describeStr integerValue], _leftModel.sufDescribeStr];
+        }else{
+            self.leftDetailLabel.text = [NSString stringWithFormat:@"%@%@%@", _leftModel.perDescribeStr,_leftModel.describeStr, _leftModel.sufDescribeStr];
+        }
         self.leftImv.image = [UIImage imageNamed:_leftModel.headerImvName];
         self.leftRedBtn.hidden = YES;
         
@@ -56,7 +60,11 @@
     }else{
         _leftModel = dataArr[0];
         self.leftLabel.text = _leftModel.titleStr;
-        self.leftDetailLabel.text = [NSString stringWithFormat:@"%@%@%@", _leftModel.perDescribeStr,_leftModel.describeStr, _leftModel.sufDescribeStr];
+        if ([_leftModel.titleStr containsString:@"数量"] || [_leftModel.titleStr containsString:@"新增标签"] || [_leftModel.titleStr containsString:@"新增会员"] || [_leftModel.titleStr containsString:@"成交人数"]) {
+            self.leftDetailLabel.text = [NSString stringWithFormat:@"%@%ld%@", _leftModel.perDescribeStr,[_leftModel.describeStr integerValue], _leftModel.sufDescribeStr];
+        }else{
+            self.leftDetailLabel.text = [NSString stringWithFormat:@"%@%@%@", _leftModel.perDescribeStr,_leftModel.describeStr, _leftModel.sufDescribeStr];
+        }
         self.leftImv.image = [UIImage imageNamed:_leftModel.headerImvName];
         self.leftRedBtn.hidden = YES;
         
@@ -67,7 +75,11 @@
         
         _rightModel = dataArr[1];
         self.rightLabel.text = _rightModel.titleStr;
-        self.rightDetailLabel.text = [NSString stringWithFormat:@"%@%@%@", _rightModel.perDescribeStr,_rightModel.describeStr, _rightModel.sufDescribeStr];
+        if ([_rightModel.titleStr containsString:@"数量"] || [_rightModel.titleStr containsString:@"新增标签"] || [_rightModel.titleStr containsString:@"新增会员"] || [_rightModel.titleStr containsString:@"成交人数"]) {
+            self.rightDetailLabel.text = [NSString stringWithFormat:@"%@%ld%@", _rightModel.perDescribeStr,[_rightModel.describeStr integerValue], _rightModel.sufDescribeStr];
+        }else{
+            self.rightDetailLabel.text = [NSString stringWithFormat:@"%@%@%@", _rightModel.perDescribeStr,_rightModel.describeStr, _rightModel.sufDescribeStr];
+        }
         self.rightImv.image = [UIImage imageNamed:_rightModel.headerImvName];
         self.rightRedBtn.hidden = YES;
         if (_hideRedPoint) {
