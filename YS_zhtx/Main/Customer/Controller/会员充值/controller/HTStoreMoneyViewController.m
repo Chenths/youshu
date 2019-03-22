@@ -82,73 +82,88 @@
 
 
 - (IBAction)finshBtClicked:(id)sender {
-
-    HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:[NSString stringWithFormat:@"是否确认%@",self.handType == HAND_TYPE_DEDUED ? @"扣除" : @"充值"] btsArray:@[@"取消",@"确认"] okBtclicked:^{
-                    if (self.handType == HAND_TYPE_STORED ) {
-                        NSMutableArray *titles = [NSMutableArray array];
-                        for (int i = 0; i < self.payArr.count; i++) {
-                            NSDictionary *dic = self.payArr[i];
-                            [titles addObject:[dic getStringWithKey:@"name"]];
-                        }
-                        if (self.selectedTag == 200) {
-                            HTStoredSendModel *selectedModel = [[HTStoredSendModel alloc] init];
-                            BOOL isselect = NO;
-                            for (HTStoredSendModel *model in self.dataArray) {
-                                if (model.isSelected) {
-                                    selectedModel = model;
-                                    isselect = YES;
-                                    break;
-                                }
-                            }
-                            if (!isselect) {
-                                [MBProgressHUD showError:@"请选择充值条件" toView:self.view];
-                                return;
-                            }
-                            [self.requstDic setObject:[HTHoldNullObj getValueWithUnCheakValue:selectedModel.send] forKey:@"send"];
-                            [self.requstDic setObject:[HTHoldNullObj getValueWithUnCheakValue:selectedModel.money] forKey:@"amount"];
-                            
-                            [LPActionSheet showActionSheetWithTitle:@"请选择支付方式" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:titles handler:^(LPActionSheet *actionSheet, NSInteger index) {
-                                if (index >= 1) {
-                                    NSDictionary *dic = self.payArr[index - 1];
-                                    [self.requstDic setObject:[dic getStringWithKey:@"id"] forKey:@"rechargeSource"];
-                                    [self LoadHandingMoney];
-                                }
-                            }];
-                        }
-                        if (self.selectedTag == 202) {
-                            if (([self.moneyTextField.text length] == 0 || self.moneyTextField.text.intValue == 0) && !self.moneyTextField.hidden) {
-                                [MBProgressHUD showError:@"请输入金额" toView:self.view];
-                                return;
-                            }
-                            if ([self.moneyTextField.text intValue] < 0) {
-                                [MBProgressHUD showError:@"金额不能为负数"];
-                                return;
-                            }
-                            [self.requstDic setObject:self.moneyTextField.text forKey:@"amount"];
-//                            [LPActionSheet showActionSheetWithTitle:@"请选择支付方式" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:titles handler:^(LPActionSheet *actionSheet, NSInteger index) {
-//                                if (index >= 1) {
-//                                    NSDictionary *dic = self.payArr[index - 1];
-//                                    [self.requstDic setObject:[dic getStringWithKey:@"id"] forKey:@"rechargeSource"];
-//                                }
-                             [self LoadHandingMoney];
-//                            }];
-                        }
-                    }
-                    if (self.handType == HAND_TYPE_DEDUED) {
-                        if (([self.moneyTextField.text length] == 0 || self.moneyTextField.text.intValue == 0) && !self.moneyTextField.hidden) {
-                            [MBProgressHUD showError:@"请输入金额" toView:self.view];
-                            return;
-                        }
-                        if ([self.moneyTextField.text intValue] < 0) {
-                            [MBProgressHUD showError:@"金额不能为负数"];
-                            return;
-                        }
-                        [self.requstDic setObject:self.moneyTextField.text forKey:@"amount"];
-                        [self LoadHandingMoney];
-                    }
-    } cancelClicked:^{
-    }];
-    [alert show];
+    
+    //    HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:[NSString stringWithFormat:@"是否确认%@",self.handType == HAND_TYPE_DEDUED ? @"扣除" : @"充值"] btsArray:@[@"取消",@"确认"] okBtclicked:^{
+    if (self.handType == HAND_TYPE_STORED ) {
+        NSMutableArray *titles = [NSMutableArray array];
+        for (int i = 0; i < self.payArr.count; i++) {
+            NSDictionary *dic = self.payArr[i];
+            [titles addObject:[dic getStringWithKey:@"name"]];
+        }
+        if (self.selectedTag == 200) {
+            HTStoredSendModel *selectedModel = [[HTStoredSendModel alloc] init];
+            BOOL isselect = NO;
+            for (HTStoredSendModel *model in self.dataArray) {
+                if (model.isSelected) {
+                    selectedModel = model;
+                    isselect = YES;
+                    break;
+                }
+            }
+            if (!isselect) {
+                [MBProgressHUD showError:@"请选择充值条件" toView:self.view];
+                return;
+            }
+            [self.requstDic setObject:[HTHoldNullObj getValueWithUnCheakValue:selectedModel.send] forKey:@"send"];
+            [self.requstDic setObject:[HTHoldNullObj getValueWithUnCheakValue:selectedModel.money] forKey:@"amount"];
+            
+            [LPActionSheet showActionSheetWithTitle:@"请选择支付方式" leftBottomBtnTitle:@"取消" rightBottomBtnTitle:@"确定" destructiveButtonTitle:@"" otherButtonTitles:titles otherButtonWithLeftImvs:@[] handler:^(LPActionSheet *actionSheet, NSInteger index) {
+                if (index >= 1) {
+                    NSDictionary *dic = self.payArr[index - 1];
+                    [self.requstDic setObject:[dic getStringWithKey:@"id"] forKey:@"rechargeSource"];
+                    [self LoadHandingMoney];
+                }else if(index == -1){
+                    
+                }else{
+                    
+                }
+            }];
+//            [LPActionSheet showActionSheetWithTitle:@"请选择支付方式" cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles:titles handler:^(LPActionSheet *actionSheet, NSInteger index) {
+//                if (index >= 1) {
+//                    NSDictionary *dic = self.payArr[index - 1];
+//                    [self.requstDic setObject:[dic getStringWithKey:@"id"] forKey:@"rechargeSource"];
+//                    [self LoadHandingMoney];
+//                }else if(index == -1){
+//
+//                }else{
+//
+//                }
+//            }];
+        }
+        if (self.selectedTag == 202) {
+            if (([self.moneyTextField.text length] == 0 || self.moneyTextField.text.intValue == 0) && !self.moneyTextField.hidden) {
+                [MBProgressHUD showError:@"请输入金额" toView:self.view];
+                return;
+            }
+            if ([self.moneyTextField.text intValue] < 0) {
+                [MBProgressHUD showError:@"金额不能为负数"];
+                return;
+            }
+            [self.requstDic setObject:self.moneyTextField.text forKey:@"amount"];
+            //                            [LPActionSheet showActionSheetWithTitle:@"请选择支付方式" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:titles handler:^(LPActionSheet *actionSheet, NSInteger index) {
+            //                                if (index >= 1) {
+            //                                    NSDictionary *dic = self.payArr[index - 1];
+            //                                    [self.requstDic setObject:[dic getStringWithKey:@"id"] forKey:@"rechargeSource"];
+            //                                }
+            [self LoadHandingMoney];
+            //                            }];
+        }
+    }
+    if (self.handType == HAND_TYPE_DEDUED) {
+        if (([self.moneyTextField.text length] == 0 || self.moneyTextField.text.intValue == 0) && !self.moneyTextField.hidden) {
+            [MBProgressHUD showError:@"请输入金额" toView:self.view];
+            return;
+        }
+        if ([self.moneyTextField.text intValue] < 0) {
+            [MBProgressHUD showError:@"金额不能为负数"];
+            return;
+        }
+        [self.requstDic setObject:self.moneyTextField.text forKey:@"amount"];
+        [self LoadHandingMoney];
+    }
+    //    } cancelClicked:^{
+    //    }];
+    //    [alert show];
 }
 - (IBAction)storedSelected:(id)sender {
     
@@ -621,13 +636,24 @@
         NSDictionary *dic = self.payArr[i];
         [titles addObject:[dic getStringWithKey:@"name"]];
     }
-    [LPActionSheet showActionSheetWithTitle:@"请选择支付方式" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:titles handler:^(LPActionSheet *actionSheet, NSInteger index) {
+    [LPActionSheet showActionSheetWithTitle:@"请选择支付方式" leftBottomBtnTitle:@"取消" rightBottomBtnTitle:@"确定" destructiveButtonTitle:@"" otherButtonTitles:titles otherButtonWithLeftImvs:@[] handler:^(LPActionSheet *actionSheet, NSInteger index) {
         if (index >= 1) {
             NSDictionary *dic = self.payArr[index - 1];
             [self.requstDic setObject:[dic getStringWithKey:@"id"] forKey:@"rechargeSource"];
             [self LoadHandingMoney];
+        }else if(index == -1){
+            
+        }else{
+            
         }
     }];
+//    [LPActionSheet showActionSheetWithTitle:@"请选择支付方式" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:titles handler:^(LPActionSheet *actionSheet, NSInteger index) {
+//        if (index >= 1) {
+//            NSDictionary *dic = self.payArr[index - 1];
+//            [self.requstDic setObject:[dic getStringWithKey:@"id"] forKey:@"rechargeSource"];
+//            [self LoadHandingMoney];
+//        }
+//    }];
 }
 #pragma mark -UITabelViewDelegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{

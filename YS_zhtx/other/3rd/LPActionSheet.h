@@ -36,6 +36,10 @@ typedef void(^LPActionSheetBlock)(LPActionSheet *actionSheet, NSInteger index);
             otherButtonTitles:(NSArray *)otherButtonTitles
                       handler:(LPActionSheetBlock)actionSheetBlock NS_DESIGNATED_INITIALIZER;
 
+- (instancetype)initWithTitle:(NSString *)title leftBottomBtn:(NSString *)leftBottomBtn rightBottomBtn:(NSString *)rightBottom destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles otherButtomImgs:(NSArray *)otherButtomImgs handler:(LPActionSheetBlock)actionSheetBlock
+                           NS_DESIGNATED_INITIALIZER;
+
+
 /**
  * 创建LPActionSheet对象(便利构造器)
  *
@@ -73,6 +77,15 @@ typedef void(^LPActionSheetBlock)(LPActionSheet *actionSheet, NSInteger index);
 /**
  * 弹出视图
  */
+
+//自己写的带有 图标 选中按钮 确认取消 的弹出框
++ (void)showActionSheetWithTitle:(NSString *)title
+               leftBottomBtnTitle:(NSString *)leftBottomBtnTitle
+               rightBottomBtnTitle:(NSString *)rightBottomBtnTitle
+          destructiveButtonTitle:(NSString *)destructiveButtonTitle
+               otherButtonTitles:(NSArray *)otherButtonTitles
+         otherButtonWithLeftImvs:(NSArray *)otherButtonImgs
+                         handler:(LPActionSheetBlock)actionSheetBlock;
 - (void)show;
 
 @end

@@ -24,6 +24,8 @@ static const NSTimeInterval kAnimateDuration = 0.3f;
 /** 弹出视图 */
 @property (strong, nonatomic) UIView *actionSheetView;
 
+//当前选中的支付方式
+@property (nonatomic, assign) NSInteger currentSelectPayType;
 /**
  * 收起视图
  */
@@ -159,6 +161,164 @@ static const NSTimeInterval kAnimateDuration = 0.3f;
     return self;
 }
 
+- (instancetype)initWithTitle:(NSString *)title leftBottomBtn:(NSString *)leftBottomBtn rightBottomBtn:(NSString *)rightBottom destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles otherButtomImgs:(NSArray *)otherButtomImgs handler:(LPActionSheetBlock)actionSheetBlock
+{
+    self = [super initWithFrame:CGRectZero];
+    if (self)
+    {
+        self.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height);
+        self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        
+        _actionSheetBlock = actionSheetBlock;
+        
+        CGFloat actionSheetHeight = 0;
+        
+        _backgroundView = [[UIView alloc] initWithFrame:self.frame];
+        _backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _backgroundView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4f];
+        _backgroundView.alpha = 0;
+        [self addSubview:_backgroundView];
+        
+        _actionSheetView = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height, self.frame.size.width, 0)];
+        _actionSheetView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+        _actionSheetView.backgroundColor = [UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
+        [self addSubview:_actionSheetView];
+        
+        UIImage *normalImage = [self imageWithColor:[UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f]];
+        UIImage *highlightedImage = [self imageWithColor:[UIColor colorWithRed:242.0f/255.0f green:242.0f/255.0f blue:242.0f/255.0f alpha:1.0f]];
+        
+        if (title && title.length > 0)
+        {
+            actionSheetHeight += kRowLineHeight;
+            
+            CGFloat titleHeight = ceil([title boundingRectWithSize:CGSizeMake(self.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:kTitleFontSize]} context:nil].size.height) + 15*2;
+            
+            UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, actionSheetHeight, self.frame.size.width, titleHeight)];
+            titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+            titleLabel.text = title;
+            titleLabel.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f];
+            titleLabel.textColor = [UIColor colorWithRed:135.0f/255.0f green:135.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
+            titleLabel.textAlignment = NSTextAlignmentCenter;
+            titleLabel.font = [UIFont systemFontOfSize:kTitleFontSize];
+            titleLabel.numberOfLines = 0;
+            [_actionSheetView addSubview:titleLabel];
+            
+            actionSheetHeight += titleHeight;
+        }
+        
+//        if (destructiveButtonTitle && destructiveButtonTitle.length > 0)
+//        {
+//            actionSheetHeight += kRowLineHeight;
+//
+//            UIButton *destructiveButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//            destructiveButton.frame = CGRectMake(0, actionSheetHeight, self.frame.size.width, kRowHeight);
+//            destructiveButton.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+//            destructiveButton.tag = -1;
+//            destructiveButton.titleLabel.font = [UIFont systemFontOfSize:kButtonTitleFontSize];
+//            [destructiveButton setTitle:destructiveButtonTitle forState:UIControlStateNormal];
+//            [destructiveButton setTitleColor:[UIColor colorWithRed:230.0f/255.0f green:66.0f/255.0f blue:66.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
+//            [destructiveButton setBackgroundImage:normalImage forState:UIControlStateNormal];
+//            [destructiveButton setBackgroundImage:highlightedImage forState:UIControlStateHighlighted];
+//            [destructiveButton addTarget:self action:@selector(newButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+//            [_actionSheetView addSubview:destructiveButton];
+//
+//            actionSheetHeight += kRowHeight;
+//        }
+        
+        if (otherButtonTitles && [otherButtonTitles count] > 0)
+        {
+            for (int i = 0; i < otherButtonTitles.count; i++)
+            {
+                actionSheetHeight += kRowLineHeight;
+                
+                UIView *backView = [[UIView alloc] init];
+                backView.frame = CGRectMake(0, actionSheetHeight, HMSCREENWIDTH, kRowHeight);
+                backView.tag = 10000 + i;
+                backView.backgroundColor = [UIColor whiteColor];
+                [_actionSheetView addSubview:backView];
+                
+                UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+                button.frame = CGRectMake(0, 0, HMSCREENWIDTH, kRowHeight);
+                button.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+                button.tag = i+1;
+                button.titleLabel.font = [UIFont systemFontOfSize:kButtonTitleFontSize];
+                [button setTitle:otherButtonTitles[i] forState:UIControlStateNormal];
+                [button setTitleColor:[UIColor colorWithRed:64.0f/255.0f green:64.0f/255.0f blue:64.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
+                [button setBackgroundImage:normalImage forState:UIControlStateNormal];
+                [button setBackgroundImage:highlightedImage forState:UIControlStateHighlighted];
+                [button addTarget:self action:@selector(newButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+                [backView addSubview:button];
+                
+                UIImageView *headerImv = [[UIImageView alloc] init];
+                headerImv.frame = CGRectMake(16, 4, 40, 40);
+                if (i == 0) {
+                    headerImv.image = [UIImage imageNamed:@"payIcon3n"];
+                }else if (i == 1){
+                    headerImv.image = [UIImage imageNamed:@"payIcon4n"];
+                }else if (i == 2){
+                    headerImv.image = [UIImage imageNamed:@"payIcon5n"];
+                }else{
+                    headerImv.image = [UIImage imageNamed:@"payIcon6n"];
+                }
+                headerImv.userInteractionEnabled = YES;
+                headerImv.tag = 20000 + i;
+                [backView addSubview:headerImv];
+                
+                UIImageView *selectImv = [[UIImageView alloc] init];
+                selectImv.frame = CGRectMake(HMSCREENWIDTH - 20 - 16, 19, 20, 20);
+                selectImv.tag = 30000 + i;
+                selectImv.image = [UIImage imageNamed:@"singleUnselected"];
+                selectImv.userInteractionEnabled = YES;
+                [backView addSubview:selectImv];
+                
+                actionSheetHeight += kRowHeight;
+            }
+        }
+        
+        if (leftBottomBtn && leftBottomBtn.length > 0)
+        {
+            actionSheetHeight += kSeparatorHeight;
+            
+            UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            cancelButton.frame = CGRectMake(0, actionSheetHeight, self.frame.size.width / 2, kRowHeight);
+            cancelButton.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+            cancelButton.tag = -3;
+            cancelButton.titleLabel.font = [UIFont systemFontOfSize:kButtonTitleFontSize];
+            [cancelButton setTitle:leftBottomBtn ?: @"取消" forState:UIControlStateNormal];
+            [cancelButton setTitleColor:[UIColor colorWithRed:64.0f/255.0f green:64.0f/255.0f blue:64.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
+            [cancelButton setBackgroundImage:normalImage forState:UIControlStateNormal];
+            [cancelButton setBackgroundImage:highlightedImage forState:UIControlStateHighlighted];
+            [cancelButton addTarget:self action:@selector(newButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+            [_actionSheetView addSubview:cancelButton];
+            
+            UIButton *sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            sureButton.frame = CGRectMake(self.frame.size.width / 2, actionSheetHeight, self.frame.size.width / 2, kRowHeight);
+            sureButton.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+            sureButton.tag = -2;
+            sureButton.titleLabel.font = [UIFont systemFontOfSize:kButtonTitleFontSize];
+            [sureButton setTitle:rightBottom ?: @"确定" forState:UIControlStateNormal];
+            [sureButton setTitleColor:[UIColor colorWithRed:64.0f/255.0f green:64.0f/255.0f blue:64.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
+            [sureButton setBackgroundImage:normalImage forState:UIControlStateNormal];
+            [sureButton setBackgroundImage:highlightedImage forState:UIControlStateHighlighted];
+            [sureButton addTarget:self action:@selector(newButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+            [_actionSheetView addSubview:sureButton];
+            
+            actionSheetHeight += kRowHeight;
+        }
+        actionSheetHeight += SafeAreaBottomHeight;
+        _actionSheetView.frame = CGRectMake(0, self.frame.size.height, self.frame.size.width, actionSheetHeight);
+    }
+    
+    return self;
+}
+
+
++ (instancetype)actionSheetWithTitle:(NSString *)title leftBottomTitle:(NSString *)leftBottomTitle rightBottomTitle:(NSString *)rightBottomTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles otherButtonImgs:(NSArray *)otherButtonImgs handler:(LPActionSheetBlock)actionSheetBlock
+{
+    return [[self alloc] initWithTitle:title leftBottomBtn:leftBottomTitle rightBottomBtn:rightBottomTitle destructiveButtonTitle:destructiveButtonTitle otherButtonTitles:otherButtonTitles otherButtomImgs:otherButtonImgs handler:actionSheetBlock];
+//    return [[self alloc] initWithTitle:title cancelButtonTitle:cancelButtonTitle destructiveButtonTitle:destructiveButtonTitle otherButtonTitles:otherButtonTitles handler:actionSheetBlock];
+}
+
 + (instancetype)actionSheetWithTitle:(NSString *)title cancelButtonTitle:(NSString *)cancelButtonTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles handler:(LPActionSheetBlock)actionSheetBlock
 {
     return [[self alloc] initWithTitle:title cancelButtonTitle:cancelButtonTitle destructiveButtonTitle:destructiveButtonTitle otherButtonTitles:otherButtonTitles handler:actionSheetBlock];
@@ -167,6 +327,18 @@ static const NSTimeInterval kAnimateDuration = 0.3f;
 + (void)showActionSheetWithTitle:(NSString *)title cancelButtonTitle:(NSString *)cancelButtonTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles handler:(LPActionSheetBlock)actionSheetBlock
 {
     LPActionSheet *lpActionSheet = [self actionSheetWithTitle:title cancelButtonTitle:cancelButtonTitle destructiveButtonTitle:destructiveButtonTitle otherButtonTitles:otherButtonTitles handler:actionSheetBlock];
+    [lpActionSheet show];
+}
+
++ (void)showActionSheetWithTitle:(NSString *)title
+              leftBottomBtnTitle:(NSString *)leftBottomBtnTitle
+             rightBottomBtnTitle:(NSString *)rightBottomBtnTitle
+          destructiveButtonTitle:(NSString *)destructiveButtonTitle
+               otherButtonTitles:(NSArray *)otherButtonTitles
+         otherButtonWithLeftImvs:(NSArray *)otherButtonImgs
+                         handler:(LPActionSheetBlock)actionSheetBlock{
+    LPActionSheet *lpActionSheet = [self actionSheetWithTitle:title leftBottomTitle:leftBottomBtnTitle rightBottomTitle:rightBottomBtnTitle destructiveButtonTitle:destructiveButtonTitle otherButtonTitles:otherButtonTitles otherButtonImgs:otherButtonImgs handler:actionSheetBlock];
+//    [self actionSheetWithTitle:title cancelButtonTitle:cancelButtonTitle destructiveButtonTitle:destructiveButtonTitle otherButtonTitles:otherButtonTitles handler:actionSheetBlock];
     [lpActionSheet show];
 }
 
@@ -220,6 +392,100 @@ static const NSTimeInterval kAnimateDuration = 0.3f;
         [self dismiss];
     }
 }
+
+- (void)newButtonClicked:(UIButton *)button{
+    switch (button.tag) {
+        case -1:
+            [self dismiss];
+            break;
+        case -2:
+            if (_currentSelectPayType > 0) {
+                if (self.actionSheetBlock)
+                {
+                    self.actionSheetBlock(self, _currentSelectPayType);
+                }
+                [self dismiss];
+            }
+            break;
+        case -3:
+            [self dismiss];
+            break;
+        default:
+            if (_currentSelectPayType > 0) {
+                //当前已经选中
+//                UIView *tempView = [self viewWithTag:button.tag - 1 + + 10000];
+                UIImageView *oldHeader = [self viewWithTag:_currentSelectPayType - 1 + 20000];
+                if (_currentSelectPayType - 1 == 0) {
+                    oldHeader.image = [UIImage imageNamed:@"payIcon3n"];
+                }else if (_currentSelectPayType - 1 == 1){
+                    oldHeader.image = [UIImage imageNamed:@"payIcon4n"];
+                }else if (_currentSelectPayType - 1 == 2){
+                    oldHeader.image = [UIImage imageNamed:@"payIcon5n"];
+                }else{
+                    oldHeader.image = [UIImage imageNamed:@"payIcon6n"];
+                }
+                
+                UIImageView *oldSelect = [self viewWithTag:_currentSelectPayType - 1 + 30000];
+                oldSelect.image = [UIImage imageNamed:@"singleUnselected"];
+                
+                
+                UIImageView *tempHeader = [self viewWithTag:button.tag - 1 + 20000];
+                if (button.tag - 1 == 0) {
+                    tempHeader.image = [UIImage imageNamed:@"payIcon3"];
+                }else if (button.tag - 1 == 1){
+                    tempHeader.image = [UIImage imageNamed:@"payIcon4"];
+                }else if (button.tag - 1 == 2){
+                    tempHeader.image = [UIImage imageNamed:@"payIcon5"];
+                }else{
+                    tempHeader.image = [UIImage imageNamed:@"payIcon6"];
+                }
+                
+                UIImageView *tempSelect = [self viewWithTag:button.tag - 1 + 30000];
+                tempSelect.image = [UIImage imageNamed:@"singleSelected"];
+                
+                _currentSelectPayType = button.tag;
+            }else{
+                //当前未选中
+                
+                UIImageView *tempHeader = [self viewWithTag:button.tag - 1 + 20000];
+                if (button.tag - 1 == 0) {
+                    tempHeader.image = [UIImage imageNamed:@"payIcon3"];
+                }else if (button.tag - 1 == 1){
+                    tempHeader.image = [UIImage imageNamed:@"payIcon4"];
+                }else if (button.tag - 1 == 2){
+                    tempHeader.image = [UIImage imageNamed:@"payIcon5"];
+                }else{
+                    tempHeader.image = [UIImage imageNamed:@"payIcon6"];
+                }
+                
+                UIImageView *tempSelect = [self viewWithTag:button.tag - 1 + 30000];
+                tempSelect.image = [UIImage imageNamed:@"singleSelected"];
+                _currentSelectPayType = button.tag;
+            }
+            
+            break;
+    }
+}
+
+//UIImageView *headerImv = [[UIImageView alloc] init];
+//headerImv.frame = CGRectMake(16, 4, 40, 40);
+//if (i == 0) {
+//    headerImv.image = [UIImage imageNamed:@"payIcon2n"];
+//}else if (i == 1){
+//    headerImv.image = [UIImage imageNamed:@"payIcon3n"];
+//}else if (i == 2){
+//    headerImv.image = [UIImage imageNamed:@"payIcon5n"];
+//}else{
+//    headerImv.image = [UIImage imageNamed:@"payIcon4n"];
+//}
+//headerImv.tag = 30000 + i;
+//[_actionSheetView addSubview:headerImv];
+//
+//UIImageView *selectImv = [[UIImageView alloc] init];
+//selectImv.frame = CGRectMake(HMSCREENWIDTH - 10 - 16, 16, 10, 10);
+//selectImv.tag = 20000 + i;
+//selectImv.image = [UIImage imageNamed:@"singleUnselected"];
+//[_actionSheetView addSubview:selectImv];
 
 - (void)buttonClicked:(UIButton *)button
 {
