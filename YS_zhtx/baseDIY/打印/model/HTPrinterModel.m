@@ -141,6 +141,68 @@
     }
     return _afterSalesList;
 }
+-(BOOL)IsChinese:(NSString *)str {
+    if (![str isKindOfClass:[NSString class]]) {
+        return NO;
+    }
+    for(int i=0; i< [str length];i++){
+        int a = [str characterAtIndex:i];
+        if( a > 0x4e00 && a < 0x9fff)
+        {
+            return YES;
+        }
+        
+    }
+    return NO;
+    
+}
 
+- (void)setValue:(id)value forKey:(NSString *)key{
+    if ([key isEqualToString:@"returnPayType"]) {
+        if ([self IsChinese:value]) {
+            
+            if ([value isEqualToString:@"现金支付"]) {
+                self.returnPayType = cashType;
+            }else if ([value isEqualToString:@"刷卡支付"]) {
+                self.returnPayType = posType;
+            }else if ([value isEqualToString:@"储值支付"]) {
+                self.returnPayType = storedType;
+            }else if ([value isEqualToString:@"储赠支付"]) {
+                self.returnPayType = storedSendType;
+            }else if ([value isEqualToString:@"支付宝支付"]) {
+                self.returnPayType = alipayType;
+            }else if ([value isEqualToString:@"微信支付"]) {
+                self.returnPayType = wetchatType;
+            }else{
+                self.returnPayType = mixType;
+            }
+        }else{
+            [super setValue:value forKey:key];
+        }
+    }else if([key isEqualToString:@"paytype"]){
+        if ([self IsChinese:value]) {
+            
+            if ([value isEqualToString:@"现金支付"]) {
+                self.paytype = cashType;
+            }else if ([value isEqualToString:@"刷卡支付"]) {
+                self.paytype = posType;
+            }else if ([value isEqualToString:@"储值支付"]) {
+                self.paytype = storedType;
+            }else if ([value isEqualToString:@"储赠支付"]) {
+                self.paytype = storedSendType;
+            }else if ([value isEqualToString:@"支付宝支付"]) {
+                self.paytype = alipayType;
+            }else if ([value isEqualToString:@"微信支付"]) {
+                self.paytype = wetchatType;
+            }else{
+                self.paytype = mixType;
+            }
+        }else{
+            [super setValue:value forKey:key];
+        }
+    }else{
+        [super setValue:value forKey:key];
+    }
+}
 
 @end
