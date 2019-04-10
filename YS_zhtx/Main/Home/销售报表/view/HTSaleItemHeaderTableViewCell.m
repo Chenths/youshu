@@ -8,12 +8,30 @@
 
 #import "HTSaleItemHeaderTableViewCell.h"
 #import "HTWarningHoldManager.h"
+#import "HTCustomTextAlertView.h"
 @implementation HTSaleItemHeaderTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
 }
+- (IBAction)alertTouchAction:(id)sender {
+    NSLog(@"点击提示");
+    if ([self.model.titleStr containsString:@"销售额"]) {
+        [HTCustomTextAlertView showAlertWhiteBackAndNoTouchWithTitle:@" 提示" holdTitle:@"" orTextString:@"销售额表示店铺销售商品的总结算金额，若在查询日期之外有退换货销售额可能不等于消费+储值消费+储赠消费。"  okBtclicked:^(NSString * textVale) {
+            [KLCPopup dismissAllPopups];
+        } andCancleBtClicked:^{
+            [KLCPopup dismissAllPopups];
+        }];
+    }else{
+        [HTCustomTextAlertView showAlertWhiteBackAndNoTouchWithTitle:@" 提示" holdTitle:@"" orTextString:@"营业收入表示店铺实际收入多少钱，若在查询日期后有退换货，在同一日期的营业收入有可能不同。"  okBtclicked:^(NSString * textVale) {
+            [KLCPopup dismissAllPopups];
+        } andCancleBtClicked:^{
+            [KLCPopup dismissAllPopups];
+        }];
+    }
+}
+
 - (IBAction)redPointTouchAction:(id)sender {
     [HTWarningHoldManager holdWarningWithTitle:self.model.titleStr andWarningValue:self.model.describeStr];
 }

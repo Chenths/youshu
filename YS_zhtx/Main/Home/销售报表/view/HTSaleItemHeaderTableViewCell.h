@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "HTSaleItemMode.h"
+typedef void(^CancleBtClick)(void);
+typedef void(^OkBtClick)(NSString *);
 @interface HTSaleItemHeaderTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *headerImv;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -16,4 +18,6 @@
 @property (nonatomic, strong) NSArray *dataArr;
 @property (nonatomic, strong) HTSaleItemMode *model;
 @property (nonatomic, assign) BOOL hideRedPoint;
+@property (nonatomic,copy) OkBtClick  okBtClicked;
+@property (nonatomic,copy) CancleBtClick cancleClicked;
 @end
