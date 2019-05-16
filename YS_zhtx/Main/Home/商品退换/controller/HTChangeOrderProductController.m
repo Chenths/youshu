@@ -16,6 +16,7 @@
 #import "HTReturnSettleViewController.h"
 #import "HTCustModel.h"
 #import "HTChangeFastCashierViewController.h"
+#import "HTNewReturnAndChangeViewController.h"
 #define SELECTEDIMG @"singleSelected"
 #define NOSELECTEDIMG @"singleUnselected"
 
@@ -208,7 +209,10 @@
         [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleCust,laodCust4App] params:dic success:^(id json) {
             [MBProgressHUD hideHUD];
             HTCustModel *custModel = [HTCustModel yy_modelWithJSON:[json getDictionArrayWithKey:@"data"]];
+//后台不支持 暂时回滚
             HTReturnSettleViewController *vc = [[HTReturnSettleViewController alloc] init];
+
+//            HTNewReturnAndChangeViewController *vc = [[HTNewReturnAndChangeViewController alloc] init];
             vc.custModel = custModel;
             vc.orderId = [HTHoldNullObj getValueWithUnCheakValue:self.orderModel.orderId];
             vc.isReturnAll = self.selctedArray.count == self.nomorArray.count ? YES : NO;
@@ -229,7 +233,10 @@
             [MBProgressHUD showError:NETERRORSTRING];
         }];
     }else{
+        //后台不支持 暂时回滚
         HTReturnSettleViewController *vc = [[HTReturnSettleViewController alloc] init];
+
+//        HTNewReturnAndChangeViewController *vc = [[HTNewReturnAndChangeViewController alloc] init];
         for (int i = 0; i < self.dataArray.count; i++) {
             HTOrderDetailProductModel *model = self.dataArray[i];
             model.discount = [NSString stringWithFormat:@"%.2f", [model.discount floatValue] / 1];

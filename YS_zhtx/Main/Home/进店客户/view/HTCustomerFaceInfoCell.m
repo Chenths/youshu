@@ -83,7 +83,7 @@
 
 -(void)setNotVipModel:(HTNewFaceNoVipModel *)notVipModel{
     _notVipModel = notVipModel;
-    [self.vipImg sd_setImageWithURL:[NSURL URLWithString:notVipModel.path] placeholderImage:[UIImage imageNamed:@"g-customerholdImg"]];
+    [self.vipImg sd_setImageWithURL:[NSURL URLWithString:notVipModel.snapPath] placeholderImage:[UIImage imageNamed:@"g-customerholdImg"]];
     self.comeDateLabel.text = [HTHoldNullObj getValueWithUnCheakValue:notVipModel.enterTime];
     self.nameLabel.text = [HTHoldNullObj getValueWithUnCheakValue:notVipModel.userVipName];
     self.sexImg.hidden = YES;

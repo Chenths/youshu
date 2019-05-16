@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *productImg;
 @property (weak, nonatomic) IBOutlet UIImageView *stateImg;
+@property (weak, nonatomic) IBOutlet UIImageView *zengPinImv;
 
 @end
 
@@ -29,7 +30,11 @@
       self.stateImg.hidden = NO;
       self.stateImg.image = [UIImage imageNamed:[HTOrderOrProductState getProductStateFormOrderString:model.state]];
     }
-    
+    if ([model.state isEqualToString:@""] || [model.state isNull]) {
+        self.zengPinImv.hidden = NO;
+    }else{
+        self.zengPinImv.hidden = YES;
+    }
     self.productImg.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
     [self.productImg addGestureRecognizer:tap];

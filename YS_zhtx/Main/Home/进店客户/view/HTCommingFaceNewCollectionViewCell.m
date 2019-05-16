@@ -23,7 +23,7 @@
 
 -(void)setModel:(HTNewFaceNoVipModel *)model{
     _model = model;
-    [self.commingHeaderImv sd_setImageWithURL:[NSURL URLWithString:model.path] placeholderImage:[UIImage imageNamed:CUSTOMERHOLDIMG]];
+    [self.commingHeaderImv sd_setImageWithURL:[NSURL URLWithString:model.snapPath] placeholderImage:[UIImage imageNamed:CUSTOMERHOLDIMG]];
 }
 
 @end

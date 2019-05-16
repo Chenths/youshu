@@ -146,10 +146,10 @@
         [_dataArray addObject:model];
         [_dataArray addObject:model1];
         //这里执行的是debug模式下
-        HTPrinterBrandModel *model2 = [[HTPrinterBrandModel alloc] init];
-        model2.imgName = @"蓝牙打印.jpg";
-        model2.title = @"蓝牙打印机";
-        [_dataArray addObject:model2];
+//        HTPrinterBrandModel *model2 = [[HTPrinterBrandModel alloc] init];
+//        model2.imgName = @"蓝牙打印.jpg";
+//        model2.title = @"蓝牙打印机";
+//        [_dataArray addObject:model2];
     }
     return _dataArray;
 }

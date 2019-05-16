@@ -11,5 +11,9 @@
 @interface HTBossInfoHeaderCell : UITableViewCell
 
 @property (nonatomic,strong) HTAgencyMainDataModel *model;
-
+@property (weak, nonatomic) IBOutlet UILabel *topLabel;
+@property (weak, nonatomic) IBOutlet UILabel *leftLabel;
+@property (weak, nonatomic) IBOutlet UILabel *rightLabel;
+@property (nonatomic, assign) NSInteger timeType;
+@property (weak, nonatomic) IBOutlet UIImageView *whiteArrowImv;
 @end

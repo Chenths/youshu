@@ -12,8 +12,9 @@
 #import "HTProductRankInfoModel.h"
 #import <MJRefresh.h>
 #import "HTSaleProductRankListController.h"
+#import "HTSeasonChooseHeaderCell.h"
 
-@interface HTSaleProductRankListController ()<UITableViewDelegate,UITableViewDataSource>
+@interface HTSaleProductRankListController ()<UITableViewDelegate,UITableViewDataSource, HTSeasonChooseHeaderCellDelegate>
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabBottomHeight;
 
@@ -22,7 +23,7 @@
 @property (nonatomic,strong) NSMutableArray *dataArray;
 
 @property (nonatomic,assign) int page;
-
+@property (nonatomic, strong) NSString *season;
 @end
 
 @implementation HTSaleProductRankListController
@@ -30,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.page = 1;
+    self.season = [self.model.season copy];
     [self createTb];
     [self.tab.mj_header beginRefreshing];
 }
@@ -38,17 +40,30 @@
     NSArray *arr = @[@"全部",@"春季款",@"夏季款",@"秋季款",@"冬季款"];
     self.title = arr[self.model.season.integerValue];
 }
+
+-(void)selectedSeasonWithIndex:(NSInteger)index{
+    self.season = [NSString stringWithFormat:@"%ld",index];
+    [self loadSeasonDataWithPage:1];
+}
 #pragma mark -life cycel
 
 #pragma mark -UITabelViewDelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return 3;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return section == 0 ? 1 : self.dataArray.count;
+    return section == 2 ? self.dataArray.count : 1;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
+        HTSeasonChooseHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTSeasonChooseHeaderCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.delegate = self;
+        HTShopSaleReportModel *model = [[HTShopSaleReportModel alloc] init];
+        model.season = self.season;
+        cell.model = model;
+        return  cell;
+    }else if (indexPath.section == 1) {
         HTChooseDateTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTChooseDateTableViewCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.reportModel = self.model;
@@ -86,7 +101,7 @@
                           @"companyId":[HTHoldNullObj getValueWithUnCheakValue:self.companyId],
                           @"beginDate":[HTHoldNullObj getValueWithUnCheakValue:self.model.productBeginTime],
                           @"endDate":[HTHoldNullObj getValueWithUnCheakValue:self.model.productEndTime],
-                          @"season":[HTHoldNullObj getValueWithUnCheakValue:self.model.season],
+                          @"season":[HTHoldNullObj getValueWithUnCheakValue:self.season],
                           @"pageNo":@(page),
                           @"pageSize":@"10",
                           @"ids":[HTHoldNullObj getValueWithUnCheakValue:self.ids]
@@ -122,6 +137,7 @@
     
     [self.tab registerNib:[UINib nibWithNibName:@"HTChooseDateTableViewCell" bundle:nil] forCellReuseIdentifier:@"HTChooseDateTableViewCell"];
     
+    [self.tab registerNib:[UINib nibWithNibName:@"HTSeasonChooseHeaderCell"  bundle:nil] forCellReuseIdentifier:@"HTSeasonChooseHeaderCell"];
     self.tab.separatorStyle = UITableViewCellSeparatorStyleNone;
     UIView *v = [[UIView alloc] init];
     v.backgroundColor = [UIColor clearColor];

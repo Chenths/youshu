@@ -55,11 +55,30 @@
 - (void)setModel:(HTAgencyMainDataModel *)model{
     _model = model;
 
+    switch (_timeType) {
+        case 1:
+            _topLabel.text = @"今日盈利(元)";
+            _leftLabel.text = @"今日累积销售";
+            _rightLabel.text = @"今日总销售额(元)";
+            break;
+        case 2:
+            _topLabel.text = @"本月盈利(元)";
+            _leftLabel.text = @"本月累积销售";
+            _rightLabel.text = @"本月总销售额(元)";
+            break;
+        case 3:
+            _topLabel.text = @"本年盈利(元)";
+            _leftLabel.text = @"本年累积销售";
+            _rightLabel.text = @"本年总销售额(元)";
+            break;
+            
+        default:
+            break;
+    }
+    self.moneyProfitLabel.text = [[HTHoldNullObj getValueWithUnCheakValue:model.profit] isEqualToString:@"0"]  ? @"无数据" :[HTHoldNullObj getValueWithUnCheakValue:model.profit];
+    self.todaySaleLabel.text = [NSString stringWithFormat:@"%@单%@件",[HTHoldNullObj getValueWithUnCheakValue:model.salesOrders],[HTHoldNullObj getValueWithUnCheakValue:model.salesNum]];
     
-    self.moneyProfitLabel.text = [[HTHoldNullObj getValueWithUnCheakValue:model.todayProfit] isEqualToString:@"0"]  ? @"无数据" :[HTHoldNullObj getValueWithUnCheakValue:model.todayProfit];
-    self.todaySaleLabel.text = [NSString stringWithFormat:@"%@单%@件",[HTHoldNullObj getValueWithUnCheakValue:model.todaySalesOrders],[HTHoldNullObj getValueWithUnCheakValue:model.todaySalesNum]];
-    
-    self.todaySaleMoneyLabel.text = [NSString stringWithFormat:@"￥%@", [HTHoldNullObj getValueWithUnCheakValue:self.model.todaySalesAmount]];
+    self.todaySaleMoneyLabel.text = [NSString stringWithFormat:@"￥%@", [HTHoldNullObj getValueWithUnCheakValue:self.model.salesAmount]];
     
 }
 

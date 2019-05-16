@@ -51,13 +51,17 @@
     [alrtView createCoverViewWithFrame:bigView.bounds];
     alrtView.model = productModel;
     [alrtView createTb];
-    if (productModel.sizeGrop.count > 0) {
+    if (productModel.sizeGrop.count > 1) {
         [alrtView.datas addObject:productModel.sizeGrop];
         [alrtView.keys addObject:@"size"];
+    }else if(productModel.sizeGrop.count == 1){
+        alrtView.model.selecedSizeCode = [productModel.sizeGrop.firstObject objectForKey:@"sizecode"];
     }
-    if (productModel.colorGrop.count > 0) {
+    if (productModel.colorGrop.count > 1) {
         [alrtView.datas addObject:productModel.colorGrop];
         [alrtView.keys addObject:@"color"];
+    }else if(productModel.colorGrop.count == 1){
+        alrtView.model.selecedColorCode = [productModel.colorGrop.firstObject objectForKey:@"colorcode"];
     }
     [alrtView.tab reloadData];
     [bigView addSubview:alrtView.coverView];

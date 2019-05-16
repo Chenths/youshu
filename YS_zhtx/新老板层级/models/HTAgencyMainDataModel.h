@@ -42,7 +42,7 @@
 @property (nonatomic,strong) NSString *yearSalesNum;
 
 @property (nonatomic,strong) NSString *yearSalesOrders;
-
-
+//年月日的都是它
+@property (nonatomic, strong) NSString *profit;
 
 @end

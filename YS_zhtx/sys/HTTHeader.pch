@@ -154,6 +154,8 @@ tmp;\
 #define saveFeedback @"save_feedbacks_4_app.html"
 //加载代理店首页
 #define loadAgentSaleDataReport @"load_agent_sale_data_report_4_app.html"
+//代理层级头部
+#define loadAgentHeader @"load_agent_sale_head_report_4_app.html"
 //请求未读消息
 #define loadUserNoticeCount4App @"load_user_notice_count_4_app.html"
 //请求个人信息
@@ -235,6 +237,8 @@ tmp;\
 #define createOrderPrintInfo4App @"create_order_print_info_4_app.html"
 //添加打印机
 #define savePrinter4App @"save_printer_4_app.html"
+//新版打印小票 由后台发送打印请求
+#define newPrintRequest @"print_order_info.html"
 //查询订单状态
 #define queryOrderState @"query_order_state_4_app.html"
 //请求客户报表

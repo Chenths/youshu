@@ -35,6 +35,10 @@
 #import "HTSaleItemDetailTableViewCell.h"
 #import "HTSaleOtherDetailTableViewCell.h"
 #import "HTSaleItemMode.h"
+#import "UIBarButtonItem+Extension.h"
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKUI/ShareSDK+SSUI.h>
+
 @interface HTGSaleReportViewController ()<UITableViewDelegate,UITableViewDataSource,HTSeemoreHeaderViewDelegate,HTNewPieCellTableViewCellDelegate,HTSeasonChooseHeaderCellDelegate, chooseShowPayDetailDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tab;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabBottomHeight;
@@ -55,7 +59,7 @@
 @property (nonatomic, assign) NSInteger currentSelectShowPayKindType;
 @property (nonatomic, strong) NSMutableArray *payKindDetailLeftArr;
 @property (nonatomic, strong) NSMutableArray *payKindDetailRightArr;
-
+@property (nonatomic, strong) UIImage *shareImg;
 @end
 
 @implementation HTGSaleReportViewController
@@ -68,7 +72,89 @@
     [self configDate];
     [self createTb];
     [self loadData];
+    [self buildRightButtonItem];
 }
+  
+
+- (void)buildRightButtonItem{
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem creatBarButtonItemWithTitle:@"分享" target:self action:@selector(creatScreenShot) ];
+    
+}
+
+- (void)creatScreenShot{
+    if (!_shareImg) {
+        NSInteger sec = self.reportModel.bascArray.count == 0 ? 0 : self.cellsName.count;
+        NSArray *cells = self.cellsName[sec - 1];
+        NSInteger ro = self.reportModel.bascArray.count == 0 ? 0 : [cells count];
+        [self.tab scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:ro - 1 inSection:sec - 1] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    
+        [MBProgressHUD showMessage:@"生成完整截图中"];
+        [NSTimer scheduledTimerWithTimeInterval:3.0 repeats:NO block:^(NSTimer * _Nonnull timer) {
+            dispatch_async(dispatch_get_main_queue(),^{
+                UIGraphicsBeginImageContextWithOptions(self.tab.contentSize, YES, [UIScreen mainScreen].scale);
+                
+                CGPoint savedContentOffset = self.tab.contentOffset;
+                CGRect savedFrame = self.tab.frame;
+                self.tab.contentOffset = CGPointZero;
+                self.tab.frame = CGRectMake(0, 0, self.tab.contentSize.width, self.tab.contentSize.height);
+                [self.tab.layer renderInContext: UIGraphicsGetCurrentContext()];
+                self.shareImg = UIGraphicsGetImageFromCurrentImageContext();
+                self.tab.contentOffset = savedContentOffset;
+                self.tab.frame = savedFrame;
+                
+                [MBProgressHUD hideHUD];
+                UIGraphicsEndImageContext();
+                [self share];
+            });
+            [timer invalidate];
+            timer = nil;
+        }];
+    }else{
+        [self share];
+    }
+}
+
+- (void)share{
+    NSArray* imageArray = @[self.shareImg];
+    if (imageArray) {
+        NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
+        
+        [shareParams SSDKSetupShareParamsByText:@"知识与你共享"
+                                         images:imageArray
+                                            url:[NSURL URLWithString:@""]
+                                          title:self.title
+                                           type:SSDKContentTypeImage];
+        [ShareSDK showShareActionSheet:nil items:nil shareParams:shareParams onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
+            
+            switch (state) {
+                case SSDKResponseStateSuccess:
+                {
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
+                                                                        message:nil
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"确定"
+                                                              otherButtonTitles:nil];
+                    [alertView show];
+                    break;
+                }
+                case SSDKResponseStateFail:
+                {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败"
+                                                                    message:[NSString stringWithFormat:@"%@",error]
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil, nil];
+                    [alert show];
+                    break;
+                }
+                default:
+                    break;
+            }
+        }];
+    }
+    
+}
+
 - (void)selectChooseShowPayKindType:(NSInteger)type
 {
     if (type == _currentSelectShowPayKindType - 1) {
@@ -206,7 +292,7 @@
         cell.beginTime = [HTHoldNullObj getValueWithUnCheakValue:self.reportModel.beginTime];
         cell.endTime = [HTHoldNullObj getValueWithUnCheakValue:self.reportModel.endTime];
         cell.companyId = self.companyId;
-        cell.model = indexPath.section == 6 ? self.reportModel.categrieModel : self.reportModel.customTypeModel;
+        cell.model = indexPath.section == 8 ? self.reportModel.categrieModel : self.reportModel.customTypeModel;
         cell.delegate = self;
         return  cell;
     }else if ([cellName isEqualToString:@"HTChooseBetweenDateCell"]){
@@ -641,6 +727,10 @@
         [self.footArray replaceObjectAtIndex:10 withObject:@"产品销量榜"];
         self.reportModel.beginTime = begin;
         self.reportModel.endTime = end;
+        //5.8改
+        self.reportModel.productBeginTime = begin;
+        self.reportModel.productEndTime = end;
+        //
         [self.tab reloadData];
         if (self.selectdWarning) {
             [self.tab scrollToRowAtIndexPath:self.selectdWarning.waringIndex atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
@@ -749,7 +839,7 @@
 }
 -(HTIndexesBox *)indexBox{
     if (!_indexBox) {
-        NSArray *tites = @[@"销售概况", @"退换概况", @"会员概况", @"营业趋势", @"销售贡献榜", @"大单排行榜", @"销售品类占比", @"销售品类占比", @"产品销量榜"];
+        NSArray *tites = @[@"销售概况", @"退换概况", @"会员概况", @"营业趋势", @"销售贡献榜", @"大单排行榜", @"销售大类占比", @"销售品类占比", @"产品销量榜"];
         
         NSArray *indexs = @[[NSIndexPath indexPathForRow:0 inSection:1],[NSIndexPath indexPathForRow:0 inSection:2],[NSIndexPath indexPathForRow:0 inSection:3],[NSIndexPath indexPathForRow:0 inSection:4],[NSIndexPath indexPathForRow:0 inSection:5],[NSIndexPath indexPathForRow:0 inSection:7],[NSIndexPath indexPathForRow:0 inSection:8],[NSIndexPath indexPathForRow:0 inSection:9],[NSIndexPath indexPathForRow:0 inSection:10]];
         NSMutableArray *datas = [NSMutableArray array];

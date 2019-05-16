@@ -98,21 +98,29 @@
     self.upOrDownPresentLabel.text = [HTHoldNullObj getValueWithUnCheakValue:[NSString stringWithFormat:@"%.2lf%@",fabsf([model.up floatValue]),@"%"]];
     self.upOrDownImg.hidden = NO;
     self.upOrDownPresentLabel.hidden = NO;
-    if (model.up.intValue > 0) {
-        self.upOrDownImg.image = [UIImage imageNamed:@"上升"];
-        _shapeLayer.strokeColor = [UIColor colorWithHexString:@"#6A82FB"].CGColor;
-    }else if(model.up.intValue < 0){
-        self.upOrDownImg.image = [UIImage imageNamed:@"下降"];
-        _shapeLayer.strokeColor = [UIColor colorWithHexString:@"#FC5C7D"].CGColor;
-
-    }else{
-        self.upOrDownImg.hidden = YES;
-        self.upOrDownPresentLabel.hidden = YES;
-    }
+    
     if (![[HTHoldNullObj getValueWithUnCheakValue:model.up] isEqualToString:[HTHoldNullObj getValueWithUnCheakValue:self.up]]) {
         [self createCircleWithIp:model.up.intValue];
         self.up = model.up;
     }
+    
+    if (model.up.intValue > 0) {
+        self.upOrDownImg.image = [UIImage imageNamed:@"上升"];
+        _shapeLayer.strokeColor = [UIColor colorWithHexString:@"#6A82FB"].CGColor;
+        _lirunLabel.hidden = YES;
+    }else if(model.up.intValue < 0){
+        self.upOrDownImg.image = [UIImage imageNamed:@"下降"];
+        _shapeLayer.strokeColor = [UIColor colorWithHexString:@"#FC5C7D"].CGColor;
+        _lirunLabel.hidden = YES;
+    }else{
+        self.upOrDownImg.hidden = YES;
+        self.upOrDownPresentLabel.hidden = YES;
+        _lirunLabel.hidden = NO;
+        _lirunLabel.text = @"无数据";
+        
+    }
+    _discountLabel.hidden = YES;
+    _holdLabel.hidden = YES;
 }
 -(void)createCircle{
     [self createCircleWithIp:self.model.up.intValue];

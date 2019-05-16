@@ -198,6 +198,8 @@
 		04260F7A2122A49600BCFA5B /* HTUnderstockListAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04260F792122A49600BCFA5B /* HTUnderstockListAlertView.m */; };
 		04260F7C2122A4A000BCFA5B /* HTUnderstockListAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04260F7B2122A4A000BCFA5B /* HTUnderstockListAlertView.xib */; };
 		04260F7F2122CE3700BCFA5B /* HTChargeOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04260F7E2122CE3700BCFA5B /* HTChargeOrderModel.m */; };
+		04292E4F225EE5DB000F299F /* HTNewReturnAndChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04292E4D225EE5DB000F299F /* HTNewReturnAndChangeViewController.m */; };
+		04292E50225EE5DB000F299F /* HTNewReturnAndChangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04292E4E225EE5DB000F299F /* HTNewReturnAndChangeViewController.xib */; };
 		042CACD2212A5BD2003098B5 /* HTChangePriceProductInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042CACD0212A5BD2003098B5 /* HTChangePriceProductInfoCell.m */; };
 		042CACD3212A5BD2003098B5 /* HTChangePriceProductInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042CACD1212A5BD2003098B5 /* HTChangePriceProductInfoCell.xib */; };
 		042FCD09214A43A7009F209B /* HTEarlyWarningModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 042FCD07214A43A7009F209B /* HTEarlyWarningModel.m */; };
@@ -1006,6 +1008,10 @@
 		04D132B6216F3315000F1D6A /* HTLogisticsCompanyModle.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D132B5216F3314000F1D6A /* HTLogisticsCompanyModle.m */; };
 		04D2E332212D3B6D003FDF4A /* HTCustomerReportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D2E331212D3B6D003FDF4A /* HTCustomerReportModel.m */; };
 		04D2E335212D3DB7003FDF4A /* HTCustomerReprotSaleMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D2E334212D3DB7003FDF4A /* HTCustomerReprotSaleMsgModel.m */; };
+		04DC951D2272A02B007969C5 /* AppDelegate.h in Sources */ = {isa = PBXBuildFile; fileRef = 043DBD8820BE9E4B00020936 /* AppDelegate.h */; };
+		04DC95212272F531007969C5 /* HTBossHomeHeaderSegmentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC951F2272F531007969C5 /* HTBossHomeHeaderSegmentTableViewCell.m */; };
+		04DC95222272F531007969C5 /* HTBossHomeHeaderSegmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DC95202272F531007969C5 /* HTBossHomeHeaderSegmentTableViewCell.xib */; };
+		04DC9525227304D9007969C5 /* CALayer+CALayer_CALayer_XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DC9524227304D9007969C5 /* CALayer+CALayer_CALayer_XibConfiguration.m */; };
 		04E348B221339B6500F6F520 /* HTAddVipWithPhoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E348B021339B6500F6F520 /* HTAddVipWithPhoneController.m */; };
 		04E348B321339B6500F6F520 /* HTAddVipWithPhoneController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E348B121339B6500F6F520 /* HTAddVipWithPhoneController.xib */; };
 		04E348B72133D07400F6F520 /* HTEditVipDefaulTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E348B52133D07400F6F520 /* HTEditVipDefaulTypeCell.m */; };
@@ -1396,6 +1402,9 @@
 		04260F7B2122A4A000BCFA5B /* HTUnderstockListAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTUnderstockListAlertView.xib; sourceTree = "<group>"; };
 		04260F7D2122CE3700BCFA5B /* HTChargeOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTChargeOrderModel.h; sourceTree = "<group>"; };
 		04260F7E2122CE3700BCFA5B /* HTChargeOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTChargeOrderModel.m; sourceTree = "<group>"; };
+		04292E4C225EE5DB000F299F /* HTNewReturnAndChangeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTNewReturnAndChangeViewController.h; sourceTree = "<group>"; };
+		04292E4D225EE5DB000F299F /* HTNewReturnAndChangeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTNewReturnAndChangeViewController.m; sourceTree = "<group>"; };
+		04292E4E225EE5DB000F299F /* HTNewReturnAndChangeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTNewReturnAndChangeViewController.xib; sourceTree = "<group>"; };
 		042CACCF212A5BD2003098B5 /* HTChangePriceProductInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTChangePriceProductInfoCell.h; sourceTree = "<group>"; };
 		042CACD0212A5BD2003098B5 /* HTChangePriceProductInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTChangePriceProductInfoCell.m; sourceTree = "<group>"; };
 		042CACD1212A5BD2003098B5 /* HTChangePriceProductInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTChangePriceProductInfoCell.xib; sourceTree = "<group>"; };
@@ -2726,6 +2735,11 @@
 		04D2E331212D3B6D003FDF4A /* HTCustomerReportModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTCustomerReportModel.m; sourceTree = "<group>"; };
 		04D2E333212D3DB7003FDF4A /* HTCustomerReprotSaleMsgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTCustomerReprotSaleMsgModel.h; sourceTree = "<group>"; };
 		04D2E334212D3DB7003FDF4A /* HTCustomerReprotSaleMsgModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTCustomerReprotSaleMsgModel.m; sourceTree = "<group>"; };
+		04DC951E2272F531007969C5 /* HTBossHomeHeaderSegmentTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTBossHomeHeaderSegmentTableViewCell.h; sourceTree = "<group>"; };
+		04DC951F2272F531007969C5 /* HTBossHomeHeaderSegmentTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTBossHomeHeaderSegmentTableViewCell.m; sourceTree = "<group>"; };
+		04DC95202272F531007969C5 /* HTBossHomeHeaderSegmentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTBossHomeHeaderSegmentTableViewCell.xib; sourceTree = "<group>"; };
+		04DC9523227304D9007969C5 /* CALayer+CALayer_CALayer_XibConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CALayer+CALayer_CALayer_XibConfiguration.h"; sourceTree = "<group>"; };
+		04DC9524227304D9007969C5 /* CALayer+CALayer_CALayer_XibConfiguration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CALayer+CALayer_CALayer_XibConfiguration.m"; sourceTree = "<group>"; };
 		04E348AF21339B6500F6F520 /* HTAddVipWithPhoneController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTAddVipWithPhoneController.h; sourceTree = "<group>"; };
 		04E348B021339B6500F6F520 /* HTAddVipWithPhoneController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTAddVipWithPhoneController.m; sourceTree = "<group>"; };
 		04E348B121339B6500F6F520 /* HTAddVipWithPhoneController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTAddVipWithPhoneController.xib; sourceTree = "<group>"; };
@@ -3081,6 +3095,11 @@
 				0420F8C320F5F65300E785D5 /* HTBossInventoryReportController.h */,
 				0420F97520F5F65300E785D5 /* HTBossInventoryReportController.m */,
 				0420F97420F5F65300E785D5 /* HTBossInventoryReportController.xib */,
+				04DC951E2272F531007969C5 /* HTBossHomeHeaderSegmentTableViewCell.h */,
+				04DC951F2272F531007969C5 /* HTBossHomeHeaderSegmentTableViewCell.m */,
+				04DC95202272F531007969C5 /* HTBossHomeHeaderSegmentTableViewCell.xib */,
+				04DC9523227304D9007969C5 /* CALayer+CALayer_CALayer_XibConfiguration.h */,
+				04DC9524227304D9007969C5 /* CALayer+CALayer_CALayer_XibConfiguration.m */,
 				0420F8F320F5F65300E785D5 /* controllers */,
 				0420F90820F5F65300E785D5 /* views */,
 				0420F8C420F5F65300E785D5 /* models */,
@@ -3497,6 +3516,9 @@
 				04B0385121F17FCB0008160B /* HTChargeMaskViewController.h */,
 				04B0385221F17FCB0008160B /* HTChargeMaskViewController.m */,
 				04B0385321F17FCB0008160B /* HTChargeMaskViewController.xib */,
+				04292E4C225EE5DB000F299F /* HTNewReturnAndChangeViewController.h */,
+				04292E4D225EE5DB000F299F /* HTNewReturnAndChangeViewController.m */,
+				04292E4E225EE5DB000F299F /* HTNewReturnAndChangeViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -6176,6 +6198,7 @@
 				04204CC921798CF100BBFEAF /* HTFastEditProductViewController.xib in Resources */,
 				0489FFFF20DB84A9009B5964 /* HTSetWarningAlertView.xib in Resources */,
 				047D761021D0855500E7CB72 /* cnwav.caf in Resources */,
+				04292E50225EE5DB000F299F /* HTNewReturnAndChangeViewController.xib in Resources */,
 				0471898E216079DD0063A736 /* JCHATPhotoBrowserViewController.xib in Resources */,
 				04852A1220DC978300589EBA /* HTOrderRemarkTableViewCell.xib in Resources */,
 				047D566C20C0F480000348DC /* HTFiltrateCollectionStyleCell.xib in Resources */,
@@ -6387,6 +6410,7 @@
 				04B0384B21E884F30008160B /* HTNewPayWriteOrderTipsTableViewCell.xib in Resources */,
 				04C73C0C20DA48DA00C62F17 /* HTCustomerProductListController.xib in Resources */,
 				04F5463720D8EF0F00D300E4 /* HTExchangeProductsDetailView.xib in Resources */,
+				04DC95222272F531007969C5 /* HTBossHomeHeaderSegmentTableViewCell.xib in Resources */,
 				04016EA521538B7800D32BD9 /* HTSaleGoodOrBadDetailController.xib in Resources */,
 				044F81EB212BEBD6007674EC /* HTChoosePrintSizeCell.xib in Resources */,
 				04ED024420D264080035589C /* HTNewGoodsImgTableViewCell.xib in Resources */,
@@ -6606,6 +6630,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04DC951D2272A02B007969C5 /* AppDelegate.h in Sources */,
 				0421A4E421608160000DC687 /* MJPhotoBrowser.m in Sources */,
 				045FB4B720C7D9C9004FE980 /* HTIndexsModel.m in Sources */,
 				047189A0216079DD0063A736 /* JCHATAlertViewWait.m in Sources */,
@@ -6969,6 +6994,7 @@
 				047D568520C1434B000348DC /* HTSearchBoxStyleBetweenTableViewCell.m in Sources */,
 				04ED1E8120EA0E3B0036333B /* HTOrderListProductModel.m in Sources */,
 				04B0385421F17FCC0008160B /* HTChargeMaskViewController.m in Sources */,
+				04DC95212272F531007969C5 /* HTBossHomeHeaderSegmentTableViewCell.m in Sources */,
 				04763462216AFF68002DC90E /* UIViewController+YPTab.m in Sources */,
 				04ABC1EA20EE0D0A0066AB3A /* UICountingLabel.m in Sources */,
 				045BEAE620CA67E0007CB614 /* HTPieDataChartTableViewCell.m in Sources */,
@@ -7073,6 +7099,7 @@
 				0466C40E215C7AD0004F9C58 /* HTCustomColAlertView.m in Sources */,
 				04ABC1DF20EE0B450066AB3A /* PNCircleChart.m in Sources */,
 				04ABC1E620EE0B450066AB3A /* PNBar.m in Sources */,
+				04292E4F225EE5DB000F299F /* HTNewReturnAndChangeViewController.m in Sources */,
 				0434D1A620C9375C008E085F /* HTNewTagsModel.m in Sources */,
 				0420F97720F5F65400E785D5 /* HTBossCustomerReportCompareController.m in Sources */,
 				04852A1B20DCF28300589EBA /* HTGuideSaleDescItemCell.m in Sources */,
@@ -7164,6 +7191,7 @@
 				047753E420C5174B008C8BA4 /* HTMeBaceInfoTableViewCell.m in Sources */,
 				047189B0216079DD0063A736 /* JCHATMoreView.m in Sources */,
 				048CD11D20BFCEEB00BE2DFD /* HTGHomeItemsCollectionCell.m in Sources */,
+				04DC9525227304D9007969C5 /* CALayer+CALayer_CALayer_XibConfiguration.m in Sources */,
 				04B0386121FEA4760008160B /* HTRFMTableViewCell.m in Sources */,
 				0477540720C52E15008C8BA4 /* HTOnlineCustomerListViewController.m in Sources */,
 				0420F9A320F5F65400E785D5 /* HTBossSaleCompareListInfoTableCell.m in Sources */,
@@ -7463,7 +7491,7 @@
 					"${SDK_ROOT}/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = YS_zhtx/sys/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7511,7 +7539,7 @@
 					"${SDK_ROOT}/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = YS_zhtx/sys/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

@@ -678,7 +678,7 @@
     }
     if (self.orderModel.encodeFinal.floatValue < 0) {
         __weak typeof(self) weakSelf = self;
-        HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:[NSString stringWithFormat:@"需退该VIP %0.lf 元",fabsf(self.orderModel.encodeFinal.floatValue)] btTitle:@"确定" okBtclicked:^{
+        HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:[NSString stringWithFormat:@"需退该顾客 %0.lf 元",fabsf(self.orderModel.encodeFinal.floatValue)] btTitle:@"确定" okBtclicked:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf settleSuccessWithMsg:json[@"data"][@"sms"]];
             [strongSelf print];

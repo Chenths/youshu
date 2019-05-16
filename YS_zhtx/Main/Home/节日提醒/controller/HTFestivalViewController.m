@@ -113,10 +113,10 @@
     return headView;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    HTCustomerViewController *vc = [[HTCustomerViewController alloc] init];
-    vc.title = @"会员列表";
-    vc.backImg = @"g-back";
-    [self.navigationController pushViewController:vc animated:YES];
+//    HTCustomerViewController *vc = [[HTCustomerViewController alloc] init];
+//    vc.title = @"会员列表";
+//    vc.backImg = @"g-back";
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     UIColor *color = [UIColor whiteColor];

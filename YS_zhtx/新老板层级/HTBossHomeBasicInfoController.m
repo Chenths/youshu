@@ -23,13 +23,17 @@
 #import "HTBossSaleDescViewController.h"
 #import "HTBossSaleDescinfoCell.h"
 #import "HTSearchTextHeadView.h"
-@interface HTBossHomeBasicInfoController ()<UITableViewDelegate,UITableViewDataSource,HTSearchTextHeadViewDelegat>
+#import "HTBossHomeHeaderSegmentTableViewCell.h"
+@interface HTBossHomeBasicInfoController ()<UITableViewDelegate,UITableViewDataSource,HTSearchTextHeadViewDelegat, HTBossHomeSegmenDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (nonatomic,strong) NSMutableArray *shopsArray;
 @property (nonatomic,strong) HTAgencyMainDataModel *headModel;
 @property (nonatomic,strong) HTRightNavBar *rightBt ;
 @property (nonatomic,strong) NSMutableArray *dataArray;
+@property (nonatomic,assign) NSInteger pageNo;
+//1 本日 2 月 3年
+@property (nonatomic,assign) NSInteger timeType;
 @end
 
 @implementation HTBossHomeBasicInfoController
@@ -40,6 +44,8 @@
     [super viewDidLoad];
     [self createTb];
     [self createRightNavBar];
+    _pageNo = 1;
+    _timeType = 1;
     [self.myTableView.mj_header beginRefreshing];
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -50,27 +56,59 @@
     self.navigationController.navigationItem.rightBarButtonItem.tintColor = [UIColor colorWithHexString:@"#ffffff"];
     [self laodNoRedNum];
 }
+#pragma customDelegate
+- (void)segmentControlValueChangedDelegate:(NSInteger)index
+{
+    _timeType = index;
+    _pageNo = 1;
+    [self loadHeaderData];
+}
 #pragma mark -UITabelViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            HTBossInfoHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTBossInfoHeaderCell" forIndexPath:indexPath];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
-            if (self.headModel) {
-                cell.model = self.headModel;
+            HTBossHomeHeaderSegmentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTBossHomeHeaderSegmentTableViewCell" forIndexPath:indexPath];
+            if (_timeType == 1) {
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }else if (_timeType == 2){
+                cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+            }else{
+                cell.selectionStyle = UITableViewCellSelectionStyleDefault;
             }
+            
+            cell.separatorInset = UIEdgeInsetsMake(0, cell.bounds.size.width,0,0);
+            cell.delegate = self;
             return cell;
         }else{
-            HTBossSaleDescinfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTBossSaleDescinfoCell" forIndexPath:indexPath];
+            HTBossInfoHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTBossInfoHeaderCell" forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.separatorInset = UIEdgeInsetsMake(0, cell.bounds.size.width,0,0);
+            cell.timeType = self.timeType;
             if (self.headModel) {
-                cell.title = indexPath.row == 1 ? @"本月" : @"本年";
                 cell.model = self.headModel;
             }
-            cell.separatorInset = UIEdgeInsetsMake(0, 0, -1, 0);
+            if (_timeType == 1) {
+                cell.whiteArrowImv.hidden = YES;
+            }else if (_timeType == 2){
+                cell.whiteArrowImv.hidden = NO;
+            }else{
+                cell.whiteArrowImv.hidden = NO;
+            }
             return cell;
         }
+    
+//        if (indexPath.row == 0) {
+    
+//        }else{
+//            HTBossSaleDescinfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTBossSaleDescinfoCell" forIndexPath:indexPath];
+//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//            if (self.headModel) {
+//                cell.title = indexPath.row == 1 ? @"本月" : @"本年";
+//                cell.model = self.headModel;
+//            }
+//            cell.separatorInset = UIEdgeInsetsMake(0, 0, -1, 0);
+//            return cell;
+//        }
        
     }else{
         HTShopInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTShopInfoCell" forIndexPath:indexPath];
@@ -80,32 +118,34 @@
         return cell;
     }
 }
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return  section == 0 ?  3 : self.dataArray.count;
+    return  section == 0 ?  2 : self.dataArray.count;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if (section == 0) {
+//    if (section == 0) {
         UIView *v =  [[UIView alloc] init];
         v.backgroundColor = [UIColor clearColor];
         return  v;
-    }
-    HTSearchTextHeadView *sectionHead = [[HTSearchTextHeadView alloc] initWithSearchFrame:CGRectMake(0, 0, HMSCREENWIDTH, 44)];
-    sectionHead.delegate = self;
-    return  sectionHead;
+//    }
+//    HTSearchTextHeadView *sectionHead = [[HTSearchTextHeadView alloc] initWithSearchFrame:CGRectMake(0, 0, HMSCREENWIDTH, 44)];
+//    sectionHead.delegate = self;
+//    return  sectionHead;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.01f;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return section == 0 ? 0.01f : 44;
+//    return section == 0 ? 0.01f : 44;
+    return 0.01f;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        return indexPath.row == 0 ?  140.0f : 148.0f;
+        return indexPath.row == 0 ? 70.0f: 140.0f;
     }else{
         return 136.f;
     }
@@ -113,15 +153,20 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (indexPath.row == 1) {
-            HTBossSaleDescViewController *vc = [[HTBossSaleDescViewController alloc] init];
-            vc.rankState = HTRANKSTATEMONTH;
-            vc.backImg = @"g-whiteback";
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if(indexPath.row == 2){
-            HTBossSaleDescViewController *vc = [[HTBossSaleDescViewController alloc] init];
-            vc.rankState = HTRANKSTATEYEAR;
-            vc.backImg = @"g-whiteback";
-            [self.navigationController pushViewController:vc animated:YES];
+            if (_timeType == 1) {
+                
+            }else if (_timeType == 2){
+                HTBossSaleDescViewController *vc = [[HTBossSaleDescViewController alloc] init];
+                vc.rankState = HTRANKSTATEMONTH;
+                vc.backImg = @"g-whiteback";
+                [self.navigationController pushViewController:vc animated:YES];
+            }else{
+                HTBossSaleDescViewController *vc = [[HTBossSaleDescViewController alloc] init];
+                vc.rankState = HTRANKSTATEYEAR;
+                vc.backImg = @"g-whiteback";
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            
         }
     }
     if (indexPath.section == 1) {
@@ -213,42 +258,82 @@
 - (void)createTb{
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
-    UIView *footView = [[UIView alloc] init];
-    footView.backgroundColor = [UIColor clearColor];
+//    UIView *footView = [[UIView alloc] init];
+//    footView.backgroundColor = [UIColor clearColor];
+    [self.myTableView registerNib:[UINib nibWithNibName:@"HTBossHomeHeaderSegmentTableViewCell" bundle:nil] forCellReuseIdentifier:@"HTBossHomeHeaderSegmentTableViewCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"HTBossInfoHeaderCell" bundle:nil] forCellReuseIdentifier:@"HTBossInfoHeaderCell"];
      [self.myTableView registerNib:[UINib nibWithNibName:@"HTShopInfoCell" bundle:nil] forCellReuseIdentifier:@"HTShopInfoCell"];
     [self.myTableView registerNib:[UINib nibWithNibName:@"HTBossSaleDescinfoCell" bundle:nil] forCellReuseIdentifier:@"HTBossSaleDescinfoCell"];
     self.myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.pageNo = 1;
         [self loadData];
     }];
-    self.myTableView.tableFooterView = footView;
+    self.myTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        self.pageNo ++;
+        [self loadData];
+    }];
     self.myTableView.contentInset = self.myTableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, SafeAreaBottomHeight + tar_height, 0);
     
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImageName:@"术logo-白" highImageName:@"术logo-白" target:self action:nil];
     
 }
-- (void)loadData{
-    
-    
+
+- (void)loadHeaderData{
     NSDictionary *dic = @{
-                          @"companyId" : [HTShareClass shareClass].loginModel.companyId
+                          @"companyId" : [HTShareClass shareClass].loginModel.companyId,
+                          @"type" : @(_timeType),
                           };
     __weak typeof(self) weakSelf =  self;
-    //    [MBProgressHUD showMessage:@""];
+        [MBProgressHUD showMessage:@""];
+    [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleAgent,loadAgentHeader] params:dic success:^(id json) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [MBProgressHUD hideHUD];
+        [strongSelf.headModel setValuesForKeysWithDictionary:[json getDictionArrayWithKey:@"data"]];
+        [strongSelf.myTableView.mj_header endRefreshing];
+        [strongSelf.myTableView.mj_footer endRefreshing];
+        [strongSelf.myTableView reloadData];
+    } error:^{
+        [MBProgressHUD hideHUD];
+        [self.myTableView.mj_header endRefreshing];
+        [self.myTableView.mj_footer endRefreshing];
+        [MBProgressHUD showError:SeverERRORSTRING];
+        
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHUD];
+        [self.myTableView.mj_header endRefreshing];
+        [self.myTableView.mj_footer endRefreshing];
+        [MBProgressHUD showError:@"网络请求失败，请检查你的网络"];
+    }];
+    
+}
+
+- (void)loadData{
+    NSDictionary *dic = @{
+                          @"companyId" : [HTShareClass shareClass].loginModel.companyId,
+                          @"pageNo" : @(_pageNo),
+                          @"pageSize" : @"10"
+                          };
+    __weak typeof(self) weakSelf =  self;
+        [MBProgressHUD showMessage:@""];
     [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleAgent,loadAgentSaleDataReport] params:dic success:^(id json) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        //        [MBProgressHUD hideHUD];
-        [strongSelf.headModel setValuesForKeysWithDictionary:[json[@"data"] getDictionArrayWithKey:@"generalAgents"]];
+        [MBProgressHUD hideHUD];
         NSArray *dataArr = [json[@"data"] getArrayWithKey:@"merchants"];
-        [strongSelf.shopsArray removeAllObjects];
-        [strongSelf.dataArray removeAllObjects];
-        __block CGFloat max = 0.0f;
-        __block CGFloat min = 0.0f;
-        __block NSString *maxStr = [NSString string];
-        __block NSString *minStr = [NSString string];
+        if (strongSelf.pageNo == 1) {
+//            [strongSelf.headModel setValuesForKeysWithDictionary:[json[@"data"] getDictionArrayWithKey:@"generalAgents"]];
+            [self loadHeaderData];
+            [strongSelf.shopsArray removeAllObjects];
+            [strongSelf.dataArray removeAllObjects];
+        }
+    
+//        __block CGFloat max = 0.0f;
+//        __block CGFloat min = 0.0f;
+//        __block NSString *maxStr = [NSString string];
+//        __block NSString *minStr = [NSString string];
         [dataArr enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             HTSingleShopDataModel *model = [[HTSingleShopDataModel alloc] init];
             [model setValuesForKeysWithDictionary:obj];
+#if 0
             if (idx == 0) {
                 max = model.profit.floatValue;
                 min = model.profit.floatValue;
@@ -269,17 +354,24 @@
                 model.max = maxStr;
                 model.min = minStr;
             }
+#endif
             [strongSelf.shopsArray addObject:model];
         }];
-        [strongSelf.dataArray addObjectsFromArray:strongSelf.shopsArray];
+//        [strongSelf.dataArray addObjectsFromArray:strongSelf.shopsArray];
+        strongSelf.dataArray = [NSMutableArray arrayWithArray:strongSelf.shopsArray];
         [strongSelf.myTableView.mj_header endRefreshing];
+        [strongSelf.myTableView.mj_footer endRefreshing];
         [strongSelf.myTableView reloadData];
     } error:^{
+        [MBProgressHUD hideHUD];
         [self.myTableView.mj_header endRefreshing];
-        [MBProgressHUD showError:SeverERRORSTRING];
+        [self.myTableView.mj_footer endRefreshing];
+//        [MBProgressHUD showError:SeverERRORSTRING];
         
     } failure:^(NSError *error) {
+        [MBProgressHUD hideHUD];
         [self.myTableView.mj_header endRefreshing];
+        [self.myTableView.mj_footer endRefreshing];
         [MBProgressHUD showError:@"网络请求失败，请检查你的网络"];
     }];
     

@@ -33,4 +33,14 @@
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key{
     
 }
+- (void)setValue:(id)value forKey:(NSString *)key
+{
+    if ([value isKindOfClass:[NSString class]]) {
+        if ([value isNull] || [value isEqualToString:@"<null>"]) {
+            value = @"--";
+        }
+    }
+    [super setValue:value forKey:key];
+    
+}
 @end

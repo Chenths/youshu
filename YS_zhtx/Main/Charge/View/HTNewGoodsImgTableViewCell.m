@@ -52,10 +52,10 @@
     self.cheakStateLabel.hidden = YES;
     if (!self.model.selectedModel) {
         HTChargeProductInfoModel *mmm = [self.model.product firstObject];
-        [self configDataWithModel:mmm andIsselected:NO];
+        [self configDataWithModel:mmm andIsselected:NO WithModel:model];
     }else{
         HTChargeProductInfoModel *mmm = model.selectedModel;
-        [self configDataWithModel:mmm andIsselected:YES];
+        [self configDataWithModel:mmm andIsselected:YES WithModel:model];
     }
 }
 -(void)setProductModel:(HTOrderDetailProductModel *)model{
@@ -77,7 +77,7 @@
         self.cheakStateLabel.backgroundColor = [UIColor colorWithHexString:@"#f1f1f1"];
     }
 }
--(void)configDataWithModel:(HTChargeProductInfoModel *)model andIsselected:(BOOL) isSelected{
+-(void)configDataWithModel:(HTChargeProductInfoModel *)model andIsselected:(BOOL) isSelected WithModel:(HTCahargeProductModel *)originalModel{
     [self.productImg sd_setImageWithURL:[NSURL URLWithString:model.productimage] placeholderImage:[UIImage imageNamed:@"g-goodsHoldImg"]];
     self.goodsName.text = isSelected ? [HTHoldNullObj getValueWithUnCheakValue:model.barcode] : [HTHoldNullObj getValueWithUnCheakValue:model.stylecode];
     self.goodsType.text = [HTHoldNullObj getValueWithUnCheakValue:model.customtype];
@@ -90,8 +90,17 @@
         self.sizeWidth.constant = [self.goodsSizeLabel.text getStringWidhtWithHeight:21 andFont:13] + 20 < 32 ? 32 : [self.goodsSizeLabel.text getStringWidhtWithHeight:21 andFont:13] + 20 ;
         self.colorWidth.constant = [self.goodsColorLabel.text getStringWidhtWithHeight:21 andFont:13] + 20 < 32 ? 32 : [self.goodsColorLabel.text getStringWidhtWithHeight:21 andFont:13] + 20 ;
     }else{
-        self.goodsSizeLabel.text = @"?";
-        self.goodsColorLabel.text = @"?";
+        if (originalModel.sizeGrop.count == 1) {
+            self.goodsSizeLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.size];
+            self.goodsColorLabel.text = @"?";
+        }else if(originalModel.colorGrop.count == 1){
+            self.goodsSizeLabel.text = @"?";
+            self.goodsColorLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.color];
+        }else{
+            self.goodsSizeLabel.text = @"?";
+            self.goodsColorLabel.text = @"?";
+        }
+        
         self.sizeWidth.constant = 32;
         self.colorWidth.constant = 32;
     }

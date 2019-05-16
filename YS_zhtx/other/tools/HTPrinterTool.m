@@ -35,6 +35,10 @@
 @implementation HTPrinterTool
 
 - (void)printOrderReceiptWithOrder:(NSString *)orderId{
+    
+    [HTShareClass shareClass].printerModel.orderId = orderId;
+    [self print];
+    /*
     [MBProgressHUD showMessage:@""];
     NSDictionary *dic = @{
                           @"orderId":orderId,
@@ -86,6 +90,8 @@
         [MBProgressHUD  hideHUD];
         [MBProgressHUD showError:@"网络请求失败，请检查你的网络"];
     }];
+     */
+    
 }
 
 -(BOOL)IsChinese:(NSString *)str {
@@ -155,22 +161,22 @@
     }];
 }
 - (void)print{
-    if (!isReceipt) {
-        [self savePrintDataWithOrderId:[HTHoldNullObj getValueWithUnCheakValue:[HTShareClass shareClass].printerModel.orderId]];
-    }
+//    if (!isReceipt) {
+//        [self savePrintDataWithOrderId:[HTHoldNullObj getValueWithUnCheakValue:[HTShareClass shareClass].printerModel.orderId]];
+//    }
     
     switch ([HTShareClass shareClass].loginModel.printers.count) {
         case 0:
         {
-            if ([[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@%@",[HTShareClass shareClass].loginModel.companyId,@"blueTooth"]]) {
-                self.version = [NSString stringWithFormat:@"%d",3];
-                HTBlueToothPrinterController *vc = [[HTBlueToothPrinterController alloc] init];
-                vc.bigPrinter = [self getPrintArrayWithSize:YES];
-                vc.pushNext = self.pushNext;
-                vc.smallPrinter = [self getPrintArrayWithSize:NO];
-                [[HTShareClass shareClass].getCurrentNavController pushViewController:vc animated:YES];
-                return;
-            }
+//            if ([[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@%@",[HTShareClass shareClass].loginModel.companyId,@"blueTooth"]]) {
+//                self.version = [NSString stringWithFormat:@"%d",3];
+//                HTBlueToothPrinterController *vc = [[HTBlueToothPrinterController alloc] init];
+//                vc.bigPrinter = [self getPrintArrayWithSize:YES];
+//                vc.pushNext = self.pushNext;
+//                vc.smallPrinter = [self getPrintArrayWithSize:NO];
+//                [[HTShareClass shareClass].getCurrentNavController pushViewController:vc animated:YES];
+//                return;
+//            }
             
             NSString *lastVerson = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastVersion"];
             NSString *versionKey = (__bridge NSString *)kCFBundleVersionKey;
@@ -449,7 +455,30 @@
 
 - (void)printReceiptWithNum:(NSString *) num  andpage:(NSInteger)page
 {
-    
+    NSDictionary *dic = @{
+                          @"orderId" : [HTShareClass shareClass].printerModel.orderId,
+                          @"sn" : num,
+                          @"companyId" : [HTShareClass shareClass].loginModel.companyId
+                          };
+    //改为网络请求服务器发送打印
+//    [MBProgressHUD showMessage:@""];
+    [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,@"admin/order/",newPrintRequest] params:dic success:^(id json) {
+        [MBProgressHUD hideHUD];
+        if ([[json[@"data"] getStringWithKey:@"status"] isEqualToString:@"1"]) {
+            [MBProgressHUD showError:@"发送打印任务打印成功"];
+        }else{
+            [MBProgressHUD showError:@"发送打印任务打印失败"];
+        }
+        
+    } error:^{
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:SeverERRORSTRING];
+        
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:NETERRORSTRING];
+    }];
+    return;
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     //申明返回的结果是json类型
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];

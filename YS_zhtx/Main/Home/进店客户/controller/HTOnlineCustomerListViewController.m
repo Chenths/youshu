@@ -147,7 +147,7 @@
         }
     }
     vc.faceModel = model;
-    vc.path = model.path;
+    vc.path = model.snapPath;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

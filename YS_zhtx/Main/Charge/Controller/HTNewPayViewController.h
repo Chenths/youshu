@@ -25,6 +25,5 @@
 //如果是简易下单 
 @property (nonatomic, assign) BOOL isFromFast;
 @property (nonatomic, strong) NSString *bcProductStr;
-- (BOOL)newPayTextFieldbeginEdit:(UITextField *)textField;
-- (BOOL)newPayTextFieldDidChange:(UITextField *)textField range:(NSRange)range replacementString:(NSString *)string;
+
 @end

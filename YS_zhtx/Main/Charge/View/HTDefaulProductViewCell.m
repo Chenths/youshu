@@ -32,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *value1Width;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *value2Width;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *value3Width;
+@property (weak, nonatomic) IBOutlet UIImageView *zengPinImv;
 
 @end
 @implementation HTDefaulProductViewCell
@@ -44,6 +45,11 @@
 }
 -(void)setOrderProductModel:(HTOrderDetailProductModel *)orderProductModel{
     _orderProductModel = orderProductModel;
+    if ([orderProductModel.state isEqualToString:@""] || [orderProductModel.state isNull] || [orderProductModel.state integerValue] == 6) {
+        self.zengPinImv.hidden = NO;
+    }else{
+        self.zengPinImv.hidden = YES;
+    }
     self.selectedImg.hidden = YES;
     self.selectedImgWidth.constant = 0.0f;
     self.holdViewLeading.constant = 0.0f;
@@ -89,8 +95,14 @@
     }
 }
 
+//这个方法好像根本没有用
 -(void)setChargeModel:(HTCahargeProductModel *)chargeModel{
     _chargeModel = chargeModel;
+//    if ([chargeModel.state isEqualToString:@""] || [chargeModel.state isNull]) {
+//        self.zengPinImv.hidden = NO;
+//    }else{
+//        self.zengPinImv.hidden = YES;
+//    }
     self.selectedImg.hidden = NO;
     self.selectedImgWidth.constant = 15;
     self.holdViewLeading.constant = 15;
@@ -116,7 +128,11 @@
 
 -(void)setExcOrReProductModel:(HTOrderDetailProductModel *)orderProductModel{
     _excOrReProductModel = orderProductModel;
-    
+    if ([orderProductModel.state isEqualToString:@""] || [orderProductModel.state isNull] || [orderProductModel.state integerValue] == 6) {
+        self.zengPinImv.hidden = NO;
+    }else{
+        self.zengPinImv.hidden = YES;
+    }
     self.selectedImg.image = [UIImage imageNamed:orderProductModel.isSelected ? @"singleSelected" :@"singleUnselected"];
     [self.productImg sd_setImageWithURL:[NSURL URLWithString:orderProductModel.image] placeholderImage:[UIImage imageNamed:@"g-goodsHoldImg"]];
     self.barcodeTitle.text = [HTHoldNullObj getValueWithUnCheakValue:orderProductModel.barcode];
@@ -150,6 +166,7 @@
     self.finallPriceLabel.text = [NSString stringWithFormat:@"¥%@",orderProductModel.finalprice];
     self.priceLabel.text = [NSString stringWithFormat:@"¥%@",orderProductModel.totalprice];
     self.stateLabel.text = [[HTHoldNullObj getValueWithUnCheakValue:orderProductModel.discount] isEqualToString:@"-10"] ? @"/": [NSString stringWithFormat:@"%.1lf折",orderProductModel.discount.floatValue * 10];
+    
 }
 
 

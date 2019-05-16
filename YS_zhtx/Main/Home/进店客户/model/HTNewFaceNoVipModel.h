@@ -10,6 +10,6 @@
 
 @interface HTNewFaceNoVipModel : NSObject
 @property (nonatomic, copy) NSString *enterTime;
-@property (nonatomic, copy) NSString *path;
+@property (nonatomic, copy) NSString *snapPath;
 @property (nonatomic, copy) NSString *userVipName;
 @end
