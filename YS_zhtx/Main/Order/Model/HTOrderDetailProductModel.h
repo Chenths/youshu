@@ -29,6 +29,7 @@ typedef NS_ENUM(NSInteger, HTProductState) {
 @property (nonatomic,strong) NSString *totalprice;
 @property (nonatomic,strong) NSString *year;
 @property (nonatomic,strong) NSString *month;
+@property (nonatomic, strong) NSString *guidename;
 
 @property (nonatomic,strong) NSString *productId;
 

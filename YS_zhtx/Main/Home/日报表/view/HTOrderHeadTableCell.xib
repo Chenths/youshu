@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,15 +24,27 @@
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="导购：" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jVu-n0-fd2">
+                        <rect key="frame" x="246.5" y="12" width="57.5" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="57.5" id="5cA-V5-Dxt"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="UbK-4k-Pgp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="7GD-DL-bNB"/>
                     <constraint firstItem="UbK-4k-Pgp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="B6H-bR-ZZV"/>
                     <constraint firstAttribute="bottom" secondItem="UbK-4k-Pgp" secondAttribute="bottom" constant="12.5" id="iM5-hs-AkU"/>
+                    <constraint firstItem="jVu-n0-fd2" firstAttribute="centerY" secondItem="UbK-4k-Pgp" secondAttribute="centerY" id="osa-VE-73S"/>
+                    <constraint firstAttribute="trailing" secondItem="jVu-n0-fd2" secondAttribute="trailing" constant="16" id="qEE-tI-JRm"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="guideLabel" destination="jVu-n0-fd2" id="Nc1-jO-GXO"/>
                 <outlet property="orderNum" destination="UbK-4k-Pgp" id="Bpi-I1-wkH"/>
             </connections>
             <point key="canvasLocation" x="25" y="51"/>

@@ -7,9 +7,11 @@
 //
 
 #import "HTOrderHeadTableCell.h"
+#import "HTOrderDetailProductModel.h"
 @interface HTOrderHeadTableCell()
 
 @property (weak, nonatomic) IBOutlet UILabel *orderNum;
+@property (weak, nonatomic) IBOutlet UILabel *guideLabel;
 
 @end
 @implementation HTOrderHeadTableCell
@@ -20,7 +22,9 @@
 -(void)setModel:(HTOrderDetailModel *)model{
     _model = model;
     
-    self.orderNum.text = [HTHoldNullObj getValueWithUnCheakValue:model.ordernum];
+    self.orderNum.text = [NSString stringWithFormat:@"订单号:%@", [HTHoldNullObj getValueWithUnCheakValue:model.ordernum]];
+    HTOrderDetailProductModel *productModel = model.product.firstObject;
+    self.guideLabel.text = [NSString stringWithFormat:@"导购:%@", [HTHoldNullObj getValueWithUnCheakValue:productModel.guidename]];
 }
 
 
