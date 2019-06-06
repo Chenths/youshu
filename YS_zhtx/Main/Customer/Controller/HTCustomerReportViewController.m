@@ -532,6 +532,7 @@
     self.tab.tableFooterView = v ;
     self.tab.backgroundColor = [UIColor clearColor];
     self.tab.estimatedRowHeight = 300;
+    self.tab.rowHeight = UITableViewAutomaticDimension;
     self.tab.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tabBottomHeight.constant = SafeAreaBottomHeight;
     if (self.customerType == HTCustomerReportTypeNomal) {

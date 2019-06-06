@@ -67,8 +67,8 @@
     }else{
         HTNewPieCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTNewPieCellTableViewCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        NSArray * arr1 = @[@"seasonModel",@"yearModel",@"categorieModel",@"customTypeModel",@"colorModel",@"sizeModel"];
-        NSArray *searchKey = @[@"season",@"year",@"categoriesName",@"customType",@"color",@"size",@"supplier"];
+        NSArray * arr1 = @[@"seasonModel",@"yearModel",@"categorieModel",@"customTypeModel",@"sizeModel"];
+        NSArray *searchKey = @[@"season",@"year",@"categoriesName",@"customType",@"size",@"supplier"];
         NSMutableArray *arr = [NSMutableArray arrayWithArray:arr1];
         if (self.inventoryModel.supplierModel) {
             if (self.inventoryModel.supplierModel.data.count > 0) {
@@ -185,8 +185,8 @@
 #pragma mark - getters and setters
 -(HTIndexesBox *)indexBox{
     if (!_indexBox) {
-        NSArray *tites = @[@"季节占比",@"年份占比",@"类别占比",@"品类占比",@"色系占比",@"尺码占比"];
-        NSArray *indexs = @[[NSIndexPath indexPathForRow:0 inSection:2],[NSIndexPath indexPathForRow:0 inSection:3],[NSIndexPath indexPathForRow:0 inSection:4],[NSIndexPath indexPathForRow:0 inSection:5],[NSIndexPath indexPathForRow:0 inSection:6],[NSIndexPath indexPathForRow:0 inSection:6]];
+        NSArray *tites = @[@"季节占比",@"年份占比",@"类别占比",@"品类占比",@"尺寸占比",@"供应商占比"];
+        NSArray *indexs = @[[NSIndexPath indexPathForRow:0 inSection:2],[NSIndexPath indexPathForRow:0 inSection:3],[NSIndexPath indexPathForRow:0 inSection:4],[NSIndexPath indexPathForRow:0 inSection:5],[NSIndexPath indexPathForRow:0 inSection:6],[NSIndexPath indexPathForRow:0 inSection:7]];
         NSMutableArray *datas = [NSMutableArray array];
         for (int i = 0; i < tites.count;i++ ) {
             HTIndexsModel *model = [[HTIndexsModel alloc] init];
@@ -220,7 +220,7 @@
         [_cellsName addObject:@[@"HTNewPieCellTableViewCell"]];
         [_cellsName addObject:@[@"HTNewPieCellTableViewCell"]];
         [_cellsName addObject:@[@"HTNewPieCellTableViewCell"]];
-        [_cellsName addObject:@[@"HTNewPieCellTableViewCell"]];
+//        [_cellsName addObject:@[@"HTNewPieCellTableViewCell"]];
         [_cellsName addObject:@[@"HTNewPieCellTableViewCell"]];
     }
     return _cellsName;

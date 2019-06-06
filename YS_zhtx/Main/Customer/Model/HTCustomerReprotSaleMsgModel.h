@@ -60,4 +60,6 @@
 @property (nonatomic,strong) NSString *remark;
 //微信
 @property (nonatomic,strong) NSString *wechat;
+//隶属店铺
+@property (nonatomic,strong) NSString *belongStore;
 @end
