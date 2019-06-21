@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" tag="500" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rZl-6r-UKW">
-                    <rect key="frame" x="0.0" y="0.0" width="215.5" height="41"/>
+                    <rect key="frame" x="0.0" y="0.0" width="143.5" height="41"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <state key="normal">
                         <color key="titleColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
@@ -25,8 +25,8 @@
                         <action selector="headBtClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="px3-Ph-HlH"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="501" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bcc-Nx-ayb">
-                    <rect key="frame" x="215.5" y="0.0" width="215.5" height="41"/>
+                <button hidden="YES" opaque="NO" tag="501" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bcc-Nx-ayb">
+                    <rect key="frame" x="143.5" y="0.0" width="144" height="41"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <state key="normal">
                         <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
@@ -35,15 +35,29 @@
                         <action selector="headBtClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="zZU-4H-NdL"/>
                     </connections>
                 </button>
+                <button hidden="YES" opaque="NO" tag="501" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQK-hu-rqp">
+                    <rect key="frame" x="287.5" y="0.0" width="143.5" height="41"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal">
+                        <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="headBtClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="5yj-Gu-6EP"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="zQK-hu-rqp" secondAttribute="bottom" id="4kP-aL-wd3"/>
+                <constraint firstItem="zQK-hu-rqp" firstAttribute="leading" secondItem="Bcc-Nx-ayb" secondAttribute="trailing" id="K3N-Vz-JQf"/>
+                <constraint firstItem="zQK-hu-rqp" firstAttribute="width" secondItem="Bcc-Nx-ayb" secondAttribute="width" id="Kad-vX-ug7"/>
                 <constraint firstItem="Bcc-Nx-ayb" firstAttribute="width" secondItem="rZl-6r-UKW" secondAttribute="width" id="Mr9-Gr-vhO"/>
                 <constraint firstItem="rZl-6r-UKW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="QF6-0F-mag"/>
                 <constraint firstItem="rZl-6r-UKW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="SFc-Ix-0Gi"/>
-                <constraint firstAttribute="trailing" secondItem="Bcc-Nx-ayb" secondAttribute="trailing" id="TYI-OJ-ApF"/>
                 <constraint firstAttribute="bottom" secondItem="Bcc-Nx-ayb" secondAttribute="bottom" id="Wuw-al-shB"/>
+                <constraint firstAttribute="trailing" secondItem="zQK-hu-rqp" secondAttribute="trailing" id="XLu-WH-ccP"/>
                 <constraint firstAttribute="bottom" secondItem="rZl-6r-UKW" secondAttribute="bottom" id="aSM-Tn-oho"/>
+                <constraint firstItem="zQK-hu-rqp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="c4l-T4-2uM"/>
                 <constraint firstItem="Bcc-Nx-ayb" firstAttribute="leading" secondItem="rZl-6r-UKW" secondAttribute="trailing" id="eMz-Uo-eQS"/>
                 <constraint firstItem="Bcc-Nx-ayb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="riX-Cb-MB1"/>
             </constraints>
@@ -51,8 +65,9 @@
             <connections>
                 <outlet property="firstBt" destination="rZl-6r-UKW" id="wUQ-c8-uhY"/>
                 <outlet property="secondBt" destination="Bcc-Nx-ayb" id="bFV-Ne-bYe"/>
+                <outlet property="thirdBt" destination="zQK-hu-rqp" id="TBt-U6-Sfl"/>
             </connections>
-            <point key="canvasLocation" x="24" y="19"/>
+            <point key="canvasLocation" x="23.199999999999999" y="18.440779610194905"/>
         </view>
     </objects>
 </document>

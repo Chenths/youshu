@@ -16,6 +16,7 @@
 @property (nonatomic,strong)  NSString *flowtype;
 @property (nonatomic,strong)  NSString *month;
 @property (nonatomic,strong)  NSString *year;
+@property (nonatomic,strong)  NSString *belongstore;
 
 
 

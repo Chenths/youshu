@@ -58,6 +58,8 @@
 
 @property (nonatomic,assign) int page;
 
+@property (nonatomic, strong) HTCustomerTapMoreController *tapMore;
+
 /** 悬浮按钮 */
 @property (nonatomic, strong) UIButton *xuanFuButton;
 @end
@@ -84,11 +86,8 @@
         CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
         CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
         
-        //添加悬浮按钮方式二:(利用UIWindow)
         _xuanFuButton.frame = CGRectMake(screenWidth - 56 - 16,screenHeight - 56 - 40, 56, 56);
         [_xuanFuButton addTarget:self action:@selector(suspendBtnClick) forControlEvents:UIControlEventTouchUpInside];
-        
-        //悬浮按钮所处的顶端UIWindow
         UIWindow* window = [[[UIApplication sharedApplication] delegate] window];
 
         [window addSubview:_xuanFuButton];
@@ -98,6 +97,9 @@
 
 
 - (void)suspendBtnClick{
+    if (_tapMore) {
+        [_tapMore dismissViewControllerAnimated:YES completion:nil];        
+    }
     if ([HTShareClass shareClass].isProductActive) {
         HTChargeViewController *vc = [[HTChargeViewController alloc] init];
         vc.customerId = self.model.custId;
@@ -138,6 +140,12 @@
         self.navigationController.navigationBar.clipsToBounds = YES;
     };
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewAutomaticDimension;
+}
+
 #pragma mark -UITabelViewDelegate
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSArray *cells = self.cellsName[indexPath.section];
@@ -213,10 +221,10 @@
     
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.reportModel.colorModel ? (section >= self.cellsName.count ? 0 : [(NSArray *)self.cellsName[section] count]) : 0;
+    return self.reportModel.categoriesModel ? (section >= self.cellsName.count ? 0 : [(NSArray *)self.cellsName[section] count]) : 0;
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return self.reportModel.colorModel ? self.sectionArray.count : 0;
+    return self.reportModel.categoriesModel ? self.sectionArray.count : 0;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
@@ -466,15 +474,15 @@
     poper                     = [[Poper alloc] init];
     poper.frame               = CGRectMake(0 , HEIGHT - height, HMSCREENWIDTH,height);
     //点击蒙板时的操作
-    HTCustomerTapMoreController *vc  = [[HTCustomerTapMoreController alloc] init];
-    vc.transitioningDelegate  = poper;
-    vc.modalPresentationStyle =  UIModalPresentationCustom;
-    vc.view.frame = CGRectMake(0 , HEIGHT - height, HMSCREENWIDTH,height);
-    vc.dataArray = tapArr;
-    vc.index = 0;
-    vc.delegate = self;
-    vc.model = self.model;
-    [self presentViewController:vc animated:YES completion:nil];
+    self.tapMore  = [[HTCustomerTapMoreController alloc] init];
+    _tapMore.transitioningDelegate  = poper;
+    _tapMore.modalPresentationStyle =  UIModalPresentationCustom;
+    _tapMore.view.frame = CGRectMake(0 , HEIGHT - height, HMSCREENWIDTH,height);
+    _tapMore.dataArray = tapArr;
+    _tapMore.index = 0;
+    _tapMore.delegate = self;
+    _tapMore.model = self.model;
+    [self presentViewController:_tapMore animated:YES completion:nil];
     
 }
 #pragma mark -private methods
@@ -532,7 +540,7 @@
     self.tab.tableFooterView = v ;
     self.tab.backgroundColor = [UIColor clearColor];
     self.tab.estimatedRowHeight = 300;
-    self.tab.rowHeight = UITableViewAutomaticDimension;
+//    self.tab.rowHeight = UITableViewAutomaticDimension;
     self.tab.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tabBottomHeight.constant = SafeAreaBottomHeight;
     if (self.customerType == HTCustomerReportTypeNomal) {
@@ -560,6 +568,9 @@
         self.model.isdel = self.reportModel.baseMessage.isdel;
         self.model.isedit = self.reportModel.baseMessage.isedit;
         self.model.openid = self.reportModel.baseMessage.openid;
+        self.reportModel.baseMessage.belongStore = [HTHoldNullObj getValueWithUnCheakValue:self.reportModel.belongStore].length == 0 ? @"暂无数据" : [HTHoldNullObj getValueWithUnCheakValue:self.reportModel.belongStore];
+
+        self.model.belongStore = self.reportModel.baseMessage.belongStore;
         NSArray *keys = @[@"stickTag",@"companyTag",@"platformTag"];
         [self.tagsArray removeAllObjects];
         [self.finallTagsArray removeAllObjects];

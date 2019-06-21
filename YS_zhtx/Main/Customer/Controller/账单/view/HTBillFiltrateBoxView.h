@@ -14,13 +14,14 @@
 -(void)FiltrateBoxDidSelectedInSection:(NSInteger) section andRow:(NSInteger) row withHeadModel:(HTFiltrateHeaderModel *)model;
 
 -(void)searchBtClicked;
-
 @end
 
 @interface HTBillFiltrateBoxView : UIView
 
+//0是账单列表 1是商品列表
 - (instancetype)initWithBoxFrame:(CGRect)frame;
 
+- (void)chooseType:(NSInteger)type;
 @property (nonatomic,strong) NSArray *dataArray;
 
 @property (nonatomic,weak) id <HTBillFiltrateBoxViewDelegate> delegate;

@@ -31,7 +31,7 @@
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     HTBuyHabitInfoCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HTBuyHabitInfoCollectionCell" forIndexPath:indexPath];
-    NSArray *colors = @[@"#4EB76C",@"#EB6580",@"#6178BA",@"#F5B73E",@"#83CEC0"];
+    NSArray *colors = @[@"#4EB76C",@"#EB6580",@"#6178BA",@"#83CEC0"];
     cell.backgroundColor = [UIColor whiteColor];
     cell.pieColor = [UIColor colorWithHexString:colors[indexPath.row]];
     cell.model = self.dataArray[indexPath.row];
@@ -76,7 +76,6 @@
     [self.dataArray removeAllObjects];
     [self.dataArray addObject:model.sizeModel];
     [self.dataArray addObject:model.categoriesModel];
-    [self.dataArray addObject:model.colorModel];
     [self.dataArray addObject:model.discountModel];
     [self.dataArray addObject:model.priceModel];
     self.colHeight.constant =( self.dataArray.count / 2 * 280 ) + 280 * ((self.dataArray.count % 2) > 0 ? 1 : 0) + (self.dataArray.count / 2) * 12;

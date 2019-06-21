@@ -931,6 +931,8 @@
 		04B39EBB216F404800FC7D07 /* HTScanLogistiscViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B39EB9216F404800FC7D07 /* HTScanLogistiscViewController.m */; };
 		04B39EBC216F404800FC7D07 /* HTScanLogistiscViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B39EBA216F404800FC7D07 /* HTScanLogistiscViewController.xib */; };
 		04B39EBF216F4FF200FC7D07 /* NSString+upperOrlower.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B39EBD216F4FF100FC7D07 /* NSString+upperOrlower.m */; };
+		04BAA9BF22B8890A0070C17A /* HTCustomerProductInfoNewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BAA9BD22B8890A0070C17A /* HTCustomerProductInfoNewCell.m */; };
+		04BAA9C022B8890A0070C17A /* HTCustomerProductInfoNewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BAA9BE22B8890A0070C17A /* HTCustomerProductInfoNewCell.xib */; };
 		04C39FE420CF6FFC00E2E309 /* HTSaleGoodOrBadCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C39FE320CF6FFC00E2E309 /* HTSaleGoodOrBadCenterController.m */; };
 		04C39FE820CF709300E2E309 /* HTInventorySaleInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C39FE620CF709300E2E309 /* HTInventorySaleInfoController.m */; };
 		04C39FE920CF709300E2E309 /* HTInventorySaleInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C39FE720CF709300E2E309 /* HTInventorySaleInfoController.xib */; };
@@ -2603,6 +2605,9 @@
 		04B39EBA216F404800FC7D07 /* HTScanLogistiscViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTScanLogistiscViewController.xib; sourceTree = "<group>"; };
 		04B39EBD216F4FF100FC7D07 /* NSString+upperOrlower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+upperOrlower.m"; sourceTree = "<group>"; };
 		04B39EBE216F4FF200FC7D07 /* NSString+upperOrlower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+upperOrlower.h"; sourceTree = "<group>"; };
+		04BAA9BC22B8890A0070C17A /* HTCustomerProductInfoNewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTCustomerProductInfoNewCell.h; sourceTree = "<group>"; };
+		04BAA9BD22B8890A0070C17A /* HTCustomerProductInfoNewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTCustomerProductInfoNewCell.m; sourceTree = "<group>"; };
+		04BAA9BE22B8890A0070C17A /* HTCustomerProductInfoNewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTCustomerProductInfoNewCell.xib; sourceTree = "<group>"; };
 		04C39FE220CF6FFC00E2E309 /* HTSaleGoodOrBadCenterController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTSaleGoodOrBadCenterController.h; sourceTree = "<group>"; };
 		04C39FE320CF6FFC00E2E309 /* HTSaleGoodOrBadCenterController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTSaleGoodOrBadCenterController.m; sourceTree = "<group>"; };
 		04C39FE520CF709300E2E309 /* HTInventorySaleInfoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTInventorySaleInfoController.h; sourceTree = "<group>"; };
@@ -3769,6 +3774,9 @@
 				04B0385E21FEA4730008160B /* HTRFMTableViewCell.h */,
 				04B0385F21FEA4730008160B /* HTRFMTableViewCell.m */,
 				04B0386021FEA4730008160B /* HTRFMTableViewCell.xib */,
+				04BAA9BC22B8890A0070C17A /* HTCustomerProductInfoNewCell.h */,
+				04BAA9BD22B8890A0070C17A /* HTCustomerProductInfoNewCell.m */,
+				04BAA9BE22B8890A0070C17A /* HTCustomerProductInfoNewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -6293,6 +6301,7 @@
 				0458BF0120D24BBE00B79740 /* HTCashierChooseSizeOrColorView.xib in Resources */,
 				0434D18B20C9100E008E085F /* HTFaceComingAlertView.xib in Resources */,
 				04C39FEE20CF71CD00E2E309 /* HTSaleGoodOrBadCell.xib in Resources */,
+				04BAA9C022B8890A0070C17A /* HTCustomerProductInfoNewCell.xib in Resources */,
 				043DBD9520BE9E4B00020936 /* LaunchScreen.storyboard in Resources */,
 				0466C401215C779B004F9C58 /* HTChangeHeadImgCollectionCell.xib in Resources */,
 				0458BEFC20D24AA600B79740 /* HTNewCustomerBaceInfoView.xib in Resources */,
@@ -6936,6 +6945,7 @@
 				04B15C082229114B006837F3 /* HTShowImg.m in Sources */,
 				04B39EA8216F34CA00FC7D07 /* FMDatabaseQueue.m in Sources */,
 				04F7427A213D265700992745 /* HTContinueBackModel.m in Sources */,
+				04BAA9BF22B8890A0070C17A /* HTCustomerProductInfoNewCell.m in Sources */,
 				04204CE121798CF100BBFEAF /* HTFastProductViewCell.m in Sources */,
 				047D566620C0F355000348DC /* HTFiltrateTableStyleCell.m in Sources */,
 				0476347F216C4740002DC90E /* HTGuiderYearItmeModel.m in Sources */,

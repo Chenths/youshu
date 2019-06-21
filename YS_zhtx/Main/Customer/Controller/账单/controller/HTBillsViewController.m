@@ -38,7 +38,7 @@
 #pragma mark -life cycel
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self configHeadBt];
+//    [self configHeadBt];
     [self createTb];
     [self createBox];
     [self.tab.mj_header beginRefreshing];
@@ -116,42 +116,59 @@
     
 }
 -(void)createBox{
-        HTBillFiltrateBoxView *box = [[HTBillFiltrateBoxView alloc] initWithBoxFrame:CGRectMake(0, 0, HMSCREENWIDTH, 48)];
-        box.delegate = self;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.view addSubview:box];
-        });
-        HTFiltrateHeaderModel *m = [[HTFiltrateHeaderModel alloc] init];
-        NSArray *title = @[@"全部",@"储值",@"储值赠送",@"积分"];
-        NSArray *valuess = @[@"",@"1",@"3",@"2"];
-        NSMutableArray *arr = [NSMutableArray array];
-        for (int i = 0; i < title.count; i++) {
-            HTFiltrateNodeModel *model = [[HTFiltrateNodeModel alloc] init];
-            model.isSelected = i == 0 ? YES : NO;
-            model.title = title[i];
-            model.searchKey = @"accountType";
-             model.searchValue = valuess[i];
-            [arr addObject:model];
-        }
-        m.titles = arr;
-        m.filtrateStyle = HTFiltrateStyleCollection;
-        
-        HTFiltrateHeaderModel *m1 = [[HTFiltrateHeaderModel alloc] init];
-        NSArray *title1 = @[@"全部",@"充值",@"赠送",@"转入",@"转出",@"消费",@"扣除",@"批量充值",@"批量扣除",@"退款",@"批量赠送"];
-        NSArray *values = @[@"",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10"];
-        NSMutableArray *arr1 = [NSMutableArray array];
-        for (int i = 0; i < title1.count; i++) {
-            HTFiltrateNodeModel *model = [[HTFiltrateNodeModel alloc] init];
-            model.isSelected = i == 0 ? YES : NO;
-            model.title = title1[i];
-            model.searchKey = @"flowType";
-            model.searchValue = values[i];
-            [arr1 addObject:model];
-        }
-        m1.titles = arr1;
-        m1.filtrateStyle = HTFiltrateStyleCollection;
-        box.dataArray = @[m,m1];
-   
+    HTBillFiltrateBoxView *box = [[HTBillFiltrateBoxView alloc] initWithBoxFrame:CGRectMake(0, 0, HMSCREENWIDTH, 48)];
+    box.delegate = self;
+    [box chooseType:0];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.view addSubview:box];
+    });
+    
+    HTFiltrateHeaderModel *m0 = [[HTFiltrateHeaderModel alloc] init];
+    NSArray *title0 = @[@"全部",@"本店"];
+    NSArray *valuess0 = @[@"0",@"1"];
+    NSMutableArray *arr0 = [NSMutableArray array];
+    for (int i = 0; i < title0.count; i++) {
+        HTFiltrateNodeModel *model = [[HTFiltrateNodeModel alloc] init];
+        model.isSelected = i == 0 ? YES : NO;
+        model.title = title0[i];
+        model.searchKey = @"isAll";
+        model.searchValue = valuess0[i];
+        [arr0 addObject:model];
+    }
+    m0.titles = arr0;
+    m0.filtrateStyle = HTFiltrateStyleCollection;
+    
+    HTFiltrateHeaderModel *m = [[HTFiltrateHeaderModel alloc] init];
+    NSArray *title = @[@"全部",@"储值",@"储值赠送",@"积分"];
+    NSArray *valuess = @[@"",@"1",@"3",@"2"];
+    NSMutableArray *arr = [NSMutableArray array];
+    for (int i = 0; i < title.count; i++) {
+        HTFiltrateNodeModel *model = [[HTFiltrateNodeModel alloc] init];
+        model.isSelected = i == 0 ? YES : NO;
+        model.title = title[i];
+        model.searchKey = @"accountType";
+        model.searchValue = valuess[i];
+        [arr addObject:model];
+    }
+    m.titles = arr;
+    m.filtrateStyle = HTFiltrateStyleCollection;
+    
+    HTFiltrateHeaderModel *m1 = [[HTFiltrateHeaderModel alloc] init];
+    NSArray *title1 = @[@"全部",@"充值",@"赠送",@"转入",@"转出",@"消费",@"扣除",@"批量充值",@"批量扣除",@"退款",@"批量赠送"];
+    NSArray *values = @[@"",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10"];
+    NSMutableArray *arr1 = [NSMutableArray array];
+    for (int i = 0; i < title1.count; i++) {
+        HTFiltrateNodeModel *model = [[HTFiltrateNodeModel alloc] init];
+        model.isSelected = i == 0 ? YES : NO;
+        model.title = title1[i];
+        model.searchKey = @"flowType";
+        model.searchValue = values[i];
+        [arr1 addObject:model];
+    }
+    m1.titles = arr1;
+    m1.filtrateStyle = HTFiltrateStyleCollection;
+    box.dataArray = @[m0,m,m1];
+    
 }
 -(void)loadDataWithPage:(int) page{
 
@@ -161,7 +178,8 @@
                           @"customerId":[HTHoldNullObj getValueWithUnCheakValue:self.custId],
                           @"companyId":[HTShareClass shareClass].loginModel.companyId,
                           @"rows":@"10",
-                          @"page":@(page)
+                          @"page":@(page),
+                          @"isAll":[self.requsetDic getStringWithKey:@"isAll"]
                           };
     [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleAccflow,loadBillList] params:dic success:^(id json) {
         if (page == 1) {

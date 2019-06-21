@@ -186,7 +186,7 @@
             [self.productArray addObject:dModel];
         }
     }
-    [self createOrderWithBcString:[dataArr arrayToJsonString] AndBqString:@""];
+    [self createOrderWithArray:dataArr];
 }
 /**
  添加vip电话
@@ -225,7 +225,7 @@
 }
 #pragma mark -private methods
 //下单
-- (void)createOrderWithBcString:(NSString *) bcProductStr AndBqString:(NSString *)bqStr{
+- (void)createOrderWithArray:(NSArray *)array{
    
 //    HTChargeOrderModel *order = [HTChargeOrderModel yy_modelWithJSON:[json[@"data"] getDictionArrayWithKey:@"order"]];
     
@@ -244,7 +244,8 @@
     vc.orderModel = order;
     vc.isFromFast = YES;
     vc.products = self.productArray;
-    vc.bcProductStr = bcProductStr;
+//    vc.bcProductStr = bcProductStr;
+    vc.fastProductArray = array;
     //        if ([HTShareClass shareClass].isPlatformOnlinePayActive) {
     //            vc.payCode = [json[@"data"] getStringWithKey:@"payCode"];
     //        }else{

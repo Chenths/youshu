@@ -26,7 +26,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *secondBt;
 @property (weak, nonatomic) IBOutlet UIButton *thirdBt;
 @property (weak, nonatomic) IBOutlet UIButton *fourthBt;
-
 @end
 
 @implementation HTBillFiltrateBoxView
@@ -37,8 +36,10 @@
 
 -(void)awakeFromNib{
     [super awakeFromNib];
-    [self conginBT:self.firstBt withTitle:@"账户类型" andImg:@"g-mineDown"];
-    [self conginBT:self.secondBt withTitle:@"账单类型" andImg:@"g-mineDown"];
+    
+    [self conginBT:self.firstBt withTitle:@"消费店铺" andImg:@"g-mineDown"];
+    [self conginBT:self.secondBt withTitle:@"账户类型" andImg:@"g-mineDown"];
+    [self conginBT:self.thirdBt withTitle:@"账单类型" andImg:@"g-mineDown"];
 }
 -(void)conginBT:(UIButton *)btn withTitle:(NSString *)title andImg:(NSString *)imgname{
     [btn setTitle:title forState:UIControlStateNormal];
@@ -49,14 +50,25 @@
     btn.titleLabel.adjustsFontSizeToFitWidth = YES;
 }
 
-- (instancetype)initWithBoxFrame:(CGRect)frame
-{
+- (instancetype)initWithBoxFrame:(CGRect)frame{
     HTBillFiltrateBoxView *boxView = [[NSBundle mainBundle] loadNibNamed:@"HTBillFiltrateBoxView" owner:nil options:nil].lastObject;
     [boxView setFrame:frame];
     return boxView;
 }
+
+- (void)chooseType:(NSInteger)type{
+    if (type == 0) {
+        _firstBt.hidden = NO;
+        _secondBt.hidden = NO;
+        _thirdBt.hidden = NO;
+    }else{
+        _firstBt.hidden = NO;
+        _secondBt.hidden = YES;
+        _thirdBt.hidden = YES;
+    }
+}
+
 -(void)initSubviews{
-    
     
 }
 #pragma mark -UITabelViewDelegate

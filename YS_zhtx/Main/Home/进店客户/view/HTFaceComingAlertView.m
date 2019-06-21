@@ -44,6 +44,7 @@
     alet.isNew = isNew;
     if (alet.isNew) {
         alet.moreBt.hidden = YES;
+        alet.receptionBt.hidden = YES;
         alet.backView.backgroundColor = [UIColor clearColor];
     }
     [[[UIApplication sharedApplication].delegate window] addSubview:alet];

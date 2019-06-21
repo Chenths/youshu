@@ -7,6 +7,7 @@
 //
 #import "HTMenuModle.h"
 #import "HTCommonViewController.h"
+#import "HTNewFaceNoVipModel.h"
 
 @interface HTAddVipViewController : HTCommonViewController
 
@@ -21,4 +22,5 @@
 @property (nonatomic,strong) NSString *customerFollowRecordId;
 @property (nonatomic, assign) NSString *path;
 @property (nonatomic, assign) BOOL isFromList;
+@property (nonatomic, strong) HTNewFaceNoVipModel *model;
 @end

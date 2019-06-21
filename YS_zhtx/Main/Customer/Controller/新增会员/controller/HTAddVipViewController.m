@@ -81,6 +81,8 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if (self.selectedImg) {
             cell.headImg = self.selectedImg;
+        }else if(self.path){
+            cell.imgPath = self.path;
         }else{
             cell.imgPath = [self.requestDic getStringWithKey:@"headimg"];
         }
@@ -303,7 +305,7 @@
 }
 - (IBAction)saveBtClicked:(id)sender {
     if ([HTShareClass shareClass].face) {
-        if (self.selectedImgArray.count == 0) {
+        if (self.selectedImgArray.count == 0 && self.path == nil) {
             HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:@"您未选择用户头像" btsArray:@[@"继续保存",@"选择头像"] okBtclicked:^{
                 //                选择人脸识别参照图片
                 HTChooseHeadImgViewController *vc = [[HTChooseHeadImgViewController alloc] init];
@@ -356,10 +358,14 @@
     if (self.selectedImg) {
         [self.requestDic setObject:[self.selectedImg getBase64Img] forKey:@"headImg"];
     }
-    if (self.path) {
-        [self.requestDic setObject:self.path forKey:@"faceurl"];
-    }
-    if (self.selectedImgArray.count > 0) {
+    if (self.path && self.selectedImgArray.count == 0) {
+//        [self.requestDic setObject:self.path forKey:@"faceurl"];
+        NSMutableArray *arr = [NSMutableArray array];
+//        for (HTFaceImgListModel *model in self.selectedImgArray) {
+            [arr addObject:self.model.customerId];
+//        }
+        [self.requestDic setObject:[arr componentsJoinedByString:@","] forKey:@"imgIds"];
+    }else if (self.selectedImgArray.count > 0) {
         NSMutableArray *arr = [NSMutableArray array];
         for (HTFaceImgListModel *model in self.selectedImgArray) {
             [arr addObject:model.HTFaceImgListModelid];

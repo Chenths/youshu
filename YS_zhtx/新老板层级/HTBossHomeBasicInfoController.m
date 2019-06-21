@@ -34,6 +34,7 @@
 @property (nonatomic,assign) NSInteger pageNo;
 //1 本日 2 月 3年
 @property (nonatomic,assign) NSInteger timeType;
+@property (nonatomic, strong) UIButton *homeBtn;
 @end
 
 @implementation HTBossHomeBasicInfoController
@@ -44,10 +45,47 @@
     [super viewDidLoad];
     [self createTb];
     [self createRightNavBar];
+    
     _pageNo = 1;
     _timeType = 1;
     [self.myTableView.mj_header beginRefreshing];
 }
+
+- (void)creatButton{
+    self.homeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _homeBtn.frame = CGRectMake(HMSCREENWIDTH - 48 - 16, HEIGHT - 150 - 48, 48, 48);
+    [_homeBtn setImage:[UIImage imageNamed:@"bossHome"] forState:UIControlStateNormal];
+    [_homeBtn addTarget:self action:@selector(sortAction) forControlEvents:UIControlEventTouchUpInside];
+    UIApplication *ap = [UIApplication sharedApplication];
+    [ap.keyWindow addSubview:_homeBtn];
+}
+
+- (void)sortAction{
+    NSLog(@"开始排序");
+    //临时处理 因为已经干掉了筛选店铺功能
+    self.shopsArray = [NSMutableArray arrayWithArray:self.dataArray];
+    if (self.dataArray.count <= 0) {
+        return;
+    }
+    
+    for (int i = 0; i < _dataArray.count; i++) {
+        for (int j = i+1; j < _dataArray.count; j++) {
+            HTSingleShopDataModel *model1 = _dataArray[i];
+            HTSingleShopDataModel *model2 = _dataArray[j];
+            if ([model1.salesAmount intValue] < [model2.salesAmount intValue]) {
+                [_dataArray exchangeObjectAtIndex:i withObjectAtIndex:j];
+            }
+        }
+    }
+    [_myTableView reloadData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [_homeBtn removeFromSuperview];
+    _homeBtn = nil;
+}
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationItem.title = [HTShareClass shareClass].loginModel.company[@"fullname"];
@@ -55,6 +93,7 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#ffffff"]}];
     self.navigationController.navigationItem.rightBarButtonItem.tintColor = [UIColor colorWithHexString:@"#ffffff"];
     [self laodNoRedNum];
+    [self creatButton];
 }
 #pragma customDelegate
 - (void)segmentControlValueChangedDelegate:(NSInteger)index
@@ -319,6 +358,9 @@
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [MBProgressHUD hideHUD];
         NSArray *dataArr = [json[@"data"] getArrayWithKey:@"merchants"];
+        if (dataArr.count == 0 || dataArr == nil) {
+            return;
+        }
         if (strongSelf.pageNo == 1) {
 //            [strongSelf.headModel setValuesForKeysWithDictionary:[json[@"data"] getDictionArrayWithKey:@"generalAgents"]];
             [self loadHeaderData];

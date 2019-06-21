@@ -17,6 +17,7 @@
 @property (nonatomic,strong) NSArray *flowtypes;
 
 @property (nonatomic,strong) NSArray *accounttypes;
+@property (weak, nonatomic) IBOutlet UILabel *belongStore;
 
 @end
 @implementation HTBillInfoTableViewCell
@@ -42,7 +43,7 @@
         self.valueLAbel.textColor = [UIColor colorWithHexString:@"#F53434"];
     }
     self.typeImg.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_bill",self.accounttypes[model.accounttype.integerValue]]];
-    
+    self.belongStore.text = model.belongstore.length > 0 ? model.belongstore : @"暂无数据";
 }
 
 @end

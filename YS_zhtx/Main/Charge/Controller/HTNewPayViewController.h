@@ -24,6 +24,7 @@
 @property (nonatomic,strong) HTCustModel *custModel;
 //如果是简易下单 
 @property (nonatomic, assign) BOOL isFromFast;
+@property (nonatomic, strong) NSArray *fastProductArray;
 @property (nonatomic, strong) NSString *bcProductStr;
 
 @end

@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface HTNewPayGoodsHeaderTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *icon;
+@property (weak, nonatomic) IBOutlet UILabel *changelabel;
 
 @end

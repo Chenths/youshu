@@ -32,8 +32,8 @@
 -(void)setModel:(HTNewFaceVipModel *)model{
     _model = model;
     self.timeLabel.text = [NSString stringWithFormat:@"到店%@" ,[HTHoldNullObj getValueWithUnCheakValue:model.enterTime]];
-    [self.headImg sd_setImageWithURL:[NSURL URLWithString:model.libPath] placeholderImage:[UIImage imageNamed:CUSTOMERHOLDIMG]];
-    [self.oldHeadImg sd_setImageWithURL:[NSURL URLWithString:model.snapPath] placeholderImage:[UIImage imageNamed:CUSTOMERHOLDIMG]];
+    [self.headImg sd_setImageWithURL:[NSURL URLWithString:model.snapPath] placeholderImage:[UIImage imageNamed:CUSTOMERHOLDIMG]];
+    [self.oldHeadImg sd_setImageWithURL:[NSURL URLWithString:model.libPath] placeholderImage:[UIImage imageNamed:CUSTOMERHOLDIMG]];
     self.nameLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.customerName];
     self.sexImg.image = [model.sex isEqualToString:@"男"] ? [UIImage imageNamed:@"g-man"]: [UIImage imageNamed:@"g-woman"];
     self.levelLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.level];

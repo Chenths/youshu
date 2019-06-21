@@ -41,6 +41,8 @@
         [MBProgressHUD showError:@"请输入电话号码"];
         return;
     }
+    self.phoneText.text = [[self.phoneText.text componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet]] componentsJoinedByString:@""];
+    
     if (![PhoneNumberTools isMobileNumber:self.phoneText.text]) {
         [MBProgressHUD showError:@"请输入正确的电话号码"];
         return;
@@ -55,7 +57,7 @@
         if ([json[@"data"] getStringWithKey:@"id"].length == 0) {
             HTAddVipViewController *vc = [[HTAddVipViewController alloc] init];
             vc.custId = [json[@"data"] getStringWithKey:@"customerId"];
-        
+            vc.model = self.faceModel;
             for (HTMenuModle *mode in [HTShareClass shareClass].menuArray) {
                 if ([mode.moduleName isEqualToString:@"customer"]) {
                     vc.moduleModel = mode;

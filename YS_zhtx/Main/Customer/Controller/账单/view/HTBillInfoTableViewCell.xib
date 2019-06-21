@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -37,8 +37,14 @@
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ta-8X-ReO">
+                        <rect key="frame" x="330" y="35" width="0.0" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-689.30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0fb-y2-da3">
-                        <rect key="frame" x="273.5" y="22.5" width="56.5" height="18"/>
+                        <rect key="frame" x="273.5" y="13" width="56.5" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.96078431372549022" green="0.20392156862745098" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -46,17 +52,21 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="H0U-pQ-EU4" firstAttribute="leading" secondItem="Mjo-rg-XHD" secondAttribute="trailing" constant="8" id="0Xv-SU-Fm2"/>
+                    <constraint firstItem="6ta-8X-ReO" firstAttribute="top" secondItem="kIv-iG-VHT" secondAttribute="top" id="27U-2z-vtR"/>
                     <constraint firstItem="kIv-iG-VHT" firstAttribute="top" secondItem="H0U-pQ-EU4" secondAttribute="bottom" constant="5" id="9A9-5u-UR9"/>
+                    <constraint firstItem="6ta-8X-ReO" firstAttribute="bottom" secondItem="kIv-iG-VHT" secondAttribute="bottom" id="BMr-GH-zIM"/>
                     <constraint firstItem="Mjo-rg-XHD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="CS6-48-1Xx"/>
                     <constraint firstItem="Mjo-rg-XHD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="KOi-A7-nIG"/>
                     <constraint firstItem="kIv-iG-VHT" firstAttribute="leading" secondItem="H0U-pQ-EU4" secondAttribute="leading" id="QAY-bd-MSC"/>
                     <constraint firstAttribute="bottom" secondItem="Mjo-rg-XHD" secondAttribute="bottom" constant="16.5" id="SNZ-ti-QhL"/>
+                    <constraint firstItem="0fb-y2-da3" firstAttribute="top" secondItem="H0U-pQ-EU4" secondAttribute="top" id="Yj8-6w-O4d"/>
                     <constraint firstAttribute="trailing" secondItem="0fb-y2-da3" secondAttribute="trailing" constant="16" id="azT-Kf-FgR"/>
-                    <constraint firstItem="0fb-y2-da3" firstAttribute="centerY" secondItem="Mjo-rg-XHD" secondAttribute="centerY" id="ew8-gw-SnK"/>
                     <constraint firstItem="H0U-pQ-EU4" firstAttribute="top" secondItem="Mjo-rg-XHD" secondAttribute="top" constant="-3" id="sP5-uV-fCj"/>
+                    <constraint firstItem="6ta-8X-ReO" firstAttribute="trailing" secondItem="0fb-y2-da3" secondAttribute="trailing" id="xnQ-zP-BTc"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="belongStore" destination="6ta-8X-ReO" id="01Z-yt-9h5"/>
                 <outlet property="dateLabel" destination="kIv-iG-VHT" id="rUP-B7-5Vc"/>
                 <outlet property="typeImg" destination="Mjo-rg-XHD" id="hN2-1N-88V"/>
                 <outlet property="typeLabel" destination="H0U-pQ-EU4" id="WFw-zI-cWG"/>
@@ -66,6 +76,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="充值_custome" width="30" height="30"/>
+        <image name="充值_custome" width="30.5" height="30.5"/>
     </resources>
 </document>

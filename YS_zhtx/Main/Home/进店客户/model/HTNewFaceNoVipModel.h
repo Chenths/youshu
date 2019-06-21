@@ -12,4 +12,8 @@
 @property (nonatomic, copy) NSString *enterTime;
 @property (nonatomic, copy) NSString *snapPath;
 @property (nonatomic, copy) NSString *userVipName;
+@property (nonatomic, copy) NSString *createTime;
+@property (nonatomic, copy) NSString *editTime;
+@property (nonatomic, copy) NSString *customerId;
+@property (nonatomic, copy) NSString *inNum;
 @end

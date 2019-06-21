@@ -8,15 +8,19 @@
 #import "HTCustomerPrudcutInfo.h"
 #import "HTCustomerProductInfoCell.h"
 #import "HTCustomerProductListController.h"
-
-@interface HTCustomerProductListController ()<UITableViewDataSource,UITableViewDelegate>
+#import "HTBillFiltrateBoxView.h"
+#import "HTFiltrateHeaderModel.h"
+#import "HTFiltrateNodeModel.h"
+#import "HTCustomerProductInfoNewCell.h"
+@interface HTCustomerProductListController ()<UITableViewDataSource,UITableViewDelegate, HTBillFiltrateBoxViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tab;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabBottomHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabTopConstraints;
 
 @property (nonatomic,strong) NSMutableArray *dataArray;
 
 @property (nonatomic,assign) int page;
-
+@property (nonatomic, copy) NSString *isAll;
 
 
 
@@ -30,6 +34,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self createTb];
+    if (self.beginDate.length > 0 && self.endDate.length > 0) {
+        _tabTopConstraints.constant = 0;
+    }else{
+        _tabTopConstraints.constant = 45;
+        [self createBox];
+    }
     [self.tab.mj_header beginRefreshing];
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -43,13 +53,51 @@
     return self.dataArray.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    HTCustomerProductInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTCustomerProductInfoCell" forIndexPath:indexPath];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.model = self.dataArray[indexPath.row];
-    return cell;
+    if (self.beginDate.length > 0 && self.endDate.length > 0) {
+        HTCustomerProductInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTCustomerProductInfoCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.model = self.dataArray[indexPath.row];
+        return cell;
+    }else{
+        HTCustomerProductInfoNewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTCustomerProductInfoNewCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.model = self.dataArray[indexPath.row];
+        return cell;
+    }
 }
-#pragma mark -CustomDelegate
 
+-(void)createBox{
+    HTBillFiltrateBoxView *box = [[HTBillFiltrateBoxView alloc] initWithBoxFrame:CGRectMake(0, 0, HMSCREENWIDTH, 48)];
+    box.delegate = self;
+    [box chooseType:1];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.view addSubview:box];
+    });
+    
+    HTFiltrateHeaderModel *m0 = [[HTFiltrateHeaderModel alloc] init];
+    NSArray *title0 = @[@"全部",@"本店"];
+    NSArray *valuess0 = @[@"0",@"1"];
+    NSMutableArray *arr0 = [NSMutableArray array];
+    for (int i = 0; i < title0.count; i++) {
+        HTFiltrateNodeModel *model = [[HTFiltrateNodeModel alloc] init];
+        model.isSelected = i == 0 ? YES : NO;
+        model.title = title0[i];
+        model.searchKey = @"isAll";
+        model.searchValue = valuess0[i];
+        [arr0 addObject:model];
+    }
+    m0.titles = arr0;
+    m0.filtrateStyle = HTFiltrateStyleCollection;
+    box.dataArray = @[m0];
+    
+}
+
+#pragma mark -CustomDelegate
+-(void)FiltrateBoxDidSelectedInSection:(NSInteger) section andRow:(NSInteger) row withHeadModel:(HTFiltrateHeaderModel *)model{
+    HTFiltrateNodeModel *node = model.titles[row];
+    _isAll = node.searchValue;
+    [self.tab.mj_header beginRefreshing];
+}
 #pragma mark -EventResponse
 
 #pragma mark -private methods
@@ -58,6 +106,8 @@
     self.tab.dataSource = self;
     
     [self.tab registerNib:[UINib nibWithNibName:@"HTCustomerProductInfoCell" bundle:nil] forCellReuseIdentifier:@"HTCustomerProductInfoCell"];
+    [self.tab registerNib:[UINib nibWithNibName:@"HTCustomerProductInfoNewCell" bundle:nil] forCellReuseIdentifier:@"HTCustomerProductInfoNewCell"];
+    
 
     UIView *v = [[UIView alloc] init];
     v.backgroundColor = [UIColor clearColor];
@@ -98,6 +148,7 @@
     [dic setObject:self.companyId forKey:@"companyId"];
     [dic setObject:[HTHoldNullObj getValueWithUnCheakValue:self.beginDate] forKey:@"beginDate"];
     [dic setObject:[HTHoldNullObj getValueWithUnCheakValue:self.endDate] forKey:@"endDate"];
+    
     if ([HTHoldNullObj getValueWithUnCheakValue:self.category].length > 0) {
        [dic setObject:[HTHoldNullObj getValueWithUnCheakValue:self.category] forKey:@"categories"];
     }
@@ -137,6 +188,7 @@
     [dic setObject:@"10" forKey:@"pageSize"];
     [dic setObject:[HTShareClass shareClass].loginModel.companyId forKey:@"companyId"];
     [dic setObject:[HTHoldNullObj getValueWithUnCheakValue:self.custId] forKey:@"customerId"];
+    [dic setObject:[HTHoldNullObj getValueWithUnCheakValue:self.isAll] forKey:@"isAll"];
     NSMutableDictionary *postDic = [NSMutableDictionary dictionary];
     [postDic setValuesForKeysWithDictionary:dic];
     [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleCust,loadOrderListByCustomer] params:postDic success:^(id json) {

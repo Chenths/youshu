@@ -514,7 +514,7 @@
 }
 -(NSString *)sortType{
     if (_sortType.length == 0) {
-        return @"3";
+        return @"1";
     }
     return _sortType;
 }

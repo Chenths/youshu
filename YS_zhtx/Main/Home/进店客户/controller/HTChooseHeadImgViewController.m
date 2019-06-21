@@ -60,11 +60,11 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     self.seebt.enabled = YES;
     self.seeTitle.hidden = NO;
-    if (self.selectedDataArray.count == 5) {
+    if (self.selectedDataArray.count == 1) {
         HTFaceImgListModel *model = self.dataArray[indexPath.row];
         if (model.isSelected) {
         }else{
-            [MBProgressHUD showError:@"人脸识别照片最多选择5张"];
+            [MBProgressHUD showError:@"人脸识别照片最多选择1张"];
             return;
         }
     }
@@ -80,7 +80,7 @@
     HTChooseHeadImgCell *cell = (HTChooseHeadImgCell*)[collectionView cellForItemAtIndexPath:indexPath];
     self.selectedImg1 = cell.headImg.image;
     self.imgId =  model.uid;
-    self.seeTitle.text = [NSString stringWithFormat:@"预览(%ld/5)",self.selectedDataArray.count];
+    self.seeTitle.text = [NSString stringWithFormat:@"预览(%ld/1)",self.selectedDataArray.count];
     [self.dataCollectionView reloadData];
 }
 #pragma mark -CustomDelegate

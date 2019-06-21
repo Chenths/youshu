@@ -36,5 +36,6 @@
 @property (nonatomic,strong) HTCustomerTagsModel *tags;
 //RFM
 @property (nonatomic, strong) HTCustRFMMeaasge *custRFMMessage;
-
+//隶属店铺
+@property (nonatomic, strong) NSString *belongStore;
 @end

@@ -548,10 +548,28 @@
 }
 
 - (NSString *)buildbcProductJsonStr{
-    if (_isFromFast) {
-        return self.bcProductStr;
-    }
     NSMutableArray *firstArr = [NSMutableArray array];
+    if (_isFromFast) {
+        NSInteger tempCount = 0;
+        for (NSDictionary *dic in self.fastProductArray) {
+            NSMutableDictionary *tempDic = [NSMutableDictionary dictionaryWithDictionary:dic];
+            //判断是否赠送积分
+            BOOL isGivenScore = 1;
+            for (NSIndexPath *index in _noGiveScoreArr) {
+                if (index.row == tempCount) {
+                    isGivenScore = 0;
+                }
+            }
+            if (isGivenScore) {
+                [tempDic setObject:@(1) forKey:@"hasGivePoint"];
+            }else{
+                [tempDic setObject:@(0) forKey:@"hasGivePoint"];
+            }
+            [firstArr addObject:tempDic];
+            tempCount++;
+        }
+        return [firstArr arrayToJsonString];
+    }
     //创建 bcProductJsonStr
     
     NSInteger tempCount = 0;
@@ -566,10 +584,10 @@
         }
         
         //判断是否赠送积分
-        BOOL isGivenScore = 0;
+        BOOL isGivenScore = 1;
         for (NSIndexPath *index in _noGiveScoreArr) {
             if (index.row == tempCount) {
-                isGivenScore = 1;
+                isGivenScore = 0;
             }
         }
         if (isGivenScore) {
@@ -915,6 +933,13 @@
     }else if (indexPath.section == 1){
         HTNewPayGoodsHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTNewPayGoodsHeaderTableViewCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (_isFromFast) {
+            cell.changelabel.hidden = YES;
+            cell.icon.hidden = YES;
+        }else{
+            cell.changelabel.hidden = NO;
+            cell.icon.hidden = NO;
+        }
         return cell;
     }else if (indexPath.section == 2){
         HTNewPayGoodsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTNewPayGoodsTableViewCell" forIndexPath:indexPath];
@@ -953,7 +978,10 @@
             cell.chooseLabel.attributedText = attribtStr;
         }else{
             cell.chooseImv.image = [UIImage imageNamed:@"singleSelected"];
-            cell.chooseLabel.text = @"赠送积分";
+            NSString *oldPriceStr = @"赠送积分";
+//            NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+            NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:oldPriceStr attributes:nil];
+            cell.chooseLabel.attributedText = attribtStr;
         }
         
         return cell;
@@ -1215,6 +1243,9 @@
 {
     NSLog(@"当前行:%ld 列:%ld", indexPath.section, indexPath.row);
     if (indexPath.section == 1) {
+        if (_isFromFast) {
+            return;
+        }
         HTChangePriceViewController *vc = [[HTChangePriceViewController alloc] init];
         vc.oldDataArray = self.products;
         vc.orderModel = self.orderModel;
@@ -1235,17 +1266,19 @@
 //            strongSelf.payCode = payCode;
 //            strongSelf.wechatPayOrderId = wechatPayOrderId;
             strongSelf.priceLabel.text = finalPrice;
-            NSMutableArray *tempSell = [NSMutableArray array];
-            for (int i = 0; i < strongSelf.paySellerArr.count; i++) {
-                [tempSell addObject:@""];
-            }
-            strongSelf.paySellerArr = [NSMutableArray arrayWithArray:tempSell];
             
-            NSMutableArray *tempBili = [NSMutableArray array];
-            for (int i = 0; i < strongSelf.biliArr.count; i++) {
-                [tempBili addObject:@""];
-            }
-            strongSelf.biliArr = [NSMutableArray arrayWithArray:tempBili];
+//            NSMutableArray *tempSell = [NSMutableArray array];
+//            for (int i = 0; i < strongSelf.paySellerArr.count; i++) {
+//                [tempSell addObject:@""];
+//            }
+//            strongSelf.paySellerArr = [NSMutableArray arrayWithArray:tempSell];
+//
+//            NSMutableArray *tempBili = [NSMutableArray array];
+//            for (int i = 0; i < strongSelf.biliArr.count; i++) {
+//                [tempBili addObject:@""];
+//            }
+//            strongSelf.biliArr = [NSMutableArray arrayWithArray:tempBili];
+            [self dealSellerData];
             
             NSMutableArray *tempPayKind = [NSMutableArray array];
             for (int i = 0; i < strongSelf.payKindMoneyArr.count; i++) {
