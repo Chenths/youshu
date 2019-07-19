@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *sexImg;
 @property (weak, nonatomic) IBOutlet UILabel *levelLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *oldHeadImg;
+@property (weak, nonatomic) IBOutlet UIImageView *systemHeadImv;
 
 @end
 
@@ -25,13 +26,15 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     [self.levelLabel changeCornerRadiusWithRadius:self.levelLabel.height *0.5];
-    [self.headImg changeCornerRadiusWithRadius:133.0 / 2];
-    [self.oldHeadImg changeCornerRadiusWithRadius:133.0 / 2];
+//    [self.headImg changeCornerRadiusWithRadius:133.0 / 2];
+//    [self.oldHeadImg changeCornerRadiusWithRadius:133.0 / 2];
+    [self.systemHeadImv changeCornerRadiusWithRadius:43.0 / 2];
     [self.levelLabel changeBorderStyleColor:[UIColor colorWithHexString:@"999999"] withWidth:1];
 }
 -(void)setModel:(HTNewFaceVipModel *)model{
     _model = model;
-    self.timeLabel.text = [NSString stringWithFormat:@"到店%@" ,[HTHoldNullObj getValueWithUnCheakValue:model.enterTime]];
+    self.timeLabel.text = [NSString stringWithFormat:@"进店: %@" ,[HTHoldNullObj getValueWithUnCheakValue:model.enterTime]];
+    [self.systemHeadImv sd_setImageWithURL:[NSURL URLWithString:model.headImg] placeholderImage:[UIImage imageNamed:CUSTOMERHOLDIMG]];
     [self.headImg sd_setImageWithURL:[NSURL URLWithString:model.snapPath] placeholderImage:[UIImage imageNamed:CUSTOMERHOLDIMG]];
     [self.oldHeadImg sd_setImageWithURL:[NSURL URLWithString:model.libPath] placeholderImage:[UIImage imageNamed:CUSTOMERHOLDIMG]];
     self.nameLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.customerName];

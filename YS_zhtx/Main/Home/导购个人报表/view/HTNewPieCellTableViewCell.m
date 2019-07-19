@@ -82,7 +82,11 @@
         HTBossLegendTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:@"HTBossLegendTableViewCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.model = self.dataArray[indexPath.row];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        if([[[HTShareClass shareClass].loginModel.company getStringWithKey:@"type"] isEqualToString:@"AGENT"]||[[[HTShareClass shareClass].loginModel.company getStringWithKey:@"type"] isEqualToString:@"BOSS"]){
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }else{
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
         return cell;
     }else {
         if ([HTHoldNullObj getValueWithUnCheakValue:model.costPrice].length > 0) {
@@ -95,7 +99,11 @@
             HTLegendTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:@"HTLegendTableViewCell" forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.model = self.dataArray[indexPath.row];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            if([[[HTShareClass shareClass].loginModel.company getStringWithKey:@"type"] isEqualToString:@"AGENT"]||[[[HTShareClass shareClass].loginModel.company getStringWithKey:@"type"] isEqualToString:@"BOSS"]){
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }else{
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            }
             return cell;
         }
     }
@@ -131,9 +139,9 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if([[[HTShareClass shareClass].loginModel.company getStringWithKey:@"type"] isEqualToString:@"AGENT"]||[[[HTShareClass shareClass].loginModel.company getStringWithKey:@"type"] isEqualToString:@"BOSS"]){
-        if (_isFromInventoryInfo) {
-            return;            
-        }
+//        if (_isFromInventoryInfo) {
+            return;
+//        }
     }
     if ([[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[HTInventoryInfoDescCell class] ]) {
         NSMutableDictionary *dic = [NSMutableDictionary dictionary];

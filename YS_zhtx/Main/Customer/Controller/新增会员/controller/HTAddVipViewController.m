@@ -61,10 +61,32 @@
     [super viewDidLoad];
     self.title = @"添加会员";
     self.configs = [HTEditVipManager configEditModels];
+    [self dealFaceUrl];
     [self createTb];
     [self configTag];
     [self loadConfig];
 }
+- (void)dealFaceUrl{
+    if (self.path) {
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            SDWebImageManager *manager = [SDWebImageManager sharedManager];
+            NSURL *imgUrl = [NSURL URLWithString:self.path];
+            [manager diskImageExistsForURL:imgUrl completion:^(BOOL isInCache) {
+                if (isInCache) {
+                    self.selectedImg =  [[manager imageCache] imageFromDiskCacheForKey:imgUrl.absoluteString];
+                }else{
+                    NSData *data = [NSData dataWithContentsOfURL:imgUrl];
+                    if (data) {
+                        self.selectedImg = [UIImage imageWithData:data];
+                    }
+                }
+            }];
+        });
+        
+    }
+}
+
+                       
 #pragma mark -UITabelViewDelegate
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSArray *cells = self.cellsName[indexPath.section];
@@ -371,6 +393,8 @@
             [arr addObject:model.HTFaceImgListModelid];
         }
         [self.requestDic setObject:[arr componentsJoinedByString:@","] forKey:@"imgIds"];
+    }else{
+        
     }
     
     [MBProgressHUD showMessage:@""];

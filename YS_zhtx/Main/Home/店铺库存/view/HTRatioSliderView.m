@@ -28,6 +28,9 @@
             if (ratio.length == 0) {
                 continue;
             }
+            if (total == 0) {
+                total = 1;
+            }
             UIView *partView = [[UIView alloc] initWithFrame:CGRectMake(xWidth -( width * ratio.floatValue / total + (i == 0 ? 0 : frame.size.height * 0.5 + 1))  , 0, width * ratio.floatValue / total + (i == 0 ? 0 : frame.size.height * 0.5 + 1)  , frame.size.height)];
             partView.backgroundColor = [UIColor colorWithHexString:colors[i]];
             [partView changeCornerRadiusWithRadius:frame.size.height * 0.5];

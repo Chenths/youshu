@@ -52,7 +52,7 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"baseUrl"]) {
         tmp = [[NSUserDefaults standardUserDefaults] objectForKey:@"baseUrl"];
     }else{
-        tmp = @"http://192.168.199.36:8080/";
+        tmp = @"http://192.168.199.38:8080/";
     }
     [HTCustomTextAlertView showAlertWithTitle:@"输入服务器地址" holdTitle:@"" orTextString:tmp okBtclicked:^(NSString * textValue) {
         if (![textValue isEqualToString:@""]) {

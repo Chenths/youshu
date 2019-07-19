@@ -26,6 +26,7 @@
 #import "HTFaceImgListModel.h"
 #import "HTChangeHeadImgViewController.h"
 #import "HTEditVipTipCell.h"
+#import "HTMyShopCustomersCenterController.h"
 @interface HTEditVipViewController ()<UITableViewDelegate,UITableViewDataSource,HTTagsTableViewCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HTEditVipContinueBackListCellDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tab;
 @property (weak, nonatomic) IBOutlet UIButton *saveBt;
@@ -66,7 +67,30 @@
     self.configs = [HTEditVipManager configEditModels];
     [self createTb];
     [self loadConfig];
+    [self dealFaceUrl];
 }
+
+- (void)dealFaceUrl{
+    if (_isFromFace) {
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            SDWebImageManager *manager = [SDWebImageManager sharedManager];
+            NSURL *imgUrl = [NSURL URLWithString:self.faceNoVipModel.snapPath];
+            [manager diskImageExistsForURL:imgUrl completion:^(BOOL isInCache) {
+                if (isInCache) {
+                    self.selectedImg =  [[manager imageCache] imageFromDiskCacheForKey:imgUrl.absoluteString];
+                }else{
+                    NSData *data = [NSData dataWithContentsOfURL:imgUrl];
+                    if (data) {
+                        self.selectedImg = [UIImage imageWithData:data];
+                    }
+                }
+            }];
+        });
+        
+    }
+}
+
+
 #pragma mark -UITabelViewDelegate
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSArray *cells = self.cellsName[indexPath.section];
@@ -84,7 +108,7 @@
         if (self.selectedImg) {
             cell.headImg = self.selectedImg;
         }else{
-            cell.imgPath = [self.requestDic getStringWithKey:@"headimg"];
+            cell.imgPath = [self.requestDic getStringWithKey:@"headImg"];
         }
         return cell;
     }else if ([cellname isEqualToString:@"HTEditVipCustLevelCell"]){
@@ -197,7 +221,7 @@
             if (self.hasHeaders) {
                 HTChangeHeadImgViewController *vc = [[HTChangeHeadImgViewController alloc] init];
                 vc.uid = self.modelId;
-                vc.headUrl = [self.requestDic getStringWithKey:@"headimg"];
+                vc.headUrl = [self.requestDic getStringWithKey:@"headImg"];
                 vc.headImg = ^(UIImage *headImg) {
                     self.selectedImg = headImg;
                     [self.tab reloadData];
@@ -449,7 +473,7 @@
  */
 - (IBAction)saveBtClicked:(id)sender {
     if ([HTShareClass shareClass].face && !self.hasHeaders) {
-        if (self.self.selectedImgArray.count == 0) {
+        if (self.selectedImgArray.count == 0 && !_isFromFace && [[self.requestDic getStringWithKey:@"headImg"] isEqualToString:@""] && !_selectedImg) {
             HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:@"您未选择用户头像" btsArray:@[@"继续保存",@"选择头像"] okBtclicked:^{
 //                选择人脸识别参照图片
                 HTChooseHeadImgViewController *vc = [[HTChooseHeadImgViewController alloc] init];
@@ -503,7 +527,14 @@
     if (self.selectedImg) {
         [self.requestDic setObject:[self.selectedImg getBase64Img] forKey:@"headImg"];
     }
-    if (self.selectedImgArray.count > 0) {
+    if (_isFromFace && self.selectedImgArray.count == 0) {
+        //        [self.requestDic setObject:self.path forKey:@"faceurl"];
+        NSMutableArray *arr = [NSMutableArray array];
+        //        for (HTFaceImgListModel *model in self.selectedImgArray) {
+        [arr addObject:self.faceNoVipModel.customerId];
+        //        }
+        [self.requestDic setObject:[arr componentsJoinedByString:@","] forKey:@"imgIds"];
+    }else if (self.selectedImgArray.count > 0) {
         NSMutableArray *arr = [NSMutableArray array];
         for (HTFaceImgListModel *model in self.selectedImgArray) {
             [arr addObject:model.HTFaceImgListModelid];
@@ -518,7 +549,20 @@
         HTCustomerListModel *model = [[HTCustomerListModel alloc] init];
         model.custId = [HTHoldNullObj getValueWithUnCheakValue:self.modelId ];
         vc.model = model;
-        [self.navigationController popViewControllerAnimated:NO];
+        if (self.isFromFace) {
+            HTMyShopCustomersCenterController *homeVC = [[HTMyShopCustomersCenterController alloc] init];
+            UIViewController *target = nil;
+            for (UIViewController * controller in self.navigationController.viewControllers) {
+                if ([controller isKindOfClass:[homeVC class]]) {
+                    target = controller;
+                }
+            }
+            if (target) {
+                [self.navigationController popToViewController:target animated:YES];
+            }
+        }else{
+            [self.navigationController popViewControllerAnimated:NO];
+        }
 //        [[HTShareClass shareClass].getCurrentNavController pushViewController:vc animated:YES];
         
     } error:^{
@@ -604,7 +648,11 @@
             [self.requestDic setObject:[baseInfo getStringWithKey:@"wechat"] forKey:@"cust.wechat"];
             [self.requestDic setObject:[baseInfo  getStringWithKey:@"hobby"] forKey:@"model.hobby"];
             [self.requestDic setObject:[baseInfo  getStringWithKey:@"name"] forKey:@"model.name"];
-            [self.requestDic setObject:[baseInfo  getStringWithKey:@"headimg"] forKey:@"headimg"];
+            if (self.isFromFace) {
+                [self.requestDic setObject:self.faceNoVipModel.snapPath forKey:@"headImg"];
+            }else{
+                [self.requestDic setObject:[baseInfo  getStringWithKey:@"headimg"] forKey:@"headImg"];
+            }
             [self.requestDic setObject:[baseInfo  getStringWithKey:@"remark"] forKey:@"remark"];
         }
         self.hasHeaders = [json[@"data"][@"hasHeaders"] boolValue];

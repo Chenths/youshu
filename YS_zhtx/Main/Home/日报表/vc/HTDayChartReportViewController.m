@@ -20,6 +20,8 @@
 #import "HTSaleItemDetailTableViewCell.h"
 #import "HTSaleOtherDetailTableViewCell.h"
 #import "HTSaleItemMode.h"
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKUI/ShareSDK+SSUI.h>
 @interface HTDayChartReportViewController ()<UITableViewDelegate,UITableViewDataSource,HTChangeTypeTableCellDelegate, chooseShowPayDetailDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tab;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabBottomHeight;
@@ -36,6 +38,7 @@
 @property (nonatomic, assign) NSInteger currentSelectShowPayKindType;
 @property (nonatomic, strong) NSMutableArray *payKindDetailLeftArr;
 @property (nonatomic, strong) NSMutableArray *payKindDetailRightArr;
+@property (nonatomic, strong) UIImage *shareImg;
 @end
 
 @implementation HTDayChartReportViewController
@@ -48,7 +51,89 @@
     self.title = @"日报表";
     [self createTb];
     [self loadDataWithDate:self.reportDate];
+    [self buildRightButtonItem];
 }
+
+
+- (void)buildRightButtonItem{
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImageName:@"g-share" highImageName:@"g-share" target:self action:@selector(creatScreenShot)];
+    
+}
+
+- (void)creatScreenShot{
+    if (!_shareImg) {
+        NSInteger sec = self.cellsName.count == 0 ? 0 : self.cellsName.count;
+        NSArray *cells = self.cellsName[sec - 1];
+        NSInteger ro = self.cellsName.count == 0 ? 0 : [cells count];
+        [self.tab scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:ro - 1 inSection:sec - 1] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        
+        [MBProgressHUD showMessage:@"生成完整截图中"];
+        [NSTimer scheduledTimerWithTimeInterval:3.0 repeats:NO block:^(NSTimer * _Nonnull timer) {
+            dispatch_async(dispatch_get_main_queue(),^{
+                UIGraphicsBeginImageContextWithOptions(self.tab.contentSize, YES, [UIScreen mainScreen].scale);
+                
+                CGPoint savedContentOffset = self.tab.contentOffset;
+                CGRect savedFrame = self.tab.frame;
+                self.tab.contentOffset = CGPointZero;
+                self.tab.frame = CGRectMake(0, 0, self.tab.contentSize.width, self.tab.contentSize.height);
+                [self.tab.layer renderInContext: UIGraphicsGetCurrentContext()];
+                self.shareImg = UIGraphicsGetImageFromCurrentImageContext();
+                self.tab.contentOffset = savedContentOffset;
+                self.tab.frame = savedFrame;
+                
+                [MBProgressHUD hideHUD];
+                UIGraphicsEndImageContext();
+                [self share];
+            });
+            [timer invalidate];
+            timer = nil;
+        }];
+    }else{
+        [self share];
+    }
+}
+
+- (void)share{
+    NSArray* imageArray = @[self.shareImg];
+    if (imageArray) {
+        NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
+        
+        [shareParams SSDKSetupShareParamsByText:@"知识与你共享"
+                                         images:imageArray
+                                            url:[NSURL URLWithString:@""]
+                                          title:self.title
+                                           type:SSDKContentTypeImage];
+        [ShareSDK showShareActionSheet:nil items:nil shareParams:shareParams onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
+            
+            switch (state) {
+                case SSDKResponseStateSuccess:
+                {
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
+                                                                        message:nil
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"确定"
+                                                              otherButtonTitles:nil];
+                    [alertView show];
+                    break;
+                }
+                case SSDKResponseStateFail:
+                {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败"
+                                                                    message:[NSString stringWithFormat:@"%@",error]
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil, nil];
+                    [alert show];
+                    break;
+                }
+                default:
+                    break;
+            }
+        }];
+    }
+    
+}
+
 
 - (void)selectChooseShowPayKindType:(NSInteger)type
 {

@@ -53,7 +53,7 @@
     _vipModel = vipModel;
     [self.vipImg sd_setImageWithURL:[NSURL URLWithString:vipModel.libPath] placeholderImage:[UIImage imageNamed:@"g-customerholdImg"]];
     [self.currentImg sd_setImageWithURL:[NSURL URLWithString:vipModel.snapPath] placeholderImage:[UIImage imageNamed:@"g-customerholdImg"]];
-    self.comeDateLabel.text = [NSString stringWithFormat:@"到店%@", [HTHoldNullObj getValueWithUnCheakValue:vipModel.enterTime]];
+    self.comeDateLabel.text = [NSString stringWithFormat:@"进店: %@", [HTHoldNullObj getValueWithUnCheakValue:vipModel.enterTime]];
     self.nameLabel.text = [HTHoldNullObj getValueWithUnCheakValue:vipModel.customerName];
     self.sexImg.hidden = NO;
     self.sexImg.image = [UIImage imageNamed: [vipModel.sex isEqualToString:@"男"] ? @"g-man" : @"g-woman"];

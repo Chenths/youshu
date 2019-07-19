@@ -18,6 +18,7 @@
 #import "HTDayChartReportViewController.h"
 #import "HTGSaleReportViewController.h"
 #import "HTOrderViewController.h"
+#import "HTWarningWebViewController.h"
 @implementation HTJumpTools
 
 + (void)jumpWithStr:(NSString *)type withDic:(NSDictionary *)dataDic{
@@ -171,6 +172,10 @@
     }else if([type isEqualToString:@"VIP_REPORT"]){
 //        进店客户
         HTMyShopCustomersCenterController *vc = [[HTMyShopCustomersCenterController alloc] init];
+        [nac pushViewController:vc animated:YES];
+    }else if ([type isEqualToString:@"LINK_SKIP"]){
+        HTWarningWebViewController *vc = [[HTWarningWebViewController alloc] init];
+        vc.finallUrl = [paramsDic objectForKey:@"linkUrl"];
         [nac pushViewController:vc animated:YES];
     }
    [HTShareClass shareClass].jumpType = @"";

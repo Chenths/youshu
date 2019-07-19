@@ -210,7 +210,7 @@
     }
     if (indexPath.section == 1) {
          HTHomePageViewController *vc = [[HTHomePageViewController alloc] init];
-         HTSingleShopDataModel *model = self.shopsArray[indexPath.row];
+         HTSingleShopDataModel *model = self.dataArray[indexPath.row];
          vc.isBoss = YES;
          vc.backImg = @"g-back";
          vc.companyName = model.merchantName;

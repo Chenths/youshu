@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HTOnlineCustomerListViewController">
             <connections>
                 <outlet property="dataTableView" destination="zpS-tj-QmS" id="hnW-9n-17A"/>
+                <outlet property="datePickTF" destination="uSO-Qw-CF9" id="HSB-ys-PX3"/>
                 <outlet property="tabBottomHeight" destination="Tzm-2h-eAi" id="rFY-VF-aoQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -21,19 +22,47 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zpS-tj-QmS">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="624"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zpS-tj-QmS">
+                    <rect key="frame" x="0.0" y="54" width="375" height="570"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
+                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="g-mineDown" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UhH-0Z-qcc">
+                    <rect key="frame" x="338" y="16" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="0AA-5h-LMq"/>
+                        <constraint firstAttribute="height" constant="20" id="8Ob-km-byh"/>
+                    </constraints>
+                </imageView>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="日期" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uSO-Qw-CF9">
+                    <rect key="frame" x="23" y="14" width="352" height="24"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="ltN-ok-Ogd"/>
+                    </constraints>
+                    <color key="textColor" red="0.32156862745098036" green="0.32941176470588235" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="zkk-yQ-aZC"/>
+                    </connections>
+                </textField>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="zpS-tj-QmS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="FIk-6w-7u3"/>
+                <constraint firstItem="uSO-Qw-CF9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="23" id="5JF-0I-h9u"/>
+                <constraint firstItem="zpS-tj-QmS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="54" id="FIk-6w-7u3"/>
+                <constraint firstItem="UhH-0Z-qcc" firstAttribute="centerY" secondItem="uSO-Qw-CF9" secondAttribute="centerY" id="OUW-q9-viu"/>
                 <constraint firstItem="zpS-tj-QmS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="PUv-ta-mlD"/>
-                <constraint firstAttribute="bottom" secondItem="zpS-tj-QmS" secondAttribute="bottom" id="Tzm-2h-eAi"/>
+                <constraint firstAttribute="trailing" secondItem="uSO-Qw-CF9" secondAttribute="trailing" id="Pum-NP-8R2"/>
+                <constraint firstAttribute="bottom" secondItem="zpS-tj-QmS" secondAttribute="bottom" constant="43" id="Tzm-2h-eAi"/>
                 <constraint firstAttribute="trailing" secondItem="zpS-tj-QmS" secondAttribute="trailing" id="cfI-ud-cwA"/>
+                <constraint firstAttribute="trailing" secondItem="UhH-0Z-qcc" secondAttribute="trailing" constant="17" id="oZX-aR-KH0"/>
+                <constraint firstItem="uSO-Qw-CF9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="14" id="uT5-fz-fX3"/>
             </constraints>
-            <point key="canvasLocation" x="24.5" y="51.5"/>
+            <point key="canvasLocation" x="23.199999999999999" y="50.824587706146929"/>
         </view>
     </objects>
+    <resources>
+        <image name="g-mineDown" width="20.5" height="20.5"/>
+    </resources>
 </document>

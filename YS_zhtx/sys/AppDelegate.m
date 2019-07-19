@@ -68,7 +68,21 @@ static BOOL isProduction = YES;
     [self configJPushWith:launchOptions and:application];
     [self configJMsgWith:launchOptions];
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    
+    [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:)
+     
+                          name:kJPFNetworkDidReceiveMessageNotification object:nil];
+
     return YES;
+}
+
+- (void)networkDidReceiveMessage:(NSNotification *)notification {
+    
+    //处理通知的方法
+    //
+    NSDictionary *userInfo = [notification userInfo];
+    
 }
 -(void)applicationDidBecomeActive:(UIApplication *)application{
    
@@ -99,6 +113,10 @@ static BOOL isProduction = YES;
     
     application.applicationIconBadgeNumber = 0 ;
     [JPUSHService setBadge:application.applicationIconBadgeNumber];
+    
+    [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
+        NSLog(@"resCode : %d,registrationID: %@",resCode,registrationID);
+    }];
 }
 //配置极光im
 -(void)configJMsgWith:(NSDictionary *)launchOptions{
@@ -230,15 +248,17 @@ static BOOL isProduction = YES;
     
     
     //组装并播放音效
-    
-    SystemSoundID soundID;
-    NSString *filePathStr = [[NSBundle mainBundle] pathForResource:[userInfo objectForKey:@"sound"] ofType:@"caf"];
-
-    NSURL *filePath = [NSURL URLWithString:filePathStr];
-    
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)filePath, &soundID);
-    
-    AudioServicesPlaySystemSound(soundID);
+    if (![[[userInfo objectForKey:@"aps"] objectForKey:@"sound"] isEqualToString:@"default"]) {
+        SystemSoundID soundID;
+        NSString *filePathStr = [[NSBundle mainBundle] pathForResource:[userInfo objectForKey:@"sound"] ofType:@"caf"];
+        
+        NSURL *filePath = [NSURL URLWithString:filePathStr];
+        
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)filePath, &soundID);
+        
+        AudioServicesPlaySystemSound(soundID);
+        
+    }
     
 
     

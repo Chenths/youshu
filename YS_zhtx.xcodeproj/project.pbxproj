@@ -306,7 +306,6 @@
 		043DBD8A20BE9E4B00020936 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 043DBD8920BE9E4B00020936 /* AppDelegate.m */; };
 		043DBD9020BE9E4B00020936 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 043DBD8E20BE9E4B00020936 /* Main.storyboard */; };
 		043DBD9220BE9E4B00020936 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 043DBD9120BE9E4B00020936 /* Assets.xcassets */; };
-		043DBD9520BE9E4B00020936 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 043DBD9320BE9E4B00020936 /* LaunchScreen.storyboard */; };
 		043DBD9820BE9E4B00020936 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 043DBD9720BE9E4B00020936 /* main.m */; };
 		043DBDA220BE9E4B00020936 /* YS_zhtxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 043DBDA120BE9E4B00020936 /* YS_zhtxTests.m */; };
 		043DBDAD20BE9E4B00020936 /* YS_zhtxUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 043DBDAC20BE9E4B00020936 /* YS_zhtxUITests.m */; };
@@ -1028,6 +1027,27 @@
 		04E348CC2133D5F700F6F520 /* HTAddVipViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E348CA2133D5F700F6F520 /* HTAddVipViewController.xib */; };
 		04E348D02133D7D300F6F520 /* HTEditVipHeadImgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E348CE2133D7D300F6F520 /* HTEditVipHeadImgCell.m */; };
 		04E348D12133D7D300F6F520 /* HTEditVipHeadImgCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E348CF2133D7D300F6F520 /* HTEditVipHeadImgCell.xib */; };
+		04E4B4E322E159A200E1FE99 /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E4B4E222E159A200E1FE99 /* NotificationService.m */; };
+		04E4B4E722E159A200E1FE99 /* InformFeedBack.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 04E4B4DF22E159A100E1FE99 /* InformFeedBack.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		04E4B4EB22E15AFD00E1FE99 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04718904216074810063A736 /* libz.tbd */; };
+		04E4B4EC22E15B0A00E1FE99 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0471890A2160749C0063A736 /* libresolv.tbd */; };
+		04E4B4ED22E15B1900E1FE99 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04718908216074940063A736 /* UserNotifications.framework */; };
+		04E4B4EE22E15B2800E1FE99 /* jpush-ios-3.1.0.a in Resources */ = {isa = PBXBuildFile; fileRef = 047188F02160741F0063A736 /* jpush-ios-3.1.0.a */; };
+		04E4B4F122E15DC800E1FE99 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047188F42160743B0063A736 /* CFNetwork.framework */; };
+		04E4B4F222E15DCF00E1FE99 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047188F6216074440063A736 /* CoreFoundation.framework */; };
+		04E4B4F322E15DD600E1FE99 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047188F82160744D0063A736 /* CoreTelephony.framework */; };
+		04E4B4F422E15DE100E1FE99 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047188FA216074570063A736 /* SystemConfiguration.framework */; };
+		04E4B4F522E15DE700E1FE99 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047188FC216074600063A736 /* CoreGraphics.framework */; };
+		04E4B4F622E15DEF00E1FE99 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047188FE216074680063A736 /* Foundation.framework */; };
+		04E4B4F722E15DF600E1FE99 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047189002160746E0063A736 /* UIKit.framework */; };
+		04E4B4F822E15DFF00E1FE99 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04718902216074770063A736 /* Security.framework */; };
+		04E4B4F922E15E0E00E1FE99 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04718906216074880063A736 /* AdSupport.framework */; };
+		04E4B4FA22E1608C00E1FE99 /* JPushNotificationExtensionService.h in Resources */ = {isa = PBXBuildFile; fileRef = 047188ED2160741F0063A736 /* JPushNotificationExtensionService.h */; };
+		04E4B4FB22E1612500E1FE99 /* JPushNotificationExtensionService.h in Resources */ = {isa = PBXBuildFile; fileRef = 047188ED2160741F0063A736 /* JPushNotificationExtensionService.h */; };
+		04E4B4FC22E1612A00E1FE99 /* jpush-ios-3.1.0.a in Resources */ = {isa = PBXBuildFile; fileRef = 047188F02160741F0063A736 /* jpush-ios-3.1.0.a */; };
+		04E4B50422E19A3F00E1FE99 /* jpush-ios-3.2.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04E4B4FF22E19A3F00E1FE99 /* jpush-ios-3.2.1.a */; };
+		04E4B50522E19A3F00E1FE99 /* jpush-extension-ios-1.1.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04E4B50022E19A3F00E1FE99 /* jpush-extension-ios-1.1.2.a */; };
+		04E4B50622E19A3F00E1FE99 /* jcore-ios-2.1.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04E4B50322E19A3F00E1FE99 /* jcore-ios-2.1.1.a */; };
 		04EBDE2121BA6A7C0069595B /* HTHoldNullObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EBDE1F21BA6A7B0069595B /* HTHoldNullObj.m */; };
 		04EBDE2421BA6B320069595B /* SecurityUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EBDE2321BA6B320069595B /* SecurityUtil.m */; };
 		04EC1E9A20CFC2B000AB10B5 /* HTTurnListDescInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC1E9820CFC2AF00AB10B5 /* HTTurnListDescInfoController.m */; };
@@ -1085,7 +1105,28 @@
 			remoteGlobalIDString = 043DBD8420BE9E4B00020936;
 			remoteInfo = YS_zhtx;
 		};
+		04E4B4E522E159A200E1FE99 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 043DBD7D20BE9E4B00020936 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04E4B4DE22E159A100E1FE99;
+			remoteInfo = InformFeedBack;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0459C27422E053F1008A50A2 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				04E4B4E722E159A200E1FE99 /* InformFeedBack.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		04016E9E21537F7E00D32BD9 /* HTStackSaleProductModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTStackSaleProductModel.h; sourceTree = "<group>"; };
@@ -1572,7 +1613,6 @@
 		043DBD8920BE9E4B00020936 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		043DBD8F20BE9E4B00020936 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		043DBD9120BE9E4B00020936 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		043DBD9420BE9E4B00020936 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		043DBD9720BE9E4B00020936 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		043DBD9D20BE9E4B00020936 /* YS_zhtxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YS_zhtxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		043DBDA120BE9E4B00020936 /* YS_zhtxTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YS_zhtxTests.m; sourceTree = "<group>"; };
@@ -2766,6 +2806,15 @@
 		04E348CD2133D7D200F6F520 /* HTEditVipHeadImgCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTEditVipHeadImgCell.h; sourceTree = "<group>"; };
 		04E348CE2133D7D300F6F520 /* HTEditVipHeadImgCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTEditVipHeadImgCell.m; sourceTree = "<group>"; };
 		04E348CF2133D7D300F6F520 /* HTEditVipHeadImgCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTEditVipHeadImgCell.xib; sourceTree = "<group>"; };
+		04E4B4DF22E159A100E1FE99 /* InformFeedBack.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = InformFeedBack.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		04E4B4E122E159A200E1FE99 /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
+		04E4B4E222E159A200E1FE99 /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
+		04E4B4E422E159A200E1FE99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04E4B4FF22E19A3F00E1FE99 /* jpush-ios-3.2.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.2.1.a"; sourceTree = "<group>"; };
+		04E4B50022E19A3F00E1FE99 /* jpush-extension-ios-1.1.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-extension-ios-1.1.2.a"; sourceTree = "<group>"; };
+		04E4B50122E19A3F00E1FE99 /* JPushNotificationExtensionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPushNotificationExtensionService.h; sourceTree = "<group>"; };
+		04E4B50222E19A3F00E1FE99 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
+		04E4B50322E19A3F00E1FE99 /* jcore-ios-2.1.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-2.1.1.a"; sourceTree = "<group>"; };
 		04EBDE1F21BA6A7B0069595B /* HTHoldNullObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTHoldNullObj.m; sourceTree = "<group>"; };
 		04EBDE2021BA6A7B0069595B /* HTHoldNullObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTHoldNullObj.h; sourceTree = "<group>"; };
 		04EBDE2221BA6B310069595B /* SecurityUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecurityUtil.h; sourceTree = "<group>"; };
@@ -2838,6 +2887,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0471890B2160749C0063A736 /* libresolv.tbd in Frameworks */,
+				04718909216074940063A736 /* UserNotifications.framework in Frameworks */,
+				04718907216074880063A736 /* AdSupport.framework in Frameworks */,
+				04718905216074810063A736 /* libz.tbd in Frameworks */,
+				04718903216074770063A736 /* Security.framework in Frameworks */,
+				047189012160746E0063A736 /* UIKit.framework in Frameworks */,
+				047188FF216074680063A736 /* Foundation.framework in Frameworks */,
+				047188FD216074610063A736 /* CoreGraphics.framework in Frameworks */,
+				047188FB216074570063A736 /* SystemConfiguration.framework in Frameworks */,
+				047188F92160744D0063A736 /* CoreTelephony.framework in Frameworks */,
+				047188F7216074440063A736 /* CoreFoundation.framework in Frameworks */,
+				047188F52160743B0063A736 /* CFNetwork.framework in Frameworks */,
 				046096E12175CDF300FC57C0 /* Photos.framework in Frameworks */,
 				046096DF2175CDE100FC57C0 /* ImageIO.framework in Frameworks */,
 				046096DD2175CDD300FC57C0 /* JavaScriptCore.framework in Frameworks */,
@@ -2850,25 +2911,13 @@
 				046096D52175CD5F00FC57C0 /* SinaWeiboConnector.framework in Frameworks */,
 				04718912216075E80063A736 /* AudioToolbox.framework in Frameworks */,
 				04718910216075D80063A736 /* CoreAudio.framework in Frameworks */,
-				0471890B2160749C0063A736 /* libresolv.tbd in Frameworks */,
 				046096D72175CD5F00FC57C0 /* MOBFoundation.framework in Frameworks */,
 				046096D12175CD5F00FC57C0 /* ShareSDKExtension.framework in Frameworks */,
 				046096CC2175CD5F00FC57C0 /* libWeChatSDK.a in Frameworks */,
 				046096D62175CD5F00FC57C0 /* ShareSDK.framework in Frameworks */,
-				04718909216074940063A736 /* UserNotifications.framework in Frameworks */,
 				046096D22175CD5F00FC57C0 /* ShareSDKUI.framework in Frameworks */,
-				04718907216074880063A736 /* AdSupport.framework in Frameworks */,
-				04718905216074810063A736 /* libz.tbd in Frameworks */,
-				04718903216074770063A736 /* Security.framework in Frameworks */,
-				047189012160746E0063A736 /* UIKit.framework in Frameworks */,
-				047188FF216074680063A736 /* Foundation.framework in Frameworks */,
 				0471890E216075BC0063A736 /* JMessage.framework in Frameworks */,
-				047188FD216074610063A736 /* CoreGraphics.framework in Frameworks */,
 				046096D32175CD5F00FC57C0 /* QQConnector.framework in Frameworks */,
-				047188FB216074570063A736 /* SystemConfiguration.framework in Frameworks */,
-				047188F92160744D0063A736 /* CoreTelephony.framework in Frameworks */,
-				047188F7216074440063A736 /* CoreFoundation.framework in Frameworks */,
-				047188F52160743B0063A736 /* CFNetwork.framework in Frameworks */,
 				046096D42175CD5F00FC57C0 /* WechatConnector.framework in Frameworks */,
 				047188F32160741F0063A736 /* jpush-ios-3.1.0.a in Frameworks */,
 				047188F22160741F0063A736 /* jcore-ios-1.2.2.a in Frameworks */,
@@ -2889,6 +2938,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04E4B4DC22E159A100E1FE99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04E4B4ED22E15B1900E1FE99 /* UserNotifications.framework in Frameworks */,
+				04E4B4F922E15E0E00E1FE99 /* AdSupport.framework in Frameworks */,
+				04E4B4F822E15DFF00E1FE99 /* Security.framework in Frameworks */,
+				04E4B4F722E15DF600E1FE99 /* UIKit.framework in Frameworks */,
+				04E4B4F622E15DEF00E1FE99 /* Foundation.framework in Frameworks */,
+				04E4B50422E19A3F00E1FE99 /* jpush-ios-3.2.1.a in Frameworks */,
+				04E4B4F522E15DE700E1FE99 /* CoreGraphics.framework in Frameworks */,
+				04E4B4F422E15DE100E1FE99 /* SystemConfiguration.framework in Frameworks */,
+				04E4B4F322E15DD600E1FE99 /* CoreTelephony.framework in Frameworks */,
+				04E4B4F222E15DCF00E1FE99 /* CoreFoundation.framework in Frameworks */,
+				04E4B50622E19A3F00E1FE99 /* jcore-ios-2.1.1.a in Frameworks */,
+				04E4B4F122E15DC800E1FE99 /* CFNetwork.framework in Frameworks */,
+				04E4B4EC22E15B0A00E1FE99 /* libresolv.tbd in Frameworks */,
+				04E4B4EB22E15AFD00E1FE99 /* libz.tbd in Frameworks */,
+				04E4B50522E19A3F00E1FE99 /* jpush-extension-ios-1.1.2.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3423,6 +3494,7 @@
 				043DBD8720BE9E4B00020936 /* YS_zhtx */,
 				043DBDA020BE9E4B00020936 /* YS_zhtxTests */,
 				043DBDAB20BE9E4B00020936 /* YS_zhtxUITests */,
+				04E4B4E022E159A100E1FE99 /* InformFeedBack */,
 				043DBD8620BE9E4B00020936 /* Products */,
 				48522B8EC6E728F7F2F268AC /* Pods */,
 				4B53997D8EF87E917E54FE8C /* Frameworks */,
@@ -3435,6 +3507,7 @@
 				043DBD8520BE9E4B00020936 /* YS_zhtx.app */,
 				043DBD9D20BE9E4B00020936 /* YS_zhtxTests.xctest */,
 				043DBDA820BE9E4B00020936 /* YS_zhtxUITests.xctest */,
+				04E4B4DF22E159A100E1FE99 /* InformFeedBack.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -4184,7 +4257,6 @@
 				043DBD8920BE9E4B00020936 /* AppDelegate.m */,
 				043DBD8E20BE9E4B00020936 /* Main.storyboard */,
 				043DBD9120BE9E4B00020936 /* Assets.xcassets */,
-				043DBD9320BE9E4B00020936 /* LaunchScreen.storyboard */,
 				043DBD9720BE9E4B00020936 /* main.m */,
 				043DBDBA20BE9E8100020936 /* Info.plist */,
 			);
@@ -6036,6 +6108,29 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		04E4B4E022E159A100E1FE99 /* InformFeedBack */ = {
+			isa = PBXGroup;
+			children = (
+				04E4B4FE22E19A3F00E1FE99 /* Lib */,
+				04E4B4E122E159A200E1FE99 /* NotificationService.h */,
+				04E4B4E222E159A200E1FE99 /* NotificationService.m */,
+				04E4B4E422E159A200E1FE99 /* Info.plist */,
+			);
+			path = InformFeedBack;
+			sourceTree = "<group>";
+		};
+		04E4B4FE22E19A3F00E1FE99 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				04E4B4FF22E19A3F00E1FE99 /* jpush-ios-3.2.1.a */,
+				04E4B50022E19A3F00E1FE99 /* jpush-extension-ios-1.1.2.a */,
+				04E4B50122E19A3F00E1FE99 /* JPushNotificationExtensionService.h */,
+				04E4B50222E19A3F00E1FE99 /* JPUSHService.h */,
+				04E4B50322E19A3F00E1FE99 /* jcore-ios-2.1.1.a */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
 		48522B8EC6E728F7F2F268AC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -6088,10 +6183,12 @@
 				043DBD8320BE9E4B00020936 /* Resources */,
 				3F570305D26766CD79282110 /* [CP] Embed Pods Frameworks */,
 				B94FB477EA589E806FFAF3D4 /* [CP] Copy Pods Resources */,
+				0459C27422E053F1008A50A2 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				04E4B4E622E159A200E1FE99 /* PBXTargetDependency */,
 			);
 			name = YS_zhtx;
 			productName = YS_zhtx;
@@ -6134,6 +6231,23 @@
 			productReference = 043DBDA820BE9E4B00020936 /* YS_zhtxUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		04E4B4DE22E159A100E1FE99 /* InformFeedBack */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04E4B4EA22E159A200E1FE99 /* Build configuration list for PBXNativeTarget "InformFeedBack" */;
+			buildPhases = (
+				04E4B4DB22E159A100E1FE99 /* Sources */,
+				04E4B4DC22E159A100E1FE99 /* Frameworks */,
+				04E4B4DD22E159A100E1FE99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = InformFeedBack;
+			productName = InformFeedBack;
+			productReference = 04E4B4DF22E159A100E1FE99 /* InformFeedBack.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -6165,6 +6279,10 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 043DBD8420BE9E4B00020936;
 					};
+					04E4B4DE22E159A100E1FE99 = {
+						CreatedOnToolsVersion = 10.2.1;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 043DBD8020BE9E4B00020936 /* Build configuration list for PBXProject "YS_zhtx" */;
@@ -6184,6 +6302,7 @@
 				043DBD8420BE9E4B00020936 /* YS_zhtx */,
 				043DBD9C20BE9E4B00020936 /* YS_zhtxTests */,
 				043DBDA720BE9E4B00020936 /* YS_zhtxUITests */,
+				04E4B4DE22E159A100E1FE99 /* InformFeedBack */,
 			);
 		};
 /* End PBXProject section */
@@ -6193,6 +6312,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04E4B4FC22E1612A00E1FE99 /* jpush-ios-3.1.0.a in Resources */,
+				04E4B4FB22E1612500E1FE99 /* JPushNotificationExtensionService.h in Resources */,
 				0439A19420D0F0C500BB5E9B /* HTTotleVipNumsTableViewCell.xib in Resources */,
 				0476344A216AF569002DC90E /* HTMsgCenterViewController.xib in Resources */,
 				04B39EAD216F34CA00FC7D07 /* Info.plist in Resources */,
@@ -6302,7 +6423,6 @@
 				0434D18B20C9100E008E085F /* HTFaceComingAlertView.xib in Resources */,
 				04C39FEE20CF71CD00E2E309 /* HTSaleGoodOrBadCell.xib in Resources */,
 				04BAA9C022B8890A0070C17A /* HTCustomerProductInfoNewCell.xib in Resources */,
-				043DBD9520BE9E4B00020936 /* LaunchScreen.storyboard in Resources */,
 				0466C401215C779B004F9C58 /* HTChangeHeadImgCollectionCell.xib in Resources */,
 				0458BEFC20D24AA600B79740 /* HTNewCustomerBaceInfoView.xib in Resources */,
 				0492511220D358C200DE9BA9 /* HTCustomMadeFieldAlertView.xib in Resources */,
@@ -6575,6 +6695,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04E4B4DD22E159A100E1FE99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04E4B4FA22E1608C00E1FE99 /* JPushNotificationExtensionService.h in Resources */,
+				04E4B4EE22E15B2800E1FE99 /* jpush-ios-3.1.0.a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7312,6 +7441,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		04E4B4DB22E159A100E1FE99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04E4B4E322E159A200E1FE99 /* NotificationService.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -7325,6 +7462,11 @@
 			target = 043DBD8420BE9E4B00020936 /* YS_zhtx */;
 			targetProxy = 043DBDA920BE9E4B00020936 /* PBXContainerItemProxy */;
 		};
+		04E4B4E622E159A200E1FE99 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 04E4B4DE22E159A100E1FE99 /* InformFeedBack */;
+			targetProxy = 04E4B4E522E159A200E1FE99 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -7334,14 +7476,6 @@
 				043DBD8F20BE9E4B00020936 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		043DBD9320BE9E4B00020936 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				043DBD9420BE9E4B00020936 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 		0453EB7D212EA3F20064BF3D /* DNImagePicker.strings */ = {
@@ -7473,6 +7607,7 @@
 			baseConfigurationReference = 2AA7F5375FECEC361BB7C89C /* Pods-YS_zhtx.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImageNew;
 				CODE_SIGN_ENTITLEMENTS = YS_zhtx/YS_zhtx.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -7521,6 +7656,7 @@
 			baseConfigurationReference = CC15511885CFAC11F0C40327 /* Pods-YS_zhtx.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImageNew;
 				CODE_SIGN_ENTITLEMENTS = YS_zhtx/YS_zhtx.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -7623,6 +7759,51 @@
 			};
 			name = Release;
 		};
+		04E4B4E822E159A200E1FE99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W82489M6GZ;
+				INFOPLIST_FILE = InformFeedBack/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/InformFeedBack/Lib",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhihuitx.24xiaozhushou.InformFeedBack;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		04E4B4E922E159A200E1FE99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W82489M6GZ;
+				INFOPLIST_FILE = InformFeedBack/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/InformFeedBack/Lib",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhihuitx.24xiaozhushou.InformFeedBack;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -7658,6 +7839,15 @@
 			buildConfigurations = (
 				043DBDB820BE9E4B00020936 /* Debug */,
 				043DBDB920BE9E4B00020936 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04E4B4EA22E159A200E1FE99 /* Build configuration list for PBXNativeTarget "InformFeedBack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04E4B4E822E159A200E1FE99 /* Debug */,
+				04E4B4E922E159A200E1FE99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -12,6 +12,7 @@
 #import "HTShareClass.h"
 #import "HTMenuModle.h"
 #import "HTAddVipViewController.h"
+#import "HTEditVipViewController.h"
 @interface HTChooseCustomerViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *maintableView;
 @property (weak, nonatomic) IBOutlet UIButton *sureBtn;
@@ -20,6 +21,7 @@
 @property (nonatomic, assign) NSInteger page;
 @property (nonatomic, assign) NSInteger currentIndexRow;
 @property (nonatomic, strong) UIButton *currentSelectBtn;
+@property (nonatomic, strong) UIView *customView;
 @end
 
 @implementation HTChooseCustomerViewController
@@ -31,6 +33,36 @@
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem creatBarButtonItemWithTitle:@"完成" target:self action:@selector(finishAction)];
     self.dataArray = [NSMutableArray array];
     [self buildUI];
+    self.page = 1;
+    [self loadDataWithPage:self.page];
+}
+
+- (UIView*)customView {
+    if (!_customView) {
+        _customView =[[UIView alloc]initWithFrame:CGRectMake(-1, 0, HMSCREENWIDTH + 2, 40)];
+        _customView.backgroundColor = [UIColor whiteColor];
+        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(HMSCREENWIDTH - 55, 5, 40, 28)];
+        [btn setTitle:@"完成" forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        btn.titleLabel.font = [UIFont systemFontOfSize:14];
+        btn.backgroundColor = [UIColor clearColor];
+        [btn addTarget:self action:@selector(btnClicked) forControlEvents:UIControlEventTouchUpInside];
+        [_customView addSubview:btn];
+    }
+    return _customView;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField*)textField {
+    textField.inputAccessoryView = self.customView; // 往自定义view中添加各种UI控件(以UIButton为例)
+    CGRect frame = [self.view convertRect:self.view.bounds fromView:textField];
+    NSLog(@"%@",NSStringFromCGRect(frame));
+    return YES;
+}
+
+- (void)btnClicked{
+    [self.view endEditing:YES];
+    _currentIndexRow = -1;
+    _currentSelectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.page = 1;
     [self loadDataWithPage:self.page];
 }
@@ -111,6 +143,27 @@
 }
 
 - (void)finishAction{
+    if (_isFromFace) {
+        if (_currentIndexRow >= 20000) {
+            HTCustomerListModel *model = _dataArray[_currentIndexRow - 20000];
+            //明天从这里开始 注意传值传全 编辑完成后跳到详情时 点击返回回到首页
+            HTEditVipViewController *vc = [[HTEditVipViewController alloc] init];
+            vc.modelId = [HTHoldNullObj getValueWithUnCheakValue:model.custId];
+            for (HTMenuModle *mode in [HTShareClass shareClass].menuArray) {
+                if ([mode.moduleName isEqualToString:@"customerFollowRecord"]) {
+                    vc.customerFollowRecordId = [mode.moduleId stringValue];
+                }
+                if ([mode.moduleName isEqualToString:@"customer"]) {
+                    vc.moduleModel = mode;
+                }
+            }
+            vc.faceNoVipModel = self.faceNoVipModel;
+            vc.isFromFace = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            return;
+        }
+    }
     NSString *phone;
     if (_currentIndexRow >= 20000) {
         HTCustomerListModel *model = _dataArray[_currentIndexRow - 20000];
@@ -158,15 +211,12 @@
         [self loadDataWithPage:self.page];
     }];
     self.maintableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    [self.sureBtn addTarget:self action:@selector(touchSure) forControlEvents:UIControlEventTouchUpInside];
+//    [self.sureBtn addTarget:self action:@selector(touchSure) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)touchSure{
-    _currentIndexRow = -1;
-    _currentSelectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.page = 1;
-    [self loadDataWithPage:self.page];
-}
+//- (void)touchSure{
+//
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

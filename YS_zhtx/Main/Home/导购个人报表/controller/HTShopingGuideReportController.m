@@ -17,6 +17,8 @@
 #import "HTIndexsModel.h"
 #import "HTGuiderReportModel.h"
 #import "HTYearsSaleinfoLineReportCell.h"
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKUI/ShareSDK+SSUI.h>
 @interface HTShopingGuideReportController ()<UITableViewDelegate,UITableViewDataSource,HTNewPieCellTableViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tab;
@@ -31,6 +33,7 @@
 
 @property (nonatomic,strong) HTGuiderReportModel *guiderModel;
 
+@property (nonatomic, strong) UIImage *shareImg;
 @end
 
 @implementation HTShopingGuideReportController
@@ -169,6 +172,83 @@
 }
 
 #pragma mark -EventResponse
+- (void)creatScreenShot{
+    if (!_shareImg) {
+        NSInteger sec = self.cellsName.count ==  0 ? 0 : self.cellsName.count;
+        NSArray *cells = self.cellsName[sec - 1];
+        NSInteger ro = cells.count == 0 ? 0 : [cells count];
+        [self.tab scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:ro - 1 inSection:sec - 1] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+//        [self.tab layoutIfNeeded];
+//        [self.tab reloadData];
+//        [self.tab scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:self.cellsName.count - 1] atScrollPosition:5 animated:YES];
+        
+        [MBProgressHUD showMessage:@"生成完整截图中"];
+        [NSTimer scheduledTimerWithTimeInterval:3.0 repeats:NO block:^(NSTimer * _Nonnull timer) {
+            dispatch_async(dispatch_get_main_queue(),^{
+                UIGraphicsBeginImageContextWithOptions(self.tab.contentSize, YES, [UIScreen mainScreen].scale);
+                
+                CGPoint savedContentOffset = self.tab.contentOffset;
+                CGRect savedFrame = self.tab.frame;
+                self.tab.contentOffset = CGPointZero;
+                self.tab.frame = CGRectMake(0, 0, self.tab.contentSize.width, self.tab.contentSize.height);
+                [self.tab.layer renderInContext: UIGraphicsGetCurrentContext()];
+                self.shareImg = UIGraphicsGetImageFromCurrentImageContext();
+                self.tab.contentOffset = savedContentOffset;
+                self.tab.frame = savedFrame;
+                
+                [MBProgressHUD hideHUD];
+                UIGraphicsEndImageContext();
+                [self share];
+            });
+            [timer invalidate];
+            timer = nil;
+        }];
+    }else{
+        [self share];
+    }
+}
+
+- (void)share{
+    NSArray* imageArray = @[self.shareImg];
+    if (imageArray) {
+        NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
+        
+        [shareParams SSDKSetupShareParamsByText:@"知识与你共享"
+                                         images:imageArray
+                                            url:[NSURL URLWithString:@""]
+                                          title:self.title
+                                           type:SSDKContentTypeImage];
+        [ShareSDK showShareActionSheet:nil items:nil shareParams:shareParams onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
+            
+            switch (state) {
+                case SSDKResponseStateSuccess:
+                {
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
+                                                                        message:nil
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"确定"
+                                                              otherButtonTitles:nil];
+                    [alertView show];
+                    break;
+                }
+                case SSDKResponseStateFail:
+                {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败"
+                                                                    message:[NSString stringWithFormat:@"%@",error]
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil, nil];
+                    [alert show];
+                    break;
+                }
+                default:
+                    break;
+            }
+        }];
+    }
+    
+}
+
 -(void)shareClick:(UIButton *)sender{
     [MBProgressHUD showMessage:@"请稍等"];
     self.tab.frame = CGRectMake(0, 0, HMSCREENWIDTH, self.tab.contentSize.height);
@@ -215,7 +295,7 @@
     }];
 }
 -(void)initNav{
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImageName:@"g-share" highImageName:@"g-share" target:self action:@selector(shareClick:)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImageName:@"g-share" highImageName:@"g-share" target:self action:@selector(creatScreenShot)];
     self.title = @"个人报表";
 }
 -(void)createTb{

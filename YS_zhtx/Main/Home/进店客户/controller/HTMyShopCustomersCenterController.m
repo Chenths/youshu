@@ -17,6 +17,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"进店客户";
+    
+    NSString *dateStr = @"";
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setObject:dateStr forKey:@"faceList"];
+    [user synchronize];
+    
     [self initViewControllers];
     
     CGSize screenSize = [UIScreen mainScreen].bounds.size;

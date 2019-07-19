@@ -77,7 +77,7 @@
   
 
 - (void)buildRightButtonItem{
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem creatBarButtonItemWithTitle:@"分享" target:self action:@selector(creatScreenShot) ];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImageName:@"g-share" highImageName:@"g-share" target:self action:@selector(creatScreenShot)];
     
 }
 

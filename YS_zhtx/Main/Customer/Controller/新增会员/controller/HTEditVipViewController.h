@@ -7,7 +7,7 @@
 //
 #import "HTMenuModle.h"
 #import "HTCommonViewController.h"
-
+#import "HTNewFaceNoVipModel.h"
 @interface HTEditVipViewController : HTCommonViewController
 
 
@@ -21,6 +21,7 @@
 //添加跟进记录使用id
 @property (nonatomic,strong) NSString *customerFollowRecordId;
 
-
-
+//人脸识别特有
+@property (nonatomic,assign) BOOL isFromFace;
+@property (nonatomic, strong) HTNewFaceNoVipModel *faceNoVipModel;
 @end

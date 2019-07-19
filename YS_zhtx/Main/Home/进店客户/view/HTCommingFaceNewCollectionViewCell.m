@@ -17,8 +17,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    self.commingHeaderImv.layer.cornerRadius = 125;
-    self.commingHeaderImv.clipsToBounds = YES;
+//    self.commingHeaderImv.layer.cornerRadius = 125;
+//    self.commingHeaderImv.clipsToBounds = YES;
 }
 
 -(void)setModel:(HTNewFaceNoVipModel *)model{

@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HTChooseCustomerViewController">
             <connections>
                 <outlet property="maintableView" destination="19r-on-pCC" id="BqQ-Zd-sJj"/>
-                <outlet property="sureBtn" destination="Le3-6I-YmD" id="m5u-lZ-ZJH"/>
                 <outlet property="takeInTF" destination="iCk-Xs-ah1" id="ode-Gv-DaI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -25,30 +24,23 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DpE-In-Syo">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Le3-6I-YmD">
-                            <rect key="frame" x="260" y="14" width="98" height="38"/>
-                            <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="98" id="eWw-Oe-kGJ"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <state key="normal" title="确认">
-                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                        </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ARf-op-d6u">
-                            <rect key="frame" x="17" y="14" width="243" height="38"/>
+                            <rect key="frame" x="17" y="14" width="341" height="33"/>
                             <subviews>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入会员姓名或电话" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iCk-Xs-ah1">
-                                    <rect key="frame" x="19" y="8" width="205" height="22"/>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入会员姓名或电话" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iCk-Xs-ah1">
+                                    <rect key="frame" x="19" y="8" width="303" height="17"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="DhY-Se-ltR"/>
+                                    </connections>
                                 </textField>
                             </subviews>
                             <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="iCk-Xs-ah1" secondAttribute="bottom" constant="8" id="B25-Bs-io5"/>
+                                <constraint firstAttribute="height" constant="33" id="YCf-Wh-p4h"/>
                                 <constraint firstItem="iCk-Xs-ah1" firstAttribute="top" secondItem="ARf-op-d6u" secondAttribute="top" constant="8" id="sf0-27-xeW"/>
                                 <constraint firstAttribute="trailing" secondItem="iCk-Xs-ah1" secondAttribute="trailing" constant="19" id="spg-hX-uCe"/>
                                 <constraint firstItem="iCk-Xs-ah1" firstAttribute="leading" secondItem="ARf-op-d6u" secondAttribute="leading" constant="19" id="xkj-bj-tfX"/>
@@ -57,13 +49,9 @@
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="Le3-6I-YmD" secondAttribute="trailing" constant="17" id="88a-5N-990"/>
+                        <constraint firstItem="ARf-op-d6u" firstAttribute="top" secondItem="DpE-In-Syo" secondAttribute="top" constant="14" id="0fA-5J-HCs"/>
                         <constraint firstItem="ARf-op-d6u" firstAttribute="leading" secondItem="DpE-In-Syo" secondAttribute="leading" constant="17" id="ATK-h4-FMA"/>
-                        <constraint firstItem="ARf-op-d6u" firstAttribute="bottom" secondItem="Le3-6I-YmD" secondAttribute="bottom" id="EDV-UG-ZVP"/>
-                        <constraint firstItem="ARf-op-d6u" firstAttribute="top" secondItem="Le3-6I-YmD" secondAttribute="top" id="PSr-Wc-GFC"/>
-                        <constraint firstItem="ARf-op-d6u" firstAttribute="trailing" secondItem="Le3-6I-YmD" secondAttribute="leading" id="S7O-dV-f0o"/>
-                        <constraint firstAttribute="bottom" secondItem="Le3-6I-YmD" secondAttribute="bottom" constant="14" id="gmq-BB-FdC"/>
-                        <constraint firstItem="Le3-6I-YmD" firstAttribute="top" secondItem="DpE-In-Syo" secondAttribute="top" constant="14" id="jBQ-Bs-r4I"/>
+                        <constraint firstAttribute="trailing" secondItem="ARf-op-d6u" secondAttribute="trailing" constant="17" id="abt-OA-B59"/>
                         <constraint firstAttribute="height" constant="66" id="rGF-ar-Fcw"/>
                     </constraints>
                 </view>
