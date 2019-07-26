@@ -32,20 +32,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"学习中心";
+    
     [self createWebView];
      HTLoginDataPersonModel *model1 = [[HTShareClass shareClass].loginModel person];
     NSString *name = [HTHoldNullObj getValueWithUnCheakValue:model1.name];
     if (self.sendUrl.length > 0) {
+        self.title = @"";
         [self.dataWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.sendUrl]]];
     }else{
-    if (self.finallUrl.length > 0) {
-         [self.dataWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@&appCode=%@&userId=%@&companyId=%@&appSecret=%@name=%@",categoreUrl,self.finallUrl,@"rscWTt71Y2JptQh8",[HTShareClass shareClass].loginId,[HTShareClass shareClass].loginModel.companyId,@"2GetNFH0WmXlfzXSzpHuGeJCJAzBPV11",[self encodeToPercentEscapeString:name]]]]];
-    }else{
-         [self.dataWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appCode=%@&userId=%@&companyId=%@&appSecret=%@name=%@",@"http://xx.24v5.com/study/studyListPage.html?nohead=1&",@"rscWTt71Y2JptQh8",[HTShareClass shareClass].loginId,[HTShareClass shareClass].loginModel.companyId,@"2GetNFH0WmXlfzXSzpHuGeJCJAzBPV11",[self encodeToPercentEscapeString:name]]]]];
-      }
+        self.title = @"学习中心";
+        if (self.finallUrl.length > 0) {
+            [self.dataWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@&appCode=%@&userId=%@&companyId=%@&appSecret=%@name=%@",categoreUrl,self.finallUrl,@"rscWTt71Y2JptQh8",[HTShareClass shareClass].loginId,[HTShareClass shareClass].loginModel.companyId,@"2GetNFH0WmXlfzXSzpHuGeJCJAzBPV11",[self encodeToPercentEscapeString:name]]]]];
+        }else{
+            [self.dataWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appCode=%@&userId=%@&companyId=%@&appSecret=%@name=%@",@"http://xx.24v5.com/study/studyListPage.html?nohead=1&",@"rscWTt71Y2JptQh8",[HTShareClass shareClass].loginId,[HTShareClass shareClass].loginModel.companyId,@"2GetNFH0WmXlfzXSzpHuGeJCJAzBPV11",[self encodeToPercentEscapeString:name]]]]];
+        }
     }
-  
+    
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"g-back"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     backItem.tintColor = [UIColor colorWithHexString:@"#222222"];
     UIBarButtonItem *closeItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(close)];
@@ -65,8 +67,7 @@
 
 
 - (void)createWebView{
-    
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem creatBarButtonItemWithTitle:@"分享" target:self action:@selector(rightBtClicked:)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImageName:@"g-share" highImageName:@"g-share" target:self action:@selector(rightBtClicked:)];
     
     self.progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, 0, HMSCREENWIDTH, 3)];
     self.progressView.progressViewStyle = UIProgressViewStyleDefault;

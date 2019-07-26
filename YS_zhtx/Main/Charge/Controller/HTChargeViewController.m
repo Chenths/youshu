@@ -412,7 +412,7 @@
 -(void)searchProductWithBarCode:(NSString *)barcode{
     [self.view endEditing:YES];
     if (barcode.length < 3) {
-        [MBProgressHUD showError:@"条码位数应大于等于3位"];
+        [MBProgressHUD showError:@"识别位数不能小于3位"];
         return;
     }
     [MBProgressHUD showMessage:@""];

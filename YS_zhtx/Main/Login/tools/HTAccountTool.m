@@ -22,7 +22,6 @@
 #import "WXApi.h"
 ////新浪微博SDK头文件
 #import "WeiboSDK.h"
-
 @implementation HTAccountTool
 
 + (void)shareSdkSet{
@@ -322,21 +321,49 @@
         [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"isShowAliCode"];
         [HTShareClass shareClass].isShowAliCode = NO;
     }
+    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"ifShowGuideView"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     if (locationVersion + 2 < serverVersion) {
         [HTShareClass shareClass].isUpdata = YES;
     }else{
         [HTShareClass shareClass].isUpdata      = NO;
+        [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"ifShowGuideView"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
     [[HTShareClass shareClass].reportWarnStandard setValuesForKeysWithDictionary:[json[@"data"] getDictionArrayWithKey:@"reportWarnStandard"]];
     [HTShareClass shareClass].JMessageUserId = [json getStringWithKey:@"JMessageUserId"];
     [HTShareClass shareClass].JMessagePwd = [json getStringWithKey:@"JMessagePwd"];
-    if ([HTShareClass shareClass].isUpdata) {
+    
+    for (UIWindow *win in [[UIApplication sharedApplication] windows]) {
+        for (UIView *temp in win.subviews) {
+            for (UIView *temp2 in temp.subviews) {
+                for (UIView *temp3 in temp2.subviews) {
+                    if ([temp3 isKindOfClass:[KLCPopup class]]) {
+                        [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"ifShowGuideView"];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+                    }
+                }
+                if ([temp2 isKindOfClass:[KLCPopup class]]) {
+                    [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"ifShowGuideView"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+                
+            }
+            if ([temp isKindOfClass:[KLCPopup class]]) {
+                [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"ifShowGuideView"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+        }
+    }
+    NSString *ifShowGuideView = [[NSUserDefaults standardUserDefaults] objectForKey:@"ifShowGuideView"];
+    if ([HTShareClass shareClass].isUpdata && ![ifShowGuideView isEqualToString:@"0"]) {
         HTCustomDefualAlertView *alert = [[HTCustomDefualAlertView alloc] initAlertWithTitle:@"检查到新版本，请及时更新" btTitle:@"更新" okBtclicked:^{
             NSString *str = [NSString stringWithFormat:@"https://itunes.apple.com/us/app/24xiao-zhu-shou/id1100109709?l=zh&ls=1&mt=8" ];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
-            exit(0);
         }];
         [alert notTochShow];
+
+        
     }
 
 }

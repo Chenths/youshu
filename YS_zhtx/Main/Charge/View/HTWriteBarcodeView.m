@@ -49,8 +49,8 @@
 }
 #pragma mark-delegate
 -(void)okBtClickedWithStr:(NSString *)text{
-    if (text.integerValue < 4 && text.integerValue != 0) {
-        [MBProgressHUD showError:@"条码位数不能小于4位"];
+    if (text.integerValue < 3 && text.integerValue != 0) {
+        [MBProgressHUD showError:@"识别位数不能小于3位"];
         return;
     }
     [[NSUserDefaults standardUserDefaults] setValue:text forKey:[NSString stringWithFormat:@"%@-%@",[HTShareClass shareClass].loginModel.companyId,@"BarcodeLength"]];

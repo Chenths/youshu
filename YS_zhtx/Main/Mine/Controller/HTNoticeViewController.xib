@@ -22,8 +22,11 @@
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eK8-eN-B26">
                     <rect key="frame" x="15" y="30" width="345" height="607"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <string key="text">1.老板层级店铺首页新增排序 2.快速下单屏蔽改价 修复赠送积分bug3.人脸识别进店散客屏蔽接待按钮 选择人脸库图片由5张变为1张4.客户商品列表, 账单列表 新增所属店铺  筛选新增全部和本店
-</string>
+                    <string key="text">1.人脸识别功能优化升级
+2.系统推送功能优化
+3.报表模块优化
+4.推送功能优化
+5.已发现的问题修复</string>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>

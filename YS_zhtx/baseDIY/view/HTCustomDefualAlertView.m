@@ -29,6 +29,7 @@
 
 @implementation HTCustomDefualAlertView
 
+
 -(void)awakeFromNib{
     [super awakeFromNib];
     [self.cancelBt changeCornerRadiusWithRadius:3];

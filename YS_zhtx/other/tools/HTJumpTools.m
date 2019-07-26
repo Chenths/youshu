@@ -175,7 +175,7 @@
         [nac pushViewController:vc animated:YES];
     }else if ([type isEqualToString:@"LINK_SKIP"]){
         HTWarningWebViewController *vc = [[HTWarningWebViewController alloc] init];
-        vc.finallUrl = [paramsDic objectForKey:@"linkUrl"];
+        vc.sendUrl = [paramsDic objectForKey:@"linkUrl"];
         [nac pushViewController:vc animated:YES];
     }
    [HTShareClass shareClass].jumpType = @"";
