@@ -14,13 +14,14 @@
 #import "HTMsgCenterViewController.h"
 #import "HTShopInventoryInfoViewController.h"
 #import "HTSearchTextHeadView.h"
+#import "HTBossAllWaySearchViewController.h"
 
 @interface HTBossInventoryReportController ()<UITableViewDelegate,UITableViewDataSource,HTSearchTextHeadViewDelegat>
 @property (weak, nonatomic) IBOutlet UITableView *dataTableView;
 @property (nonatomic,strong) NSMutableArray *dataArray;
-@property (nonatomic,strong) HTRightNavBar *rightBt ;
-
+@property (nonatomic,strong) HTRightNavBar *rightBt;
 @property (nonatomic,strong) NSMutableArray *shopsData;
+@property (nonatomic, strong) UIView *naviTitleView;
 @end
 
 @implementation HTBossInventoryReportController
@@ -31,10 +32,63 @@
     [super viewDidLoad];
     [self createTb];
     [self createRightNavBar];
+}
+
+- (void)createNavTitleView{
+    if (_naviTitleView) {
+        _naviTitleView.hidden = NO;
+        return;
+    }
+    self.naviTitleView = [[UIView alloc] init];
+    _naviTitleView.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF"];
+    if (isIPHONEX) {
+        _naviTitleView.frame = CGRectMake(80, 40 + 4, HMSCREENWIDTH - 160, 32);
+    }else{
+        _naviTitleView.frame = CGRectMake(80, 20 + 4, HMSCREENWIDTH - 160, 32);
+    }
+    _naviTitleView.clipsToBounds = YES;
+    _naviTitleView.layer.cornerRadius = _naviTitleView.frame.size.height / 2;
+    self.navigationItem.titleView = _naviTitleView;
+    
+    UIImageView *searchImv = [[UIImageView alloc] init];
+    searchImv.frame = CGRectMake(17, 8, 16,16 );
+    searchImv.image = [UIImage imageNamed:@"bossSearch"];
+    [_naviTitleView addSubview: searchImv];
+    
+    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(43, 0, HMSCREENWIDTH - 160 - 43 - 10 , 32)];
+    textLabel.font = [UIFont systemFontOfSize:14];
+    textLabel.text = @"商品全渠道查询";
+    textLabel.backgroundColor = [UIColor whiteColor];
+    textLabel.textColor = [UIColor colorWithHexString:@"#ADAFAF"];
+    [_naviTitleView addSubview:textLabel];
+    
+    UIButton *pushBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    pushBtn.frame = CGRectMake(0, 0, _naviTitleView.frame.size.width, _naviTitleView.frame.size.height);
+    [pushBtn addTarget:self action:@selector(touchHeaderTitleAction) forControlEvents:UIControlEventTouchUpInside];
+    [_naviTitleView addSubview:pushBtn];
+    
     
 }
+
+- (void)touchHeaderTitleAction{
+    
+    if ([HTShareClass shareClass].isAllchannels) {
+        HTBossAllWaySearchViewController *allWaySearchVc = [[HTBossAllWaySearchViewController alloc] init];
+        [self.navigationController pushViewController:allWaySearchVc animated:YES];
+    }else{
+        [MBProgressHUD showError:@"未开通全渠道访问权限"];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    _naviTitleView.hidden = YES;
+}
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self createNavTitleView];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithHexString:@"#59B4A5"]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#ffffff"]}];
     [self laodNoRedNum];
@@ -79,7 +133,7 @@
     HTShopInventoryInfoViewController *vc = [[HTShopInventoryInfoViewController alloc] init];
     HTCompanyRepotryModel *model = self.dataArray[indexPath.section][indexPath.row];
     vc.companyId = [HTHoldNullObj getValueWithUnCheakValue:model.companyId];
-    vc.title = model.companyName;
+//    vc.title = model.companyName;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -185,7 +239,7 @@
         [self.dataArray addObject:@[sectionModel]];
         [self.dataArray addObject:self.shopsData];
         HTCompanyRepotryModel *model = self.shopsData[0];
-        self.navigationItem.title = [HTHoldNullObj getValueWithUnCheakValue:model.companyName];
+//        self.navigationItem.title = [HTHoldNullObj getValueWithUnCheakValue:model.companyName];
         [self.dataTableView reloadData];
     } error:^{
         [MBProgressHUD hideHUDForView:self.view];
@@ -205,7 +259,7 @@
    self.dataTableView.contentInset = self.dataTableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, SafeAreaBottomHeight + tar_height, 0); 
     self.dataTableView.tableFooterView = footView;
     
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImageName:@"术logo-白" highImageName:@"术logo-白" target:self action:nil];
+//    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImageName:@"术logo-白" highImageName:@"术logo-白" target:self action:nil];
     
 }
 #pragma mark - getters and setters

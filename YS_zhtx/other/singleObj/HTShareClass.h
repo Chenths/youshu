@@ -99,6 +99,7 @@
 
 @property (nonatomic, assign) BOOL hideVIPPhone;
 
+@property (nonatomic, assign) BOOL isAllchannels;
 - (UINavigationController *) getCurrentNavController;
 
 @end

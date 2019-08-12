@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="HTBossSearchHistoryTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NTk-kR-f6K">
+                        <rect key="frame" x="17.5" y="16.5" width="35.5" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="wlb-hK-mK9"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bossDeleteIcon" translatesAutoresizingMaskIntoConstraints="NO" id="vJE-WM-ncb">
+                        <rect key="frame" x="345.5" y="18.5" width="12" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="12" id="6Py-TQ-S1I"/>
+                            <constraint firstAttribute="height" constant="12" id="Vv8-RA-W2V"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="vJE-WM-ncb" secondAttribute="trailing" constant="17.5" id="AT9-jG-RWP"/>
+                    <constraint firstItem="NTk-kR-f6K" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17.5" id="JRs-VG-kfB"/>
+                    <constraint firstItem="vJE-WM-ncb" firstAttribute="centerY" secondItem="NTk-kR-f6K" secondAttribute="centerY" id="gZB-cA-e3c"/>
+                    <constraint firstItem="NTk-kR-f6K" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16.5" id="lz8-vA-maa"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="deleteImv" destination="vJE-WM-ncb" id="AlZ-Um-e3H"/>
+                <outlet property="nameLabel" destination="NTk-kR-f6K" id="fX1-2O-29q"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="bossDeleteIcon" width="12" height="12"/>
+    </resources>
+</document>

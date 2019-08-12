@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HTNewPayYHQMaskView"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wma-WF-2wh" customClass="HTNewPayYHQMaskView">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BZ2-Yu-ZqS">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="240"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="240" id="sO9-92-fiX"/>
+                    </constraints>
+                </tableView>
+                <view userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r5t-B9-LZg">
+                    <rect key="frame" x="0.0" y="240" width="414" height="656"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="r5t-B9-LZg" firstAttribute="leading" secondItem="BZ2-Yu-ZqS" secondAttribute="leading" id="BvR-IL-XDZ"/>
+                <constraint firstAttribute="trailing" secondItem="BZ2-Yu-ZqS" secondAttribute="trailing" id="aF3-Sw-xvQ"/>
+                <constraint firstItem="BZ2-Yu-ZqS" firstAttribute="top" secondItem="wma-WF-2wh" secondAttribute="top" id="br4-r3-0Ma"/>
+                <constraint firstItem="r5t-B9-LZg" firstAttribute="top" secondItem="BZ2-Yu-ZqS" secondAttribute="bottom" id="f0Y-ce-QOe"/>
+                <constraint firstAttribute="bottom" secondItem="r5t-B9-LZg" secondAttribute="bottom" id="iKH-0O-sCc"/>
+                <constraint firstItem="BZ2-Yu-ZqS" firstAttribute="leading" secondItem="wma-WF-2wh" secondAttribute="leading" id="zn7-ae-cok"/>
+                <constraint firstItem="r5t-B9-LZg" firstAttribute="trailing" secondItem="BZ2-Yu-ZqS" secondAttribute="trailing" id="zsG-48-Lfm"/>
+            </constraints>
+            <connections>
+                <outlet property="maskTb" destination="BZ2-Yu-ZqS" id="eGE-4I-KSC"/>
+            </connections>
+        </view>
+    </objects>
+</document>

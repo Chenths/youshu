@@ -296,7 +296,9 @@
     [HTShareClass shareClass].loginId = [NSString stringWithFormat:@"%@",dataDic[@"data"][@"loginId"]];
     [HTShareClass shareClass].face = [dataDic[@"data"][@"face"] boolValue];
     [HTShareClass shareClass].hideVIPPhone = [dataDic[@"data"][@"hideVIPPhone"] boolValue];
-    [HTShareClass shareClass].smsConfig = [dataDic[@"data"][@"smsConfig"] integerValue];
+    [HTShareClass shareClass].smsConfig = [dataDic[@"data"][@"smsConfig"]
+                                           integerValue];
+    [HTShareClass shareClass].isAllchannels = [dataDic[@"data"][@"isAllchannels"] boolValue];
     if (([json[@"data"][@"company"][@"type" ] isEqualToString:@"SHOP"])) {
        [HTShareClass shareClass].isProductStockActive = [dataDic[@"data"][@"isProductStockActive"] boolValue];
        [HTShareClass shareClass].isProductActive = [dataDic[@"data"][@"isProductActive"] boolValue];

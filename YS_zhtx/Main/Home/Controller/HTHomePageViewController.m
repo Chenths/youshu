@@ -29,6 +29,8 @@
 #import "HTWarningWebViewController.h"
 #import "HTWarningModel.h"
 #import "HTWarningSetViewController.h"
+//test
+#import "HTNewPayYHQViewController.h"
 @interface HTHomePageViewController ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,HTGHomeHeadCollectionViewCellDelegate,UITabBarControllerDelegate,UITabBarDelegate>
 
 
@@ -128,7 +130,10 @@
             HTMyShopCustomersCenterController *vc = [[HTMyShopCustomersCenterController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }else if ([model.title isEqualToString:@"店铺库存"]){
-            HTShopInventoryInfoViewController *vc = [[HTShopInventoryInfoViewController alloc] init];
+//            HTShopInventoryInfoViewController *vc = [[HTShopInventoryInfoViewController alloc] init];
+//            [self.navigationController pushViewController:vc animated:YES];
+            //test
+            HTNewPayYHQViewController *vc = [[HTNewPayYHQViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }else if ([model.title isEqualToString:@"销售报表"]){
             HTGSaleReportViewController *vc = [[HTGSaleReportViewController alloc] init];

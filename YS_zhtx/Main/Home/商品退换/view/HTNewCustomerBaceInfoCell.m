@@ -54,7 +54,7 @@
     HTOrderCustomerModel *customer = model.customer;
     self.nameLabel.text = [HTHoldNullObj getValueWithUnCheakValue:customer.name].length == 0 ? @"未录入称呼":[HTHoldNullObj getValueWithUnCheakValue:customer.name] ;
     self.phoneLabel.text = [HTHoldNullObj getValueWithUnCheakValue:customer.phone];
-    self.sexImg.image = [[HTHoldNullObj getValueWithUnCheakValue:customer.sex] isEqualToString:@"0"] ?  [UIImage imageNamed:@"g-woman" ] : [UIImage imageNamed:@"g-man" ] ;
+    self.sexImg.image = [[HTHoldNullObj getValueWithUnCheakValue:customer.sex] isEqualToString:@"1"] ?  [UIImage imageNamed:@"g-man" ] : [UIImage imageNamed:@"g-woman" ] ;
     self.custLevel.text = customer.custlevel.length == 0 ? @"" : [HTHoldNullObj getValueWithUnCheakValue:customer.custlevel];
 }
 

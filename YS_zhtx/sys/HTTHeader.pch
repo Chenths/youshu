@@ -360,6 +360,14 @@ tmp;\
 #define creatOrderAndPay  @"place_an_order_4_app.html"
 //简易下单
 #define creatFastOrder    @"no_product_place_an_order_4_app.html"
+//全渠道查询商品是否存在
+#define checkGoodsIsNotNull @"admin/product_stock/load_style_isnotnull.html"
+//全渠道查询 商品基本信息
+#define getGoodsDetailMessage @"admin/product_stock/load_product_style_detail.html"
+//全渠道查询 单一商品颜色
+#define getGoodsColorAll @"admin/product_stock/load_product_color_by_styleCode.html"
+//全渠道查询 查下方详细列表
+#define getGoodsDetailCompareData @"admin/product_stock/load_product_stylelist_by_styleCode.html"
 #pragma mark -宏
 
 
