@@ -20,6 +20,7 @@
 @property (nonatomic, assign) NSInteger currentChooseColor;
 @property (nonatomic, assign) NSInteger currentChooseStatus;
 @property (nonatomic, strong) NSMutableArray *listArray;
+@property (nonatomic, strong) HTBossGoodsChooseHeaderView *sectionHeaderView;
 @end
 
 @implementation HTBossGoodsDetailViewController
@@ -64,6 +65,7 @@
     [MBProgressHUD showMessage:@""];
     [HTHttpTools POST:[NSString stringWithFormat:@"%@%@",baseUrl,getGoodsColorAll] params:dic success:^(id json) {
         self.colorArray = [NSMutableArray arrayWithArray:json[@"data"]];
+        [self.colorArray insertObject:@"全部" atIndex:0];
         [self getList];
         [self.goodsTb reloadData];
         [MBProgressHUD hideHUD];
@@ -77,10 +79,16 @@
 }
 
 - (void)getList{
-    if (_colorArray.count) {
-        
+    NSString *tempColor;
+    if (_colorArray.count == 0) {
+        tempColor = @"";
+    }else{
+        if (_currentChooseColor == 0) {
+            tempColor = @"";
+        }else{
+            tempColor = _colorArray[_currentChooseColor];
+        }
     }
-    NSString *tempColor = _colorArray[_currentChooseColor];
     NSDictionary *dic = @{
                           @"styleCode": self.searchStr,
                           @"companyId":[HTShareClass shareClass].loginModel.companyId,
@@ -128,18 +136,18 @@
         UIView *sectionHeaderView = [[UIView alloc] init];
         return sectionHeaderView;
     }else if (section == 1){
-        HTBossGoodsChooseHeaderView *view = [[NSBundle mainBundle] loadNibNamed:@"HTBossGoodsChooseHeaderView" owner:nil options:nil].lastObject;
+        self.sectionHeaderView = [[NSBundle mainBundle] loadNibNamed:@"HTBossGoodsChooseHeaderView" owner:nil options:nil].lastObject;
 //        [[HTBossGoodsChooseHeaderView alloc] initWithFrame:CGRectMake(0, 0, HMSCREENWIDTH, 180)];
 //        view.backgroundColor = [UIColor yellowColor];
-        view.delegate = self;
-        view.currentType = _currentType;
-        view.currentSelectedStatus = _currentChooseStatus;
-        view.currentSelectedColor = _currentChooseColor;
+        _sectionHeaderView.delegate = self;
+        _sectionHeaderView.currentType = _currentType;
+        _sectionHeaderView.currentSelectedStatus = _currentChooseStatus;
+        _sectionHeaderView.currentSelectedColor = _currentChooseColor;
         if (_colorArray.count > 0) {
-            view.itemsStatusArray = [NSMutableArray arrayWithArray:_basicArray];
-            view.itemsColorArray = [NSMutableArray arrayWithArray:_colorArray];            
+            _sectionHeaderView.itemsStatusArray = [NSMutableArray arrayWithArray:_basicArray];
+            _sectionHeaderView.itemsColorArray = [NSMutableArray arrayWithArray:_colorArray];
         }
-        return view;
+        return _sectionHeaderView;
     }else{
         UIView *sectionHeaderView = [[UIView alloc] init];
         return sectionHeaderView;
@@ -199,27 +207,41 @@
         }else{
             _currentType = 1;
         }
+        NSIndexSet *indexSet=[[NSIndexSet alloc] initWithIndex:1];
+        [_goodsTb reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
+        //    [_goodsTb reloadData];
+        [_goodsTb scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }else if (tag == 101){
         if (_currentType == 2) {
             _currentType = 0;
         }else{
             _currentType = 2;
         }
+        NSIndexSet *indexSet=[[NSIndexSet alloc] initWithIndex:1];
+        [_goodsTb reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
+        //    [_goodsTb reloadData];
+        [_goodsTb scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }else{
         if (_currentType == 1) {
             _currentChooseColor = tag;
+            [self getList];
         }else if (_currentType == 2){
             _currentChooseStatus = tag;
+//            NSIndexSet *indexSet=[[NSIndexSet alloc] initWithIndex:1];
+//            [_goodsTb reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
+//            [_goodsTb scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+            [_goodsTb reloadData];
         }else{
             
         }
     }
-    [_goodsTb reloadData];
+    
 }
 
+
 - (void)bossGoodRefreshDelegateAction{
-    [_goodsTb scrollsToTop];
     [_goodsTb reloadData];
+    [_goodsTb scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 }
 
 -(void)setContentOffSet:(CGPoint) offset{

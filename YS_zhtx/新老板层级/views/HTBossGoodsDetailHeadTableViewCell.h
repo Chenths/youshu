@@ -33,6 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *bottomLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *bottomImv;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *secondViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewHeight;
 @property (weak, nonatomic) IBOutlet UIView *secondView;
 @property (nonatomic, strong) NSDictionary *dataDic;
 @property (nonatomic, assign) BOOL isShowDetail;

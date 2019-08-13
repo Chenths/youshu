@@ -17,7 +17,7 @@
     UICollectionViewFlowLayout* layout = [[UICollectionViewFlowLayout alloc] init];
     layout.minimumLineSpacing = 0.001f;
     layout.minimumInteritemSpacing = 0.001f;
-    layout.itemSize = CGSizeMake((HMSCREENWIDTH - 13 * 5) / 4, 45);
+    layout.itemSize = CGSizeMake((HMSCREENWIDTH - 15 * 5) / 4, 45);
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     self.cv.showsHorizontalScrollIndicator = NO;
     self.cv.showsVerticalScrollIndicator = NO;
@@ -28,7 +28,20 @@
     [self.cv registerNib:[UINib nibWithNibName:@"HTBossGoodsSearchItemCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"HTBossGoodsSearchItemCollectionViewCell"];
 }
 
-    
+
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    return UIEdgeInsetsMake(0, 15, 0, 0);//分别为上、左、下、右}
+}
+
+//这个是两行cell之间的间距（上下行cell的间距）
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+    return 15;
+}
+//两个cell之间的间距（同一行的cell的间距）
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+    return 15;
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     HTBossGoodsSearchItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HTBossGoodsSearchItemCollectionViewCell" forIndexPath:indexPath];
@@ -43,8 +56,8 @@
     }else{
         cell.titleLabel.text = _itemsStatusArray[indexPath.row];
         if (_currentSelectedStatus == indexPath.row) {
-            cell.titleLabel.backgroundColor = [UIColor colorWithHexString:@"#E5E5E5"];
-            cell.titleLabel.layer.borderWidth = 0;
+            cell.titleLabel.backgroundColor = [UIColor whiteColor];
+            cell.titleLabel.layer.borderWidth = 0.5;
             cell.titleLabel.layer.borderColor = [UIColor colorWithHexString:@"#313131"].CGColor;
         }
     }

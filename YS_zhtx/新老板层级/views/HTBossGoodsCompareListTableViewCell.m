@@ -30,6 +30,7 @@
     [self.cv registerNib:[UINib nibWithNibName:@"HTBossGoodsCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"HTBossGoodsCollectionViewCell"];
 }
 
+
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.titleArray.count;
 }
@@ -79,6 +80,7 @@
     [_titleArray addObject:@"最近调出日期"];
     _detailArray = [NSMutableArray arrayWithArray:[_dataDic objectForKey:@"stock"]];
     _nameLabel.text = [_tempDic objectForKey:@"companyname"];
+    [_cv reloadData];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -469,6 +469,7 @@
                 <outlet property="dengji" destination="cma-7S-uhr" id="VOf-nS-iqo"/>
                 <outlet property="gongyingshang" destination="Ik9-gr-eDQ" id="WqP-Wg-efw"/>
                 <outlet property="headImv" destination="vju-gy-0zC" id="xfV-MJ-zuv"/>
+                <outlet property="imageViewHeight" destination="NCG-5x-j61" id="XKd-WK-Yob"/>
                 <outlet property="jianyanyuan" destination="gnr-Ck-UY6" id="JMb-8S-DMj"/>
                 <outlet property="jijie" destination="StR-81-qZG" id="Y2r-GJ-sks"/>
                 <outlet property="kuanhao" destination="0Sm-WS-6Qb" id="jmq-SA-0gw"/>

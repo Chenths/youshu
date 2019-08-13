@@ -17,6 +17,7 @@
     _secondView.hidden = YES;
     _bottomLabel.text = @"查看更多";
     _bottomImv.image = [UIImage imageNamed:@"boss-down"];
+    _imageViewHeight.constant = HMSCREENWIDTH;
     // Initialization code
 }
 - (IBAction)touchBottomAction:(id)sender {
