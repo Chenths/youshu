@@ -25,6 +25,8 @@
 
 @property (nonatomic,strong) NSString *imgId;
 
+@property (nonatomic, strong) UIView *topView;
+
 @end
 
 @implementation HTChooseHeadImgViewController
@@ -118,6 +120,36 @@
     self.dataCollectionView.delegate   = self;
     self.dataCollectionView.dataSource = self;
     [self.dataCollectionView registerNib:[UINib nibWithNibName:@"HTChooseHeadImgCell" bundle:nil] forCellWithReuseIdentifier:@"HTChooseHeadImgCell"];
+    
+    
+    _cvHeader.constant += 40;
+    self.topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, HMSCREENWIDTH, 40)];
+    _topView.backgroundColor = [UIColor colorWithHexString:@"#E6384C"];
+    [self.view addSubview:_topView];
+    
+    UILabel * textLabel = [[UILabel alloc] init];
+    textLabel.frame = CGRectMake(18, 11, HMSCREENWIDTH - 18 - 21 - 18 - 4, 18);
+    textLabel.text = @"为了提高识别准确率，请使用正面照片录入资料。";
+    textLabel.textColor = [UIColor whiteColor];
+    textLabel.font = [UIFont systemFontOfSize:13];
+    [_topView addSubview:textLabel];
+    
+    UIImageView *imv = [[UIImageView alloc] init];
+    imv.frame = CGRectMake(HMSCREENWIDTH - 21 - 18, 9, 21, 21);
+    imv.image= [UIImage imageNamed:@"colseWhite"];
+    [_topView addSubview:imv];
+    
+    UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    closeBtn.frame = CGRectMake(HMSCREENWIDTH - 21 - 18 - 8, 9, 37, 21);
+    [closeBtn addTarget:self action:@selector(closeRedAlert) forControlEvents:UIControlEventTouchUpInside];
+    [_topView addSubview:closeBtn];
+    
+    
+}
+
+- (void)closeRedAlert{
+    _cvHeader.constant -= 40;
+    [_topView removeFromSuperview];
 }
 - (void)loadData{
     

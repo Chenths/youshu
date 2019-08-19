@@ -30,8 +30,8 @@
                           @"styleCode": str,
                           @"companyId":[HTShareClass shareClass].loginModel.companyId
                           };
-    
     [HTHttpTools POST:[NSString stringWithFormat:@"%@%@",baseUrl,checkGoodsIsNotNull] params:dic success:^(id json) {
+        self.historyTb.userInteractionEnabled = YES;
         if ([json[@"isNull"] boolValue] == 1){
             [self dealDataThings:str];
             if ([self.searchTF isFirstResponder]) {
@@ -54,10 +54,12 @@
         if ([self.searchTF isFirstResponder]) {
             [self.searchTF resignFirstResponder];
         }
+        self.historyTb.userInteractionEnabled = YES;
         
         [MBProgressHUD showError:SeverERRORSTRING];
         
     } failure:^(NSError *error) {
+        self.historyTb.userInteractionEnabled = YES;
         if ([self.searchTF isFirstResponder]) {
             [self.searchTF resignFirstResponder];
         }
@@ -122,7 +124,7 @@
     
     self.searchTF = [[UITextField alloc] initWithFrame:CGRectMake(43, 0, HMSCREENWIDTH - 160 - 43 - 10 , 32)];
     _searchTF.font = [UIFont systemFontOfSize:14];
-    _searchTF.placeholder = @"商品全渠道查询";
+    _searchTF.placeholder = @"请输入商品款号";
     _searchTF.backgroundColor = [UIColor whiteColor];
     _searchTF.textColor = [UIColor colorWithHexString:@"#222222"];
     _searchTF.delegate = self;
@@ -163,6 +165,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     //此处网络请求调用
+    _historyTb.userInteractionEnabled = NO;
     [self checkGoodsNum:_historyArr[indexPath.row]];
 }
 
@@ -170,6 +173,7 @@
     NSLog(@"完成");
     //此处网络请求调用
     [self checkGoodsNum:textField.text];
+    [textField resignFirstResponder];
     
     return YES;
 }

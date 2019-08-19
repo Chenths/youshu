@@ -14,5 +14,6 @@ typedef NS_ENUM(NSInteger, HTUSRTYPE) {
 @interface HTOnlineCustomerListViewController : HTCommonViewController
 
 @property (nonatomic,assign) HTUSRTYPE usrType;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tbTop;
 
 @end

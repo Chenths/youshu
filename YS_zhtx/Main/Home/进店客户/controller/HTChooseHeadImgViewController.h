@@ -16,5 +16,6 @@ typedef void(^SELECTEDIMG)(NSArray *selectedArr);
 @property (nonatomic,strong) HTFaceNotVipModel *notVipModel;
 
 @property (nonatomic,copy) SELECTEDIMG selectedImg;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cvHeader;
 
 @end

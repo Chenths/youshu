@@ -36,7 +36,7 @@
         _bottomImv.image = [UIImage imageNamed:@"boss-down"];
     }
     if (self.delegate) {
-        [self.delegate bossGoodRefreshDelegateAction];
+        [self.delegate bossGoodRefreshDelegateActionShowDedetail:_isShowDetail];
     }
 }
 

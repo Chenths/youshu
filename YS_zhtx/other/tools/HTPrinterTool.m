@@ -237,9 +237,10 @@
         if ([self.version isEqualToString:@"2"]) {
             [self printReceiptWithNum:num andpage:2];
         }else if ([self.version isEqualToString:@"1"]){
-            for (int i = 0; i < 2; i++) {
+            //2019.8.19注释掉for
+//            for (int i = 0; i < 2; i++) {
                 [self printReceiptWithNum:num andpage:1];
-            }
+//            }
         }
     }
     
@@ -261,9 +262,10 @@
             if ([self.version isEqualToString:@"2"]) {
                 [self printReceiptWithNum:num andpage:pages];
             }else if ([self.version isEqualToString:@"1"]){
-                for (int i = 0; i < pages; i++) {
+                //2019.8.19注释掉for
+//                for (int i = 0; i < pages; i++) {
                     [self printReceiptWithNum:num andpage:1];
-                }
+//                }
             }
         }
     }
@@ -478,6 +480,7 @@
         [MBProgressHUD hideHUD];
         [MBProgressHUD showError:NETERRORSTRING];
     }];
+    
     return;
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     //申明返回的结果是json类型

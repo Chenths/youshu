@@ -32,6 +32,7 @@
     self.title = @"选择会员";
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem creatBarButtonItemWithTitle:@"完成" target:self action:@selector(finishAction)];
     self.dataArray = [NSMutableArray array];
+    _currentIndexRow = -1;
     [self buildUI];
     self.page = 1;
     [self loadDataWithPage:self.page];
@@ -143,6 +144,9 @@
 }
 
 - (void)finishAction{
+    if (_currentIndexRow == -1 && _dataArray.count != 0) {
+        return;
+    }
     if (_isFromFace) {
         if (_currentIndexRow >= 20000) {
             HTCustomerListModel *model = _dataArray[_currentIndexRow - 20000];

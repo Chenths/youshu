@@ -21,6 +21,7 @@
 @property (nonatomic, assign) NSInteger currentChooseStatus;
 @property (nonatomic, strong) NSMutableArray *listArray;
 @property (nonatomic, strong) HTBossGoodsChooseHeaderView *sectionHeaderView;
+@property (nonatomic, assign) BOOL ifShowDetail;
 @end
 
 @implementation HTBossGoodsDetailViewController
@@ -31,6 +32,7 @@
     [self buildTb];
     [self loadBasicData];
     self.basicArray = [NSMutableArray arrayWithArray:@[@"可用", @"历史", @"销售", @"在途"]];
+    _ifShowDetail = 0;
     self.currentType = 0;
     self.currentChooseColor = 0;
     self.currentChooseStatus = 0;
@@ -128,6 +130,7 @@
         return 1;
     }else{
         return _listArray.count;
+//        return 10;
     }
 }
 
@@ -195,51 +198,82 @@
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf setContentOffSet:point];
         };
+//        [cell.cv scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
         cell.dataDic = _listArray[indexPath.row];
         return cell;
     }
 }
 
 - (void)bossChooseBtnDelegateAction:(NSInteger)tag{
+//    [_goodsTb scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionNone animated:YES];
+//    [_goodsTb scrollsToTop];
     if (tag == 100) {
         if (_currentType == 1) {
             _currentType = 0;
         }else{
             _currentType = 1;
         }
+        [self setContentOffSet:CGPointMake(0, 0)];
+//        if (_ifShowDetail) {
+//            _goodsTb.contentOffset = CGPointMake(0, 166 + 260 + HMSCREENWIDTH);
+//        }else{
+//            _goodsTb.contentOffset = CGPointMake(0, 166 + HMSCREENWIDTH);
+//        }
+        
         NSIndexSet *indexSet=[[NSIndexSet alloc] initWithIndex:1];
-        [_goodsTb reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
-        //    [_goodsTb reloadData];
-        [_goodsTb scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [_goodsTb reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+//        [_goodsTb scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        
+//        [_goodsTb reloadData];
     }else if (tag == 101){
         if (_currentType == 2) {
             _currentType = 0;
         }else{
             _currentType = 2;
         }
+        [self setContentOffSet:CGPointMake(0, 0)];
+//        if (_ifShowDetail) {
+//            _goodsTb.contentOffset = CGPointMake(0, 166 + 260 + HMSCREENWIDTH);
+//        }else{
+//            _goodsTb.contentOffset = CGPointMake(0, 166 + HMSCREENWIDTH);
+//        }
         NSIndexSet *indexSet=[[NSIndexSet alloc] initWithIndex:1];
-        [_goodsTb reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
-        //    [_goodsTb reloadData];
-        [_goodsTb scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [_goodsTb reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+//        [_goodsTb scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+//        [_goodsTb reloadData];
     }else{
         if (_currentType == 1) {
             _currentChooseColor = tag;
+            [self setContentOffSet:CGPointMake(0, 0)];
             [self getList];
+//            if (_ifShowDetail) {
+//                _goodsTb.contentOffset = CGPointMake(0, 166 + 260 + HMSCREENWIDTH);
+//            }else{
+//                _goodsTb.contentOffset = CGPointMake(0, 166 + HMSCREENWIDTH);
+//            }
         }else if (_currentType == 2){
             _currentChooseStatus = tag;
 //            NSIndexSet *indexSet=[[NSIndexSet alloc] initWithIndex:1];
 //            [_goodsTb reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
 //            [_goodsTb scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+            [self setContentOffSet:CGPointMake(0, 0)];
             [_goodsTb reloadData];
+//            if (_ifShowDetail) {
+//                _goodsTb.contentOffset = CGPointMake(0, 166 + 260 + HMSCREENWIDTH);
+//            }else{
+//                _goodsTb.contentOffset = CGPointMake(0, 166 + HMSCREENWIDTH);
+//            }
         }else{
             
         }
     }
     
+    
 }
 
 
-- (void)bossGoodRefreshDelegateAction{
+- (void)bossGoodRefreshDelegateActionShowDedetail:(BOOL)show{
+    _ifShowDetail = show;
     [_goodsTb reloadData];
     [_goodsTb scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 }

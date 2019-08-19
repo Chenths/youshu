@@ -14,6 +14,7 @@
                 <outlet property="dataTableView" destination="zpS-tj-QmS" id="hnW-9n-17A"/>
                 <outlet property="datePickTF" destination="uSO-Qw-CF9" id="HSB-ys-PX3"/>
                 <outlet property="tabBottomHeight" destination="Tzm-2h-eAi" id="rFY-VF-aoQ"/>
+                <outlet property="tbTop" destination="FIk-6w-7u3" id="CUg-0B-Dl8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabBottomHeight;
 @property (nonatomic, copy) NSString *currentDate;
 @property (nonatomic, strong) UIDatePicker *datePicker;
+@property (nonatomic, strong) UIView *tbHeaderView;
 @end
 
 @implementation HTOnlineCustomerListViewController
@@ -444,9 +445,40 @@
     self.dataTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self loadData];
     }];
+    
+    if (_usrType == HTUSRERNOTVIP) {
+        _tbTop.constant += 40;
+        self.tbHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 54, HMSCREENWIDTH, 40)];
+        _tbHeaderView.backgroundColor = [UIColor colorWithHexString:@"#E6384C"];
+        [self.view addSubview:_tbHeaderView];
+        
+        UILabel * textLabel = [[UILabel alloc] init];
+        textLabel.frame = CGRectMake(18, 11, HMSCREENWIDTH - 18 - 12 - 18 - 4, 18);
+        textLabel.text = @"为了提高识别准确率，请选择客户的正面照片。";
+        textLabel.textColor = [UIColor whiteColor];
+        textLabel.font = [UIFont systemFontOfSize:13];
+        [_tbHeaderView addSubview:textLabel];
+        
+        UIImageView *imv = [[UIImageView alloc] init];
+        imv.frame = CGRectMake(HMSCREENWIDTH - 21 - 18, 9, 21, 21);
+        imv.image= [UIImage imageNamed:@"colseWhite"];
+        [_tbHeaderView addSubview:imv];
+        
+        UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        closeBtn.frame = CGRectMake(HMSCREENWIDTH - 21 - 18 - 8, 9, 37, 21);
+        [closeBtn addTarget:self action:@selector(closeRedAlert) forControlEvents:UIControlEventTouchUpInside];
+        [_tbHeaderView addSubview:closeBtn];
+    }else{
+        
+    }
     //设置预估行高
     _dataTableView.estimatedRowHeight = 98;
     _dataTableView.rowHeight = UITableViewAutomaticDimension;
+}
+
+- (void)closeRedAlert{
+    [_tbHeaderView removeFromSuperview];
+    _tbTop.constant -= 40;
 }
 
 #pragma mark - getters and setters

@@ -22,11 +22,7 @@
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eK8-eN-B26">
                     <rect key="frame" x="15" y="30" width="345" height="607"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <string key="text">1.人脸识别功能优化升级
-2.系统推送功能优化
-3.报表模块优化
-4.推送功能优化
-5.已发现的问题修复</string>
+                    <string key="text">APP更新内容：1.库存管理页面新增商品全渠道查询功能，可按款查询商品在各店的库存情况。2.优化了一些bug，提升了一下用户体验.</string>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>

@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @protocol HTBossGoodRefreshDelegate <NSObject>
-- (void)bossGoodRefreshDelegateAction;
+- (void)bossGoodRefreshDelegateActionShowDedetail:(BOOL)show;
 @end
 @interface HTBossGoodsDetailHeadTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *headImv;

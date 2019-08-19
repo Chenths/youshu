@@ -399,7 +399,10 @@
     
     [MBProgressHUD showMessage:@""];
     [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleCust,addCust4App] params:self.requestDic success:^(id json) {
-        
+        if (![json[@"isSuccess"] boolValue]) {
+            [MBProgressHUD showError:json[@"msg"]];
+            return;
+        }
         if (self.backLists.count > 0) {
             //            已输入添加跟进记录，此处新增
             NSMutableArray *data = [NSMutableArray array];

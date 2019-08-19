@@ -25,7 +25,7 @@
 }
 #pragma mark -UITabelViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 2;
+    return 1;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"celll"];
@@ -34,7 +34,8 @@
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.text = indexPath.row == 0 ? @"新增功能":@"下载APP";
+    cell.textLabel.text = @"新增功能";
+//    cell.textLabel.text = indexPath.row == 0 ? @"新增功能":@"下载APP";
     cell.textLabel.textColor = [UIColor colorWithHexString:@"#222222"];
     return cell;
 }
