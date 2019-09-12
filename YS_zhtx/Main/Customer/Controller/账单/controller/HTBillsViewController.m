@@ -188,8 +188,8 @@
         for (NSDictionary *dic in [json getArrayWithKey:@"rows"]) {
             if (self.dataArray.count > 0) {
 //                为同月分为一组，不同月在建一组
-                HTBillSectionModel *model = [self.dataArray lastObject];
                 if ([dic getStringWithKey:@"createdate"].length >= 7) {
+                    HTBillSectionModel *model = [self.dataArray lastObject];
                     if ([model.holdStr isEqualToString:[[dic getStringWithKey:@"createdate"] substringWithRange:NSMakeRange(0, 7)]]) {
                         [model.datas addObject:[HTBillInfoModel yy_modelWithJSON:dic]];
                     }else{
@@ -197,8 +197,8 @@
                         HTBillInfoModel *mmm = [HTBillInfoModel yy_modelWithJSON:dic];
                         if (mmm.createdate.length >= 7) {
                             [secModel.datas addObject:mmm];
-                            model.holdStr = [mmm.createdate substringWithRange:NSMakeRange(0, 7)];
-                            model.sectionTile = [NSString stringWithFormat:@"%@年%@月",mmm.year,mmm.month];
+                            secModel.holdStr = [mmm.createdate substringWithRange:NSMakeRange(0, 7)];
+                            secModel.sectionTile = [NSString stringWithFormat:@"%@年%@月",mmm.year,mmm.month];
                             [self.dataArray addObject:secModel];
                         }
                     }

@@ -31,12 +31,19 @@
 #import "HTPrinterTool.h"
 #import "HTHoldOrderEventManager.h"
 #import "HTShowImg.h"
-@interface HTNewPayViewController ()<UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, paypayNormalDelegate, chooseSellerBackDelegate, UITextFieldDelegate, MFMessageComposeViewControllerDelegate>{
+#import "HTNewPayYHQViewController.h"
+@interface HTNewPayViewController ()<UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, paypayNormalDelegate, chooseSellerBackDelegate, UITextFieldDelegate, MFMessageComposeViewControllerDelegate, HTYHQListChooseDelegate>{
     BOOL isNormalPayKind;
     NSMutableArray *biliTFArr;
     NSMutableArray *priceTFArr;
     //当前支付种类
     NSInteger currentNormalPayKind;
+    NSString *scoreText;
+    NSString *yhqText;
+    HTYHQModel *yhqModel;
+    __weak IBOutlet UITextField *maskScoreTF;
+    __weak IBOutlet UITextField *maskMoneyTF;
+    __weak IBOutlet UIView *maskView;
 }
 @property (weak, nonatomic) IBOutlet UITableView *dataTableView;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
@@ -67,13 +74,16 @@
 @property (nonatomic, strong) HTPrinterTool *printerManager;
 @property (nonatomic, strong) NSString *tipStr;
 
-
 @end
 
 @implementation HTNewPayViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"结算";
+    scoreText = @"无";
+    yhqText = @"无";
+    maskView.hidden = YES;
     _mixRemainPayNum = [_orderModel.encodeFinal floatValue];
     biliTFArr = [NSMutableArray array];
     priceTFArr = [NSMutableArray array];
@@ -81,8 +91,6 @@
     self.mixSellHeaderView = [self buildSellKeyBoardHeader];
     self.mixPayHeaderView = [self buildPayKeyBoardHeader];
     
-    self.title = @"结算";
-//    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImageName:@"g-goodsAdd" highImageName:@"g-goodsAdd" target:self action:@selector(cancelAction)] ;
     isNormalPayKind = 1;
     self.selectSellerArr = [NSMutableArray array];
     [self dealMixData];
@@ -517,12 +525,12 @@
     self.paySellerArr = [NSMutableArray array];
     CGFloat totalBili = 100.0;
     CGFloat everyBili = [[NSString stringWithFormat:@"%.2f", totalBili / self.selectSellerArr.count] floatValue];
-
+    
     CGFloat totalPrice = [_orderModel.encodeFinal floatValue];
     CGFloat everyPrice = [[NSString stringWithFormat:@"%.2f", everyBili * totalPrice / 100.0] floatValue];
     NSString *everyBiliNum = [NSString stringWithFormat:@"%.2f", everyBili];
     NSString *everyPriceNum = [NSString stringWithFormat:@"%.2f", everyPrice];
-
+    
     for (int i = 0; i < self.selectSellerArr.count; i++) {
         if (i !=  self.selectSellerArr.count - 1) {
             [_biliArr addObject:everyBiliNum];
@@ -782,7 +790,7 @@
         [MBProgressHUD showError:@"组合销售金额未选择完成"];
         return;
     }
-   
+    
     NSLog(@"确认支付");
     
     NSString *orderStr;
@@ -819,9 +827,9 @@
         NSDictionary *dataDic = [json getDictionArrayWithKey:@"data"];
         if ([json[@"isSuccess"] boolValue]) {
             if ([[dataDic objectForKey:@"state"] boolValue]) {
-//                if (!self.isFromFast) {
-                    [strongSelf.orderModel setValuesForKeysWithDictionary:[dataDic objectForKey:@"order"]];
-//                }
+                //                if (!self.isFromFast) {
+                [strongSelf.orderModel setValuesForKeysWithDictionary:[dataDic objectForKey:@"order"]];
+                //                }
                 if (isNormalPayKind) {
                     switch (currentNormalPayKind) {
                         case 1:
@@ -908,13 +916,13 @@
     
     //组合支付
     [self.dataTableView registerNib:[UINib nibWithNibName:@"HTNewPayMixPayKindTableViewCell" bundle:nil] forCellReuseIdentifier:@"HTNewPayMixPayKindTableViewCell"];
-
+    
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    
     if (indexPath.section == 0) {
         HTNewPayHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTNewPayHeaderTableViewCell" forIndexPath:indexPath];
         [cell.headerImv sd_setImageWithURL:[NSURL URLWithString:_custModel.headImg] placeholderImage:[UIImage imageNamed:@"g-customerholdImg"]];
@@ -922,8 +930,8 @@
         cell.sexImv.image = [UIImage imageNamed: [_custModel.sex isEqualToString:@"1"] ? @"g-man" : @"g-woman"];
         cell.levelLabel.text = [HTHoldNullObj getValueWithUnCheakValue:_custModel.custlevel];
         cell.phoneLabel.text = [HTHoldNullObj getValueWithUnCheakValue:_custModel.phone];
-        cell.czLabel.text = [HTHoldNullObj getValueWithUnCheakValue:_custModel.account.stored.balance];
-        cell.czzsLabel.text = [HTHoldNullObj getValueWithUnCheakValue:_custModel.account.storedPresented.balance];
+        cell.czLabel.text = [NSString stringWithFormat:@"¥%@", [HTHoldNullObj getValueWithUnCheakValue:_custModel.account.stored.balance]];
+        cell.czzsLabel.text = [NSString stringWithFormat:@"¥%@",[HTHoldNullObj getValueWithUnCheakValue:_custModel.account.storedPresented.balance]];
         cell.jfLabel.text = [HTHoldNullObj getValueWithUnCheakValue:_custModel.account.integral.balance];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if ([[HTHoldNullObj getValueWithUnCheakValue:_custModel.phone] isEqualToString:@""]) {
@@ -952,7 +960,7 @@
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
         cell.goodsHeaderImv.tag = 20000 + indexPath.row;
         [cell.goodsHeaderImv addGestureRecognizer:tap];
-
+        
         
         if (_isFromFast) {
             cell.goodsName.text = [HTHoldNullObj getValueWithUnCheakValue:model.selectedModel.barcode];
@@ -979,7 +987,7 @@
         }else{
             cell.chooseImv.image = [UIImage imageNamed:@"singleSelected"];
             NSString *oldPriceStr = @"赠送积分";
-//            NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+            //            NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
             NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:oldPriceStr attributes:nil];
             cell.chooseLabel.attributedText = attribtStr;
         }
@@ -999,6 +1007,28 @@
         cell.numLabel.text = [NSString stringWithFormat:@"共%@件小计: ", [HTHoldNullObj getValueWithUnCheakValue:[NSString stringWithFormat:@"%ld", _products.count]]];
         return cell;
     }else if (indexPath.section == 4){
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"normalCell"];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"normalCell"];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+        }
+        if (indexPath.row == 0) {
+            cell.textLabel.text = @"使用积分";
+            cell.textLabel.textColor = [UIColor colorWithHexString:@"#373737"];
+            cell.detailTextLabel.text = scoreText;
+            cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#BBBBBB"];
+        }else{
+            cell.textLabel.text = @"使用优惠券";
+            cell.textLabel.textColor = [UIColor colorWithHexString:@"#373737"];
+            cell.detailTextLabel.text = yhqText;
+            cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#BBBBBB"];
+        }
+        if (_custModel.phone == nil || [_custModel.phone isEqualToString:@""]) {
+            cell.hidden = YES;
+        }
+        return cell;
+    }else if (indexPath.section == 5){
         HTNewPayWriteOrderTipsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTNewPayWriteOrderTipsTableViewCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.tipLabel.delegate = self;
@@ -1010,7 +1040,7 @@
         cell.tipLabel.textColor = [UIColor colorWithHexString:@"#999999"];
         self.tipTextView = cell.tipLabel;
         return cell;
-    }else if(indexPath.section == 5){
+    }else if(indexPath.section == 6){
         HTNewPaySellerHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTNewPaySellerHeaderTableViewCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         HTSellerListModel *model = _selectSellerArr[indexPath.row];
@@ -1080,7 +1110,7 @@
         }
         
         return cell;
-    }else if(indexPath.section == 6){
+    }else if(indexPath.section == 7){
         HTNewPaySellerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTNewPaySellerTableViewCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         HTSellerListModel *model = _selectSellerArr[indexPath.row];
@@ -1098,7 +1128,7 @@
         cell.biliTF.delegate = self;
         cell.priceTF.delegate = self;
         return cell;
-    }else if(indexPath.section == 7){
+    }else if(indexPath.section == 8){
         HTNewPayPayHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HTNewPayPayHeaderTableViewCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.payHeaderLeft addTarget:self action:@selector(payHeaderLeftAction) forControlEvents:UIControlEventTouchUpInside];
@@ -1156,7 +1186,7 @@
             }
             cell.moneyTF.tag = 3000 + indexPath.row;
             [cell.moneyTF setInputAccessoryView:_mixPayHeaderView];
-
+            
             return cell;
         }
     }
@@ -1175,6 +1205,17 @@
     
 }
 
+- (void)HTChooseYHQListBackWithModel:(HTYHQModel *)model
+{
+    if (model.cardTemplateId == 0) {
+        yhqModel = nil;
+        yhqText = @"无";
+    }else{
+        yhqModel = model;
+        yhqText = yhqModel.name;
+    }
+    [_dataTableView reloadData];
+}
 
 - (BOOL)checkPayIfCanThisEditWithTextField:(UITextField *)textField WithStr:(NSString *)str{
     NSInteger tag = textField.tag;
@@ -1190,7 +1231,7 @@
         }
         totalNum += currentTFNum;
         if ([_orderModel.encodeFinal floatValue] >= totalNum) {
-//            _mixPayHeaderLabel.text = [NSString stringWithFormat:@"还有%.2f元未分配", [_orderModel.encodeFinal floatValue] - totalNum];
+            //            _mixPayHeaderLabel.text = [NSString stringWithFormat:@"还有%.2f元未分配", [_orderModel.encodeFinal floatValue] - totalNum];
             return YES;
         }else{
             return NO;
@@ -1198,7 +1239,7 @@
     }else if(tag >= 4000 && tag < 5000){
         //组合销售比例输入框
         NSInteger current = tag - 4000;
-
+        
         CGFloat currentTFNum =  [textField.text floatValue] * 10 + str.floatValue;
         CGFloat totalNum;
         for (int i = 0; i < _biliArr.count; i++) {
@@ -1241,6 +1282,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSLog(@"当前行:%ld 列:%ld", indexPath.section, indexPath.row);
     if (indexPath.section == 1) {
         if (_isFromFast) {
@@ -1263,21 +1305,21 @@
             strongSelf.products = backArray;
             strongSelf.orderModel.encodeFinal = finalPrice;
             
-//            strongSelf.payCode = payCode;
-//            strongSelf.wechatPayOrderId = wechatPayOrderId;
+            //            strongSelf.payCode = payCode;
+            //            strongSelf.wechatPayOrderId = wechatPayOrderId;
             strongSelf.priceLabel.text = finalPrice;
             
-//            NSMutableArray *tempSell = [NSMutableArray array];
-//            for (int i = 0; i < strongSelf.paySellerArr.count; i++) {
-//                [tempSell addObject:@""];
-//            }
-//            strongSelf.paySellerArr = [NSMutableArray arrayWithArray:tempSell];
-//
-//            NSMutableArray *tempBili = [NSMutableArray array];
-//            for (int i = 0; i < strongSelf.biliArr.count; i++) {
-//                [tempBili addObject:@""];
-//            }
-//            strongSelf.biliArr = [NSMutableArray arrayWithArray:tempBili];
+            //            NSMutableArray *tempSell = [NSMutableArray array];
+            //            for (int i = 0; i < strongSelf.paySellerArr.count; i++) {
+            //                [tempSell addObject:@""];
+            //            }
+            //            strongSelf.paySellerArr = [NSMutableArray arrayWithArray:tempSell];
+            //
+            //            NSMutableArray *tempBili = [NSMutableArray array];
+            //            for (int i = 0; i < strongSelf.biliArr.count; i++) {
+            //                [tempBili addObject:@""];
+            //            }
+            //            strongSelf.biliArr = [NSMutableArray arrayWithArray:tempBili];
             [self dealSellerData];
             
             NSMutableArray *tempPayKind = [NSMutableArray array];
@@ -1288,14 +1330,14 @@
             
             [strongSelf.dataTableView reloadData];
         };
-//        vc.didpay = ^{
-//            __strong typeof(weakSelf) strongSelf = weakSelf;
-//            strongSelf.printerManager.pushNext = ^{
-//                __strong typeof(weakSelf) strongsSelf = weakSelf;
-//                [strongsSelf print];
-//                [strongsSelf.navigationController popToRootViewControllerAnimated:YES];
-//            };
-//        };
+        //        vc.didpay = ^{
+        //            __strong typeof(weakSelf) strongSelf = weakSelf;
+        //            strongSelf.printerManager.pushNext = ^{
+        //                __strong typeof(weakSelf) strongsSelf = weakSelf;
+        //                [strongsSelf print];
+        //                [strongsSelf.navigationController popToRootViewControllerAnimated:YES];
+        //            };
+        //        };
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.section == 2){
         if ([_noGiveScoreArr containsObject:indexPath]) {
@@ -1304,7 +1346,26 @@
             [_noGiveScoreArr addObject:indexPath];
         }
         [_dataTableView reloadData];
-    } else if (indexPath.section == 5) {
+    }else if (indexPath.section == 4){
+        if (indexPath.row == 0) {
+            maskView.hidden = NO;
+        }else{
+            HTNewPayYHQViewController *vc = [[HTNewPayYHQViewController alloc] init];
+            vc.delegate = self;
+            if (yhqModel) {
+                vc.currentModel = yhqModel;
+            }
+            if (_custModel.phone == nil || [_custModel.phone isEqualToString:@""]) {
+                vc.customerId = @"";
+                vc.phone = @"";
+            }else{
+                vc.customerId = [HTHoldNullObj getValueWithUnCheakValue: _custModel.custId];
+                vc.phone = _custModel.phone;
+            }
+            vc.companyId = [HTHoldNullObj getValueWithUnCheakValue:[HTShareClass shareClass].loginModel.companyId];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    } else if (indexPath.section == 6) {
         HTChargeMaskViewController *choose = [[HTChargeMaskViewController alloc] init];
         choose.delegate = self;
         choose.selectArr = [NSMutableArray arrayWithArray:_selectSellerArr];
@@ -1312,6 +1373,22 @@
     }else{
         
     }
+}
+- (IBAction)maskCancelAction:(id)sender {
+    NSLog(@"取消按钮");
+    maskScoreTF.text = @"";
+    maskMoneyTF.text = @"";
+    maskView.hidden = YES;
+}
+- (IBAction)maskSureAction:(id)sender {
+    NSLog(@"确认按钮");
+    [self getFinalPrice];
+    maskView.hidden = YES;
+    
+}
+
+- (void)getFinalPrice{
+    NSLog(@"获取最终价格");
 }
 
 - (void)chooseSellerBack:(NSMutableArray *)sellerArr{
@@ -1384,15 +1461,22 @@
         //商品尾
         return 52;
     }else if (indexPath.section == 4){
+        //积分优惠券
+        if (_custModel.phone == nil || [_custModel.phone isEqualToString:@""]) {
+            return 0.1;
+        }else{
+            return 48;
+        }
+    }else if (indexPath.section == 5){
         //备注
         return 93;
-    }else if (indexPath.section == 5){
+    }else if (indexPath.section == 6){
         //导购头
         return 44;
-    }else if (indexPath.section == 6){
+    }else if (indexPath.section == 7){
         //导购
         return 71;
-    }else if(indexPath.section == 7){
+    }else if(indexPath.section == 8){
         //组合头
         return 120;
     }else{
@@ -1410,7 +1494,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    if (section == 6) {
+    if (section == 7) {
         
         UIView *headerView = [[UIView alloc] init];
         headerView.frame = CGRectMake(0, 0, HMSCREENWIDTH, 44);
@@ -1436,7 +1520,7 @@
             label.text = [NSString stringWithFormat:@"还有%.2f元/%.2f%%未分配", _mixRemainSellNum, tempTotalBili];
         }
         return headerView;
-    }else if (section == 8 && !isNormalPayKind){
+    }else if (section == 9 && !isNormalPayKind){
         
         UIView *headerView = [[UIView alloc] init];
         headerView.frame = CGRectMake(0, 0, HMSCREENWIDTH, 44);
@@ -1460,7 +1544,7 @@
         
         return headerView;
         
-       
+        
     }else{
         return [[UIView alloc] init];
     }
@@ -1474,9 +1558,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (section == 6) {
+    if (section == 7) {
         return 44;
-    }else if (section == 8){
+    }else if (section == 9){
         if (isNormalPayKind) {
             return 0.01;
         }else{
@@ -1498,28 +1582,36 @@
     }else if(section == 3){
         return 0.01;
     }else if(section == 4){
-        return 10;
+        if (_custModel.phone == nil || [_custModel.phone isEqualToString:@""]) {
+            return 0.1;
+        }else{
+            return 10;
+        }
     }else if(section == 5){
         return 10;
     }else if(section == 6){
+        return 10;
+    }else if(section == 7){
         return 0.01;
-    }else if (section == 7){
+    }else if (section == 8){
         return 10;
     }
     return 0.01;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 9;
+    return 10;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 2) {
         return _products.count;
-    }else if (section == 6){
+    }else if (section == 4){
+        return 2;
+    }else if (section == 7){
         return _selectSellerArr.count;
-    }else if (section == 8){
+    }else if (section == 9){
         if (isNormalPayKind) {
             return 1;
         }else{
@@ -1589,7 +1681,7 @@
     }];
     [HTShareClass shareClass].printerModel.orderDesc = self.tipTextView.text;
     //    发送打印请求
-//    [HTHoldOrderEventManager printOrderInfoWithOrderId:self.orderModel.orderId];
+    //    [HTHoldOrderEventManager printOrderInfoWithOrderId:self.orderModel.orderId];
     [self.printerManager print];
 }
 /**
@@ -1727,13 +1819,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

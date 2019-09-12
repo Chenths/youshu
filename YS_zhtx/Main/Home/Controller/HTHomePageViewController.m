@@ -29,8 +29,6 @@
 #import "HTWarningWebViewController.h"
 #import "HTWarningModel.h"
 #import "HTWarningSetViewController.h"
-//test
-#import "HTNewPayYHQViewController.h"
 @interface HTHomePageViewController ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,HTGHomeHeadCollectionViewCellDelegate,UITabBarControllerDelegate,UITabBarDelegate>
 
 
@@ -46,6 +44,7 @@
 
 @property (nonatomic,strong) NSMutableArray *sellWarning;
 
+@property (nonatomic, assign) BOOL ifFromBossCheckFace;
 @end
 
 @implementation HTHomePageViewController
@@ -58,9 +57,11 @@
         self.title = self.companyName;
         [self loadComanyRestand];
         self.navigationItem.rightBarButtonItem = [UIBarButtonItem creatBarButtonItemWithTitle:@"指标设置" target:self action:@selector(setAction)];
+    }else{
+        [self createData];
     }
     [self createTb];
-    [self createData];
+    
     [self loadWarning];
 }
 - (void)setAction{
@@ -128,13 +129,14 @@
         HTHomeItemsModel *model = self.dataArray[indexPath.row];
         if ([model.title isEqualToString:@"进店客户"]) {
             HTMyShopCustomersCenterController *vc = [[HTMyShopCustomersCenterController alloc] init];
+            vc.isFromBoss = self.isBoss;
+            if (self.isBoss) {
+                vc.sonShopId = self.companyId;
+            }
             [self.navigationController pushViewController:vc animated:YES];
         }else if ([model.title isEqualToString:@"店铺库存"]){
             HTShopInventoryInfoViewController *vc = [[HTShopInventoryInfoViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
-            //test
-//            HTNewPayYHQViewController *vc = [[HTNewPayYHQViewController alloc] init];
-//            [self.navigationController pushViewController:vc animated:YES];
         }else if ([model.title isEqualToString:@"销售报表"]){
             HTGSaleReportViewController *vc = [[HTGSaleReportViewController alloc] init];
             vc.companyId = self.companyId;
@@ -391,6 +393,10 @@
         [[HTShareClass shareClass].reportWarnStandard setValuesForKeysWithDictionary:dataArr];
         [HTShareClass shareClass].isProductStockActive = [dataArr[@"data"][@"isProductStockActive"] boolValue];
         [HTShareClass shareClass].isProductActive = [dataArr[@"data"][@"isProductActive"] boolValue];
+        if (self.isBoss) {
+            self.ifFromBossCheckFace = [dataArr[@"face"] boolValue];
+            [self createData];
+        }
         if ([HTShareClass shareClass].isGuide) {
             [self loadEmployeeData];
         }else{
@@ -462,29 +468,33 @@
     NSMutableArray *imgs = [NSMutableArray array];
     NSMutableArray *titles = [NSMutableArray array];
     if (self.isBoss) {
-        [titles  addObjectsFromArray:@[@"今日报表",@"销售报表",@"客群分析",@"员工报表",@"学习中心"]];
-        [imgs addObjectsFromArray:@[@"g-dayReport",@"g-itemsSaleReport",@"g-itemsCustomerReport",@"g-itemsGuiderrReport",@"g-itemsLearnCenter"]];
+        [titles  addObjectsFromArray:@[@"进店客户",@"今日报表",@"销售报表",@"客群分析",@"员工报表",@"学习中心"]];
+        [imgs addObjectsFromArray:@[@"g-itemsShopCustomer",@"g-dayReport",@"g-itemsSaleReport",@"g-itemsCustomerReport",@"g-itemsGuiderrReport",@"g-itemsLearnCenter"]];
+        if (!_ifFromBossCheckFace) {
+            [imgs removeObject:@"g-itemsShopCustomer"];
+            [titles removeObject:@"进店客户"];
+        }
     }else{
-    [imgs addObjectsFromArray:ii];
-    [titles addObjectsFromArray:tt];
-    if (![HTShareClass shareClass].face) {
-        [imgs removeObject:@"g-itemsShopCustomer"];
-        [titles removeObject:@"进店客户"];
-    }
-    if (![HTShareClass shareClass].isProductActive) {
-        [imgs removeObject:@"g-itemsInventory"];
-        [titles removeObject:@"店铺库存"];
-        [imgs removeObject:@"g-itemsGoddsImg"];
-        [titles removeObject:@"商品图片"];
-    }
-    if (![HTShareClass shareClass].isProductStockActive) {
-        if ([imgs containsObject:@"g-itemsInventory"]) {
-          [imgs removeObject:@"g-itemsInventory"];
+        [imgs addObjectsFromArray:ii];
+        [titles addObjectsFromArray:tt];
+        if (![HTShareClass shareClass].face) {
+            [imgs removeObject:@"g-itemsShopCustomer"];
+            [titles removeObject:@"进店客户"];
         }
-        if ([titles containsObject:@"店铺库存"]) {
-          [titles removeObject:@"店铺库存"];
+        if (![HTShareClass shareClass].isProductActive) {
+            [imgs removeObject:@"g-itemsInventory"];
+            [titles removeObject:@"店铺库存"];
+            [imgs removeObject:@"g-itemsGoddsImg"];
+            [titles removeObject:@"商品图片"];
         }
-    }
+        if (![HTShareClass shareClass].isProductStockActive) {
+            if ([imgs containsObject:@"g-itemsInventory"]) {
+                [imgs removeObject:@"g-itemsInventory"];
+            }
+            if ([titles containsObject:@"店铺库存"]) {
+                [titles removeObject:@"店铺库存"];
+            }
+        }
     }
     for (int i = 0; i < imgs.count; i++) {
         HTHomeItemsModel *model = [[HTHomeItemsModel alloc] init];

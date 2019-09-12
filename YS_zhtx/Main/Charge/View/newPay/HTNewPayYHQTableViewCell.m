@@ -25,9 +25,5 @@
     // Configure the view for the selected state
 }
 
-- (void)setYhqArr:(NSMutableArray *)yhqArr
-{
-    _yhqArr = yhqArr;
-}
 
 @end

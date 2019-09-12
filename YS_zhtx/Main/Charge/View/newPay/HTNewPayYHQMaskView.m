@@ -53,7 +53,7 @@
 - (void)setCurrentType:(NSInteger)currentType{
     _currentType = currentType;
     if (currentType == 1) {
-        dataArr = [NSMutableArray arrayWithArray:@[@"全部", @"代金券", @"折扣券", @"兑换券"]];
+        dataArr = [NSMutableArray arrayWithArray:@[@"全部", @"折扣券", @"兑换券", @"代金券"]];
     }else{
         dataArr = [NSMutableArray arrayWithArray:@[@"全部", @"未使用", @"已使用", @"已过期"]];
     }

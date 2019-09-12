@@ -31,7 +31,7 @@
 
 
 @implementation HTFaceComingAlertView
-+(void)showWithDatas:(NSArray *)dataArray hiddenBottomBtn:(BOOL)hiddenBottom isNew:(BOOL)isNew{
++(void)showWithDatas:(NSArray *)dataArray hiddenBottomBtn:(BOOL)hiddenBottom isNew:(BOOL)isNew hideReception:(BOOL)hideReception{
     HTFaceComingAlertView *alet = [[self alloc] initWithAlertFrame:CGRectMake(0, 0, HMSCREENWIDTH, HEIGHT - SafeAreaBottomHeight)];
     [alet initSubviews];
     [alet createCol];
@@ -46,6 +46,9 @@
         alet.moreBt.hidden = YES;
         alet.receptionBt.hidden = YES;
         alet.backView.backgroundColor = [UIColor clearColor];
+    }
+    if (hideReception) {
+        alet.receptionBt.hidden = YES;
     }
     [[[UIApplication sharedApplication].delegate window] addSubview:alet];
 }

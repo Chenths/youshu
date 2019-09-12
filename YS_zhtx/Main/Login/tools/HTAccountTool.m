@@ -296,6 +296,8 @@
     [HTShareClass shareClass].loginId = [NSString stringWithFormat:@"%@",dataDic[@"data"][@"loginId"]];
     [HTShareClass shareClass].face = [dataDic[@"data"][@"face"] boolValue];
     [HTShareClass shareClass].hideVIPPhone = [dataDic[@"data"][@"hideVIPPhone"] boolValue];
+    [HTShareClass shareClass].points = [dataDic[@"data"][@"points"] integerValue];
+    [HTShareClass shareClass].isPointDeduct = [dataDic[@"data"][@"isPointDeduct"] boolValue];
     [HTShareClass shareClass].smsConfig = [dataDic[@"data"][@"smsConfig"]
                                            integerValue];
     [HTShareClass shareClass].isAllchannels = [dataDic[@"data"][@"isAllchannels"] boolValue];
@@ -309,6 +311,7 @@
     [[HTShareClass shareClass].loginModel setValuesForKeysWithDictionary:dataDic[@"data"]];
     [HTShareClass shareClass].isPlatformOnlinePayActive = [dataDic[@"data"][@"isPlatformOnlinePayActive"] boolValue];
     [HTShareClass shareClass].isGuide = [dataDic[@"data"][@"isGuide"] boolValue];//        单例储存是否隐藏二维码
+    
     NSString *versionKey = (__bridge NSString *)kCFBundleVersionKey;
     NSString *currentVersion = [NSBundle mainBundle].infoDictionary[versionKey];
     NSString *str  =  [currentVersion stringByReplacingOccurrencesOfString:@"." withString:@""];

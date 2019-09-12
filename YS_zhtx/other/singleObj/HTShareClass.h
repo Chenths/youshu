@@ -96,10 +96,14 @@
 @property (nonatomic,assign) NSInteger seltedPhotosCount;
 
 @property (nonatomic,strong) HTSelectedImgaeObject *selectdImg;
-
+//隐藏手机号
 @property (nonatomic, assign) BOOL hideVIPPhone;
 
 @property (nonatomic, assign) BOOL isAllchannels;
+//店铺积分比例 积分/元
+@property (nonatomic, assign) NSInteger points;
+//是否开启积分抵扣  yes开了 no没开
+@property (nonatomic, assign) BOOL isPointDeduct;
 - (UINavigationController *) getCurrentNavController;
 
 @end

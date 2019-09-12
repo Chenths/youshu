@@ -447,7 +447,7 @@ static BOOL isProduction = YES;
             [vvv removeFromSuperview];
         }
     }
-    [HTFaceComingAlertView showWithDatas:@[model] hiddenBottomBtn:NO isNew:NO];
+    [HTFaceComingAlertView showWithDatas:@[model] hiddenBottomBtn:NO isNew:NO hideReception:NO];
 }
 
 

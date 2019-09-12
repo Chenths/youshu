@@ -369,6 +369,7 @@
 		0444C0D022FBCB7F0011E5DD /* HTNewPayYHQHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444C0CF22FBCB7F0011E5DD /* HTNewPayYHQHeaderView.xib */; };
 		0444C0D322FD54210011E5DD /* HTNewPayYHQMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0444C0D222FD54210011E5DD /* HTNewPayYHQMaskView.m */; };
 		0444C0D522FD543F0011E5DD /* HTNewPayYHQMaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444C0D422FD543F0011E5DD /* HTNewPayYHQMaskView.xib */; };
+		04450331230FBE0000836CB6 /* HTYHQModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04450330230FBE0000836CB6 /* HTYHQModel.m */; };
 		0445678E210854CD00A5DB12 /* HTHoldChargeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0445678D210854CD00A5DB12 /* HTHoldChargeManager.m */; };
 		044567912108715B00A5DB12 /* HTCahargeProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 044567902108715B00A5DB12 /* HTCahargeProductModel.m */; };
 		04456794210871A000A5DB12 /* HTChargeProductInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04456793210871A000A5DB12 /* HTChargeProductInfoModel.m */; };
@@ -1721,6 +1722,8 @@
 		0444C0D122FD54210011E5DD /* HTNewPayYHQMaskView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTNewPayYHQMaskView.h; sourceTree = "<group>"; };
 		0444C0D222FD54210011E5DD /* HTNewPayYHQMaskView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTNewPayYHQMaskView.m; sourceTree = "<group>"; };
 		0444C0D422FD543F0011E5DD /* HTNewPayYHQMaskView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HTNewPayYHQMaskView.xib; sourceTree = "<group>"; };
+		0445032F230FBE0000836CB6 /* HTYHQModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTYHQModel.h; sourceTree = "<group>"; };
+		04450330230FBE0000836CB6 /* HTYHQModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTYHQModel.m; sourceTree = "<group>"; };
 		0445678C210854CD00A5DB12 /* HTHoldChargeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTHoldChargeManager.h; sourceTree = "<group>"; };
 		0445678D210854CD00A5DB12 /* HTHoldChargeManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTHoldChargeManager.m; sourceTree = "<group>"; };
 		0445678F2108715B00A5DB12 /* HTCahargeProductModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTCahargeProductModel.h; sourceTree = "<group>"; };
@@ -3655,6 +3658,8 @@
 				04B0380321E728C20008160B /* HTChooseCustomerListModel.m */,
 				04B0385B21F1D0D20008160B /* HTSellerListModel.h */,
 				04B0385C21F1D0D20008160B /* HTSellerListModel.m */,
+				0445032F230FBE0000836CB6 /* HTYHQModel.h */,
+				04450330230FBE0000836CB6 /* HTYHQModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -7191,6 +7196,7 @@
 				0471899E216079DD0063A736 /* JCHATConversationListCell.m in Sources */,
 				04C997B2214F5B6600860833 /* IQKeyboardReturnKeyHandler.m in Sources */,
 				04763461216AFF68002DC90E /* UIScrollView+YPTab.m in Sources */,
+				04450331230FBE0000836CB6 /* HTYHQModel.m in Sources */,
 				0489FFE720DB7759009B5964 /* HTVipLevelEditCell.m in Sources */,
 				0439A1FF20D115F600BB5E9B /* NSDate+Manager.m in Sources */,
 				044F8207212BEC2A007674EC /* HLPrinter.m in Sources */,

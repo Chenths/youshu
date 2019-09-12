@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HTNewPayYHQTableViewCell : UITableViewCell
@@ -21,7 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *maskImv;
-@property (nonatomic, strong) NSMutableArray *yhqArr;
 @end
 
 NS_ASSUME_NONNULL_END

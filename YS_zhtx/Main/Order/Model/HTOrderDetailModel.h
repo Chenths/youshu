@@ -44,6 +44,16 @@
 @property (nonatomic,strong) NSArray *orderimage;
 
 @property (nonatomic,strong) NSString *orderId;
-
-
+//使用积分
+@property (nonatomic,strong) NSString *usepointdeduct;
+//使用优惠券
+@property (nonatomic,strong) NSString *usecoupon;
+//应收金额
+@property (nonatomic,assign) NSInteger shouldsum;
+//优惠金额
+@property (nonatomic,assign) NSInteger procouponsum;
+//创建人
+@property (nonatomic,strong) NSString *creatorname;
+//订单来源
+@property (nonatomic,strong) NSString *ordertype;
 @end

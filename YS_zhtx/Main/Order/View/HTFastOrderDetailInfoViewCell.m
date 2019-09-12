@@ -11,6 +11,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *createTime;
 @property (weak, nonatomic) IBOutlet UILabel *gudeName;
+@property (weak, nonatomic) IBOutlet UILabel *orderSourceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *createrLabel;
 
 @end
 @implementation HTFastOrderDetailInfoViewCell
@@ -29,6 +31,8 @@
     _model = model;
     self.createTime.text = [HTHoldNullObj getValueWithUnCheakValue:model.createdate];
     self.gudeName.text = [HTHoldNullObj getValueWithUnCheakValue:model.creator];
+    self.orderSourceLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.ordertype];
+    self.createrLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.creatorname];
 }
 
 @end

@@ -214,7 +214,11 @@
                 [vvv removeFromSuperview];
             }
         }
-        [HTFaceComingAlertView showWithDatas:@[model] hiddenBottomBtn:YES isNew:NO];
+        if (_isBoss) {
+            [HTFaceComingAlertView showWithDatas:@[model] hiddenBottomBtn:YES isNew:NO hideReception:YES];
+        }else{
+            [HTFaceComingAlertView showWithDatas:@[model] hiddenBottomBtn:YES isNew:NO hideReception:NO];
+        }
     }else{
 //        HTAddVipWithPhoneController *vc = [[HTAddVipWithPhoneController alloc] init];
 //        HTNewFaceNoVipModel *model = self.dataArray[indexPath.row];
@@ -233,11 +237,19 @@
                 [vvv removeFromSuperview];
             }
         }
-        [HTFaceComingAlertView showWithDatas:@[model] hiddenBottomBtn:YES isNew:YES];
+        if (_isBoss) {
+            [HTFaceComingAlertView showWithDatas:@[model] hiddenBottomBtn:YES isNew:YES hideReception:YES];
+        }else{
+            [HTFaceComingAlertView showWithDatas:@[model] hiddenBottomBtn:YES isNew:YES hideReception:NO];
+        }
     }
 }
 #pragma mark -CustomDelegate
 -(void)receptionCustmerWithCell:(HTCustomerFaceInfoCell *)cell{
+    if (_isBoss) {
+        [MBProgressHUD showError:@"没有操作权限"];
+        return;
+    }
     NSIndexPath *index = [self.dataTableView indexPathForCell:cell];
     HTNewFaceVipModel *model = self.dataArray[index.row];
     HTCustomerReportViewController *vc = [[HTCustomerReportViewController alloc] init];
@@ -249,6 +261,7 @@
 }
 
 - (void)repitBuyWithCell:(HTCustomerFaceInfoCell *)cell{
+    
     if ([HTShareClass shareClass].isProductActive) {
         HTChargeViewController *vc = [[HTChargeViewController alloc] init];
         NSIndexPath *index = [self.dataTableView indexPathForCell:cell];
@@ -267,6 +280,10 @@
 }
 
 - (void)writeCutomerInfoWithCell:(HTCustomerFaceInfoCell *)cell{
+    if (_isBoss) {
+        [MBProgressHUD showError:@"没有操作权限"];
+        return;
+    }
     NSIndexPath *index = [self.dataTableView indexPathForCell:cell];
     HTNewFaceVipModel *model = self.dataArray[index.row];
     
@@ -301,6 +318,10 @@
 
 #pragma mark -CustomDelegate
 -(void)receptionCustmerVipWithCell:(HTCustomerFaceInfoCell *)cell{
+    if (_isBoss) {
+        [MBProgressHUD showError:@"没有操作权限"];
+        return;
+    }
     NSIndexPath *index = [self.dataTableView indexPathForCell:cell];
     HTNewFaceVipModel *model = self.dataArray[index.row];
     HTCustomerReportViewController *vc = [[HTCustomerReportViewController alloc] init];
@@ -389,10 +410,18 @@
          
          */
     
-    NSDictionary *dic = @{
-                          @"companyId":[HTShareClass shareClass].loginModel.companyId,
-                          @"dayTime": _currentDate
-                          };
+    NSDictionary *dic;
+    if(self.isBoss){
+        dic = @{
+                @"companyId":self.sonShopId,
+                @"dayTime": _currentDate
+                };
+    }else{
+        dic = @{
+                @"companyId":[HTShareClass shareClass].loginModel.companyId,
+                @"dayTime": _currentDate
+                };
+    }
 //    [MBProgressHUD showMessage:@""];
     [HTHttpTools POST:[NSString stringWithFormat:@"%@%@%@",baseUrl,middleFace,faceUserList] params:dic success:^(id json) {
 //        [MBProgressHUD hideHUD];

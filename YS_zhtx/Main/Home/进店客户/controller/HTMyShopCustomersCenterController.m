@@ -54,9 +54,13 @@
     HTOnlineCustomerListViewController *controller1 = [[HTOnlineCustomerListViewController alloc] init];
     controller1.yp_tabItemTitle = @"会员";
     controller1.usrType = HTUSRERVIP;
+    controller1.isBoss = self.isFromBoss;
+    controller1.sonShopId = self.sonShopId;
     HTOnlineCustomerListViewController *controller2 = [[HTOnlineCustomerListViewController alloc] init];
     controller2.yp_tabItemTitle = @"散客";
     controller2.usrType = HTUSRERNOTVIP;
+    controller2.isBoss = self.isFromBoss;
+    controller2.sonShopId = self.sonShopId;
     self.viewControllers = [NSMutableArray arrayWithObjects:controller1, controller2, nil];
 }
 

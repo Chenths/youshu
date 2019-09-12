@@ -15,5 +15,6 @@ typedef NS_ENUM(NSInteger, HTUSRTYPE) {
 
 @property (nonatomic,assign) HTUSRTYPE usrType;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tbTop;
-
+@property (nonatomic, strong) NSString *sonShopId;
+@property (nonatomic, assign) BOOL isBoss;
 @end

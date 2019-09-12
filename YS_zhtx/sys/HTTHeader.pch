@@ -368,6 +368,8 @@ tmp;\
 #define getGoodsColorAll @"admin/product_stock/load_product_color_by_styleCode.html"
 //全渠道查询 查下方详细列表
 #define getGoodsDetailCompareData @"admin/product_stock/load_product_stylelist_by_styleCode.html"
+//获取优惠券列表
+#define getYHQList @"admin/wei_mob/query_user_coupon_list.html"
 #pragma mark -宏
 
 

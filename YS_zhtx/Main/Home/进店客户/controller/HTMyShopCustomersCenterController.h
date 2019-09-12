@@ -9,5 +9,6 @@
 #import "YPTabBarController.h"
 
 @interface HTMyShopCustomersCenterController : YPTabBarController
-
+@property (nonatomic, assign) BOOL isFromBoss;
+@property (nonatomic, strong) NSString *sonShopId;
 @end

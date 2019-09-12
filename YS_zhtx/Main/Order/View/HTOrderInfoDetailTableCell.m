@@ -11,17 +11,19 @@
 
 @interface HTOrderInfoDetailTableCell()
 
-@property (weak, nonatomic) IBOutlet UILabel *payTypeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *goodsOldLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *isChangepriceLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *orderTotalLabel;
+@property (weak, nonatomic) IBOutlet UILabel *changePriceLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *discountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *changeOverLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *integralLabel;
+@property (weak, nonatomic) IBOutlet UILabel *yhqLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *finallPriceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *discountLabel;
 
 @end
 @implementation HTOrderInfoDetailTableCell
@@ -34,10 +36,13 @@
 -(void)setModel:(HTOrderDetailModel *)model{
     _model = model;
     self.isChangepriceLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.hasmodifiedprice];
-    self.payTypeLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.paytype];
-    self.orderTotalLabel.text = [NSString stringWithFormat:@"¥%@",[HTHoldNullObj getValueWithBigDecmalObj:model.totalprice]];
+    self.goodsOldLabel.text = [NSString stringWithFormat:@"¥%@",[HTHoldNullObj getValueWithUnCheakValue:model.totalprice]];
+    self.changePriceLabel.text = [NSString stringWithFormat:@"¥%ld",model.procouponsum];
+    self.changeOverLabel.text = [NSString stringWithFormat:@"¥%ld",model.shouldsum];
+    self.integralLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.usepointdeduct];
+    self.yhqLabel.text = [HTHoldNullObj getValueWithUnCheakValue:model.usecoupon];
+    
     self.discountLabel.text = model.discount.floatValue == 0 ? @"0折" : model.discount.floatValue < 0 ? @"/折" : [NSString stringWithFormat:@"%@折",[HTHoldNullObj getValueWithBigDecmalObj:model.discount]];
-    self.integralLabel.text = @"无数据";
    
     self.finallPriceLabel.text =  [NSString stringWithFormat:@"¥%@",[HTHoldNullObj getValueWithBigDecmalObj:model.finalprice]];
 }

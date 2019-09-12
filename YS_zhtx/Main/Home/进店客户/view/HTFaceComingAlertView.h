@@ -12,6 +12,6 @@
 
 - (instancetype)initWithAlertFrame:(CGRect)frame;
 
-+(void)showWithDatas:(NSArray *)dataArray hiddenBottomBtn:(BOOL)hiddenBottom isNew:(BOOL)isNew;
++(void)showWithDatas:(NSArray *)dataArray hiddenBottomBtn:(BOOL)hiddenBottom isNew:(BOOL)isNew hideReception:(BOOL)hideReception;
 
 @end
